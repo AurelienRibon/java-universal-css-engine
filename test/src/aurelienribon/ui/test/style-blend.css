@@ -1,0 +1,35 @@
+javax-swing-JButton {
+	-swing-button-halign: center;
+	-swing-button-valign: center;
+	-swing-button-margin: 3 5;
+}
+
+aurelienribon-ui-components-Button {
+	-swing-foreground: #FFFFFF;
+	-arui-foreground-mouseover: #000000;
+	-arui-foreground-pressed: #FFFFFF;
+	-arui-stroke: #333333;
+	-arui-stroke-mouseover: #333333;
+	-arui-stroke-pressed: #1A1A1A;
+	-arui-fill: #595959;
+	-arui-fill-mouseover: #AAAAAA;
+	-arui-fill-pressed: #424242;
+	-arui-cornerradius: 0;
+}
+
+aurelienribon-ui-components-TabPanel {
+	-swing-background: #595959;
+	-swing-foreground: #FFFFFF;
+	-arui-foreground-selected: #FFFFFF;
+	-arui-foreground-mouseover: #FFFFFF;
+	-arui-stroke: #444444;
+	-arui-stroke-mouseover: #444444;
+	-arui-stroke-selected: #444444;
+	-arui-fill: #333333;
+	-arui-fill-mouseover: #4C4C4C;
+	-arui-fill-selected: #595959;
+}
+
+.rootPanel {
+	-swing-background: #282828;
+}
