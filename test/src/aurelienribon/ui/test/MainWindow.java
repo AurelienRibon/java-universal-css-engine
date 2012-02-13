@@ -1,8 +1,10 @@
 package aurelienribon.ui.test;
 
-import aurelienribon.ui.Style;
+import aurelienribon.ui.components.AruiStyle;
 import aurelienribon.ui.components.TabPanel;
 import aurelienribon.ui.components.TabPanelModel;
+import aurelienribon.ui.css.Style;
+import aurelienribon.ui.css.predefined.SwingStyle;
 import gfx.Gfx;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,7 +18,13 @@ public class MainWindow extends javax.swing.JFrame {
 	private Style style;
 
     public MainWindow() {
+		SwingStyle.init();
+		AruiStyle.init();
+
         initComponents();
+
+		tabPanel1.setHeaderLayout(TabPanel.LAYOUT_GRID);
+		tabPanel1.getModel().add(controlPanel, "Controls", null, false);
 
 		applyBtn.addActionListener(new ActionListener() {
 			@Override public void actionPerformed(ActionEvent e) {
@@ -32,29 +40,36 @@ public class MainWindow extends javax.swing.JFrame {
 
 		loadStyle1Btn.addActionListener(new ActionListener() {
 			@Override public void actionPerformed(ActionEvent e) {
-				
+				style = new Style(getClass().getResource("style-netbeans.css"));
+				editorArea.setText(style.getStyleSheet());
+				editorArea.setCaretPosition(0);
+				Style.apply(getContentPane(), style);
+			}
+		});
+
+		loadStyle2Btn.addActionListener(new ActionListener() {
+			@Override public void actionPerformed(ActionEvent e) {
+				style = new Style(getClass().getResource("style-blend.css"));
+				editorArea.setText(style.getStyleSheet());
+				editorArea.setCaretPosition(0);
+				Style.apply(getContentPane(), style);
 			}
 		});
 
 		resetBtn.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent e) {reset();}});
 		toggleLayoutBtn.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent e) {toggleLayout();}});
 
-		Style.registerClassName(getContentPane(), "rootPanel");
-		Style.registerClassName(applyBtn, "applyButton");
-		Style.registerClassName(resetBtn, "resetButton");
-		Style.registerClassName(loadStyle1Btn, "loadButton");
-		Style.registerClassName(loadStyle2Btn, "loadButton");
-		Style.registerClassName(toggleLayoutBtn, "toggleLayoutButton");
+		Style.registerTargetClass(getContentPane(), "rootPanel");
+		Style.registerTargetClass(applyBtn, "applyButton");
+		Style.registerTargetClass(resetBtn, "resetButton");
+		Style.registerTargetClass(loadStyle1Btn, "loadButton");
+		Style.registerTargetClass(loadStyle2Btn, "loadButton");
+		Style.registerTargetClass(toggleLayoutBtn, "toggleLayoutButton");
 
 		reset();
     }
 
 	private void reset() {
-		style = new Style(getClass().getResource("style-netbeans.css"));
-
-		editorArea.setText(style.getStyleSheet());
-		editorArea.setCaretPosition(0);
-
 		tabPanel.setHeaderLayout(TabPanel.LAYOUT_STACK);
 
 		JPanel[] panels = new JPanel[3];
@@ -69,6 +84,9 @@ public class MainWindow extends javax.swing.JFrame {
 		tabPanel.getModel().add(panels[1], "Panel", null, true);
 		tabPanel.getModel().add(panels[2], "Panel with icon", Gfx.getIcon("ic_file.png"), true);
 
+		style = new Style(getClass().getResource("style-netbeans.css"));
+		editorArea.setText(style.getStyleSheet());
+		editorArea.setCaretPosition(0);
 		Style.apply(getContentPane(), style);
 	}
 
@@ -88,12 +106,14 @@ public class MainWindow extends javax.swing.JFrame {
         editorPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         editorArea = new javax.swing.JTextArea();
-        tabPanel = new aurelienribon.ui.components.TabPanel();
-        resetBtn = new aurelienribon.ui.components.Button();
+        controlPanel = new javax.swing.JPanel();
         toggleLayoutBtn = new aurelienribon.ui.components.Button();
         applyBtn = new aurelienribon.ui.components.Button();
-        loadStyle1Btn = new aurelienribon.ui.components.Button();
         loadStyle2Btn = new aurelienribon.ui.components.Button();
+        resetBtn = new aurelienribon.ui.components.Button();
+        loadStyle1Btn = new aurelienribon.ui.components.Button();
+        tabPanel = new aurelienribon.ui.components.TabPanel();
+        tabPanel1 = new aurelienribon.ui.components.TabPanel();
 
         editorPanel.setOpaque(false);
         editorPanel.setLayout(new java.awt.BorderLayout());
@@ -107,18 +127,52 @@ public class MainWindow extends javax.swing.JFrame {
 
         editorPanel.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Arui test");
-
-        resetBtn.setText("Reset");
+        controlPanel.setOpaque(false);
 
         toggleLayoutBtn.setText("Toggle TabPanel layout");
 
         applyBtn.setText("Apply");
 
+        loadStyle2Btn.setText("Load style 2");
+
+        resetBtn.setText("Reset");
+
         loadStyle1Btn.setText("Load Style 1");
 
-        loadStyle2Btn.setText("Load style 2");
+        javax.swing.GroupLayout controlPanelLayout = new javax.swing.GroupLayout(controlPanel);
+        controlPanel.setLayout(controlPanelLayout);
+        controlPanelLayout.setHorizontalGroup(
+            controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(controlPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(toggleLayoutBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                    .addComponent(loadStyle1Btn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(loadStyle2Btn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, controlPanelLayout.createSequentialGroup()
+                        .addComponent(applyBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(resetBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        controlPanelLayout.setVerticalGroup(
+            controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(controlPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(resetBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(applyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(loadStyle1Btn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(loadStyle2Btn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(toggleLayoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Arui test");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -126,16 +180,9 @@ public class MainWindow extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tabPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
+                .addComponent(tabPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(toggleLayoutBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(loadStyle1Btn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(loadStyle2Btn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(applyBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(resetBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(tabPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -143,18 +190,10 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tabPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 343, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(resetBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(applyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(loadStyle1Btn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(loadStyle2Btn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(toggleLayoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(tabPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(347, 347, 347))
+                    .addComponent(tabPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -163,6 +202,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private aurelienribon.ui.components.Button applyBtn;
+    private javax.swing.JPanel controlPanel;
     private javax.swing.JTextArea editorArea;
     private javax.swing.JPanel editorPanel;
     private javax.swing.JScrollPane jScrollPane1;
@@ -170,6 +210,7 @@ public class MainWindow extends javax.swing.JFrame {
     private aurelienribon.ui.components.Button loadStyle2Btn;
     private aurelienribon.ui.components.Button resetBtn;
     private aurelienribon.ui.components.TabPanel tabPanel;
+    private aurelienribon.ui.components.TabPanel tabPanel1;
     private aurelienribon.ui.components.Button toggleLayoutBtn;
     // End of variables declaration//GEN-END:variables
 

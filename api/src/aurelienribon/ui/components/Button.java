@@ -1,8 +1,7 @@
 package aurelienribon.ui.components;
 
-import aurelienribon.ui.Style;
-import aurelienribon.ui.StyleAttributes;
-import aurelienribon.ui.StyleAccessor;
+import aurelienribon.ui.css.StyleAttributes;
+import aurelienribon.ui.css.StyleProcessor;
 import aurelienribon.ui.utils.PaintUtils;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -13,36 +12,38 @@ import javax.swing.*;
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
 public class Button extends JButton {
-	static {
-		Style.register(Button.class, new StyleAccessor<Button>() {
-			@Override public void applyStyle(Button target, StyleAttributes attrs) {
-				target.foregroundPressed = attrs.getColor("-arui-foreground-pressed", target.foregroundPressed);
-				target.foregroundMouseOver = attrs.getColor("-arui-foreground-mouseover", target.foregroundMouseOver);
-				target.stroke = attrs.getColor("-arui-stroke", target.stroke);
-				target.strokePressed = attrs.getColor("-arui-stroke-pressed", target.strokePressed);
-				target.strokeMouseOver = attrs.getColor("-arui-stroke-mouseover", target.strokeMouseOver);
-				target.fill = attrs.getPaint("-arui-fill", target.fill);
-				target.fillPressed = attrs.getPaint("-arui-fill-pressed", target.fillPressed);
-				target.fillMouseOver = attrs.getPaint("-arui-fill-mouseover", target.fillMouseOver);
-				target.cornerRadius = attrs.getInt("-arui-cornerradius", target.cornerRadius);
-				target.reload();
+	public static class Processor implements StyleProcessor {
+		@Override
+		public void process(Object target, StyleAttributes attrs) {
+			if (target instanceof Button) {
+				Button t = (Button) target;
+				if (attrs.contains(AruiStyle.RULE_FOREGROUND_MOUSEDOWN)) t.foregroundMouseDown = attrs.asColor(AruiStyle.RULE_FOREGROUND_MOUSEDOWN);
+				if (attrs.contains(AruiStyle.RULE_FOREGROUND_MOUSEOVER)) t.foregroundMouseOver = attrs.asColor(AruiStyle.RULE_FOREGROUND_MOUSEOVER);
+				if (attrs.contains(AruiStyle.RULE_STROKE)) t.stroke = attrs.asColor(AruiStyle.RULE_STROKE);
+				if (attrs.contains(AruiStyle.RULE_STROKE_MOUSEDOWN)) t.strokeMouseDown = attrs.asColor(AruiStyle.RULE_STROKE_MOUSEDOWN);
+				if (attrs.contains(AruiStyle.RULE_STROKE_MOUSEOVER)) t.strokeMouseOver = attrs.asColor(AruiStyle.RULE_STROKE_MOUSEOVER);
+				if (attrs.contains(AruiStyle.RULE_FILL)) t.fill = attrs.asPaint(AruiStyle.RULE_FILL);
+				if (attrs.contains(AruiStyle.RULE_FILL_MOUSEDOWN)) t.fillMouseDown = attrs.asPaint(AruiStyle.RULE_FILL_MOUSEDOWN);
+				if (attrs.contains(AruiStyle.RULE_FILL_MOUSEOVER)) t.fillMouseOver = attrs.asPaint(AruiStyle.RULE_FILL_MOUSEOVER);
+				if (attrs.contains(AruiStyle.RULE_CORNERRADIUS)) t.cornerRadius = attrs.asInteger(AruiStyle.RULE_CORNERRADIUS);
+				t.reload();
 			}
-		});
+		}
 	}
 
-	private Color foregroundPressed = Color.RED;
+	private Color foregroundMouseDown = Color.RED;
 	private Color foregroundMouseOver = Color.RED;
 	private Color stroke = Color.RED;
-	private Color strokePressed = Color.RED;
+	private Color strokeMouseDown = Color.RED;
 	private Color strokeMouseOver = Color.RED;
 	private Paint fill = Color.RED;
-	private Paint fillPressed = Color.RED;
+	private Paint fillMouseDown = Color.RED;
 	private Paint fillMouseOver = Color.RED;
 	private int cornerRadius = 0;
 
 	private final JLabel label = new JLabel();
+	private boolean isMouseDown = false;
 	private boolean isMouseOver = false;
-	private boolean isPressed = false;
 
 	public Button() {
 		setOpaque(false);
@@ -57,9 +58,9 @@ public class Button extends JButton {
 		label.setVerticalAlignment(getVerticalAlignment());
 		label.setFont(getFont());
 
-		if (isPressed && isMouseOver) {
-			label.setForeground(foregroundPressed);
-		} else if (isMouseOver || (isPressed && !isMouseOver)) {
+		if (isMouseDown && isMouseOver) {
+			label.setForeground(foregroundMouseDown);
+		} else if (isMouseOver || (isMouseDown && !isMouseOver)) {
 			label.setForeground(foregroundMouseOver);
 		} else {
 			label.setForeground(getForeground());
@@ -107,13 +108,13 @@ public class Button extends JButton {
 		int w = getWidth();
 		int h = getHeight();
 
-		if (isPressed && isMouseOver) {
-			gg.setPaint(PaintUtils.buildPaint(fillPressed, w, h));
+		if (isMouseDown && isMouseOver) {
+			gg.setPaint(PaintUtils.buildPaint(fillMouseDown, w, h));
 			gg.fillRoundRect(0, 0, w, h, cornerRadius, cornerRadius);
-			gg.setColor(strokePressed);
+			gg.setColor(strokeMouseDown);
 			gg.drawRoundRect(0, 0, w-1, h-1, cornerRadius, cornerRadius);
 
-		} else if (isMouseOver || (isPressed && !isMouseOver)) {
+		} else if (isMouseOver || (isMouseDown && !isMouseOver)) {
 			gg.setPaint(PaintUtils.buildPaint(fillMouseOver, w, h));
 			gg.fillRoundRect(0, 0, w, h, cornerRadius, cornerRadius);
 			gg.setColor(strokeMouseOver);
@@ -143,7 +144,7 @@ public class Button extends JButton {
 		@Override
 		public void mousePressed(MouseEvent e) {
 			if (SwingUtilities.isLeftMouseButton(e)) {
-				isPressed = true;
+				isMouseDown = true;
 				reload();
 			}
 		}
@@ -151,7 +152,7 @@ public class Button extends JButton {
 		@Override
 		public void mouseReleased(MouseEvent e) {
 			if (SwingUtilities.isLeftMouseButton(e)) {
-				isPressed = false;
+				isMouseDown = false;
 				reload();
 			}
 		}

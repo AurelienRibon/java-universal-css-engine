@@ -1,10 +1,10 @@
 package aurelienribon.ui.components;
 
-import aurelienribon.ui.utils.PaintUtils;
-import aurelienribon.ui.Style;
-import aurelienribon.ui.StyleAttributes;
-import aurelienribon.ui.StyleAccessor;
 import aurelienribon.ui.components.TabPanelModel.TabModel;
+import aurelienribon.ui.css.StyleAttributes;
+import aurelienribon.ui.css.StyleProcessor;
+import aurelienribon.ui.css.predefined.SwingStyle;
+import aurelienribon.ui.utils.PaintUtils;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
@@ -16,21 +16,23 @@ import javax.swing.border.MatteBorder;
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
 class TabPanelHeaderSubPanel extends JPanel {
-	static {
-		Style.register(TabPanelHeaderSubPanel.class, new StyleAccessor<TabPanelHeaderSubPanel>() {
-			@Override public void applyStyle(TabPanelHeaderSubPanel target, StyleAttributes attrs) {
-				target.foreground = attrs.getColor("-swing-foreground", target.foreground);
-				target.foregroundSelected = attrs.getColor("-arui-foreground-selected", target.foregroundSelected);
-				target.foregroundMouseOver = attrs.getColor("-arui-foreground-mouseover", target.foregroundMouseOver);
-				target.stroke = attrs.getColor("-arui-stroke", target.stroke);
-				target.strokeSelected = attrs.getColor("-arui-stroke-selected", target.strokeSelected);
-				target.strokeMouseOver = attrs.getColor("-arui-stroke-mouseover", target.strokeMouseOver);
-				target.fill = attrs.getPaint("-arui-fill", target.fill);
-				target.fillSelected = attrs.getPaint("-arui-fill-selected", target.fillSelected);
-				target.fillMouseOver = attrs.getPaint("-arui-fill-mouseover", target.fillMouseOver);
-				target.reload();
+	public static class Processor implements StyleProcessor {
+		@Override
+		public void process(Object target, StyleAttributes attrs) {
+			if (target instanceof TabPanelHeaderSubPanel) {
+				TabPanelHeaderSubPanel t = (TabPanelHeaderSubPanel) target;
+				if (attrs.contains(SwingStyle.RULE_FOREGROUND)) t.foreground = attrs.asColor(SwingStyle.RULE_FOREGROUND);
+				if (attrs.contains(AruiStyle.RULE_FOREGROUND_SELECTED)) t.foregroundSelected = attrs.asColor(AruiStyle.RULE_FOREGROUND_SELECTED);
+				if (attrs.contains(AruiStyle.RULE_FOREGROUND_MOUSEOVER)) t.foregroundMouseOver = attrs.asColor(AruiStyle.RULE_FOREGROUND_MOUSEOVER);
+				if (attrs.contains(AruiStyle.RULE_STROKE)) t.stroke = attrs.asColor(AruiStyle.RULE_STROKE);
+				if (attrs.contains(AruiStyle.RULE_STROKE_SELECTED)) t.strokeSelected = attrs.asColor(AruiStyle.RULE_STROKE_SELECTED);
+				if (attrs.contains(AruiStyle.RULE_STROKE_MOUSEOVER)) t.strokeMouseOver = attrs.asColor(AruiStyle.RULE_STROKE_MOUSEOVER);
+				if (attrs.contains(AruiStyle.RULE_FILL)) t.fill = attrs.asPaint(AruiStyle.RULE_FILL);
+				if (attrs.contains(AruiStyle.RULE_FILL_SELECTED)) t.fillSelected = attrs.asPaint(AruiStyle.RULE_FILL_SELECTED);
+				if (attrs.contains(AruiStyle.RULE_FILL_MOUSEOVER)) t.fillMouseOver = attrs.asPaint(AruiStyle.RULE_FILL_MOUSEOVER);
+				t.reload();
 			}
-		});
+		}
 	}
 
 	private static final ImageIcon IC_CROSS1_DARK = new ImageIcon(TabPanelHeaderSubPanel.class.getResource("ic_cross1_dark.png"));

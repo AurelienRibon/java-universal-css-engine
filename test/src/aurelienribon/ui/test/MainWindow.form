@@ -37,6 +37,77 @@
         </Container>
       </SubComponents>
     </Container>
+    <Container class="javax.swing.JPanel" name="controlPanel">
+      <Properties>
+        <Property name="opaque" type="boolean" value="false"/>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="toggleLayoutBtn" alignment="1" pref="154" max="32767" attributes="0"/>
+                      <Component id="loadStyle1Btn" alignment="1" max="32767" attributes="0"/>
+                      <Component id="loadStyle2Btn" alignment="1" max="32767" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="applyBtn" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="resetBtn" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="resetBtn" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                      <Component id="applyBtn" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="loadStyle1Btn" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="loadStyle2Btn" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="toggleLayoutBtn" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="aurelienribon.ui.components.Button" name="toggleLayoutBtn">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Toggle TabPanel layout"/>
+          </Properties>
+        </Component>
+        <Component class="aurelienribon.ui.components.Button" name="applyBtn">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Apply"/>
+          </Properties>
+        </Component>
+        <Component class="aurelienribon.ui.components.Button" name="loadStyle2Btn">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Load style 2"/>
+          </Properties>
+        </Component>
+        <Component class="aurelienribon.ui.components.Button" name="resetBtn">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Reset"/>
+          </Properties>
+        </Component>
+        <Component class="aurelienribon.ui.components.Button" name="loadStyle1Btn">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Load Style 1"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
@@ -60,20 +131,11 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="tabPanel" pref="586" max="32767" attributes="0"/>
+              <Component id="tabPanel" pref="547" max="32767" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="toggleLayoutBtn" alignment="1" max="32767" attributes="0"/>
-                  <Component id="loadStyle1Btn" alignment="1" max="32767" attributes="0"/>
-                  <Component id="loadStyle2Btn" alignment="1" max="32767" attributes="0"/>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="applyBtn" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="resetBtn" min="-2" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
+              <Component id="tabPanel1" min="-2" pref="160" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -81,24 +143,15 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="tabPanel" max="32767" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace pref="343" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="resetBtn" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
-                          <Component id="applyBtn" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="loadStyle1Btn" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="loadStyle2Btn" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="toggleLayoutBtn" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="tabPanel1" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="347" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="tabPanel" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -106,30 +159,7 @@
   <SubComponents>
     <Component class="aurelienribon.ui.components.TabPanel" name="tabPanel">
     </Component>
-    <Component class="aurelienribon.ui.components.Button" name="resetBtn">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Reset"/>
-      </Properties>
-    </Component>
-    <Component class="aurelienribon.ui.components.Button" name="toggleLayoutBtn">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Toggle TabPanel layout"/>
-      </Properties>
-    </Component>
-    <Component class="aurelienribon.ui.components.Button" name="applyBtn">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Apply"/>
-      </Properties>
-    </Component>
-    <Component class="aurelienribon.ui.components.Button" name="loadStyle1Btn">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Load Style 1"/>
-      </Properties>
-    </Component>
-    <Component class="aurelienribon.ui.components.Button" name="loadStyle2Btn">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Load style 2"/>
-      </Properties>
+    <Component class="aurelienribon.ui.components.TabPanel" name="tabPanel1">
     </Component>
   </SubComponents>
 </Form>

@@ -2,6 +2,8 @@ package aurelienribon.ui.utils;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
+import java.awt.LinearGradientPaint;
+import java.awt.MultipleGradientPaint;
 import java.awt.Paint;
 
 /**
@@ -18,11 +20,11 @@ public class PaintUtils {
 
 	public static int getBrightness(Paint p) {
 		if (p instanceof Color) return getBrightness((Color) p);
-		if (p instanceof GradientPaint) {
-			GradientPaint gp = (GradientPaint) p;
-			int b1 = getBrightness(gp.getColor1());
-			int b2 = getBrightness(gp.getColor2());
-			return (b1 + b2) / 2;
+
+		if (p instanceof MultipleGradientPaint) {
+			MultipleGradientPaint gp = (MultipleGradientPaint) p;
+			int b = 128; for (Color c : gp.getColors()) b += getBrightness(c);
+			return b / gp.getColors().length;
 		}
 
 		assert false;
@@ -31,17 +33,14 @@ public class PaintUtils {
 
 	public static Paint buildPaint(Paint p, int w, int h) {
 		if (p instanceof Color) return p;
-		if (p instanceof GradientPaint) {
-			GradientPaint gp = (GradientPaint) p;
-			double gpX1 = gp.getPoint1().getX();
-			double gpY1 = gp.getPoint1().getY();
-			double gpX2 = gp.getPoint2().getX();
-			double gpY2 = gp.getPoint2().getY();
-			float x1 = (float) (gpX1 * w);
-			float y1 = (float) (gpY1 * h);
-			float x2 = (float) (gpX2 * w);
-			float y2 = (float) (gpY2 * h);
-			return new GradientPaint(x1, y1, gp.getColor1(), x2, y2, gp.getColor2());
+
+		if (p instanceof LinearGradientPaint) {
+			LinearGradientPaint gp = (LinearGradientPaint) p;
+			float x1 = (float) (gp.getStartPoint().getX() * w);
+			float y1 = (float) (gp.getStartPoint().getY() * h);
+			float x2 = (float) (gp.getEndPoint().getX() * w);
+			float y2 = (float) (gp.getEndPoint().getY() * h);
+			return new LinearGradientPaint(x1, y1, x2, y2, gp.getFractions(), gp.getColors());
 		}
 
 		assert false;

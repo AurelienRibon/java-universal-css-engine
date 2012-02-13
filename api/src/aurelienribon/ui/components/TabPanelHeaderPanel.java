@@ -1,9 +1,9 @@
 package aurelienribon.ui.components;
 
-import aurelienribon.ui.Style;
-import aurelienribon.ui.StyleAttributes;
-import aurelienribon.ui.StyleAccessor;
 import aurelienribon.ui.components.TabPanelModel.TabModel;
+import aurelienribon.ui.css.Style;
+import aurelienribon.ui.css.StyleAttributes;
+import aurelienribon.ui.css.StyleProcessor;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -15,16 +15,19 @@ import javax.swing.JLayeredPane;
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
 class TabPanelHeaderPanel extends JLayeredPane {
-	static {
-		Style.register(TabPanelHeaderPanel.class, new StyleAccessor<TabPanelHeaderPanel>() {
-			@Override public void applyStyle(TabPanelHeaderPanel target, StyleAttributes attrs) {
-				target.tabStrokeColor = attrs.getColor("-arui-stroke", target.tabStrokeColor);
-				target.styleAttrs = attrs;
+	public static class Processor implements StyleProcessor {
+		@Override
+		public void process(Object target, StyleAttributes attrs) {
+			if (target instanceof TabPanelHeaderPanel) {
+				TabPanelHeaderPanel t = (TabPanelHeaderPanel) target;
 
-				for (TabPanelHeaderSubPanel subPanel : target.subPanels) Style.apply(subPanel, attrs);
-				target.reload();
+				if (attrs.contains(AruiStyle.RULE_STROKE)) t.tabStrokeColor = attrs.asColor(AruiStyle.RULE_STROKE);
+				t.styleAttrs = attrs;
+
+				for (TabPanelHeaderSubPanel p : t.subPanels) Style.apply(p, attrs);
+				t.reload();
 			}
-		});
+		}
 	}
 
 	// -------------------------------------------------------------------------

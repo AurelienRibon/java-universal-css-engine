@@ -1,19 +1,32 @@
+/**
+ * Style based on the colors of the Microsoft Expression Blend editor
+ * @author Aurelien Ribon | http://www.aurelienribon.com/
+ */
+
 javax-swing-JButton {
 	-swing-button-halign: center;
 	-swing-button-valign: center;
 	-swing-button-margin: 3 5;
 }
 
+javax-swing-JTextArea {
+	-swing-font: "Monospaced" plain 11;
+	-swing-tabsize: 4;
+	-swing-background: #CCCCCC;
+	-swing-foreground: #000000;
+}
+
 aurelienribon-ui-components-Button {
+	-swing-margin: 2 3;
 	-swing-foreground: #FFFFFF;
 	-arui-foreground-mouseover: #000000;
-	-arui-foreground-pressed: #FFFFFF;
+	-arui-foreground-mousedown: #FFFFFF;
 	-arui-stroke: #333333;
 	-arui-stroke-mouseover: #333333;
-	-arui-stroke-pressed: #1A1A1A;
+	-arui-stroke-mousedown: #1A1A1A;
 	-arui-fill: #595959;
 	-arui-fill-mouseover: #AAAAAA;
-	-arui-fill-pressed: #424242;
+	-arui-fill-mousedown: #424242;
 	-arui-cornerradius: 0;
 }
 
@@ -32,4 +45,19 @@ aurelienribon-ui-components-TabPanel {
 
 .rootPanel {
 	-swing-background: #282828;
+}
+
+.applyButton {
+}
+
+.resetButton {
+	-arui-stroke: #FF2222;
+	-arui-stroke-mouseover: #FF2222;
+	-arui-stroke-mousedown: #FF2222;
+}
+
+.loadButton {
+}
+
+.toggleButton {
 }

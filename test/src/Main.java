@@ -1,4 +1,3 @@
-
 import aurelienribon.ui.test.MainWindow;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -20,6 +19,7 @@ public class Main {
 				}
 
 				MainWindow mw = new MainWindow();
+				mw.setSize(1000, 600);
 				mw.setLocationRelativeTo(null);
 				mw.setVisible(true);
 			}
