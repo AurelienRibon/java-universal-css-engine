@@ -4,10 +4,12 @@ import aurelienribon.ui.components.AruiStyle;
 import aurelienribon.ui.components.TabPanel;
 import aurelienribon.ui.components.TabPanelModel;
 import aurelienribon.ui.css.Style;
+import aurelienribon.ui.css.StyleException;
 import aurelienribon.ui.css.predefined.SwingStyle;
 import gfx.Gfx;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -28,31 +30,19 @@ public class MainWindow extends javax.swing.JFrame {
 
 		applyBtn.addActionListener(new ActionListener() {
 			@Override public void actionPerformed(ActionEvent e) {
-				style = new Style(editorArea.getText());
-
-				try {
-					Style.apply(getContentPane(), style);
-				} catch (RuntimeException ex) {
-					JOptionPane.showMessageDialog(MainWindow.this, ex.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
-				}
+				setStyle(editorArea.getText());
 			}
 		});
 
 		loadStyle1Btn.addActionListener(new ActionListener() {
 			@Override public void actionPerformed(ActionEvent e) {
-				style = new Style(getClass().getResource("style-netbeans.css"));
-				editorArea.setText(style.getStyleSheet());
-				editorArea.setCaretPosition(0);
-				Style.apply(getContentPane(), style);
+				setStyle(getClass().getResource("style-netbeans.css"));
 			}
 		});
 
 		loadStyle2Btn.addActionListener(new ActionListener() {
 			@Override public void actionPerformed(ActionEvent e) {
-				style = new Style(getClass().getResource("style-blend.css"));
-				editorArea.setText(style.getStyleSheet());
-				editorArea.setCaretPosition(0);
-				Style.apply(getContentPane(), style);
+				setStyle(getClass().getResource("style-blend.css"));
 			}
 		});
 
@@ -84,15 +74,34 @@ public class MainWindow extends javax.swing.JFrame {
 		tabPanel.getModel().add(panels[1], "Panel", null, true);
 		tabPanel.getModel().add(panels[2], "Panel with icon", Gfx.getIcon("ic_file.png"), true);
 
-		style = new Style(getClass().getResource("style-netbeans.css"));
-		editorArea.setText(style.getStyleSheet());
-		editorArea.setCaretPosition(0);
-		Style.apply(getContentPane(), style);
+		setStyle(getClass().getResource("style-netbeans.css"));
 	}
 
 	private void toggleLayout() {
 		int layout = tabPanel.getHeaderLayout();
 		tabPanel.setHeaderLayout(layout == TabPanel.LAYOUT_STACK ? TabPanel.LAYOUT_GRID : TabPanel.LAYOUT_STACK);
+	}
+
+	private void setStyle(URL input) {
+		try {
+			style = new Style(input);
+			editorArea.setText(style.getStyleSheet());
+			editorArea.setCaretPosition(0);
+			Style.apply(getContentPane(), style);
+		} catch (StyleException ex) {
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
+		}
+	}
+
+	private void setStyle(String input) {
+		try {
+			style = new Style(input);
+			editorArea.setText(style.getStyleSheet());
+			editorArea.setCaretPosition(0);
+			Style.apply(getContentPane(), style);
+		} catch (StyleException ex) {
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
+		}
 	}
 
 	// -------------------------------------------------------------------------

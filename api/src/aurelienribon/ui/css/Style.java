@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.CommonTokenStream;
@@ -71,12 +69,12 @@ public class Style {
 	private final String styleSheet;
 	private final List<StyleClass> classes = new ArrayList<StyleClass>();
 
-	public Style(URL styleSheetUrl) {
+	public Style(URL styleSheetUrl) throws StyleException {
 		this.styleSheet = getStyleSheet(styleSheetUrl);
 		parse(styleSheet);
 	}
 
-	public Style(String styleSheet) {
+	public Style(String styleSheet) throws StyleException {
 		this.styleSheet = styleSheet;
 		parse(styleSheet);
 	}
@@ -118,7 +116,7 @@ public class Style {
 		}
 	}
 
-	private void parse(String styleSheet) {
+	private void parse(String styleSheet) throws StyleException {
 		CharStream cs = new ANTLRStringStream(styleSheet);
 		CssLexer lexer = new CssLexer(cs);
 		CommonTokenStream tokens = new CommonTokenStream();
@@ -132,11 +130,15 @@ public class Style {
 				Map<String, List<Object>> rules = result.get(selector);
 
 				for (String name : rules.keySet()) {
+					StyleRule regRule = registeredRules.get(name);
 					List<Object> params = rules.get(name);
 
-					for (int i=0; i<params.size(); i++) {
-						params.set(i, evaluateParam(params.get(i)));
-					}
+					for (int i=0; i<params.size(); i++) params.set(i, evaluateParam(params.get(i)));
+
+					if (regRule == null) throw StyleException.forRule(name);
+					if (!checkParams(params, regRule.getParams())) throw StyleException.forRuleParams(regRule);
+
+					for (int i=0; i<params.size(); i++) params.set(i, evaluateParam(params.get(i)));
 				}
 
 				StyleClass sc = new StyleClass(selector, result.get(selector));
@@ -144,39 +146,35 @@ public class Style {
 			}
 
 		} catch (RecognitionException ex) {
-			throw new RuntimeException(ex.getMessage());
+			throw new StyleException(ex.getMessage());
 		}
 	}
 
-	private static Object evaluateParam(Object param) {
+	private static Object evaluateParam(Object param) throws StyleException {
 		if (param instanceof CssParser.Function) {
 			CssParser.Function func = (CssParser.Function) param;
-			List<Object> funcParams = new ArrayList<Object>(func.params);
-
-			for (int i=0; i<funcParams.size(); i++) {
-				funcParams.set(i, evaluateParam(funcParams.get(i)));
-			}
-
 			StyleFunction regFunc = registeredFunctions.get(func.name);
-			if (regFunc == null) throw new RuntimeException("function " + func.name + " is not registered");
-			if (!checkParams(func.params, regFunc.getParams())) throw new RuntimeException("Bad parameters in function " + func.name);
+			List<Object> params = new ArrayList<Object>(func.params);
 
-			return regFunc.process(funcParams);
+			for (int i=0; i<params.size(); i++) params.set(i, evaluateParam(params.get(i)));
 
-		} else {
-			return param;
+			if (regFunc == null) throw StyleException.forFunction(func.name);
+			if (!checkParams(params, regFunc.getParams())) throw StyleException.forFunctionParams(regFunc);
+
+			return regFunc.process(params);
 		}
+
+		return param;
 	}
 
 	private static boolean checkParams(List<Object> params, Class[][] paramsClasses) {
 		for (Class[] cs : paramsClasses) {
-			boolean match = true;
-
-			for (int i=0; i<params.size(); i++) {
-				if (!cs[i].isInstance(params.get(i))) match = false;
+			if (params.size() == cs.length) {
+				boolean match = true;
+				for (int i=0; i<params.size(); i++)
+					if (!cs[i].isInstance(params.get(i))) match = false;
+				if (match) return true;
 			}
-
-			if (match) return true;
 		}
 
 		return false;

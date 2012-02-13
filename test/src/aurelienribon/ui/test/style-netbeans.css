@@ -4,9 +4,9 @@
  */
 
 javax-swing-JButton {
-	-swing-button-halign: center;
-	-swing-button-valign: center;
-	-swing-button-margin: 3 5;
+	-swing-horizontalalignment: center;
+	-swing-verticalalignment: center;
+	-swing-margin: 3 5;
 }
 
 javax-swing-JTextArea {
