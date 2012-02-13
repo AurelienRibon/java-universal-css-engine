@@ -10,18 +10,13 @@ import java.util.List;
  */
 public class SwingFunctions {
 	public static class Rgb implements StyleFunction {
-		@Override
-		public String getName() {
-			return "rgb";
-		}
+		@Override public String getName() {return "rgb";}
+		@Override public String[] getKeywords(int paramsId, int paramId) {return null;}
+		@Override public Class[][] getParams() {return new Class[][] {
+			{Integer.class, Integer.class, Integer.class}
+		};}
 
-		@Override
-		public Class[][] getParams() {
-			return new Class[][] {{Integer.class, Integer.class, Integer.class}};
-		}
-
-		@Override
-		public Object process(List<Object> params) {
+		@Override public Object process(List<Object> params) {
 			int r = (Integer) params.get(0);
 			int g = (Integer) params.get(1);
 			int b = (Integer) params.get(2);
@@ -30,18 +25,15 @@ public class SwingFunctions {
 	};
 
 	public static class Rgba implements StyleFunction {
-		@Override
-		public String getName() {
-			return "rgba";
-		}
+		@Override public String getName() {return "rgba";}
+		@Override public String[] getKeywords(int paramsId, int paramId) {return null;}
 
-		@Override
-		public Class[][] getParams() {
-			return new Class[][] {{Integer.class, Integer.class, Integer.class, Float.class}};
-		}
+		@Override public Class[][] getParams() {return new Class[][] {
+			{Integer.class, Integer.class, Integer.class, Float.class}
+		};}
 
-		@Override
-		public Object process(List<Object> params) {
+
+		@Override public Object process(List<Object> params) {
 			int r = (Integer) params.get(0);
 			int g = (Integer) params.get(1);
 			int b = (Integer) params.get(2);
@@ -51,23 +43,16 @@ public class SwingFunctions {
 	};
 
 	public static class LinearGradient implements StyleFunction {
-		@Override
-		public String getName() {
-			return "lineargradient";
-		}
+		@Override public String getName() {return "lineargradient";}
+		@Override public String[] getKeywords(int paramsId, int paramId) {return null;}
+		@Override public Class[][] getParams() {return new Class[][] {
+			{Number.class, Number.class, Number.class, Number.class, Number.class, Color.class, Number.class, Color.class, Number.class, Color.class, Number.class, Color.class, Number.class, Color.class},
+			{Number.class, Number.class, Number.class, Number.class, Number.class, Color.class, Number.class, Color.class, Number.class, Color.class, Number.class, Color.class},
+			{Number.class, Number.class, Number.class, Number.class, Number.class, Color.class, Number.class, Color.class, Number.class, Color.class},
+			{Number.class, Number.class, Number.class, Number.class, Number.class, Color.class, Number.class, Color.class}
+		};}
 
-		@Override
-		public Class[][] getParams() {
-			return new Class[][] {
-				{Number.class, Number.class, Number.class, Number.class, Number.class, Color.class, Number.class, Color.class, Number.class, Color.class, Number.class, Color.class, Number.class, Color.class},
-				{Number.class, Number.class, Number.class, Number.class, Number.class, Color.class, Number.class, Color.class, Number.class, Color.class, Number.class, Color.class},
-				{Number.class, Number.class, Number.class, Number.class, Number.class, Color.class, Number.class, Color.class, Number.class, Color.class},
-				{Number.class, Number.class, Number.class, Number.class, Number.class, Color.class, Number.class, Color.class}
-			};
-		}
-
-		@Override
-		public Object process(List<Object> params) {
+		@Override public Object process(List<Object> params) {
 			float x1 = ((Number) params.get(0)).floatValue();
 			float y1 = ((Number) params.get(1)).floatValue();
 			float x2 = ((Number) params.get(2)).floatValue();

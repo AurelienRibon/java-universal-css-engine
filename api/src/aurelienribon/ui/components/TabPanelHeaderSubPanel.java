@@ -61,7 +61,6 @@ class TabPanelHeaderSubPanel extends JPanel {
 		this.callback = callback;
 
 		addMouseListener(mouseAdapter);
-		setBorder(new MatteBorder(1, 0, 0, 1, stroke));
 
 		descLabel = new JLabel();
 		descLabel.setIconTextGap(6);

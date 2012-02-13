@@ -6,4 +6,5 @@ package aurelienribon.ui.css;
 public interface StyleRule {
 	public String getName();
 	public Class[][] getParams();
+	public String[] getKeywords(int paramsId, int paramId);
 }

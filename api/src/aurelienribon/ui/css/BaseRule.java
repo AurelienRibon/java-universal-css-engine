@@ -1,7 +1,5 @@
 package aurelienribon.ui.css;
 
-import aurelienribon.ui.css.StyleRule;
-
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
@@ -15,5 +13,10 @@ public abstract class BaseRule implements StyleRule {
 	@Override
 	public String getName() {
 		return name;
+	}
+
+	@Override
+	public String[] getKeywords(int paramsId, int paramId) {
+		return null;
 	}
 }

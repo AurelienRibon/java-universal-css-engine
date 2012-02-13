@@ -17,7 +17,6 @@ javax-swing-JTextArea {
 }
 
 aurelienribon-ui-components-Button {
-	-swing-margin: 2 3;
 	-swing-foreground: #000000;
 	-arui-foreground-mouseover: #000000;
 	-arui-foreground-mousedown: #000000;

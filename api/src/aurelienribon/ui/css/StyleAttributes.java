@@ -128,7 +128,9 @@ public class StyleAttributes {
 		else if (val.equals("left")) return SwingConstants.LEFT;
 		else if (val.equals("right")) return SwingConstants.RIGHT;
 		else if (val.equals("center")) return SwingConstants.CENTER;
-		else throw new RuntimeException("Invalid alignment, use leading|trailing|left|right|center");
+
+		assert false;
+		return -1;
 	}
 
 	public int asVAlign(String ruleName) {
@@ -138,7 +140,9 @@ public class StyleAttributes {
 		if (val.equals("bottom")) return AbstractButton.BOTTOM;
 		else if (val.equals("top")) return AbstractButton.TOP;
 		else if (val.equals("center")) return AbstractButton.CENTER;
-		else throw new RuntimeException("Invalid alignment, use bottom|top|center");
+
+		assert false;
+		return -1;
 	}
 
 	public Font asFont(String ruleName) {
@@ -146,12 +150,12 @@ public class StyleAttributes {
 		String p2 = (String) attrs.get(ruleName).get(1);
 		int p3 = (Integer) attrs.get(ruleName).get(2);
 
-		int style;
+		int style = -1;
 
 		if (p2.equals("plain")) style = Font.PLAIN;
 		else if (p2.equals("italic")) style = Font.ITALIC;
 		else if (p2.equals("bold")) style = Font.BOLD;
-		else throw new RuntimeException("Invalid font style, use plain|italic|bold");
+		else assert false;
 
 		return new Font(p1, style, p3);
 	}

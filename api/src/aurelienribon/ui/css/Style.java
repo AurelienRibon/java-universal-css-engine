@@ -136,7 +136,7 @@ public class Style {
 					for (int i=0; i<params.size(); i++) params.set(i, evaluateParam(params.get(i)));
 
 					if (regRule == null) throw StyleException.forRule(name);
-					if (!checkParams(params, regRule.getParams())) throw StyleException.forRuleParams(regRule);
+					if (!checkParams(regRule, params)) throw StyleException.forRuleParams(regRule);
 
 					for (int i=0; i<params.size(); i++) params.set(i, evaluateParam(params.get(i)));
 				}
@@ -159,7 +159,7 @@ public class Style {
 			for (int i=0; i<params.size(); i++) params.set(i, evaluateParam(params.get(i)));
 
 			if (regFunc == null) throw StyleException.forFunction(func.name);
-			if (!checkParams(params, regFunc.getParams())) throw StyleException.forFunctionParams(regFunc);
+			if (!checkParams(regFunc, params)) throw StyleException.forFunctionParams(regFunc);
 
 			return regFunc.process(params);
 		}
@@ -167,13 +167,31 @@ public class Style {
 		return param;
 	}
 
-	private static boolean checkParams(List<Object> params, Class[][] paramsClasses) {
-		for (Class[] cs : paramsClasses) {
+	private static boolean checkParams(StyleRule rule, List<Object> params) {
+		for (int i=0; i<rule.getParams().length; i++) {
+			Class[] cs = rule.getParams()[i];
+
 			if (params.size() == cs.length) {
-				boolean match = true;
-				for (int i=0; i<params.size(); i++)
-					if (!cs[i].isInstance(params.get(i))) match = false;
-				if (match) return true;
+				boolean isMatch = true;
+
+				for (int ii=0; ii<params.size(); ii++) {
+					if (!cs[ii].isInstance(params.get(ii))) {
+						isMatch = false;
+						break;
+					}
+				}
+
+				if (isMatch) {
+					for (int ii=0; ii<params.size(); ii++) {
+						String[] keywords = rule.getKeywords(i, ii);
+
+						if (keywords != null && !Arrays.asList(keywords).contains((String) params.get(ii))) {
+							return false;
+						}
+					}
+
+					return true;
+				}
 			}
 		}
 

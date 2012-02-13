@@ -11,7 +11,7 @@ public class StyleException extends Exception {
 	public static StyleException forRuleParams(StyleRule rule) {
 		return new StyleException("Bad parameter(s) for rule \"" + rule.getName() + "\"");
 	}
-
+	
 	public static StyleException forFunction(String name) {
 		return new StyleException("Function \"" + name + "\" is not registered.");
 	}

@@ -3,6 +3,7 @@ package aurelienribon.ui.css.predefined;
 import aurelienribon.ui.css.BaseBooleanRule;
 import aurelienribon.ui.css.BaseColorRule;
 import aurelienribon.ui.css.BaseIntegerRule;
+import aurelienribon.ui.css.BaseKeywordRule;
 import aurelienribon.ui.css.BaseRule;
 import aurelienribon.ui.css.BaseStringRule;
 import aurelienribon.ui.css.Style;
@@ -29,10 +30,10 @@ public class SwingStyle {
 	public static final String RULE_CARETPOSITION = "-swing-caretposition";
 
 	// String
-	public static final String RULE_H_ALIGN = "-swing-horizontalalignment";
-	public static final String RULE_V_ALIGN = "-swing-verticalalignment";
 	public static final String RULE_TOOLTIP = "-swing-tooltiptext";
 	public static final String RULE_TEXT = "-swing-text";
+	public static final String RULE_H_ALIGN = "-swing-horizontalalignment";
+	public static final String RULE_V_ALIGN = "-swing-verticalalignment";
 
 	// Misc
 	public static final String RULE_MARGIN = "-swing-margin";
@@ -56,10 +57,10 @@ public class SwingStyle {
 		Style.registerRule(new BaseBooleanRule(RULE_WRAPSTYLEWORD));
 		Style.registerRule(new BaseIntegerRule(RULE_TABSIZE));
 		Style.registerRule(new BaseIntegerRule(RULE_CARETPOSITION));
-		Style.registerRule(new BaseStringRule(RULE_H_ALIGN));
-		Style.registerRule(new BaseStringRule(RULE_V_ALIGN));
 		Style.registerRule(new BaseStringRule(RULE_TOOLTIP));
 		Style.registerRule(new BaseStringRule(RULE_TEXT));
+		Style.registerRule(new BaseKeywordRule(RULE_H_ALIGN, "leading", "trailing", "left", "right", "center"));
+		Style.registerRule(new BaseKeywordRule(RULE_V_ALIGN, "top", "bottom", "center"));
 
 		Style.registerRule(new BaseRule(RULE_MARGIN) {
 			@Override public Class[][] getParams() {return new Class[][] {
@@ -73,6 +74,11 @@ public class SwingStyle {
 			@Override public Class[][] getParams() {return new Class[][] {
 				{String.class, String.class, Integer.class}
 			};}
+
+			@Override public String[] getKeywords(int paramsId, int paramId) {
+				if (paramId == 1) return new String[] {"plain", "italic", "bold"};
+				return null;
+			}
 		});
 	}
 }
