@@ -7,6 +7,8 @@ import aurelienribon.ui.css.BaseKeywordRule;
 import aurelienribon.ui.css.BaseRule;
 import aurelienribon.ui.css.BaseStringRule;
 import aurelienribon.ui.css.Style;
+import java.net.URL;
+import javax.swing.Icon;
 
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
@@ -38,8 +40,11 @@ public class SwingStyle {
 	// Misc
 	public static final String RULE_MARGIN = "-swing-margin";
 	public static final String RULE_FONT = "-swing-font";
+	public static final String RULE_ICON = "-swing-icon";
 
 	public static void init() {
+		Style.registerFunction(new SwingFunctions.Url());
+		Style.registerFunction(new SwingFunctions.Icon());
 		Style.registerFunction(new SwingFunctions.Rgb());
 		Style.registerFunction(new SwingFunctions.Rgba());
 		Style.registerFunction(new SwingFunctions.LinearGradient());
@@ -79,6 +84,14 @@ public class SwingStyle {
 				if (paramId == 1) return new String[] {"plain", "italic", "bold"};
 				return null;
 			}
+		});
+
+		Style.registerRule(new BaseRule(RULE_ICON) {
+			@Override public Class[][] getParams() {return new Class[][] {
+				{Icon.class},
+				{URL.class},
+				{String.class}
+			};}
 		});
 	}
 }

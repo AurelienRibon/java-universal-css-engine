@@ -36,6 +36,8 @@ public class SwingProcessor implements StyleProcessor {
 			if (attrs.contains(SwingStyle.RULE_MARGIN)) t.setMargin(attrs.asInsets(SwingStyle.RULE_MARGIN));
 			if (attrs.contains(SwingStyle.RULE_H_ALIGN)) t.setHorizontalAlignment(attrs.asHAlign(SwingStyle.RULE_H_ALIGN));
 			if (attrs.contains(SwingStyle.RULE_V_ALIGN)) t.setVerticalAlignment(attrs.asVAlign(SwingStyle.RULE_V_ALIGN));
+			if (attrs.contains(SwingStyle.RULE_TEXT)) t.setText(attrs.asString(SwingStyle.RULE_TEXT));
+			if (attrs.contains(SwingStyle.RULE_ICON)) t.setIcon(attrs.asIcon(SwingStyle.RULE_ICON));
 		}
 
 		if (target instanceof JLabel) {
@@ -43,6 +45,7 @@ public class SwingProcessor implements StyleProcessor {
 			if (attrs.contains(SwingStyle.RULE_H_ALIGN)) t.setHorizontalAlignment(attrs.asHAlign(SwingStyle.RULE_H_ALIGN));
 			if (attrs.contains(SwingStyle.RULE_V_ALIGN)) t.setVerticalAlignment(attrs.asVAlign(SwingStyle.RULE_V_ALIGN));
 			if (attrs.contains(SwingStyle.RULE_TEXT)) t.setText(attrs.asString(SwingStyle.RULE_TEXT));
+			if (attrs.contains(SwingStyle.RULE_ICON)) t.setIcon(attrs.asIcon(SwingStyle.RULE_ICON));
 		}
 
 		if (target instanceof JTextComponent) {

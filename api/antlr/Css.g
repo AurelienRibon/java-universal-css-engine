@@ -4,6 +4,13 @@ grammar Css;
 	package aurelienribon.ui.css;
 }
 
+@lexer::members {
+	@Override
+	public void emitErrorMessage(String msg) {
+		throw new RuntimeException(msg);
+	}
+}
+
 @header {
 	package aurelienribon.ui.css;
 	
@@ -15,7 +22,12 @@ grammar Css;
 	import java.util.LinkedHashMap;
 }
 
-@members {	
+@members {
+	@Override
+	public void emitErrorMessage(String msg) {
+		throw new RuntimeException(msg);
+	}
+	
 	public class Function {
 		public final String name;
 		public final List<Object> params;

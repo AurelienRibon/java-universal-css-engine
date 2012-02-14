@@ -3,12 +3,52 @@ package aurelienribon.ui.css.predefined;
 import aurelienribon.ui.css.StyleFunction;
 import java.awt.Color;
 import java.awt.LinearGradientPaint;
+import java.net.URL;
 import java.util.List;
+import javax.swing.ImageIcon;
 
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
 public class SwingFunctions {
+
+	// -------------------------------------------------------------------------
+	// Files
+	// -------------------------------------------------------------------------
+
+	public static class Url implements StyleFunction {
+		@Override public String getName() {return "url";}
+		@Override public String[] getKeywords(int paramsId, int paramId) {return null;}
+		@Override public Class[][] getParams() {return new Class[][] {
+			{String.class}
+		};}
+
+		@Override public Object process(List<Object> params) {
+			String name = (String) params.get(0);
+			return getClass().getResource(name);
+		}
+	};
+
+	public static class Icon implements StyleFunction {
+		@Override public String getName() {return "icon";}
+		@Override public String[] getKeywords(int paramsId, int paramId) {return null;}
+		@Override public Class[][] getParams() {return new Class[][] {
+			{URL.class},
+			{String.class}
+		};}
+
+		@Override public Object process(List<Object> params) {
+			if (params.get(0) instanceof URL) return new ImageIcon((URL) params.get(0));
+			if (params.get(0) instanceof String) return new ImageIcon((String) params.get(0));
+			assert false;
+			return null;
+		}
+	};
+
+	// -------------------------------------------------------------------------
+	// Colors
+	// -------------------------------------------------------------------------
+
 	public static class Rgb implements StyleFunction {
 		@Override public String getName() {return "rgb";}
 		@Override public String[] getKeywords(int paramsId, int paramId) {return null;}

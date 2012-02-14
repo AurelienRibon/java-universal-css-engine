@@ -4,11 +4,14 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Insets;
 import java.awt.Paint;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.AbstractButton;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 
 /**
@@ -158,5 +161,16 @@ public class StyleAttributes {
 		else assert false;
 
 		return new Font(p1, style, p3);
+	}
+
+	public Icon asIcon(String ruleName) {
+		Object param = getParams(ruleName).get(0);
+
+		if (param instanceof URL) return new ImageIcon((URL) param);
+		if (param instanceof String) return new ImageIcon((String) param);
+		if (param instanceof Icon) return (Icon) param;
+
+		assert false;
+		return null;
 	}
 }

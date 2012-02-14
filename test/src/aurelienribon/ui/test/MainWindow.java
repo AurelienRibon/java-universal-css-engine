@@ -90,6 +90,8 @@ public class MainWindow extends javax.swing.JFrame {
 			Style.apply(getContentPane(), style);
 		} catch (StyleException ex) {
 			JOptionPane.showMessageDialog(this, ex.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
+		} catch (RuntimeException ex) {
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
 		}
 	}
 
@@ -100,6 +102,8 @@ public class MainWindow extends javax.swing.JFrame {
 			editorArea.setCaretPosition(0);
 			Style.apply(getContentPane(), style);
 		} catch (StyleException ex) {
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
+		} catch (RuntimeException ex) {
 			JOptionPane.showMessageDialog(this, ex.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
 		}
 	}
