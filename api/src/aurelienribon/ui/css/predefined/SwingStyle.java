@@ -7,6 +7,7 @@ import aurelienribon.ui.css.BaseKeywordRule;
 import aurelienribon.ui.css.BaseRule;
 import aurelienribon.ui.css.BaseStringRule;
 import aurelienribon.ui.css.Style;
+import java.awt.Font;
 import java.net.URL;
 import javax.swing.Icon;
 import javax.swing.border.Border;
@@ -98,7 +99,8 @@ public class SwingStyle {
 
 		Style.registerRule(new BaseRule(RULE_FONT) {
 			@Override public Class[][] getParams() {return new Class[][] {
-				{String.class, String.class, Integer.class}
+				{String.class, String.class, Integer.class},
+				{Font.class}
 			};}
 
 			@Override public String[][] getParamsNames() {return new String[][] {
