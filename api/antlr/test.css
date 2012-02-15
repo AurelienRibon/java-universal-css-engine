@@ -1,0 +1,23 @@
+/**
+ * Test file for the css grammar
+ */
+ 
+typeRule {
+	test: 1;
+	test: "abc def";
+	test: 0.25;
+	test: abc;
+	test: #000000;
+	test: "Tahoma" italic 12;
+	test: func(1, 2, 3);
+	test: func(1, func(), func(1));
+}
+
+.classRule {
+}
+
+.rule1 .rule2 .rule3 {
+}
+
+.rule1, .rule2, .rule3 {
+}

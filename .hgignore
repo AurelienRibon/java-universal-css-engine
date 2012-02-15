@@ -1,0 +1,13 @@
+syntax: glob
+
+api/build/*
+api/dist/*
+api/nbproject/*
+api/manifest.mf
+api/nbbuild.xml
+
+test/build/*
+test/dist/*
+test/nbproject/*
+test/manifest.mf
+test/nbbuild.xml
