@@ -2,7 +2,9 @@ package aurelienribon.ui.css.predefined;
 
 import aurelienribon.ui.css.BaseFunction;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.LinearGradientPaint;
+import java.awt.Paint;
 import java.net.URL;
 import java.util.List;
 import javax.swing.BorderFactory;
@@ -58,6 +60,38 @@ public class SwingFunctions {
 		}
 	};
 
+	public static class FontFunction extends BaseFunction {
+		public FontFunction() {super("font");}
+
+		@Override public Class[][] getParams() {return new Class[][] {
+			{String.class, String.class, Integer.class}
+		};}
+
+		@Override public String[][] getParamsNames() {return new String[][] {
+			{"name", "style", "size"}
+		};}
+
+		@Override public String[] getKeywords(int paramsId, int paramId) {
+			if (paramId == 1) return new String[] {"plain", "italic", "bold"};
+			return null;
+		}
+
+		@Override public Object process(List<Object> params) {
+			String name = (String) params.get(0);
+			String styleStr = (String) params.get(1);
+			int size = (Integer) params.get(2);
+
+			int style = -1;
+
+			if (styleStr.equals("plain")) style = Font.PLAIN;
+			else if (styleStr.equals("italic")) style = Font.ITALIC;
+			else if (styleStr.equals("bold")) style = Font.BOLD;
+			else assert false;
+
+			return new Font(name, style, size);
+		}
+	}
+
 	// -------------------------------------------------------------------------
 	// Colors
 	// -------------------------------------------------------------------------
@@ -105,17 +139,17 @@ public class SwingFunctions {
 		public LinearGradientFunction() {super("lineargradient");}
 
 		@Override public Class[][] getParams() {return new Class[][] {
-			{Number.class, Number.class, Number.class, Number.class, Number.class, Color.class, Number.class, Color.class, Number.class, Color.class, Number.class, Color.class, Number.class, Color.class},
-			{Number.class, Number.class, Number.class, Number.class, Number.class, Color.class, Number.class, Color.class, Number.class, Color.class, Number.class, Color.class},
+			{Number.class, Number.class, Number.class, Number.class, Number.class, Color.class, Number.class, Color.class},
 			{Number.class, Number.class, Number.class, Number.class, Number.class, Color.class, Number.class, Color.class, Number.class, Color.class},
-			{Number.class, Number.class, Number.class, Number.class, Number.class, Color.class, Number.class, Color.class}
+			{Number.class, Number.class, Number.class, Number.class, Number.class, Color.class, Number.class, Color.class, Number.class, Color.class, Number.class, Color.class},
+			{Number.class, Number.class, Number.class, Number.class, Number.class, Color.class, Number.class, Color.class, Number.class, Color.class, Number.class, Color.class, Number.class, Color.class}
 		};}
 
 		@Override public String[][] getParamsNames() {return new String[][] {
-			{"x1", "y1", "x2", "y2", "fraction1", "color1", "fraction2", "color2", "fraction3", "color3", "fraction4", "color4", "fraction5", "color5"},
-			{"x1", "y1", "x2", "y2", "fraction1", "color1", "fraction2", "color2", "fraction3", "color3", "fraction4", "color4"},
+			{"x1", "y1", "x2", "y2", "fraction1", "color1", "fraction2", "color2"},
 			{"x1", "y1", "x2", "y2", "fraction1", "color1", "fraction2", "color2", "fraction3", "color3"},
-			{"x1", "y1", "x2", "y2", "fraction1", "color1", "fraction2", "color2"}
+			{"x1", "y1", "x2", "y2", "fraction1", "color1", "fraction2", "color2", "fraction3", "color3", "fraction4", "color4"},
+			{"x1", "y1", "x2", "y2", "fraction1", "color1", "fraction2", "color2", "fraction3", "color3", "fraction4", "color4", "fraction5", "color5"}
 		};}
 
 		@Override public Object process(List<Object> params) {
@@ -281,6 +315,53 @@ public class SwingFunctions {
 		}
 	};
 
+	public static class SoftBevelBorderFunction extends BaseFunction {
+		public SoftBevelBorderFunction() {super("softbevelborder");}
+
+		@Override public String[] getKeywords(int paramsId, int paramId) {
+			if (paramId == 0) return new String[] {"lowered", "raised"};
+			return null;
+		}
+
+		@Override public Class[][] getParams() {return new Class[][] {
+			{String.class},
+			{String.class, Color.class, Color.class},
+			{String.class, Color.class, Color.class, Color.class, Color.class}
+		};}
+
+		@Override public String[][] getParamsNames() {return new String[][] {
+			{"type"},
+			{"type", "highlight", "shadow"},
+			{"type", "highlightOuter", "highlightInner", "shadowOuter", "shadowInner"}
+		};}
+
+		@Override public Object process(List<Object> params) {
+			String typeStr = (String) params.get(0);
+			int type = typeStr.equals("lowered") ? BevelBorder.LOWERED : BevelBorder.RAISED;
+
+			if (params.size() == 1) {
+				return BorderFactory.createSoftBevelBorder(type);
+			}
+
+			if (params.size() == 3) {
+				Color highlight = (Color) params.get(1);
+				Color shadow = (Color) params.get(1);
+				return BorderFactory.createSoftBevelBorder(type, highlight, shadow);
+			}
+
+			if (params.size() == 5) {
+				Color highlightOuter = (Color) params.get(1);
+				Color highlightInner = (Color) params.get(2);
+				Color shadowOuter = (Color) params.get(3);
+				Color shadowInner = (Color) params.get(4);
+				return BorderFactory.createSoftBevelBorder(type, highlightOuter, highlightInner, shadowOuter, shadowInner);
+			}
+
+			assert false;
+			return null;
+		}
+	};
+
 	public static class CompoundBorderFunction extends BaseFunction {
 		public CompoundBorderFunction() {super("compoundborder");}
 
@@ -307,6 +388,175 @@ public class SwingFunctions {
 				Border outsideBorder = (Border) params.get(0);
 				Border insideBorder = (Border) params.get(1);
 				return BorderFactory.createCompoundBorder(outsideBorder, insideBorder);
+			}
+
+			assert false;
+			return null;
+		}
+	};
+
+	public static class DashedBorderFunction extends BaseFunction {
+		public DashedBorderFunction() {super("dashedborder");}
+
+		@Override public Class[][] getParams() {return new Class[][] {
+			{Paint.class},
+			{Paint.class, Number.class, Number.class},
+			{Paint.class, Number.class, Number.class, Number.class, Boolean.class}
+		};}
+
+		@Override public String[][] getParamsNames() {return new String[][] {
+			{"paint"},
+			{"paint", "length", "spacing"},
+			{"paint", "thickness", "length", "spacing", "rounded"}
+		};}
+
+		@Override public boolean canBeNull(int paramsId, int paramId) {
+			return paramId == 0;
+		}
+
+		@Override public Object process(List<Object> params) {
+			if (params.size() == 1) {
+				Paint paint = (Paint) params.get(0);
+				return BorderFactory.createDashedBorder(paint);
+			}
+
+			if (params.size() == 2) {
+				Paint paint = (Paint) params.get(0);
+				float length = (Float) params.get(1);
+				float spacing = (Float) params.get(2);
+				return BorderFactory.createDashedBorder(paint, length, spacing);
+			}
+
+			if (params.size() == 4) {
+				Paint paint = (Paint) params.get(0);
+				float thickness = (Float) params.get(1);
+				float length = (Float) params.get(2);
+				float spacing = (Float) params.get(2);
+				boolean rounded = (Boolean) params.get(3);
+				return BorderFactory.createDashedBorder(paint, thickness, length, spacing, rounded);
+			}
+
+			assert false;
+			return null;
+		}
+	};
+
+	public static class EtchedBorderFunction extends BaseFunction {
+		public EtchedBorderFunction() {super("etchedborder");}
+
+		@Override public Class[][] getParams() {return new Class[][] {
+			{},
+			{Integer.class},
+			{Color.class, Color.class},
+			{Integer.class, Color.class, Color.class}
+		};}
+
+		@Override public String[][] getParamsNames() {return new String[][] {
+			{},
+			{"type"},
+			{"highlight", "shadow"},
+			{"type", "highlight", "shadow"}
+		};}
+
+		@Override public boolean canBeNull(int paramsId, int paramId) {
+			return paramId == 0;
+		}
+
+		@Override public Object process(List<Object> params) {
+			if (params.isEmpty()) {
+				return BorderFactory.createEtchedBorder();
+			}
+
+			if (params.size() == 1) {
+				int type = (Integer) params.get(0);
+				return BorderFactory.createEtchedBorder(type);
+			}
+
+			if (params.size() == 2) {
+				Color highlight = (Color) params.get(0);
+				Color shadow = (Color) params.get(1);
+				return BorderFactory.createEtchedBorder(highlight, shadow);
+			}
+
+			if (params.size() == 3) {
+				int type = (Integer) params.get(0);
+				Color highlight = (Color) params.get(1);
+				Color shadow = (Color) params.get(2);
+				return BorderFactory.createEtchedBorder(type, highlight, shadow);
+			}
+
+			assert false;
+			return null;
+		}
+	};
+
+	public static class TitledBorderFunction extends BaseFunction {
+		public TitledBorderFunction() {super("titledborder");}
+
+		@Override public Class[][] getParams() {return new Class[][] {
+			{Border.class},
+			{String.class},
+			{Border.class, String.class},
+			{Border.class, String.class, Integer.class, Integer.class},
+			{Border.class, String.class, Integer.class, Integer.class, Font.class},
+			{Border.class, String.class, Integer.class, Integer.class, Font.class, Color.class}
+		};}
+
+		@Override public String[][] getParamsNames() {return new String[][] {
+			{"border"},
+			{"title"},
+			{"border", "title"},
+			{"border", "title", "titleJustification", "titlePosition"},
+			{"border", "title", "titleJustification", "titlePosition", "titleFont"},
+			{"border", "title", "titleJustification", "titlePosition", "titleFont", "titleColor"}
+		};}
+
+		@Override public boolean canBeNull(int paramsId, int paramId) {
+			return paramId == 0;
+		}
+
+		@Override public Object process(List<Object> params) {
+			if (params.size() == 1 && params.get(0) instanceof Border) {
+				Border border = (Border) params.get(0);
+				return BorderFactory.createTitledBorder(border);
+			}
+
+			if (params.size() == 1 && params.get(0) instanceof String) {
+				String title = (String) params.get(0);
+				return BorderFactory.createTitledBorder(title);
+			}
+
+			if (params.size() == 2) {
+				Border border = (Border) params.get(0);
+				String title = (String) params.get(1);
+				return BorderFactory.createTitledBorder(border, title);
+			}
+
+			if (params.size() == 4) {
+				Border border = (Border) params.get(0);
+				String title = (String) params.get(1);
+				int titleJustification = (Integer) params.get(2);
+				int titlePosition = (Integer) params.get(3);
+				return BorderFactory.createTitledBorder(border, title, titleJustification, titlePosition);
+			}
+
+			if (params.size() == 5) {
+				Border border = (Border) params.get(0);
+				String title = (String) params.get(1);
+				int titleJustification = (Integer) params.get(2);
+				int titlePosition = (Integer) params.get(3);
+				Font titleFont = (Font) params.get(4);
+				return BorderFactory.createTitledBorder(border, title, titleJustification, titlePosition, titleFont);
+			}
+
+			if (params.size() == 6) {
+				Border border = (Border) params.get(0);
+				String title = (String) params.get(1);
+				int titleJustification = (Integer) params.get(2);
+				int titlePosition = (Integer) params.get(3);
+				Font titleFont = (Font) params.get(4);
+				Color titleColor = (Color) params.get(5);
+				return BorderFactory.createTitledBorder(border, title, titleJustification, titlePosition, titleFont, titleColor);
 			}
 
 			assert false;

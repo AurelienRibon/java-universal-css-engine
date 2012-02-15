@@ -152,6 +152,9 @@ public class StyleAttributes {
 	}
 
 	public Font asFont(String ruleName) {
+		if (attrs.get(ruleName).get(0) instanceof Font)
+			return (Font) attrs.get(ruleName).get(0);
+
 		String p1 = (String) attrs.get(ruleName).get(0);
 		String p2 = (String) attrs.get(ruleName).get(1);
 		int p3 = (Integer) attrs.get(ruleName).get(2);

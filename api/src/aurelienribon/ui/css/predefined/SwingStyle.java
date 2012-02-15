@@ -47,6 +47,7 @@ public class SwingStyle {
 	public static void init() {
 		Style.registerFunction(new SwingFunctions.UrlFunction());
 		Style.registerFunction(new SwingFunctions.IconFunction());
+		Style.registerFunction(new SwingFunctions.FontFunction());
 		Style.registerFunction(new SwingFunctions.RgbFunction());
 		Style.registerFunction(new SwingFunctions.RgbaFunction());
 		Style.registerFunction(new SwingFunctions.LinearGradientFunction());
@@ -54,7 +55,10 @@ public class SwingStyle {
 		Style.registerFunction(new SwingFunctions.LineBorderFunction());
 		Style.registerFunction(new SwingFunctions.MatteBorderFunction());
 		Style.registerFunction(new SwingFunctions.BevelBorderFunction());
-		Style.registerFunction(new SwingFunctions.CompoundBorderFunction());
+		Style.registerFunction(new SwingFunctions.SoftBevelBorderFunction());
+		Style.registerFunction(new SwingFunctions.DashedBorderFunction());
+		Style.registerFunction(new SwingFunctions.EtchedBorderFunction());
+		Style.registerFunction(new SwingFunctions.TitledBorderFunction());
 
 		Style.registerProcessor(new SwingProcessor());
 
@@ -98,7 +102,8 @@ public class SwingStyle {
 			};}
 
 			@Override public String[][] getParamsNames() {return new String[][] {
-				{"name", "style", "size"}
+				{"name", "style", "size"},
+				{"font"}
 			};}
 
 			@Override public String[] getKeywords(int paramsId, int paramId) {
@@ -109,15 +114,15 @@ public class SwingStyle {
 
 		Style.registerRule(new BaseRule(RULE_ICON) {
 			@Override public Class[][] getParams() {return new Class[][] {
-				{Icon.class},
 				{URL.class},
-				{String.class}
+				{String.class},
+				{Icon.class}
 			};}
 
 			@Override public String[][] getParamsNames() {return new String[][] {
-				{"icon"},
 				{"url"},
-				{"filepath"}
+				{"filepath"},
+				{"icon"}
 			};}
 
 			@Override public boolean canBeNull(int paramsId, int paramId) {
