@@ -1,12 +1,14 @@
 package aurelienribon.ui.css.predefined;
 
-import aurelienribon.ui.css.StyleFunction;
+import aurelienribon.ui.css.BaseFunction;
 import java.awt.Color;
 import java.awt.LinearGradientPaint;
 import java.net.URL;
 import java.util.List;
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 
 /**
@@ -18,9 +20,9 @@ public class SwingFunctions {
 	// Files
 	// -------------------------------------------------------------------------
 
-	public static class Url implements StyleFunction {
-		@Override public String getName() {return "url";}
-		@Override public String[] getKeywords(int paramsId, int paramId) {return null;}
+	public static class UrlFunction extends BaseFunction {
+		public UrlFunction() {super("url");}
+
 		@Override public Class[][] getParams() {return new Class[][] {
 			{String.class}
 		};}
@@ -31,9 +33,9 @@ public class SwingFunctions {
 		}
 	};
 
-	public static class Icon implements StyleFunction {
-		@Override public String getName() {return "icon";}
-		@Override public String[] getKeywords(int paramsId, int paramId) {return null;}
+	public static class IconFunction extends BaseFunction {
+		public IconFunction() {super("icon");}
+
 		@Override public Class[][] getParams() {return new Class[][] {
 			{URL.class},
 			{String.class}
@@ -51,9 +53,9 @@ public class SwingFunctions {
 	// Colors
 	// -------------------------------------------------------------------------
 
-	public static class Rgb implements StyleFunction {
-		@Override public String getName() {return "rgb";}
-		@Override public String[] getKeywords(int paramsId, int paramId) {return null;}
+	public static class RgbFunction extends BaseFunction {
+		public RgbFunction() {super("rgb");}
+
 		@Override public Class[][] getParams() {return new Class[][] {
 			{Integer.class, Integer.class, Integer.class}
 		};}
@@ -66,9 +68,8 @@ public class SwingFunctions {
 		}
 	};
 
-	public static class Rgba implements StyleFunction {
-		@Override public String getName() {return "rgba";}
-		@Override public String[] getKeywords(int paramsId, int paramId) {return null;}
+	public static class RgbaFunction extends BaseFunction {
+		public RgbaFunction() {super("rgba");}
 
 		@Override public Class[][] getParams() {return new Class[][] {
 			{Integer.class, Integer.class, Integer.class, Float.class}
@@ -84,9 +85,9 @@ public class SwingFunctions {
 		}
 	};
 
-	public static class LinearGradient implements StyleFunction {
-		@Override public String getName() {return "lineargradient";}
-		@Override public String[] getKeywords(int paramsId, int paramId) {return null;}
+	public static class LinearGradientFunction extends BaseFunction {
+		public LinearGradientFunction() {super("lineargradient");}
+
 		@Override public Class[][] getParams() {return new Class[][] {
 			{Number.class, Number.class, Number.class, Number.class, Number.class, Color.class, Number.class, Color.class, Number.class, Color.class, Number.class, Color.class, Number.class, Color.class},
 			{Number.class, Number.class, Number.class, Number.class, Number.class, Color.class, Number.class, Color.class, Number.class, Color.class, Number.class, Color.class},
@@ -117,9 +118,9 @@ public class SwingFunctions {
 	// Borders
 	// -------------------------------------------------------------------------
 
-	public static class EmptyBorder implements StyleFunction {
-		@Override public String getName() {return "emptyborder";}
-		@Override public String[] getKeywords(int paramsId, int paramId) {return null;}
+	public static class EmptyBorderFunction extends BaseFunction {
+		public EmptyBorderFunction() {super("emptyborder");}
+
 		@Override public Class[][] getParams() {return new Class[][] {
 			{Integer.class, Integer.class, Integer.class, Integer.class}
 		};}
@@ -133,9 +134,9 @@ public class SwingFunctions {
 		}
 	};
 
-	public static class LineBorder implements StyleFunction {
-		@Override public String getName() {return "lineborder";}
-		@Override public String[] getKeywords(int paramsId, int paramId) {return null;}
+	public static class LineBorderFunction extends BaseFunction {
+		public LineBorderFunction() {super("lineborder");}
+
 		@Override public Class[][] getParams() {return new Class[][] {
 			{Color.class},
 			{Color.class, Integer.class},
@@ -166,12 +167,12 @@ public class SwingFunctions {
 		}
 	};
 
-	public static class MatteBorder implements StyleFunction {
-		@Override public String getName() {return "matteborder";}
-		@Override public String[] getKeywords(int paramsId, int paramId) {return null;}
+	public static class MatteBorderFunction extends BaseFunction {
+		public MatteBorderFunction() {super("matteborder");}
+
 		@Override public Class[][] getParams() {return new Class[][] {
 			{Integer.class, Integer.class, Integer.class, Integer.class, Color.class},
-			{Integer.class, Integer.class, Integer.class, Integer.class, javax.swing.Icon.class}
+			{Integer.class, Integer.class, Integer.class, Integer.class, Icon.class}
 		};}
 
 		@Override public Object process(List<Object> params) {
@@ -185,8 +186,8 @@ public class SwingFunctions {
 				return BorderFactory.createMatteBorder(top, left, bottom, right, color);
 			}
 
-			if (params.get(4) instanceof javax.swing.Icon) {
-				javax.swing.Icon icon = (javax.swing.Icon) params.get(4);
+			if (params.get(4) instanceof Icon) {
+				Icon icon = (Icon) params.get(4);
 				return BorderFactory.createMatteBorder(top, left, bottom, right, icon);
 			}
 
@@ -195,8 +196,9 @@ public class SwingFunctions {
 		}
 	};
 
-	public static class BevelBorder implements StyleFunction {
-		@Override public String getName() {return "bevelborder";}
+	public static class BevelBorderFunction extends BaseFunction {
+		public BevelBorderFunction() {super("bevelborder");}
+
 		@Override public String[] getKeywords(int paramsId, int paramId) {
 			if (paramId == 0) return new String[] {"lowered", "raised"};
 			return null;
@@ -210,8 +212,7 @@ public class SwingFunctions {
 
 		@Override public Object process(List<Object> params) {
 			String typeStr = (String) params.get(0);
-			int type = typeStr.equals("lowered") ? javax.swing.border.BevelBorder.LOWERED
-					: javax.swing.border.BevelBorder.RAISED;
+			int type = typeStr.equals("lowered") ? BevelBorder.LOWERED : BevelBorder.RAISED;
 
 			if (params.size() == 1) {
 				return BorderFactory.createBevelBorder(type);
@@ -236,13 +237,17 @@ public class SwingFunctions {
 		}
 	};
 
-	public static class CompoundBorder implements StyleFunction {
-		@Override public String getName() {return "compoundborder";}
-		@Override public String[] getKeywords(int paramsId, int paramId) {return null;}
+	public static class CompoundBorderFunction extends BaseFunction {
+		public CompoundBorderFunction() {super("compoundborder");}
+
 		@Override public Class[][] getParams() {return new Class[][] {
 			{},
 			{Border.class, Border.class}
 		};}
+
+		@Override public boolean canBeNull(int paramsId, int paramId) {
+			return true;
+		}
 
 		@Override public Object process(List<Object> params) {
 			if (params.isEmpty()) {

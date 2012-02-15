@@ -43,16 +43,21 @@ grammar Css;
 	}
 	
 	private Color parseColor(String s) {
-		int r, g, b, a = 255, i = 1;
-		
-		int incr = s.length() == 9 || s.length() == 7 ? 2 : 1;
-		boolean alpha = s.length() == 9 || s.length() == 5;
-		
-		if (alpha) a = Integer.parseInt(s.substring(i,i+=incr), 16);
-		r = Integer.parseInt(s.substring(i,i+=incr), 16);
-		g = Integer.parseInt(s.substring(i,i+=incr), 16);
-		b = Integer.parseInt(s.substring(i,i+=incr), 16);
-		return new Color(r, g, b, a);
+   		int r, g, b, a = 255, i = 1;
+
+    	int incr = s.length() == 9 || s.length() == 7 ? 2 : 1;
+   		boolean alpha = s.length() == 9 || s.length() == 5;
+
+    	if (alpha) a = parseColorHex(s.substring(i,i+=incr));
+   		r = parseColorHex(s.substring(i,i+=incr));
+   		g = parseColorHex(s.substring(i,i+=incr));
+   		b = parseColorHex(s.substring(i,i+=incr));
+   		return new Color(r, g, b, a);
+   	}
+
+	private int parseColorHex(String s) {
+		if (s.length() == 1) s = s.concat(s);
+		return Integer.parseInt(s, 16);
 	}
 }
 

@@ -175,8 +175,9 @@ public class Style {
 			boolean isMatch = true;
 
 			for (int ii=0; ii<params.size(); ii++) {
-				if (cs[ii] == null && params.get(ii) == null) continue;
+				assert cs[ii] != null;
 				if (cs[ii].isInstance(params.get(ii))) continue;
+				if (params.get(ii) == null && rule.canBeNull(i, ii)) continue;
 				isMatch = false;
 				break;
 			}

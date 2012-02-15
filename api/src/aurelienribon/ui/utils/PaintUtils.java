@@ -1,7 +1,6 @@
 package aurelienribon.ui.utils;
 
 import java.awt.Color;
-import java.awt.GradientPaint;
 import java.awt.LinearGradientPaint;
 import java.awt.MultipleGradientPaint;
 import java.awt.Paint;

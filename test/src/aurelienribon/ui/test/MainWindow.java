@@ -25,9 +25,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         initComponents();
 
-		tabPanel1.setHeaderLayout(TabPanel.LAYOUT_GRID);
-		tabPanel1.getModel().add(controlPanel, "Controls", null, false);
-
 		applyBtn.addActionListener(new ActionListener() {
 			@Override public void actionPerformed(ActionEvent e) {
 				setStyle(editorArea.getText());
@@ -50,6 +47,7 @@ public class MainWindow extends javax.swing.JFrame {
 		toggleLayoutBtn.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent e) {toggleLayout();}});
 
 		Style.registerTargetClass(getContentPane(), "rootPanel");
+		Style.registerTargetClass(controlPanel, "controlPanel");
 		Style.registerTargetClass(applyBtn, "applyButton");
 		Style.registerTargetClass(resetBtn, "resetButton");
 		Style.registerTargetClass(loadStyle1Btn, "loadButton");
@@ -119,15 +117,13 @@ public class MainWindow extends javax.swing.JFrame {
         editorPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         editorArea = new javax.swing.JTextArea();
+        tabPanel = new aurelienribon.ui.components.TabPanel();
         controlPanel = new javax.swing.JPanel();
         toggleLayoutBtn = new aurelienribon.ui.components.Button();
         applyBtn = new aurelienribon.ui.components.Button();
         loadStyle2Btn = new aurelienribon.ui.components.Button();
         resetBtn = new aurelienribon.ui.components.Button();
         loadStyle1Btn = new aurelienribon.ui.components.Button();
-        tabPanel = new aurelienribon.ui.components.TabPanel();
-        tabPanel1 = new aurelienribon.ui.components.TabPanel();
-        jButton1 = new javax.swing.JButton();
 
         editorPanel.setOpaque(false);
         editorPanel.setLayout(new java.awt.BorderLayout());
@@ -141,7 +137,8 @@ public class MainWindow extends javax.swing.JFrame {
 
         editorPanel.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        controlPanel.setOpaque(false);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Arui test");
 
         toggleLayoutBtn.setText("Toggle TabPanel layout");
 
@@ -160,7 +157,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(controlPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(toggleLayoutBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                    .addComponent(toggleLayoutBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(loadStyle1Btn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(loadStyle2Btn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, controlPanelLayout.createSequentialGroup()
@@ -185,26 +182,16 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Arui test");
-
-        jButton1.setText("jButton1");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tabPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
+                .addComponent(tabPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(tabPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(42, 42, 42))))
+                .addComponent(controlPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,10 +199,8 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(tabPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(161, 161, 161)
-                        .addComponent(jButton1)
-                        .addGap(163, 163, 163))
+                        .addComponent(controlPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(163, 245, Short.MAX_VALUE))
                     .addComponent(tabPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -228,13 +213,11 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel controlPanel;
     private javax.swing.JTextArea editorArea;
     private javax.swing.JPanel editorPanel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private aurelienribon.ui.components.Button loadStyle1Btn;
     private aurelienribon.ui.components.Button loadStyle2Btn;
     private aurelienribon.ui.components.Button resetBtn;
     private aurelienribon.ui.components.TabPanel tabPanel;
-    private aurelienribon.ui.components.TabPanel tabPanel1;
     private aurelienribon.ui.components.Button toggleLayoutBtn;
     // End of variables declaration//GEN-END:variables
 

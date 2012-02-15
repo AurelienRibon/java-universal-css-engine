@@ -23,6 +23,8 @@ public class AruiStyle {
 	public static final String RULE_CORNERRADIUS = "-arui-cornerradius";
 
 	public static void init() {
+		Style.registerFunction(new AruiFunctions.GroupBorderFunction());
+
 		Style.registerProcessor(new Button.Processor());
 		Style.registerProcessor(new TabPanel.Processor());
 		Style.registerProcessor(new TabPanelHeaderPanel.Processor());

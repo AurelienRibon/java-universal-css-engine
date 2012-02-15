@@ -45,16 +45,16 @@ public class SwingStyle {
 	public static final String RULE_BORDER = "-swing-border";
 
 	public static void init() {
-		Style.registerFunction(new SwingFunctions.Url());
-		Style.registerFunction(new SwingFunctions.Icon());
-		Style.registerFunction(new SwingFunctions.Rgb());
-		Style.registerFunction(new SwingFunctions.Rgba());
-		Style.registerFunction(new SwingFunctions.LinearGradient());
-		Style.registerFunction(new SwingFunctions.EmptyBorder());
-		Style.registerFunction(new SwingFunctions.LineBorder());
-		Style.registerFunction(new SwingFunctions.MatteBorder());
-		Style.registerFunction(new SwingFunctions.BevelBorder());
-		Style.registerFunction(new SwingFunctions.CompoundBorder());
+		Style.registerFunction(new SwingFunctions.UrlFunction());
+		Style.registerFunction(new SwingFunctions.IconFunction());
+		Style.registerFunction(new SwingFunctions.RgbFunction());
+		Style.registerFunction(new SwingFunctions.RgbaFunction());
+		Style.registerFunction(new SwingFunctions.LinearGradientFunction());
+		Style.registerFunction(new SwingFunctions.EmptyBorderFunction());
+		Style.registerFunction(new SwingFunctions.LineBorderFunction());
+		Style.registerFunction(new SwingFunctions.MatteBorderFunction());
+		Style.registerFunction(new SwingFunctions.BevelBorderFunction());
+		Style.registerFunction(new SwingFunctions.CompoundBorderFunction());
 
 		Style.registerProcessor(new SwingProcessor());
 
@@ -78,9 +78,12 @@ public class SwingStyle {
 			@Override public Class[][] getParams() {return new Class[][] {
 				{Integer.class, Integer.class, Integer.class, Integer.class},
 				{Integer.class, Integer.class},
-				{Integer.class},
-				{null}
+				{Integer.class}
 			};}
+
+			@Override public boolean canBeNull(int paramsId, int paramId) {
+				return paramsId == 2;
+			}
 		});
 
 		Style.registerRule(new BaseRule(RULE_FONT) {
@@ -98,16 +101,22 @@ public class SwingStyle {
 			@Override public Class[][] getParams() {return new Class[][] {
 				{Icon.class},
 				{URL.class},
-				{String.class},
-				{null}
+				{String.class}
 			};}
+
+			@Override public boolean canBeNull(int paramsId, int paramId) {
+				return true;
+			}
 		});
 
 		Style.registerRule(new BaseRule(RULE_BORDER) {
 			@Override public Class[][] getParams() {return new Class[][] {
-				{Border.class},
-				{null}
+				{Border.class}
 			};}
+
+			@Override public boolean canBeNull(int paramsId, int paramId) {
+				return true;
+			}
 		});
 	}
 }

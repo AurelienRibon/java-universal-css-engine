@@ -93,8 +93,6 @@ class TabPanelHeaderSubPanel extends JPanel {
 	}
 
 	public void reload() {
-		setBorder(new MatteBorder(1, 0, 0, 1, stroke));
-
 		descLabel.setText(model.title);
 		descLabel.setIcon(model.icon);
 		crossLabel.setVisible(model.closable);
