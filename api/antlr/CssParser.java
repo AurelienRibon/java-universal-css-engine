@@ -1,4 +1,4 @@
-// $ANTLR 3.4 D:\\Dev\\Java\\arui\\api\\antlr\\Css.g 2012-02-14 11:14:20
+// $ANTLR 3.4 D:\\Dev\\Java\\arui\\api\\antlr\\Css.g 2012-02-14 11:42:19
 
 	package aurelienribon.ui.css;
 	
@@ -18,11 +18,10 @@ import java.util.ArrayList;
 @SuppressWarnings({"all", "warnings", "unchecked"})
 public class CssParser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "BOOLEAN", "COLOR", "COMMENT", "FLOAT", "HEX", "ID", "INT", "STRING", "WS", "'('", "')'", "','", "'.'", "':'", "';'", "'{'", "'}'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "BOOLEAN", "COLOR", "COMMENT", "FLOAT", "HEX", "ID", "INT", "NULL", "STRING", "WS", "'('", "')'", "','", "'.'", "':'", "';'", "'{'", "'}'"
     };
 
     public static final int EOF=-1;
-    public static final int T__13=13;
     public static final int T__14=14;
     public static final int T__15=15;
     public static final int T__16=16;
@@ -30,6 +29,7 @@ public class CssParser extends Parser {
     public static final int T__18=18;
     public static final int T__19=19;
     public static final int T__20=20;
+    public static final int T__21=21;
     public static final int BOOLEAN=4;
     public static final int COLOR=5;
     public static final int COMMENT=6;
@@ -37,8 +37,9 @@ public class CssParser extends Parser {
     public static final int HEX=8;
     public static final int ID=9;
     public static final int INT=10;
-    public static final int STRING=11;
-    public static final int WS=12;
+    public static final int NULL=11;
+    public static final int STRING=12;
+    public static final int WS=13;
 
     // delegates
     public Parser[] getDelegates() {
@@ -82,7 +83,7 @@ public class CssParser extends Parser {
     		int r, g, b, a = 255, i = 1;
     		
     		int incr = s.length() == 9 || s.length() == 7 ? 2 : 1;
-    		boolean alpha = s.length() == 9 || s.length() == 4;
+    		boolean alpha = s.length() == 9 || s.length() == 5;
     		
     		if (alpha) a = Integer.parseInt(s.substring(i,i+=incr), 16);
     		r = Integer.parseInt(s.substring(i,i+=incr), 16);
@@ -113,7 +114,7 @@ public class CssParser extends Parser {
                 int alt1=2;
                 int LA1_0 = input.LA(1);
 
-                if ( (LA1_0==ID||LA1_0==16) ) {
+                if ( (LA1_0==ID||LA1_0==17) ) {
                     alt1=1;
                 }
 
@@ -184,7 +185,7 @@ public class CssParser extends Parser {
             state._fsp--;
 
 
-            match(input,19,FOLLOW_19_in_styleclass81); 
+            match(input,20,FOLLOW_20_in_styleclass81); 
 
             retval.sels = selector_list_list2;
 
@@ -220,7 +221,7 @@ public class CssParser extends Parser {
             } while (true);
 
 
-            match(input,20,FOLLOW_20_in_styleclass114); 
+            match(input,21,FOLLOW_21_in_styleclass114); 
 
             }
 
@@ -272,7 +273,7 @@ public class CssParser extends Parser {
                 int alt3=2;
                 int LA3_0 = input.LA(1);
 
-                if ( (LA3_0==15) ) {
+                if ( (LA3_0==16) ) {
                     alt3=1;
                 }
 
@@ -281,7 +282,7 @@ public class CssParser extends Parser {
             	case 1 :
             	    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:75:4: ',' ss2= selector_list
             	    {
-            	    match(input,15,FOLLOW_15_in_selector_list_list150); 
+            	    match(input,16,FOLLOW_16_in_selector_list_list150); 
 
             	    pushFollow(FOLLOW_selector_list_in_selector_list_list154);
             	    ss2=selector_list();
@@ -338,7 +339,7 @@ public class CssParser extends Parser {
                 int alt4=2;
                 int LA4_0 = input.LA(1);
 
-                if ( (LA4_0==ID||LA4_0==16) ) {
+                if ( (LA4_0==ID||LA4_0==17) ) {
                     alt4=1;
                 }
 
@@ -401,7 +402,7 @@ public class CssParser extends Parser {
             int alt5=2;
             int LA5_0 = input.LA(1);
 
-            if ( (LA5_0==16) ) {
+            if ( (LA5_0==17) ) {
                 alt5=1;
             }
             else if ( (LA5_0==ID) ) {
@@ -418,7 +419,7 @@ public class CssParser extends Parser {
                 case 1 :
                     // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:87:4: '.' ID
                     {
-                    match(input,16,FOLLOW_16_in_selector208); 
+                    match(input,17,FOLLOW_17_in_selector208); 
 
                     match(input,ID,FOLLOW_ID_in_selector210); 
 
@@ -474,7 +475,7 @@ public class CssParser extends Parser {
             {
             ID5=(Token)match(input,ID,FOLLOW_ID_in_rule236); 
 
-            match(input,17,FOLLOW_17_in_rule238); 
+            match(input,18,FOLLOW_18_in_rule238); 
 
             retval.key = (ID5!=null?ID5.getText():null);
 
@@ -515,7 +516,7 @@ public class CssParser extends Parser {
             } while (true);
 
 
-            match(input,18,FOLLOW_18_in_rule259); 
+            match(input,19,FOLLOW_19_in_rule259); 
 
             }
 
@@ -556,10 +557,10 @@ public class CssParser extends Parser {
             if ( (LA7_0==ID) ) {
                 int LA7_1 = input.LA(2);
 
-                if ( (LA7_1==13) ) {
+                if ( (LA7_1==14) ) {
                     alt7=1;
                 }
-                else if ( ((LA7_1 >= BOOLEAN && LA7_1 <= COLOR)||LA7_1==FLOAT||(LA7_1 >= ID && LA7_1 <= STRING)||LA7_1==18) ) {
+                else if ( ((LA7_1 >= BOOLEAN && LA7_1 <= COLOR)||LA7_1==FLOAT||(LA7_1 >= ID && LA7_1 <= STRING)||LA7_1==19) ) {
                     alt7=2;
                 }
                 else {
@@ -643,7 +644,7 @@ public class CssParser extends Parser {
             {
             ID9=(Token)match(input,ID,FOLLOW_ID_in_function309); 
 
-            match(input,13,FOLLOW_13_in_function311); 
+            match(input,14,FOLLOW_14_in_function311); 
 
             // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:106:3: (f1= function_param ( ',' f2= function_param )* )?
             int alt9=2;
@@ -670,7 +671,7 @@ public class CssParser extends Parser {
                         int alt8=2;
                         int LA8_0 = input.LA(1);
 
-                        if ( (LA8_0==15) ) {
+                        if ( (LA8_0==16) ) {
                             alt8=1;
                         }
 
@@ -679,7 +680,7 @@ public class CssParser extends Parser {
                     	case 1 :
                     	    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:107:4: ',' f2= function_param
                     	    {
-                    	    match(input,15,FOLLOW_15_in_function330); 
+                    	    match(input,16,FOLLOW_16_in_function330); 
 
                     	    pushFollow(FOLLOW_function_param_in_function334);
                     	    f2=function_param();
@@ -704,7 +705,7 @@ public class CssParser extends Parser {
             }
 
 
-            match(input,14,FOLLOW_14_in_function346); 
+            match(input,15,FOLLOW_15_in_function346); 
 
             f = new Function((ID9!=null?ID9.getText():null), params);
 
@@ -744,10 +745,10 @@ public class CssParser extends Parser {
             if ( (LA10_0==ID) ) {
                 int LA10_1 = input.LA(2);
 
-                if ( (LA10_1==13) ) {
+                if ( (LA10_1==14) ) {
                     alt10=1;
                 }
-                else if ( ((LA10_1 >= 14 && LA10_1 <= 15)) ) {
+                else if ( ((LA10_1 >= 15 && LA10_1 <= 16)) ) {
                     alt10=2;
                 }
                 else {
@@ -813,7 +814,7 @@ public class CssParser extends Parser {
 
 
     // $ANTLR start "param"
-    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:116:1: param returns [Object o] : ( INT | FLOAT | BOOLEAN | STRING | ID | COLOR );
+    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:116:1: param returns [Object o] : ( INT | FLOAT | BOOLEAN | NULL | STRING | ID | COLOR );
     public final Object param() throws RecognitionException {
         Object o = null;
 
@@ -826,8 +827,8 @@ public class CssParser extends Parser {
         Token COLOR17=null;
 
         try {
-            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:117:2: ( INT | FLOAT | BOOLEAN | STRING | ID | COLOR )
-            int alt11=6;
+            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:117:2: ( INT | FLOAT | BOOLEAN | NULL | STRING | ID | COLOR )
+            int alt11=7;
             switch ( input.LA(1) ) {
             case INT:
                 {
@@ -844,19 +845,24 @@ public class CssParser extends Parser {
                 alt11=3;
                 }
                 break;
-            case STRING:
+            case NULL:
                 {
                 alt11=4;
                 }
                 break;
-            case ID:
+            case STRING:
                 {
                 alt11=5;
                 }
                 break;
-            case COLOR:
+            case ID:
                 {
                 alt11=6;
+                }
+                break;
+            case COLOR:
+                {
+                alt11=7;
                 }
                 break;
             default:
@@ -896,27 +902,36 @@ public class CssParser extends Parser {
                     }
                     break;
                 case 4 :
-                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:120:4: STRING
+                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:120:4: NULL
                     {
-                    STRING15=(Token)match(input,STRING,FOLLOW_STRING_in_param432); 
+                    match(input,NULL,FOLLOW_NULL_in_param432); 
+
+                    o = null;
+
+                    }
+                    break;
+                case 5 :
+                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:121:4: STRING
+                    {
+                    STRING15=(Token)match(input,STRING,FOLLOW_STRING_in_param442); 
 
                     o = (STRING15!=null?STRING15.getText():null).substring(1, (STRING15!=null?STRING15.getText():null).length()-1);
 
                     }
                     break;
-                case 5 :
-                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:121:4: ID
+                case 6 :
+                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:122:4: ID
                     {
-                    ID16=(Token)match(input,ID,FOLLOW_ID_in_param440); 
+                    ID16=(Token)match(input,ID,FOLLOW_ID_in_param450); 
 
                     o = (ID16!=null?ID16.getText():null);
 
                     }
                     break;
-                case 6 :
-                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:122:4: COLOR
+                case 7 :
+                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:123:4: COLOR
                     {
-                    COLOR17=(Token)match(input,COLOR,FOLLOW_COLOR_in_param452); 
+                    COLOR17=(Token)match(input,COLOR,FOLLOW_COLOR_in_param462); 
 
                     o = parseColor((COLOR17!=null?COLOR17.getText():null));
 
@@ -942,37 +957,38 @@ public class CssParser extends Parser {
 
  
 
-    public static final BitSet FOLLOW_styleclass_in_stylesheet51 = new BitSet(new long[]{0x0000000000010202L});
-    public static final BitSet FOLLOW_selector_list_list_in_styleclass79 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_19_in_styleclass81 = new BitSet(new long[]{0x0000000000100200L});
-    public static final BitSet FOLLOW_rule_in_styleclass88 = new BitSet(new long[]{0x0000000000100200L});
-    public static final BitSet FOLLOW_20_in_styleclass114 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_selector_list_in_selector_list_list138 = new BitSet(new long[]{0x0000000000008002L});
-    public static final BitSet FOLLOW_15_in_selector_list_list150 = new BitSet(new long[]{0x0000000000010200L});
-    public static final BitSet FOLLOW_selector_list_in_selector_list_list154 = new BitSet(new long[]{0x0000000000008002L});
-    public static final BitSet FOLLOW_selector_in_selector_list189 = new BitSet(new long[]{0x0000000000010202L});
-    public static final BitSet FOLLOW_16_in_selector208 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_styleclass_in_stylesheet51 = new BitSet(new long[]{0x0000000000020202L});
+    public static final BitSet FOLLOW_selector_list_list_in_styleclass79 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_20_in_styleclass81 = new BitSet(new long[]{0x0000000000200200L});
+    public static final BitSet FOLLOW_rule_in_styleclass88 = new BitSet(new long[]{0x0000000000200200L});
+    public static final BitSet FOLLOW_21_in_styleclass114 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_selector_list_in_selector_list_list138 = new BitSet(new long[]{0x0000000000010002L});
+    public static final BitSet FOLLOW_16_in_selector_list_list150 = new BitSet(new long[]{0x0000000000020200L});
+    public static final BitSet FOLLOW_selector_list_in_selector_list_list154 = new BitSet(new long[]{0x0000000000010002L});
+    public static final BitSet FOLLOW_selector_in_selector_list189 = new BitSet(new long[]{0x0000000000020202L});
+    public static final BitSet FOLLOW_17_in_selector208 = new BitSet(new long[]{0x0000000000000200L});
     public static final BitSet FOLLOW_ID_in_selector210 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ID_in_selector215 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ID_in_rule236 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_17_in_rule238 = new BitSet(new long[]{0x0000000000000EB0L});
-    public static final BitSet FOLLOW_rule_value_in_rule250 = new BitSet(new long[]{0x0000000000040EB0L});
-    public static final BitSet FOLLOW_18_in_rule259 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ID_in_rule236 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_18_in_rule238 = new BitSet(new long[]{0x0000000000001EB0L});
+    public static final BitSet FOLLOW_rule_value_in_rule250 = new BitSet(new long[]{0x0000000000081EB0L});
+    public static final BitSet FOLLOW_19_in_rule259 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_function_in_rule_value275 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_param_in_rule_value282 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ID_in_function309 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_function311 = new BitSet(new long[]{0x0000000000004EB0L});
-    public static final BitSet FOLLOW_function_param_in_function318 = new BitSet(new long[]{0x000000000000C000L});
-    public static final BitSet FOLLOW_15_in_function330 = new BitSet(new long[]{0x0000000000000EB0L});
-    public static final BitSet FOLLOW_function_param_in_function334 = new BitSet(new long[]{0x000000000000C000L});
-    public static final BitSet FOLLOW_14_in_function346 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ID_in_function309 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_function311 = new BitSet(new long[]{0x0000000000009EB0L});
+    public static final BitSet FOLLOW_function_param_in_function318 = new BitSet(new long[]{0x0000000000018000L});
+    public static final BitSet FOLLOW_16_in_function330 = new BitSet(new long[]{0x0000000000001EB0L});
+    public static final BitSet FOLLOW_function_param_in_function334 = new BitSet(new long[]{0x0000000000018000L});
+    public static final BitSet FOLLOW_15_in_function346 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_function_in_function_param377 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_param_in_function_param384 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_INT_in_param405 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_FLOAT_in_param416 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_BOOLEAN_in_param425 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_STRING_in_param432 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ID_in_param440 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_COLOR_in_param452 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_NULL_in_param432 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_STRING_in_param442 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ID_in_param450 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_COLOR_in_param462 = new BitSet(new long[]{0x0000000000000002L});
 
 }

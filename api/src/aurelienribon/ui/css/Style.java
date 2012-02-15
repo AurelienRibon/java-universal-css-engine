@@ -170,29 +170,28 @@ public class Style {
 	private static boolean checkParams(StyleRule rule, List<Object> params) {
 		for (int i=0; i<rule.getParams().length; i++) {
 			Class[] cs = rule.getParams()[i];
+			if (params.size() != cs.length) continue;
 
-			if (params.size() == cs.length) {
-				boolean isMatch = true;
+			boolean isMatch = true;
 
-				for (int ii=0; ii<params.size(); ii++) {
-					if (!cs[ii].isInstance(params.get(ii))) {
-						isMatch = false;
-						break;
-					}
-				}
+			for (int ii=0; ii<params.size(); ii++) {
+				if (cs[ii] == null && params.get(ii) == null) continue;
+				if (cs[ii].isInstance(params.get(ii))) continue;
+				isMatch = false;
+				break;
+			}
 
-				if (isMatch) {
-					for (int ii=0; ii<params.size(); ii++) {
-						String[] keywords = rule.getKeywords(i, ii);
+			if (!isMatch) continue;
 
-						if (keywords != null && !Arrays.asList(keywords).contains((String) params.get(ii))) {
-							return false;
-						}
-					}
+			for (int ii=0; ii<params.size(); ii++) {
+				String[] keywords = rule.getKeywords(i, ii);
 
-					return true;
+				if (keywords != null && !Arrays.asList(keywords).contains((String) params.get(ii))) {
+					return false;
 				}
 			}
+
+			return true;
 		}
 
 		return false;

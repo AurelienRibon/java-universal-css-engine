@@ -29,6 +29,7 @@ public class SwingProcessor implements StyleProcessor {
 			JComponent t = (JComponent) target;
 			if (attrs.contains(SwingStyle.RULE_OPAQUE)) t.setOpaque(attrs.asBoolean(SwingStyle.RULE_OPAQUE));
 			if (attrs.contains(SwingStyle.RULE_TOOLTIP)) t.setToolTipText(attrs.asString(SwingStyle.RULE_TOOLTIP));
+			if (attrs.contains(SwingStyle.RULE_BORDER)) t.setBorder(attrs.asBorder(SwingStyle.RULE_BORDER));
 		}
 
 		if (target instanceof AbstractButton) {

@@ -9,6 +9,7 @@ import aurelienribon.ui.css.BaseStringRule;
 import aurelienribon.ui.css.Style;
 import java.net.URL;
 import javax.swing.Icon;
+import javax.swing.border.Border;
 
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
@@ -41,6 +42,7 @@ public class SwingStyle {
 	public static final String RULE_MARGIN = "-swing-margin";
 	public static final String RULE_FONT = "-swing-font";
 	public static final String RULE_ICON = "-swing-icon";
+	public static final String RULE_BORDER = "-swing-border";
 
 	public static void init() {
 		Style.registerFunction(new SwingFunctions.Url());
@@ -48,6 +50,11 @@ public class SwingStyle {
 		Style.registerFunction(new SwingFunctions.Rgb());
 		Style.registerFunction(new SwingFunctions.Rgba());
 		Style.registerFunction(new SwingFunctions.LinearGradient());
+		Style.registerFunction(new SwingFunctions.EmptyBorder());
+		Style.registerFunction(new SwingFunctions.LineBorder());
+		Style.registerFunction(new SwingFunctions.MatteBorder());
+		Style.registerFunction(new SwingFunctions.BevelBorder());
+		Style.registerFunction(new SwingFunctions.CompoundBorder());
 
 		Style.registerProcessor(new SwingProcessor());
 
@@ -71,7 +78,8 @@ public class SwingStyle {
 			@Override public Class[][] getParams() {return new Class[][] {
 				{Integer.class, Integer.class, Integer.class, Integer.class},
 				{Integer.class, Integer.class},
-				{Integer.class}
+				{Integer.class},
+				{null}
 			};}
 		});
 
@@ -90,7 +98,15 @@ public class SwingStyle {
 			@Override public Class[][] getParams() {return new Class[][] {
 				{Icon.class},
 				{URL.class},
-				{String.class}
+				{String.class},
+				{null}
+			};}
+		});
+
+		Style.registerRule(new BaseRule(RULE_BORDER) {
+			@Override public Class[][] getParams() {return new Class[][] {
+				{Border.class},
+				{null}
 			};}
 		});
 	}

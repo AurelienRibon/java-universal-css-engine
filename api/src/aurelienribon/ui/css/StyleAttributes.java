@@ -13,6 +13,7 @@ import javax.swing.AbstractButton;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
@@ -103,6 +104,8 @@ public class StyleAttributes {
 
 	public Insets asInsets(String ruleName) {
 		List<Object> params = attrs.get(ruleName);
+		if (params.get(0) == null) return null;
+
 		int top, right, bottom, left;
 
 		if (params.size() == 1) {
@@ -169,8 +172,13 @@ public class StyleAttributes {
 		if (param instanceof URL) return new ImageIcon((URL) param);
 		if (param instanceof String) return new ImageIcon((String) param);
 		if (param instanceof Icon) return (Icon) param;
+		if (param == null) return null;
 
 		assert false;
 		return null;
+	}
+
+	public Border asBorder(String ruleName) {
+		return (Border) getParams(ruleName).get(0);
 	}
 }

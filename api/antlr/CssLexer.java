@@ -1,4 +1,4 @@
-// $ANTLR 3.4 D:\\Dev\\Java\\arui\\api\\antlr\\Css.g 2012-02-14 11:14:20
+// $ANTLR 3.4 D:\\Dev\\Java\\arui\\api\\antlr\\Css.g 2012-02-14 11:42:19
 
 	package aurelienribon.ui.css;
 
@@ -11,7 +11,6 @@ import java.util.ArrayList;
 @SuppressWarnings({"all", "warnings", "unchecked"})
 public class CssLexer extends Lexer {
     public static final int EOF=-1;
-    public static final int T__13=13;
     public static final int T__14=14;
     public static final int T__15=15;
     public static final int T__16=16;
@@ -19,6 +18,7 @@ public class CssLexer extends Lexer {
     public static final int T__18=18;
     public static final int T__19=19;
     public static final int T__20=20;
+    public static final int T__21=21;
     public static final int BOOLEAN=4;
     public static final int COLOR=5;
     public static final int COMMENT=6;
@@ -26,8 +26,9 @@ public class CssLexer extends Lexer {
     public static final int HEX=8;
     public static final int ID=9;
     public static final int INT=10;
-    public static final int STRING=11;
-    public static final int WS=12;
+    public static final int NULL=11;
+    public static final int STRING=12;
+    public static final int WS=13;
 
     	@Override
     	public void emitErrorMessage(String msg) {
@@ -50,36 +51,15 @@ public class CssLexer extends Lexer {
     }
     public String getGrammarFileName() { return "D:\\Dev\\Java\\arui\\api\\antlr\\Css.g"; }
 
-    // $ANTLR start "T__13"
-    public final void mT__13() throws RecognitionException {
-        try {
-            int _type = T__13;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:12:7: ( '(' )
-            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:12:9: '('
-            {
-            match('('); 
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__13"
-
     // $ANTLR start "T__14"
     public final void mT__14() throws RecognitionException {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:13:7: ( ')' )
-            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:13:9: ')'
+            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:12:7: ( '(' )
+            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:12:9: '('
             {
-            match(')'); 
+            match('('); 
 
             }
 
@@ -97,10 +77,10 @@ public class CssLexer extends Lexer {
         try {
             int _type = T__15;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:14:7: ( ',' )
-            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:14:9: ','
+            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:13:7: ( ')' )
+            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:13:9: ')'
             {
-            match(','); 
+            match(')'); 
 
             }
 
@@ -118,10 +98,10 @@ public class CssLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:15:7: ( '.' )
-            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:15:9: '.'
+            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:14:7: ( ',' )
+            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:14:9: ','
             {
-            match('.'); 
+            match(','); 
 
             }
 
@@ -139,10 +119,10 @@ public class CssLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:16:7: ( ':' )
-            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:16:9: ':'
+            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:15:7: ( '.' )
+            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:15:9: '.'
             {
-            match(':'); 
+            match('.'); 
 
             }
 
@@ -160,10 +140,10 @@ public class CssLexer extends Lexer {
         try {
             int _type = T__18;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:17:7: ( ';' )
-            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:17:9: ';'
+            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:16:7: ( ':' )
+            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:16:9: ':'
             {
-            match(';'); 
+            match(':'); 
 
             }
 
@@ -181,10 +161,10 @@ public class CssLexer extends Lexer {
         try {
             int _type = T__19;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:18:7: ( '{' )
-            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:18:9: '{'
+            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:17:7: ( ';' )
+            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:17:9: ';'
             {
-            match('{'); 
+            match(';'); 
 
             }
 
@@ -202,6 +182,27 @@ public class CssLexer extends Lexer {
         try {
             int _type = T__20;
             int _channel = DEFAULT_TOKEN_CHANNEL;
+            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:18:7: ( '{' )
+            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:18:9: '{'
+            {
+            match('{'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__20"
+
+    // $ANTLR start "T__21"
+    public final void mT__21() throws RecognitionException {
+        try {
+            int _type = T__21;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
             // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:19:7: ( '}' )
             // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:19:9: '}'
             {
@@ -216,14 +217,14 @@ public class CssLexer extends Lexer {
         	// do for sure before leaving
         }
     }
-    // $ANTLR end "T__20"
+    // $ANTLR end "T__21"
 
     // $ANTLR start "COLOR"
     public final void mCOLOR() throws RecognitionException {
         try {
             int _type = COLOR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:126:2: ( '#' HEX HEX HEX HEX HEX HEX HEX HEX | '#' HEX HEX HEX HEX HEX HEX | '#' HEX HEX HEX HEX | '#' HEX HEX HEX )
+            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:127:2: ( '#' HEX HEX HEX HEX HEX HEX HEX HEX | '#' HEX HEX HEX HEX HEX HEX | '#' HEX HEX HEX HEX | '#' HEX HEX HEX )
             int alt1=4;
             int LA1_0 = input.LA(1);
 
@@ -304,7 +305,7 @@ public class CssLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:126:4: '#' HEX HEX HEX HEX HEX HEX HEX HEX
+                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:127:4: '#' HEX HEX HEX HEX HEX HEX HEX HEX
                     {
                     match('#'); 
 
@@ -335,7 +336,7 @@ public class CssLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:127:4: '#' HEX HEX HEX HEX HEX HEX
+                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:128:4: '#' HEX HEX HEX HEX HEX HEX
                     {
                     match('#'); 
 
@@ -360,7 +361,7 @@ public class CssLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:128:4: '#' HEX HEX HEX HEX
+                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:129:4: '#' HEX HEX HEX HEX
                     {
                     match('#'); 
 
@@ -379,7 +380,7 @@ public class CssLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:129:4: '#' HEX HEX HEX
+                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:130:4: '#' HEX HEX HEX
                     {
                     match('#'); 
 
@@ -410,7 +411,7 @@ public class CssLexer extends Lexer {
         try {
             int _type = INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:132:5: ( ( '0' .. '9' )+ | '0x' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+ | '0X' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+ )
+            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:133:5: ( ( '0' .. '9' )+ | '0x' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+ | '0X' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+ )
             int alt5=3;
             int LA5_0 = input.LA(1);
 
@@ -443,9 +444,9 @@ public class CssLexer extends Lexer {
             }
             switch (alt5) {
                 case 1 :
-                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:132:7: ( '0' .. '9' )+
+                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:133:7: ( '0' .. '9' )+
                     {
-                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:132:7: ( '0' .. '9' )+
+                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:133:7: ( '0' .. '9' )+
                     int cnt2=0;
                     loop2:
                     do {
@@ -487,13 +488,13 @@ public class CssLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:133:4: '0x' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
+                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:134:4: '0x' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
                     {
                     match("0x"); 
 
 
 
-                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:133:9: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
+                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:134:9: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
                     int cnt3=0;
                     loop3:
                     do {
@@ -535,13 +536,13 @@ public class CssLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:134:4: '0X' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
+                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:135:4: '0X' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
                     {
                     match("0X"); 
 
 
 
-                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:134:9: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
+                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:135:9: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
                     int cnt4=0;
                     loop4:
                     do {
@@ -598,7 +599,7 @@ public class CssLexer extends Lexer {
         try {
             int _type = FLOAT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:138:2: ( ( '0' .. '9' )+ '.' ( '0' .. '9' )* | '.' ( '0' .. '9' )+ )
+            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:139:2: ( ( '0' .. '9' )+ '.' ( '0' .. '9' )* | '.' ( '0' .. '9' )+ )
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -617,9 +618,9 @@ public class CssLexer extends Lexer {
             }
             switch (alt9) {
                 case 1 :
-                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:138:4: ( '0' .. '9' )+ '.' ( '0' .. '9' )*
+                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:139:4: ( '0' .. '9' )+ '.' ( '0' .. '9' )*
                     {
-                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:138:4: ( '0' .. '9' )+
+                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:139:4: ( '0' .. '9' )+
                     int cnt6=0;
                     loop6:
                     do {
@@ -660,7 +661,7 @@ public class CssLexer extends Lexer {
 
                     match('.'); 
 
-                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:138:20: ( '0' .. '9' )*
+                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:139:20: ( '0' .. '9' )*
                     loop7:
                     do {
                         int alt7=2;
@@ -697,11 +698,11 @@ public class CssLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:139:4: '.' ( '0' .. '9' )+
+                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:140:4: '.' ( '0' .. '9' )+
                     {
                     match('.'); 
 
-                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:139:8: ( '0' .. '9' )+
+                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:140:8: ( '0' .. '9' )+
                     int cnt8=0;
                     loop8:
                     do {
@@ -758,10 +759,10 @@ public class CssLexer extends Lexer {
         try {
             int _type = BOOLEAN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:143:2: ( ( 'true' | 'false' ) )
-            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:143:4: ( 'true' | 'false' )
+            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:144:2: ( ( 'true' | 'false' ) )
+            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:144:4: ( 'true' | 'false' )
             {
-            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:143:4: ( 'true' | 'false' )
+            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:144:4: ( 'true' | 'false' )
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -780,7 +781,7 @@ public class CssLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:143:5: 'true'
+                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:144:5: 'true'
                     {
                     match("true"); 
 
@@ -789,7 +790,7 @@ public class CssLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:143:12: 'false'
+                    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:144:12: 'false'
                     {
                     match("false"); 
 
@@ -812,13 +813,36 @@ public class CssLexer extends Lexer {
     }
     // $ANTLR end "BOOLEAN"
 
+    // $ANTLR start "NULL"
+    public final void mNULL() throws RecognitionException {
+        try {
+            int _type = NULL;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:148:2: ( 'null' )
+            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:148:4: 'null'
+            {
+            match("null"); 
+
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "NULL"
+
     // $ANTLR start "ID"
     public final void mID() throws RecognitionException {
         try {
             int _type = ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:146:4: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '-' )* )
-            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:146:6: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '-' )*
+            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:151:4: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '-' )* )
+            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:151:6: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '-' )*
             {
             if ( input.LA(1)=='-'||(input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
                 input.consume();
@@ -830,7 +854,7 @@ public class CssLexer extends Lexer {
             }
 
 
-            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:146:34: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '-' )*
+            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:151:34: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '-' )*
             loop11:
             do {
                 int alt11=2;
@@ -880,12 +904,12 @@ public class CssLexer extends Lexer {
         try {
             int _type = STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:150:2: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) |~ ( '\\\\' | '\"' ) )* '\"' )
-            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:150:4: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) |~ ( '\\\\' | '\"' ) )* '\"'
+            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:155:2: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) |~ ( '\\\\' | '\"' ) )* '\"' )
+            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:155:4: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) |~ ( '\\\\' | '\"' ) )* '\"'
             {
             match('\"'); 
 
-            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:150:8: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) |~ ( '\\\\' | '\"' ) )*
+            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:155:8: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) |~ ( '\\\\' | '\"' ) )*
             loop12:
             do {
                 int alt12=3;
@@ -901,7 +925,7 @@ public class CssLexer extends Lexer {
 
                 switch (alt12) {
             	case 1 :
-            	    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:150:10: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
+            	    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:155:10: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
             	    {
             	    match('\\'); 
 
@@ -918,7 +942,7 @@ public class CssLexer extends Lexer {
             	    }
             	    break;
             	case 2 :
-            	    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:150:54: ~ ( '\\\\' | '\"' )
+            	    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:155:54: ~ ( '\\\\' | '\"' )
             	    {
             	    if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '!')||(input.LA(1) >= '#' && input.LA(1) <= '[')||(input.LA(1) >= ']' && input.LA(1) <= '\uFFFF') ) {
             	        input.consume();
@@ -955,7 +979,7 @@ public class CssLexer extends Lexer {
     // $ANTLR start "HEX"
     public final void mHEX() throws RecognitionException {
         try {
-            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:154:2: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )
+            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:159:2: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )
             // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:
             {
             if ( (input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'F')||(input.LA(1) >= 'a' && input.LA(1) <= 'f') ) {
@@ -983,8 +1007,8 @@ public class CssLexer extends Lexer {
         try {
             int _type = WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:157:4: ( ( ' ' | '\\t' | '\\r' | '\\n' ) )
-            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:157:6: ( ' ' | '\\t' | '\\r' | '\\n' )
+            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:162:4: ( ( ' ' | '\\t' | '\\r' | '\\n' ) )
+            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:162:6: ( ' ' | '\\t' | '\\r' | '\\n' )
             {
             if ( (input.LA(1) >= '\t' && input.LA(1) <= '\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
                 input.consume();
@@ -1014,14 +1038,14 @@ public class CssLexer extends Lexer {
         try {
             int _type = COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:161:2: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:161:4: '/*' ( options {greedy=false; } : . )* '*/'
+            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:166:2: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:166:4: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
 
 
-            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:161:9: ( options {greedy=false; } : . )*
+            // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:166:9: ( options {greedy=false; } : . )*
             loop13:
             do {
                 int alt13=2;
@@ -1046,7 +1070,7 @@ public class CssLexer extends Lexer {
 
                 switch (alt13) {
             	case 1 :
-            	    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:161:37: .
+            	    // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:166:37: .
             	    {
             	    matchAny(); 
 
@@ -1077,70 +1101,70 @@ public class CssLexer extends Lexer {
     // $ANTLR end "COMMENT"
 
     public void mTokens() throws RecognitionException {
-        // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:8: ( T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | COLOR | INT | FLOAT | BOOLEAN | ID | STRING | WS | COMMENT )
-        int alt14=16;
+        // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:8: ( T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | COLOR | INT | FLOAT | BOOLEAN | NULL | ID | STRING | WS | COMMENT )
+        int alt14=17;
         alt14 = dfa14.predict(input);
         switch (alt14) {
             case 1 :
-                // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:10: T__13
-                {
-                mT__13(); 
-
-
-                }
-                break;
-            case 2 :
-                // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:16: T__14
+                // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:10: T__14
                 {
                 mT__14(); 
 
 
                 }
                 break;
-            case 3 :
-                // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:22: T__15
+            case 2 :
+                // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:16: T__15
                 {
                 mT__15(); 
 
 
                 }
                 break;
-            case 4 :
-                // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:28: T__16
+            case 3 :
+                // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:22: T__16
                 {
                 mT__16(); 
 
 
                 }
                 break;
-            case 5 :
-                // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:34: T__17
+            case 4 :
+                // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:28: T__17
                 {
                 mT__17(); 
 
 
                 }
                 break;
-            case 6 :
-                // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:40: T__18
+            case 5 :
+                // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:34: T__18
                 {
                 mT__18(); 
 
 
                 }
                 break;
-            case 7 :
-                // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:46: T__19
+            case 6 :
+                // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:40: T__19
                 {
                 mT__19(); 
 
 
                 }
                 break;
-            case 8 :
-                // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:52: T__20
+            case 7 :
+                // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:46: T__20
                 {
                 mT__20(); 
+
+
+                }
+                break;
+            case 8 :
+                // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:52: T__21
+                {
+                mT__21(); 
 
 
                 }
@@ -1178,31 +1202,39 @@ public class CssLexer extends Lexer {
                 }
                 break;
             case 13 :
-                // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:82: ID
+                // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:82: NULL
+                {
+                mNULL(); 
+
+
+                }
+                break;
+            case 14 :
+                // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:87: ID
                 {
                 mID(); 
 
 
                 }
                 break;
-            case 14 :
-                // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:85: STRING
+            case 15 :
+                // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:90: STRING
                 {
                 mSTRING(); 
 
 
                 }
                 break;
-            case 15 :
-                // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:92: WS
+            case 16 :
+                // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:97: WS
                 {
                 mWS(); 
 
 
                 }
                 break;
-            case 16 :
-                // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:95: COMMENT
+            case 17 :
+                // D:\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:100: COMMENT
                 {
                 mCOMMENT(); 
 
@@ -1217,54 +1249,59 @@ public class CssLexer extends Lexer {
 
     protected DFA14 dfa14 = new DFA14(this);
     static final String DFA14_eotS =
-        "\4\uffff\1\22\5\uffff\2\24\2\16\7\uffff\4\16\1\33\1\16\1\uffff\1"+
-        "\33";
+        "\4\uffff\1\23\5\uffff\2\25\3\17\7\uffff\6\17\1\37\1\17\1\41\1\uffff"+
+        "\1\37\1\uffff";
     static final String DFA14_eofS =
-        "\35\uffff";
+        "\42\uffff";
     static final String DFA14_minS =
-        "\1\11\3\uffff\1\60\5\uffff\2\56\1\162\1\141\7\uffff\1\165\1\154"+
-        "\1\145\1\163\1\55\1\145\1\uffff\1\55";
+        "\1\11\3\uffff\1\60\5\uffff\2\56\1\162\1\141\1\165\7\uffff\1\165"+
+        "\2\154\1\145\1\163\1\154\1\55\1\145\1\55\1\uffff\1\55\1\uffff";
     static final String DFA14_maxS =
-        "\1\175\3\uffff\1\71\5\uffff\2\71\1\162\1\141\7\uffff\1\165\1\154"+
-        "\1\145\1\163\1\172\1\145\1\uffff\1\172";
+        "\1\175\3\uffff\1\71\5\uffff\2\71\1\162\1\141\1\165\7\uffff\1\165"+
+        "\2\154\1\145\1\163\1\154\1\172\1\145\1\172\1\uffff\1\172\1\uffff";
     static final String DFA14_acceptS =
-        "\1\uffff\1\1\1\2\1\3\1\uffff\1\5\1\6\1\7\1\10\1\11\4\uffff\1\15"+
-        "\1\16\1\17\1\20\1\4\1\13\1\12\6\uffff\1\14\1\uffff";
+        "\1\uffff\1\1\1\2\1\3\1\uffff\1\5\1\6\1\7\1\10\1\11\5\uffff\1\16"+
+        "\1\17\1\20\1\21\1\4\1\13\1\12\11\uffff\1\14\1\uffff\1\15";
     static final String DFA14_specialS =
-        "\35\uffff}>";
+        "\42\uffff}>";
     static final String[] DFA14_transitionS = {
-            "\2\20\2\uffff\1\20\22\uffff\1\20\1\uffff\1\17\1\11\4\uffff\1"+
-            "\1\1\2\2\uffff\1\3\1\16\1\4\1\21\1\12\11\13\1\5\1\6\5\uffff"+
-            "\32\16\4\uffff\1\16\1\uffff\5\16\1\15\15\16\1\14\6\16\1\7\1"+
-            "\uffff\1\10",
+            "\2\21\2\uffff\1\21\22\uffff\1\21\1\uffff\1\20\1\11\4\uffff\1"+
+            "\1\1\2\2\uffff\1\3\1\17\1\4\1\22\1\12\11\13\1\5\1\6\5\uffff"+
+            "\32\17\4\uffff\1\17\1\uffff\5\17\1\15\7\17\1\16\5\17\1\14\6"+
+            "\17\1\7\1\uffff\1\10",
             "",
             "",
             "",
-            "\12\23",
+            "\12\24",
             "",
             "",
             "",
             "",
             "",
-            "\1\23\1\uffff\12\13",
-            "\1\23\1\uffff\12\13",
-            "\1\25",
+            "\1\24\1\uffff\12\13",
+            "\1\24\1\uffff\12\13",
             "\1\26",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
             "\1\27",
             "\1\30",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
             "\1\31",
             "\1\32",
-            "\1\16\2\uffff\12\16\7\uffff\32\16\4\uffff\1\16\1\uffff\32\16",
+            "\1\33",
             "\1\34",
+            "\1\35",
+            "\1\36",
+            "\1\17\2\uffff\12\17\7\uffff\32\17\4\uffff\1\17\1\uffff\32\17",
+            "\1\40",
+            "\1\17\2\uffff\12\17\7\uffff\32\17\4\uffff\1\17\1\uffff\32\17",
             "",
-            "\1\16\2\uffff\12\16\7\uffff\32\16\4\uffff\1\16\1\uffff\32\16"
+            "\1\17\2\uffff\12\17\7\uffff\32\17\4\uffff\1\17\1\uffff\32\17",
+            ""
     };
 
     static final short[] DFA14_eot = DFA.unpackEncodedString(DFA14_eotS);
@@ -1297,7 +1334,7 @@ public class CssLexer extends Lexer {
             this.transition = DFA14_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | COLOR | INT | FLOAT | BOOLEAN | ID | STRING | WS | COMMENT );";
+            return "1:1: Tokens : ( T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | COLOR | INT | FLOAT | BOOLEAN | NULL | ID | STRING | WS | COMMENT );";
         }
     }
  

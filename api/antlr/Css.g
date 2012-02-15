@@ -46,7 +46,7 @@ grammar Css;
 		int r, g, b, a = 255, i = 1;
 		
 		int incr = s.length() == 9 || s.length() == 7 ? 2 : 1;
-		boolean alpha = s.length() == 9 || s.length() == 4;
+		boolean alpha = s.length() == 9 || s.length() == 5;
 		
 		if (alpha) a = Integer.parseInt(s.substring(i,i+=incr), 16);
 		r = Integer.parseInt(s.substring(i,i+=incr), 16);
@@ -117,6 +117,7 @@ param returns [Object o]
 	:	INT     {$o = Integer.parseInt($INT.text);}
 	|	FLOAT   {$o = Float.parseFloat($FLOAT.text);}
 	|	BOOLEAN {$o = Boolean.parseBoolean($BOOLEAN.text);}
+	|	NULL    {$o = null;}
 	|	STRING  {$o = $STRING.text.substring(1, $STRING.text.length()-1);}
 	|	ID      {$o = $ID.text;}
 	|	COLOR   {$o = parseColor($COLOR.text);}
@@ -141,6 +142,10 @@ FLOAT
 				
 BOOLEAN
 	:	('true'|'false')
+	;
+	
+NULL
+	:	'null'
 	;
 	
 ID	:	('a'..'z'|'A'..'Z'|'_'|'-') ('a'..'z'|'A'..'Z'|'0'..'9'|'_'|'-')*

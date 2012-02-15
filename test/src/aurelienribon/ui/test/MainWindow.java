@@ -127,6 +127,7 @@ public class MainWindow extends javax.swing.JFrame {
         loadStyle1Btn = new aurelienribon.ui.components.Button();
         tabPanel = new aurelienribon.ui.components.TabPanel();
         tabPanel1 = new aurelienribon.ui.components.TabPanel();
+        jButton1 = new javax.swing.JButton();
 
         editorPanel.setOpaque(false);
         editorPanel.setLayout(new java.awt.BorderLayout());
@@ -187,6 +188,8 @@ public class MainWindow extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Arui test");
 
+        jButton1.setText("jButton1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -195,8 +198,13 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(tabPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tabPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(tabPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(42, 42, 42))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,7 +213,9 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(tabPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(347, 347, 347))
+                        .addGap(161, 161, 161)
+                        .addComponent(jButton1)
+                        .addGap(163, 163, 163))
                     .addComponent(tabPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -218,6 +228,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel controlPanel;
     private javax.swing.JTextArea editorArea;
     private javax.swing.JPanel editorPanel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private aurelienribon.ui.components.Button loadStyle1Btn;
     private aurelienribon.ui.components.Button loadStyle2Btn;
