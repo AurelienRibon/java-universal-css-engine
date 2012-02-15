@@ -3,42 +3,43 @@
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
 
+javax-swing-JScrollPane {
+	-swing-border: null;
+}
+
 javax-swing-JButton {
-	-swing-button-halign: center;
-	-swing-button-valign: center;
-	-swing-button-margin: 3 5;
+	-swing-horizontalalignment: center;
+	-swing-verticalalignment: center;
+	-swing-margin: 3 5;
 }
 
 javax-swing-JTextArea {
 	-swing-font: "Monospaced" plain 11;
 	-swing-tabsize: 4;
-	-swing-background: #CCCCCC;
-	-swing-foreground: #000000;
+	-swing-background: #CCC;
+	-swing-foreground: #000;
 }
 
 aurelienribon-ui-components-Button {
-	-swing-margin: 2 3;
-	-swing-foreground: #FFFFFF;
-	-arui-foreground-mouseover: #000000;
-	-arui-foreground-mousedown: #FFFFFF;
-	-arui-stroke: #333333;
-	-arui-stroke-mouseover: #333333;
+	-swing-foreground: #FFF;
+	-arui-foreground-mouseover: #000;
+	-arui-foreground-mousedown: #FFF;
+	-arui-stroke: #333;
+	-arui-stroke-mouseover: #333;
 	-arui-stroke-mousedown: #1A1A1A;
 	-arui-fill: #595959;
 	-arui-fill-mouseover: #AAAAAA;
 	-arui-fill-mousedown: #424242;
-	-arui-cornerradius: 0;
+	-arui-cornerradius: 10;
 }
 
 aurelienribon-ui-components-TabPanel {
-	-swing-background: #595959;
-	-swing-foreground: #FFFFFF;
-	-arui-foreground-selected: #FFFFFF;
-	-arui-foreground-mouseover: #FFFFFF;
-	-arui-stroke: #444444;
-	-arui-stroke-mouseover: #444444;
-	-arui-stroke-selected: #444444;
-	-arui-fill: #333333;
+	-arui-foreground-selected: #FFF;
+	-arui-foreground-mouseover: #FFF;
+	-arui-stroke: #444;
+	-arui-stroke-mouseover: #444;
+	-arui-stroke-selected: #444;
+	-arui-fill: #333;
 	-arui-fill-mouseover: #4C4C4C;
 	-arui-fill-selected: #595959;
 }
@@ -47,17 +48,24 @@ aurelienribon-ui-components-TabPanel {
 	-swing-background: #282828;
 }
 
+.styleControlPanel, .tabPanelControlPanel, aurelienribon-ui-components-TabPanel {
+	-swing-background: #727272;
+	-swing-foreground: #FFF;
+}
+
+.styleControlPanel {
+	-swing-border: arui-groupborder(null, "Style", 20, 6, #FFF, #444, #333);
+}
+
+.tabPanelControlPanel {
+	-swing-border: arui-groupborder(null, "TabPanel", 20, 6, #FFF, #444, #333);
+}
+
 .applyButton {
+	-arui-fill: lineargradient(0, 0, 0, 1, 0.49, #59CC59, 0.5, #59CC59);
 }
 
 .resetButton {
-	-arui-stroke: #FF2222;
-	-arui-stroke-mouseover: #FF2222;
-	-arui-stroke-mousedown: #FF2222;
-}
-
-.loadButton {
-}
-
-.toggleButton {
+	-arui-stroke: #F33;
+	-arui-fill: lineargradient(0, 0, 0, 1, 0.49, #AA5959, 0.5, #AA5959);
 }

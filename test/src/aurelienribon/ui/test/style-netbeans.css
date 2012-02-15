@@ -34,8 +34,6 @@ aurelienribon-ui-components-Button {
 }
 
 aurelienribon-ui-components-TabPanel {
-	-swing-background: #CDCED1;
-	-swing-foreground: #000;
 	-arui-foreground-selected: #000;
 	-arui-foreground-mouseover: #000;
 	-arui-stroke: #898C95;
@@ -50,8 +48,9 @@ aurelienribon-ui-components-TabPanel {
 	-swing-background: #F0F0F0;
 }
 
-.styleControlPanel, .tabPanelControlPanel {
+.styleControlPanel, .tabPanelControlPanel, aurelienribon-ui-components-TabPanel {
 	-swing-background: #CDCED1;
+	-swing-foreground: #000;
 }
 
 .styleControlPanel {
