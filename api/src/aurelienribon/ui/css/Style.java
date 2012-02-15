@@ -26,16 +26,25 @@ public class Style {
 	private static final Map<Object, String> registeredTargetsClassNames = new LinkedHashMap<Object, String>();
 	private static final List<Class> registeredSkippedClasses = new ArrayList<Class>();
 
+	/**
+	 * Registers a new rule to the engine.
+	 */
 	public static void registerRule(StyleRule rule) {
 		if (registeredRules.containsKey(rule.getName())) throw new RuntimeException("Rule already registered");
 		registeredRules.put(rule.getName(), rule);
 	}
 
+	/**
+	 * Registers a new function to the engine.
+	 */
 	public static void registerFunction(StyleFunction function) {
 		if (registeredFunctions.containsKey(function.getName())) throw new RuntimeException("Function already registered");
 		registeredFunctions.put(function.getName(), function);
 	}
 
+	/**
+	 * Registers a new processor to the engine.
+	 */
 	public static void registerProcessor(StyleProcessor processor) {
 		for (StyleProcessor sp : registeredProcessors)
 			if (sp.getClass() == processor.getClass())
@@ -43,67 +52,119 @@ public class Style {
 		registeredProcessors.add(processor);
 	}
 
+	/**
+	 * Registers a target with a className. Don't forget to unregister the
+	 * target if you dispose of it, to remove it from memory.
+	 */
 	public static void registerTargetClassName(Object target, String className) {
 		registeredTargetsClassNames.put(target, "." + className);
 	}
 
+	/**
+	 * Registers a class or interface to be skipped by the engine.
+	 */
 	public static void registerSkippedClass(Class clazz) {
 		if (registeredSkippedClasses.contains(clazz)) throw new RuntimeException("Skipped class already registered");
 		registeredSkippedClasses.add(clazz);
 	}
 
+	/**
+	 * Unregisters a rule from the engine.
+	 */
 	public static void unregisterRule(StyleRule rule) {
 		registeredRules.remove(rule.getName());
 	}
 
+	/**
+	 * Unregisters a function from the engine.
+	 */
 	public static void unregisterFunction(StyleFunction function) {
 		registeredFunctions.remove(function.getName());
 	}
 
+	/**
+	 * Unregisters a processor from the engine.
+	 */
 	public static void unregisterProcessor(StyleProcessor processor) {
 		registeredProcessors.remove(processor);
 	}
 
+	/**
+	 * Unregisters a className from the engine.
+	 */
 	public static void unregisterTargetClassName(Object target) {
 		registeredTargetsClassNames.remove(target);
 	}
 
+	/**
+	 * Unregisters a skipped class or interface from the engine.
+	 */
 	public static void unregisterSkippedClass(Class clazz) {
 		registeredSkippedClasses.remove(clazz);
 	}
 
+	/**
+	 * Gets a list of every registered rules.
+	 */
 	public static List<String> getRegisteredRulesNames() {
 		return Collections.unmodifiableList(new ArrayList<String>(registeredRules.keySet()));
 	}
 
+	/**
+	 * Gets a rule by its name.
+	 */
 	public static StyleRule getRegisteredRule(String name) {
 		return registeredRules.get(name);
 	}
 
+	/**
+	 * Gets a list of every registered functions.
+	 */
 	public static List<String> getRegisteredFunctionsNames() {
 		return Collections.unmodifiableList(new ArrayList<String>(registeredFunctions.keySet()));
 	}
 
+	/**
+	 * Gets a function by its name.
+	 */
 	public static StyleFunction getRegisteredFunction(String name) {
 		return registeredFunctions.get(name);
 	}
 
+	/**
+	 * Gets the className associated to the given target.
+	 */
 	public static String getRegisteredTargetClass(Object target) {
 		return registeredTargetsClassNames.get(target);
 	}
 
+	/**
+	 * Applies a stylesheet to a target. If the target is a swing Container,
+	 * the style will be applied to its children too, etc.
+	 */
 	public static void apply(Object target, Style style) {
 		apply(target, style, new ArrayList<String>());
 	}
 
+	/**
+	 * Applies a group of attributes to a target. It may be interesting when you
+	 * want to apply the same group of attributes to some objects, directly from
+	 * a StyleProcessor for instance.
+	 */
 	public static void apply(Object target, StyleAttributes attrs) {
 		for (StyleProcessor sp : registeredProcessors) sp.process(target, attrs);
 	}
 
+	/**
+	 * Gets the rules manual.
+	 */
 	public static String generateRulesManual() {
 		return generateManual(registeredRules.values());
 	}
 
+	/**
+	 * Gets the functions manual.
+	 */
 	public static String generateFunctionsManual() {
 		return generateManual(registeredFunctions.values());
 	}
@@ -115,11 +176,19 @@ public class Style {
 	private final String styleSheet;
 	private final List<StyleClass> classes = new ArrayList<StyleClass>();
 
+	/**
+	 * Builds a new Style from an URL pointing to a stylesheet.
+	 * @throws StyleException
+	 */
 	public Style(URL styleSheetUrl) throws StyleException {
 		this.styleSheet = getStyleSheet(styleSheetUrl);
 		parse(styleSheet);
 	}
 
+	/**
+	 * Builds a new Style from String stylesheet.
+	 * @throws StyleException
+	 */
 	public Style(String styleSheet) throws StyleException {
 		this.styleSheet = styleSheet;
 		parse(styleSheet);
@@ -129,10 +198,16 @@ public class Style {
 	// Public API
 	// -------------------------------------------------------------------------
 
+	/**
+	 * Gets the stylesheet content.
+	 */
 	public String getStyleSheet() {
 		return styleSheet;
 	}
 
+	/**
+	 * Gets the retrieved classes.
+	 */
 	public List<StyleClass> getClasses() {
 		return Collections.unmodifiableList(classes);
 	}
