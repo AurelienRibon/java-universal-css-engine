@@ -81,6 +81,12 @@ public class SwingStyle {
 				{Integer.class}
 			};}
 
+			@Override public String[][] getParamsNames() {return new String[][] {
+				{"top", "left", "bottom", "right"},
+				{"topBottom", "leftRight"},
+				{"thickness"}
+			};}
+
 			@Override public boolean canBeNull(int paramsId, int paramId) {
 				return paramsId == 2;
 			}
@@ -89,6 +95,10 @@ public class SwingStyle {
 		Style.registerRule(new BaseRule(RULE_FONT) {
 			@Override public Class[][] getParams() {return new Class[][] {
 				{String.class, String.class, Integer.class}
+			};}
+
+			@Override public String[][] getParamsNames() {return new String[][] {
+				{"name", "style", "size"}
 			};}
 
 			@Override public String[] getKeywords(int paramsId, int paramId) {
@@ -104,6 +114,12 @@ public class SwingStyle {
 				{String.class}
 			};}
 
+			@Override public String[][] getParamsNames() {return new String[][] {
+				{"icon"},
+				{"url"},
+				{"filepath"}
+			};}
+
 			@Override public boolean canBeNull(int paramsId, int paramId) {
 				return true;
 			}
@@ -112,6 +128,10 @@ public class SwingStyle {
 		Style.registerRule(new BaseRule(RULE_BORDER) {
 			@Override public Class[][] getParams() {return new Class[][] {
 				{Border.class}
+			};}
+
+			@Override public String[][] getParamsNames() {return new String[][] {
+				{"border"}
 			};}
 
 			@Override public boolean canBeNull(int paramsId, int paramId) {

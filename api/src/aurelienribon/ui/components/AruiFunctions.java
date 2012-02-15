@@ -17,8 +17,12 @@ public class AruiFunctions {
 			{Icon.class, String.class, Integer.class, Integer.class, Color.class, Color.class, Paint.class}
 		};}
 
+		@Override public String[][] getParamsNames() {return new String[][] {
+			{"icon", "title", "titleHeight", "padding", "foreground", "stroke", "fill"}
+		};}
+
 		@Override public boolean canBeNull(int paramsId, int paramId) {
-			return paramId == 0;
+			return paramId == 0 || paramId == 5;
 		}
 
 		@Override public Object process(List<Object> params) {
@@ -29,7 +33,6 @@ public class AruiFunctions {
 			Color foreground = (Color) params.get(4);
 			Color stroke = (Color) params.get(5);
 			Paint fill = (Paint) params.get(6);
-
 			return new GroupBorder(icon, title, titleHeight, padding, foreground, stroke, fill);
 		}
 	};

@@ -57,7 +57,7 @@ public class StyleAttributes {
 		}
 	}
 
-	private static boolean isStackValid(List<String> selectors, List<String> stack) {
+	private boolean isStackValid(List<String> selectors, List<String> stack) {
 		if (selectors.size() == 1) return true;
 
 		for (int i=0; i<selectors.size()-1; i++) {
@@ -106,20 +106,20 @@ public class StyleAttributes {
 		List<Object> params = attrs.get(ruleName);
 		if (params.get(0) == null) return null;
 
-		int top, right, bottom, left;
+		int top, left, bottom, right;
 
 		if (params.size() == 1) {
-			top = right = bottom = left = (Integer) params.get(0);
+			top = left = bottom = right = (Integer) params.get(0);
 
 		} else if (params.size() == 2) {
 			top = bottom = (Integer) params.get(0);
-			right = left = (Integer) params.get(1);
+			left = right = (Integer) params.get(1);
 
 		} else {
 			top = (Integer) params.get(0);
-			right = (Integer) params.get(1);
+			left = (Integer) params.get(1);
 			bottom = (Integer) params.get(2);
-			left = (Integer) params.get(3);
+			right = (Integer) params.get(3);
 		}
 
 		return new Insets(top, left, bottom, right);

@@ -17,6 +17,11 @@ public class BaseKeywordRule extends BaseRule {
 	}
 
 	@Override
+	public String[][] getParamsNames() {
+		return new String[][] {{"value"}};
+	}
+
+	@Override
 	public String[] getKeywords(int paramsId, int paramId) {
 		return keywords;
 	}

@@ -68,7 +68,7 @@ stylesheet returns [Map<String, Map<String, List<Object>>> classes]
 	;
 	
 styleclass returns [List<String> sels, Map<String, List<Object>> rules]
-@init {$rules = new HashMap<String, List<Object>>();}
+@init {$rules = new LinkedHashMap<String, List<Object>>();}
 	:	selector_list_list '{' {$sels = $selector_list_list.sels;}
 		(rule                  {$rules.put($rule.key, $rule.values);}
 		)* '}'

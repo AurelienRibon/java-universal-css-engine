@@ -12,4 +12,9 @@ public class BaseBooleanRule extends BaseRule {
 	public Class[][] getParams() {
 		return new Class[][] {{Boolean.class}};
 	}
+
+	@Override
+	public String[][] getParamsNames() {
+		return new String[][] {{"value"}};
+	}
 }

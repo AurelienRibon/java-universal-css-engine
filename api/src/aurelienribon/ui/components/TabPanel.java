@@ -30,6 +30,11 @@ public class TabPanel extends JPanel {
 		}
 	}
 
+	static {
+		Style.registerSkippedClass(TabPanelHeaderPanel.class);
+		Style.registerSkippedClass(TabPanelHeaderSubPanel.class);
+	}
+
 	// -------------------------------------------------------------------------
 	// Attributes + ctor
 	// -------------------------------------------------------------------------
@@ -94,6 +99,7 @@ public class TabPanel extends JPanel {
 			@Override public void selectionChanged(TabModel tm, int idx) {
 				cardLayout.show(cardPanel, cardsMap.get(tm));
 				headerPanel.reload();
+				if (tm != null) tm.component.requestFocusInWindow();
 			}
 		});
 

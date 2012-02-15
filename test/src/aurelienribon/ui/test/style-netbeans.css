@@ -3,6 +3,10 @@
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
 
+javax-swing-JScrollPane {
+	-swing-border: null;
+}
+
 javax-swing-JButton {
 	-swing-horizontalalignment: center;
 	-swing-verticalalignment: center;
@@ -46,9 +50,16 @@ aurelienribon-ui-components-TabPanel {
 	-swing-background: #F0F0F0;
 }
 
-.controlPanel {
-	-swing-border: arui-groupborder(null, "Controls", 20, 6, #000, #898C95, lineargradient(0, 0, 0, 1, 0.49, #F2F9FC, 0.5, #DCEEF7));
+.styleControlPanel, .tabPanelControlPanel {
 	-swing-background: #CDCED1;
+}
+
+.styleControlPanel {
+	-swing-border: arui-groupborder(null, "Style", 20, 6, #000, #898C95, lineargradient(0, 0, 0, 1, 0.49, #F2F9FC, 0.5, #DCEEF7));
+}
+
+.tabPanelControlPanel {
+	-swing-border: arui-groupborder(null, "TabPanel", 20, 6, #000, #898C95, lineargradient(0, 0, 0, 1, 0.49, #F2F9FC, 0.5, #DCEEF7));
 }
 
 .applyButton {

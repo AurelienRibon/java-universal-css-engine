@@ -12,4 +12,9 @@ public class BaseStringRule extends BaseRule {
 	public Class[][] getParams() {
 		return new Class[][] {{String.class}};
 	}
+
+	@Override
+	public String[][] getParamsNames() {
+		return new String[][] {{"value"}};
+	}
 }

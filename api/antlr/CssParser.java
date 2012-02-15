@@ -1,4 +1,4 @@
-// $ANTLR 3.4 C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g 2012-02-15 11:21:28
+// $ANTLR 3.4 C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g 2012-02-15 13:07:32
 
 	package aurelienribon.ui.css;
 	
@@ -179,7 +179,7 @@ public class CssParser extends Parser {
         CssParser.rule_return rule3 =null;
 
 
-        retval.rules = new HashMap<String, List<Object>>();
+        retval.rules = new LinkedHashMap<String, List<Object>>();
         try {
             // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:72:2: ( selector_list_list '{' ( rule )* '}' )
             // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:72:4: selector_list_list '{' ( rule )* '}'

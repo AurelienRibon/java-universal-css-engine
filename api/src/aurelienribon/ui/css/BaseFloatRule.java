@@ -12,4 +12,9 @@ public class BaseFloatRule extends BaseRule {
 	public Class[][] getParams() {
 		return new Class[][] {{Float.class}};
 	}
+
+	@Override
+	public String[][] getParamsNames() {
+		return new String[][] {{"value"}};
+	}
 }

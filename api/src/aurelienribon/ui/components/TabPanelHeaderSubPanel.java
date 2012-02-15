@@ -10,12 +10,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.*;
-import javax.swing.border.MatteBorder;
 
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
-class TabPanelHeaderSubPanel extends JPanel {
+class TabPanelHeaderSubPanel extends JComponent {
 	public static class Processor implements StyleProcessor {
 		@Override
 		public void process(Object target, StyleAttributes attrs) {

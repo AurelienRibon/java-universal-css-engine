@@ -20,19 +20,20 @@ public class Style {
 	// Static API
 	// -------------------------------------------------------------------------
 
-	private static final Map<String, StyleRule> registeredRules = new HashMap<String, StyleRule>();
-	private static final Map<String, StyleFunction> registeredFunctions = new HashMap<String, StyleFunction>();
+	private static final Map<String, StyleRule> registeredRules = new LinkedHashMap<String, StyleRule>();
+	private static final Map<String, StyleFunction> registeredFunctions = new LinkedHashMap<String, StyleFunction>();
 	private static final List<StyleProcessor> registeredProcessors = new ArrayList<StyleProcessor>();
-	private static final Map<Object, String> registeredTargetsClasses = new HashMap<Object, String>();
-
-	public static void registerFunction(StyleFunction function) {
-		if (registeredFunctions.containsKey(function.getName())) throw new RuntimeException("Function already registered");
-		registeredFunctions.put(function.getName(), function);
-	}
+	private static final Map<Object, String> registeredTargetsClassNames = new LinkedHashMap<Object, String>();
+	private static final List<Class> registeredSkippedClasses = new ArrayList<Class>();
 
 	public static void registerRule(StyleRule rule) {
 		if (registeredRules.containsKey(rule.getName())) throw new RuntimeException("Rule already registered");
 		registeredRules.put(rule.getName(), rule);
+	}
+
+	public static void registerFunction(StyleFunction function) {
+		if (registeredFunctions.containsKey(function.getName())) throw new RuntimeException("Function already registered");
+		registeredFunctions.put(function.getName(), function);
 	}
 
 	public static void registerProcessor(StyleProcessor processor) {
@@ -42,16 +43,53 @@ public class Style {
 		registeredProcessors.add(processor);
 	}
 
-	public static void registerTargetClass(Object target, String className) {
-		registeredTargetsClasses.put(target, "." + className);
+	public static void registerTargetClassName(Object target, String className) {
+		registeredTargetsClassNames.put(target, "." + className);
 	}
 
-	public static void unregisterTarget(Object target) {
-		registeredTargetsClasses.remove(target);
+	public static void registerSkippedClass(Class clazz) {
+		if (registeredSkippedClasses.contains(clazz)) throw new RuntimeException("Skipped class already registered");
+		registeredSkippedClasses.add(clazz);
+	}
+
+	public static void unregisterRule(StyleRule rule) {
+		registeredRules.remove(rule.getName());
+	}
+
+	public static void unregisterFunction(StyleFunction function) {
+		registeredFunctions.remove(function.getName());
+	}
+
+	public static void unregisterProcessor(StyleProcessor processor) {
+		registeredProcessors.remove(processor);
+	}
+
+	public static void unregisterTargetClassName(Object target) {
+		registeredTargetsClassNames.remove(target);
+	}
+
+	public static void unregisterSkippedClass(Class clazz) {
+		registeredSkippedClasses.remove(clazz);
+	}
+
+	public static List<String> getRegisteredRulesNames() {
+		return Collections.unmodifiableList(new ArrayList<String>(registeredRules.keySet()));
+	}
+
+	public static StyleRule getRegisteredRule(String name) {
+		return registeredRules.get(name);
+	}
+
+	public static List<String> getRegisteredFunctionsNames() {
+		return Collections.unmodifiableList(new ArrayList<String>(registeredFunctions.keySet()));
+	}
+
+	public static StyleFunction getRegisteredFunction(String name) {
+		return registeredFunctions.get(name);
 	}
 
 	public static String getRegisteredTargetClass(Object target) {
-		return registeredTargetsClasses.get(target);
+		return registeredTargetsClassNames.get(target);
 	}
 
 	public static void apply(Object target, Style style) {
@@ -60,6 +98,14 @@ public class Style {
 
 	public static void apply(Object target, StyleAttributes attrs) {
 		for (StyleProcessor sp : registeredProcessors) sp.process(target, attrs);
+	}
+
+	public static String generateRulesManual() {
+		return generateManual(registeredRules.values());
+	}
+
+	public static String generateFunctionsManual() {
+		return generateManual(registeredFunctions.values());
 	}
 
 	// -------------------------------------------------------------------------
@@ -199,14 +245,50 @@ public class Style {
 	}
 
 	private static void apply(Object target, Style style, List<String> stack) {
+		for (Class clazz : registeredSkippedClasses)
+			if (clazz.isInstance(target)) return;
+
 		apply(target, new StyleAttributes(style, target, stack));
 
 		stack.add(target.getClass().getName());
-		if (registeredTargetsClasses.containsKey(target)) stack.add(registeredTargetsClasses.get(target));
+		if (registeredTargetsClassNames.containsKey(target)) stack.add(registeredTargetsClassNames.get(target));
 
 		if (target instanceof Container) {
 			Container cnt = (Container) target;
 			for (Component child : cnt.getComponents()) apply(child, style, stack);
 		}
+	}
+
+	private static String generateManual(Collection<? extends StyleRule> rules) {
+		String str = "";
+
+		for (StyleRule rule : rules) {
+			str += rule.getName() + "\n";
+
+			for (int i=0; i<rule.getParams().length; i++) {
+				str += "    ";
+
+				if (rule.getParams()[i].length == 0) str += "nothing";
+
+				for (int ii=0; ii<rule.getParams()[i].length; ii++) {
+					String clazz = rule.getParams()[i][ii].getSimpleName();
+					String name = rule.getParamsNames()[i][ii];
+
+					clazz = clazz.replace("Integer", "int");
+					clazz = clazz.replace("Float", "float");
+					clazz = clazz.replace("Number", "float");
+					clazz = clazz.replace("Boolean", "boolean");
+
+					if (ii > 0) str += ", ";
+					str += clazz + " " + name;
+				}
+
+				str += "\n";
+			}
+
+			str += "\n";
+		}
+
+		return str;
 	}
 }

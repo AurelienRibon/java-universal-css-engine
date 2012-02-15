@@ -42,6 +42,10 @@ public class TabPanelModel {
 		}
 	}
 
+	public int getTabsCount() {
+		return tabModels.size();
+	}
+
 	public void setSelection(Component cmp) {
 		setSelection(tabModels.indexOf(findTabModel(cmp)));
 	}

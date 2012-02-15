@@ -12,4 +12,9 @@ public class BaseIntegerRule extends BaseRule {
 	public Class[][] getParams() {
 		return new Class[][] {{Integer.class}};
 	}
+
+	@Override
+	public String[][] getParamsNames() {
+		return new String[][] {{"value"}};
+	}
 }

@@ -14,4 +14,9 @@ public class BaseColorRule extends BaseRule {
 	public Class[][] getParams() {
 		return new Class[][] {{Color.class}};
 	}
+
+	@Override
+	public String[][] getParamsNames() {
+		return new String[][] {{"value"}};
+	}
 }

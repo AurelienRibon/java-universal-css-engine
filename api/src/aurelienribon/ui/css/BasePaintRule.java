@@ -14,4 +14,9 @@ public class BasePaintRule extends BaseRule {
 	public Class[][] getParams() {
 		return new Class[][] {{Paint.class}};
 	}
+
+	@Override
+	public String[][] getParamsNames() {
+		return new String[][] {{"value"}};
+	}
 }
