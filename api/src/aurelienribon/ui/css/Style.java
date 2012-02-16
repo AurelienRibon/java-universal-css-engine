@@ -1,7 +1,5 @@
 package aurelienribon.ui.css;
 
-import java.awt.Component;
-import java.awt.Container;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -25,9 +23,17 @@ public class Style {
 	private static final List<StyleProcessor> registeredProcessors = new ArrayList<StyleProcessor>();
 	private static final Map<Object, String> registeredTargetsClassNames = new LinkedHashMap<Object, String>();
 	private static final List<Class> registeredSkippedClasses = new ArrayList<Class>();
+	private static final Map<Class, StyleChildrenAccessor> registeredChildrenAccessors = new HashMap<Class, StyleChildrenAccessor>();
 
 	/**
 	 * Registers a new rule to the engine.
+	 * <p/>
+	 * A Rule takes one or more parameters, separated by whitespaces. It may
+	 * take different numbers of parameters. A rule is global, so it does
+	 * nothing on its own: the processing behavior is managed by the target.
+	 * Therefore, a rule can be treated differently by different targets, or
+	 * even skipped if not relevant for a given target (but its children may
+	 * use it, so its never totally irrelevant).
 	 */
 	public static void registerRule(StyleRule rule) {
 		if (registeredRules.containsKey(rule.getName())) throw new RuntimeException("Rule already registered");
@@ -36,6 +42,8 @@ public class Style {
 
 	/**
 	 * Registers a new function to the engine.
+	 * <p/>
+	 * A function
 	 */
 	public static void registerFunction(StyleFunction function) {
 		if (registeredFunctions.containsKey(function.getName())) throw new RuntimeException("Function already registered");
@@ -66,6 +74,16 @@ public class Style {
 	public static void registerSkippedClass(Class clazz) {
 		if (registeredSkippedClasses.contains(clazz)) throw new RuntimeException("Skipped class already registered");
 		registeredSkippedClasses.add(clazz);
+	}
+
+	/**
+	 * Registers a children accessor with a parent class. Accessors are used to
+	 * automatically apply a style to a target children, without requiring it
+	 * to manually pass it to its children.
+	 */
+	public static void registerChildrenAccessor(Class parentClass, StyleChildrenAccessor accessor) {
+		if (registeredChildrenAccessors.containsKey(parentClass)) throw new RuntimeException("Accessor already registered");
+		registeredChildrenAccessors.put(parentClass, accessor);
 	}
 
 	/**
@@ -328,9 +346,11 @@ public class Style {
 		stack.add(target.getClass().getName());
 		if (registeredTargetsClassNames.containsKey(target)) stack.add(registeredTargetsClassNames.get(target));
 
-		if (target instanceof Container) {
-			Container cnt = (Container) target;
-			for (Component child : cnt.getComponents()) apply(child, style, stack);
+		for (Class clazz : registeredChildrenAccessors.keySet()) {
+			if (clazz.isInstance(target)) {
+				StyleChildrenAccessor accessor = registeredChildrenAccessors.get(clazz);
+				for (Object child : accessor.getChildren(target)) apply(child, style, stack);
+			}
 		}
 	}
 

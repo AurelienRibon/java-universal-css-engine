@@ -25,6 +25,10 @@ public class AruiFunctions {
 			return paramId == 0 || paramId == 5;
 		}
 
+		@Override public Class getReturn() {
+			return GroupBorder.class;
+		}
+
 		@Override public Object process(List<Object> params) {
 			Icon icon = (Icon) params.get(0);
 			String title = (String) params.get(1);

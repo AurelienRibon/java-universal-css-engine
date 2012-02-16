@@ -33,6 +33,10 @@ public class SwingFunctions {
 			{"absoluteUrl"}
 		};}
 
+		@Override public Class getReturn() {
+			return URL.class;
+		}
+
 		@Override public Object process(List<Object> params) {
 			String name = (String) params.get(0);
 			return getClass().getResource(name);
@@ -51,6 +55,10 @@ public class SwingFunctions {
 			{"url"},
 			{"filepath"}
 		};}
+
+		@Override public Class getReturn() {
+			return ImageIcon.class;
+		}
 
 		@Override public Object process(List<Object> params) {
 			if (params.get(0) instanceof URL) return new ImageIcon((URL) params.get(0));
@@ -74,6 +82,10 @@ public class SwingFunctions {
 		@Override public String[] getKeywords(int paramsId, int paramId) {
 			if (paramId == 1) return new String[] {"plain", "italic", "bold"};
 			return null;
+		}
+
+		@Override public Class getReturn() {
+			return Font.class;
 		}
 
 		@Override public Object process(List<Object> params) {
@@ -107,6 +119,10 @@ public class SwingFunctions {
 			{"r", "g", "b"}
 		};}
 
+		@Override public Class getReturn() {
+			return Color.class;
+		}
+
 		@Override public Object process(List<Object> params) {
 			int r = (Integer) params.get(0);
 			int g = (Integer) params.get(1);
@@ -125,6 +141,10 @@ public class SwingFunctions {
 		@Override public String[][] getParamsNames() {return new String[][] {
 			{"r", "g", "b", "a"}
 		};}
+
+		@Override public Class getReturn() {
+			return Color.class;
+		}
 
 		@Override public Object process(List<Object> params) {
 			int r = (Integer) params.get(0);
@@ -151,6 +171,10 @@ public class SwingFunctions {
 			{"x1", "y1", "x2", "y2", "fraction1", "color1", "fraction2", "color2", "fraction3", "color3", "fraction4", "color4"},
 			{"x1", "y1", "x2", "y2", "fraction1", "color1", "fraction2", "color2", "fraction3", "color3", "fraction4", "color4", "fraction5", "color5"}
 		};}
+
+		@Override public Class getReturn() {
+			return LinearGradientPaint.class;
+		}
 
 		@Override public Object process(List<Object> params) {
 			float x1 = ((Number) params.get(0)).floatValue();
@@ -186,6 +210,10 @@ public class SwingFunctions {
 			{"top", "left", "bottom", "right"}
 		};}
 
+		@Override public Class getReturn() {
+			return Border.class;
+		}
+
 		@Override public Object process(List<Object> params) {
 			int top = (Integer) params.get(0);
 			int left = (Integer) params.get(1);
@@ -209,6 +237,10 @@ public class SwingFunctions {
 			{"color", "thickness"},
 			{"color", "thickness", "rounded"}
 		};}
+
+		@Override public Class getReturn() {
+			return Border.class;
+		}
 
 		@Override public Object process(List<Object> params) {
 			if (params.size() == 1) {
@@ -246,6 +278,10 @@ public class SwingFunctions {
 			{"top", "left", "bottom", "up", "color"},
 			{"top", "left", "bottom", "up", "tileIcon"}
 		};}
+
+		@Override public Class getReturn() {
+			return Border.class;
+		}
 
 		@Override public Object process(List<Object> params) {
 			int top = (Integer) params.get(0);
@@ -287,6 +323,10 @@ public class SwingFunctions {
 			{"type", "highlight", "shadow"},
 			{"type", "highlightOuter", "highlightInner", "shadowOuter", "shadowInner"}
 		};}
+
+		@Override public Class getReturn() {
+			return Border.class;
+		}
 
 		@Override public Object process(List<Object> params) {
 			String typeStr = (String) params.get(0);
@@ -335,6 +375,10 @@ public class SwingFunctions {
 			{"type", "highlightOuter", "highlightInner", "shadowOuter", "shadowInner"}
 		};}
 
+		@Override public Class getReturn() {
+			return Border.class;
+		}
+
 		@Override public Object process(List<Object> params) {
 			String typeStr = (String) params.get(0);
 			int type = typeStr.equals("lowered") ? BevelBorder.LOWERED : BevelBorder.RAISED;
@@ -379,6 +423,10 @@ public class SwingFunctions {
 			return true;
 		}
 
+		@Override public Class getReturn() {
+			return Border.class;
+		}
+
 		@Override public Object process(List<Object> params) {
 			if (params.isEmpty()) {
 				return BorderFactory.createCompoundBorder();
@@ -412,6 +460,10 @@ public class SwingFunctions {
 
 		@Override public boolean canBeNull(int paramsId, int paramId) {
 			return paramId == 0;
+		}
+
+		@Override public Class getReturn() {
+			return Border.class;
 		}
 
 		@Override public Object process(List<Object> params) {
@@ -460,6 +512,10 @@ public class SwingFunctions {
 
 		@Override public boolean canBeNull(int paramsId, int paramId) {
 			return paramId == 0;
+		}
+
+		@Override public Class getReturn() {
+			return Border.class;
 		}
 
 		@Override public Object process(List<Object> params) {
@@ -513,6 +569,10 @@ public class SwingFunctions {
 
 		@Override public boolean canBeNull(int paramsId, int paramId) {
 			return paramId == 0;
+		}
+
+		@Override public Class getReturn() {
+			return Border.class;
 		}
 
 		@Override public Object process(List<Object> params) {

@@ -1,14 +1,11 @@
 package aurelienribon.ui.css.predefined;
 
-import aurelienribon.ui.css.BaseBooleanRule;
-import aurelienribon.ui.css.BaseColorRule;
-import aurelienribon.ui.css.BaseIntegerRule;
-import aurelienribon.ui.css.BaseKeywordRule;
-import aurelienribon.ui.css.BaseRule;
-import aurelienribon.ui.css.BaseStringRule;
-import aurelienribon.ui.css.Style;
+import aurelienribon.ui.css.*;
+import java.awt.Container;
 import java.awt.Font;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 import javax.swing.Icon;
 import javax.swing.border.Border;
 
@@ -46,6 +43,12 @@ public class SwingStyle {
 	public static final String RULE_BORDER = "-swing-border";
 
 	public static void init() {
+		Style.registerChildrenAccessor(Container.class, new StyleChildrenAccessor<Container>() {
+			@Override public List<?> getChildren(Container target) {
+				return Arrays.asList(target.getComponents());
+			}
+		});
+
 		Style.registerFunction(new SwingFunctions.UrlFunction());
 		Style.registerFunction(new SwingFunctions.IconFunction());
 		Style.registerFunction(new SwingFunctions.FontFunction());
