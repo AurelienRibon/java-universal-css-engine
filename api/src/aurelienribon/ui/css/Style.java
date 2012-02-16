@@ -28,7 +28,7 @@ public class Style {
 	/**
 	 * Registers a new rule to the engine.
 	 * <p/>
-	 * A Rule takes one or more parameters, separated by whitespaces. It may
+	 * A rule takes one or more parameters, separated by whitespaces. It may
 	 * take different numbers of parameters. A rule is global, so it does
 	 * nothing on its own: the processing behavior is managed by the target.
 	 * Therefore, a rule can be treated differently by different targets, or
@@ -43,7 +43,10 @@ public class Style {
 	/**
 	 * Registers a new function to the engine.
 	 * <p/>
-	 * A function
+	 * A function takes one or more parameters, separated by whitespaces. It may
+	 * take different numbers of parameters. A function defines a process, and
+	 * always returns something. Therefore, a function can be used as a
+	 * parameter to a rule, or to another function.
 	 */
 	public static void registerFunction(StyleFunction function) {
 		if (registeredFunctions.containsKey(function.getName())) throw new RuntimeException("Function already registered");
@@ -52,6 +55,12 @@ public class Style {
 
 	/**
 	 * Registers a new processor to the engine.
+	 * <p/>
+	 * A processor acts directly on a target according to the rules given to it,
+	 * and their parameters. Note that upon applying a style, the targets of
+	 * your application will be sent to every registered processors. Therefore,
+	 * a processor should return immediatly if a target is not of a type it
+	 * was built to handle.
 	 */
 	public static void registerProcessor(StyleProcessor processor) {
 		for (StyleProcessor sp : registeredProcessors)
@@ -61,15 +70,23 @@ public class Style {
 	}
 
 	/**
-	 * Registers a target with a className. Don't forget to unregister the
-	 * target if you dispose of it, to remove it from memory.
+	 * Registers a target with a className.
+	 * <p/>
+	 * This is used to assign CSS classnames (like ".something" to a target).
+	 * Don't forget to unregister the target when you dispose of it, to remove
+	 * it from memory.
 	 */
 	public static void registerTargetClassName(Object target, String className) {
-		registeredTargetsClassNames.put(target, "." + className);
+		if (!className.startsWith(".")) className = "." + className;
+		registeredTargetsClassNames.put(target, className);
 	}
 
 	/**
 	 * Registers a class or interface to be skipped by the engine.
+	 * <p/>
+	 * You may not always want an object type to be processed by a style.
+	 * Registering this type as a skipped class will exlude every instances
+	 * from the engine process methodology.
 	 */
 	public static void registerSkippedClass(Class clazz) {
 		if (registeredSkippedClasses.contains(clazz)) throw new RuntimeException("Skipped class already registered");
@@ -77,9 +94,10 @@ public class Style {
 	}
 
 	/**
-	 * Registers a children accessor with a parent class. Accessors are used to
-	 * automatically apply a style to a target children, without requiring it
-	 * to manually pass it to its children.
+	 * Registers a children accessor with a parent class.
+	 * <p/>
+	 * Accessors are used to automatically apply a style to the children of a
+	 * target, without requiring it to manually pass it to its children.
 	 */
 	public static void registerChildrenAccessor(Class parentClass, StyleChildrenAccessor accessor) {
 		if (registeredChildrenAccessors.containsKey(parentClass)) throw new RuntimeException("Accessor already registered");
@@ -157,8 +175,8 @@ public class Style {
 	}
 
 	/**
-	 * Applies a stylesheet to a target. If the target is a swing Container,
-	 * the style will be applied to its children too, etc.
+	 * Applies a stylesheet to a target and its children, if it has a
+	 * corresponding StyleChildrenAccessor registered.
 	 */
 	public static void apply(Object target, Style style) {
 		apply(target, style, new ArrayList<String>());
@@ -166,11 +184,11 @@ public class Style {
 
 	/**
 	 * Applies a group of attributes to a target. It may be interesting when you
-	 * want to apply the same group of attributes to some objects, directly from
+	 * want to apply the same group of rules to some objects, directly from
 	 * a StyleProcessor for instance.
 	 */
-	public static void apply(Object target, StyleAttributes attrs) {
-		for (StyleProcessor sp : registeredProcessors) sp.process(target, attrs);
+	public static void apply(Object target, StyleRuleSet rs) {
+		for (StyleProcessor sp : registeredProcessors) sp.process(target, rs);
 	}
 
 	/**
@@ -250,8 +268,7 @@ public class Style {
 			return null;
 
 		} finally {
-			try {reader.close();
-			} catch (IOException ex) {}
+			try {reader.close();} catch (IOException ex) {}
 		}
 	}
 
@@ -266,21 +283,25 @@ public class Style {
 			Map<String, Map<String, List<Object>>> result = parser.stylesheet();
 
 			for (String selector : result.keySet()) {
-				Map<String, List<Object>> rules = result.get(selector);
+				Map<String, List<Object>> resultRules = result.get(selector);
 
-				for (String name : rules.keySet()) {
-					StyleRule regRule = registeredRules.get(name);
-					List<Object> params = rules.get(name);
+				List<StyleRule> rules = new ArrayList<StyleRule>();
+				Map<StyleRule, List<Object>> rulesParams = new HashMap<StyleRule, List<Object>>();
 
+				for (String name : resultRules.keySet()) {
+					StyleRule rule = registeredRules.get(name);
+					List<Object> params = resultRules.get(name);
+
+					if (rule == null) throw StyleException.forRule(name);
 					for (int i=0; i<params.size(); i++) params.set(i, evaluateParam(params.get(i)));
+					if (!checkParams(rule, params)) throw StyleException.forRuleParams(rule);
 
-					if (regRule == null) throw StyleException.forRule(name);
-					if (!checkParams(regRule, params)) throw StyleException.forRuleParams(regRule);
-
-					for (int i=0; i<params.size(); i++) params.set(i, evaluateParam(params.get(i)));
+					rules.add(rule);
+					rulesParams.put(rule, params);
 				}
 
-				StyleClass sc = new StyleClass(selector, result.get(selector));
+				StyleRuleSet rs = new StyleRuleSet(rules, rulesParams);
+				StyleClass sc = new StyleClass(selector, rs);
 				classes.add(sc);
 			}
 
@@ -338,14 +359,18 @@ public class Style {
 	}
 
 	private static void apply(Object target, Style style, List<String> stack) {
-		for (Class clazz : registeredSkippedClasses)
-			if (clazz.isInstance(target)) return;
+		// Skip target if required
+		for (Class clazz : registeredSkippedClasses) if (clazz.isInstance(target)) return;
 
-		apply(target, new StyleAttributes(style, target, stack));
+		// Retrieve all the rules belonging to the target, and apply them
+		StyleRuleSet rs = new StyleRuleSet(style, target, stack);
+		apply(target, rs);
 
+		// Add the target class and className to the selectors stack
 		stack.add(target.getClass().getName());
 		if (registeredTargetsClassNames.containsKey(target)) stack.add(registeredTargetsClassNames.get(target));
 
+		// Iterate over the target children, if any
 		for (Class clazz : registeredChildrenAccessors.keySet()) {
 			if (clazz.isInstance(target)) {
 				StyleChildrenAccessor accessor = registeredChildrenAccessors.get(clazz);
@@ -358,7 +383,7 @@ public class Style {
 		String str = "";
 
 		for (StyleRule rule : rules) {
-			str += rule.getName() + "\n";
+			str += rule.getName() + getReturnStatement(rule) + "\n";
 
 			for (int i=0; i<rule.getParams().length; i++) {
 				str += "    ";
@@ -369,13 +394,8 @@ public class Style {
 					String clazz = rule.getParams()[i][ii].getSimpleName();
 					String name = rule.getParamsNames()[i][ii];
 
-					clazz = clazz.replace("Integer", "int");
-					clazz = clazz.replace("Float", "float");
-					clazz = clazz.replace("Number", "float");
-					clazz = clazz.replace("Boolean", "boolean");
-
 					if (ii > 0) str += ", ";
-					str += clazz + " " + name;
+					str += prettify(clazz) + " " + name;
 				}
 
 				str += "\n";
@@ -384,6 +404,22 @@ public class Style {
 			str += "\n";
 		}
 
-		return str;
+		return str.trim();
+	}
+
+	private static String prettify(String clazz) {
+		clazz = clazz.replace("Integer", "int");
+		clazz = clazz.replace("Float", "float");
+		clazz = clazz.replace("Number", "float");
+		clazz = clazz.replace("Boolean", "boolean");
+		return clazz;
+	}
+
+	private static String getReturnStatement(StyleRule rule) {
+		if (rule instanceof StyleFunction) {
+			StyleFunction func = (StyleFunction) rule;
+			return " [returns " + prettify(func.getReturn().getSimpleName()) + "]";
+		}
+		return "";
 	}
 }
