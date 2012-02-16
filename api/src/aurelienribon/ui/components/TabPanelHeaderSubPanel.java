@@ -1,9 +1,10 @@
 package aurelienribon.ui.components;
 
 import aurelienribon.ui.components.TabPanelModel.TabModel;
-import aurelienribon.ui.css.StyleAttributes;
+import aurelienribon.ui.css.StyleRuleSet;
 import aurelienribon.ui.css.StyleProcessor;
-import aurelienribon.ui.css.predefined.SwingStyle;
+import aurelienribon.ui.css.swing.SwingRules;
+import aurelienribon.ui.css.swing.SwingUtils;
 import aurelienribon.ui.utils.PaintUtils;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -15,24 +16,23 @@ import javax.swing.*;
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
 class TabPanelHeaderSubPanel extends JComponent {
-	public static class Processor implements StyleProcessor {
-		@Override
-		public void process(Object target, StyleAttributes attrs) {
+	public static final StyleProcessor PROCESSOR = new StyleProcessor() {
+		@Override public void process(Object target, StyleRuleSet rs) {
 			if (target instanceof TabPanelHeaderSubPanel) {
 				TabPanelHeaderSubPanel t = (TabPanelHeaderSubPanel) target;
-				if (attrs.contains(SwingStyle.RULE_FOREGROUND)) t.foreground = attrs.asColor(SwingStyle.RULE_FOREGROUND);
-				if (attrs.contains(AruiStyle.RULE_FOREGROUND_SELECTED)) t.foregroundSelected = attrs.asColor(AruiStyle.RULE_FOREGROUND_SELECTED);
-				if (attrs.contains(AruiStyle.RULE_FOREGROUND_MOUSEOVER)) t.foregroundMouseOver = attrs.asColor(AruiStyle.RULE_FOREGROUND_MOUSEOVER);
-				if (attrs.contains(AruiStyle.RULE_STROKE)) t.stroke = attrs.asColor(AruiStyle.RULE_STROKE);
-				if (attrs.contains(AruiStyle.RULE_STROKE_SELECTED)) t.strokeSelected = attrs.asColor(AruiStyle.RULE_STROKE_SELECTED);
-				if (attrs.contains(AruiStyle.RULE_STROKE_MOUSEOVER)) t.strokeMouseOver = attrs.asColor(AruiStyle.RULE_STROKE_MOUSEOVER);
-				if (attrs.contains(AruiStyle.RULE_FILL)) t.fill = attrs.asPaint(AruiStyle.RULE_FILL);
-				if (attrs.contains(AruiStyle.RULE_FILL_SELECTED)) t.fillSelected = attrs.asPaint(AruiStyle.RULE_FILL_SELECTED);
-				if (attrs.contains(AruiStyle.RULE_FILL_MOUSEOVER)) t.fillMouseOver = attrs.asPaint(AruiStyle.RULE_FILL_MOUSEOVER);
+				if (rs.contains(SwingRules.FOREGROUND)) t.foreground = SwingUtils.asColor(rs, SwingRules.FOREGROUND, 0);
+				if (rs.contains(AruiRules.FOREGROUND_SELECTED)) t.foregroundSelected = SwingUtils.asColor(rs, AruiRules.FOREGROUND_SELECTED, 0);
+				if (rs.contains(AruiRules.FOREGROUND_MOUSEOVER)) t.foregroundMouseOver = SwingUtils.asColor(rs, AruiRules.FOREGROUND_MOUSEOVER, 0);
+				if (rs.contains(AruiRules.STROKE)) t.stroke = SwingUtils.asColor(rs, AruiRules.STROKE, 0);
+				if (rs.contains(AruiRules.STROKE_SELECTED)) t.strokeSelected = SwingUtils.asColor(rs, AruiRules.STROKE_SELECTED, 0);
+				if (rs.contains(AruiRules.STROKE_MOUSEOVER)) t.strokeMouseOver = SwingUtils.asColor(rs, AruiRules.STROKE_MOUSEOVER, 0);
+				if (rs.contains(AruiRules.FILL)) t.fill = SwingUtils.asPaint(rs, AruiRules.FILL, 0);
+				if (rs.contains(AruiRules.FILL_SELECTED)) t.fillSelected = SwingUtils.asPaint(rs, AruiRules.FILL_SELECTED, 0);
+				if (rs.contains(AruiRules.FILL_MOUSEOVER)) t.fillMouseOver = SwingUtils.asPaint(rs, AruiRules.FILL_MOUSEOVER, 0);
 				t.reload();
 			}
 		}
-	}
+	};
 
 	private static final ImageIcon IC_CROSS1_DARK = new ImageIcon(TabPanelHeaderSubPanel.class.getResource("ic_cross1_dark.png"));
 	private static final ImageIcon IC_CROSS2_DARK = new ImageIcon(TabPanelHeaderSubPanel.class.getResource("ic_cross2_dark.png"));

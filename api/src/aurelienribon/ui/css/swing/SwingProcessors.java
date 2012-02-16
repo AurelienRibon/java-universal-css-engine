@@ -1,4 +1,4 @@
-package aurelienribon.ui.css.predefined;
+package aurelienribon.ui.css.swing;
 
 import aurelienribon.ui.css.StyleRuleSet;
 import aurelienribon.ui.css.StyleProcessor;

@@ -1,10 +1,11 @@
-package aurelienribon.ui.css.predefined;
+package aurelienribon.ui.css.swing;
 
 import aurelienribon.ui.css.StyleRule;
 import aurelienribon.ui.css.StyleRuleSet;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Insets;
+import java.awt.Paint;
 import java.net.URL;
 import java.util.List;
 import javax.swing.AbstractButton;
@@ -19,6 +20,9 @@ import javax.swing.border.Border;
 public class SwingUtils {
 	public static Color asColor(StyleRuleSet rs, StyleRule rule, int paramId) {
 		return (Color) rs.getParams(rule).get(paramId);
+	}
+	public static Paint asPaint(StyleRuleSet rs, StyleRule rule, int paramId) {
+		return (Paint) rs.getParams(rule).get(paramId);
 	}
 
 	public static Insets asInsets(StyleRuleSet rs, StyleRule rule) {

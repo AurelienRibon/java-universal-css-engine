@@ -2,8 +2,9 @@ package aurelienribon.ui.components;
 
 import aurelienribon.ui.components.TabPanelModel.TabModel;
 import aurelienribon.ui.css.Style;
-import aurelienribon.ui.css.StyleAttributes;
+import aurelienribon.ui.css.StyleRuleSet;
 import aurelienribon.ui.css.StyleProcessor;
+import aurelienribon.ui.css.swing.SwingUtils;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,21 +15,20 @@ import javax.swing.border.MatteBorder;
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
 public class TabPanel extends JPanel {
-	public static class Processor implements StyleProcessor {
-		@Override
-		public void process(Object target, StyleAttributes attrs) {
+	public static final StyleProcessor PROCESSOR = new StyleProcessor() {
+		@Override public void process(Object target, StyleRuleSet rs) {
 			if (target instanceof TabPanel) {
 				TabPanel t = (TabPanel) target;
 
-				if (attrs.contains(AruiStyle.RULE_STROKE)) {
-					t.stroke = attrs.asColor(AruiStyle.RULE_STROKE);
+				if (rs.contains(AruiRules.STROKE)) {
+					t.stroke = SwingUtils.asColor(rs, AruiRules.STROKE, 0);
 					t.cardPanel.setBorder(new MatteBorder(0, 1, 1, 1, t.stroke));
 				}
 
-				Style.apply(t.headerPanel, attrs);
+				Style.apply(t.headerPanel, rs);
 			}
 		}
-	}
+	};
 
 	static {
 		Style.registerSkippedClass(TabPanelHeaderPanel.class);

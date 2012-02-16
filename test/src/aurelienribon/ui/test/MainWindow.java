@@ -4,7 +4,7 @@ import aurelienribon.ui.components.AruiStyle;
 import aurelienribon.ui.components.TabPanel;
 import aurelienribon.ui.css.Style;
 import aurelienribon.ui.css.StyleException;
-import aurelienribon.ui.css.predefined.SwingStyle;
+import aurelienribon.ui.css.swing.SwingStyle;
 import gfx.Gfx;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

@@ -1,4 +1,4 @@
-package aurelienribon.ui.css.predefined;
+package aurelienribon.ui.css.swing;
 
 import aurelienribon.ui.css.*;
 import java.awt.Container;
@@ -10,6 +10,8 @@ import java.util.List;
  */
 public class SwingStyle {
 	public static void init() {
+		Style.registerRule(SwingRules.BACKGROUND);
+		Style.registerRule(SwingRules.FOREGROUND);
 		Style.registerRule(SwingRules.VISIBLE);
 		Style.registerRule(SwingRules.ENABLED);
 		Style.registerRule(SwingRules.FOCUSABLE);
@@ -27,8 +29,6 @@ public class SwingStyle {
 		Style.registerRule(SwingRules.FONT);
 		Style.registerRule(SwingRules.ICON);
 		Style.registerRule(SwingRules.BORDER);
-		Style.registerRule(SwingRules.BACKGROUND);
-		Style.registerRule(SwingRules.FOREGROUND);
 
 		Style.registerFunction(SwingFunctions.URL);
 		Style.registerFunction(SwingFunctions.ICON);

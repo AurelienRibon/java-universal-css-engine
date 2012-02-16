@@ -1,4 +1,4 @@
-package aurelienribon.ui.css.predefined;
+package aurelienribon.ui.css.swing;
 
 import aurelienribon.ui.css.*;
 import java.awt.Color;
@@ -11,6 +11,9 @@ import javax.swing.border.Border;
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
 public class SwingRules {
+	public static final StyleRule BACKGROUND = new BaseColorRule("-swing-background");
+	public static final StyleRule FOREGROUND = new BaseColorRule("-swing-foreground");
+
 	public static final StyleRule VISIBLE = new BaseBooleanRule("-swing-visible");
 	public static final StyleRule ENABLED = new BaseBooleanRule("-swing-enabled");
 	public static final StyleRule FOCUSABLE = new BaseBooleanRule("-swing-focusable");
@@ -90,39 +93,6 @@ public class SwingRules {
 
 		@Override public String[][] getParamsNames() {return new String[][] {
 			{"border"}
-		};}
-
-		@Override public boolean canBeNull(int paramsId, int paramId) {
-			return true;
-		}
-	};
-
-	public static final StyleRule BACKGROUND = new BaseRule("-swing-background") {
-		@Override
-		public Class[][] getParams() {return new Class[][] {
-			{Color.class}
-		};}
-
-		@Override
-		public String[][] getParamsNames() {return new String[][] {
-			{"color"}
-		};}
-
-		@Override public boolean canBeNull(int paramsId, int paramId) {
-			return true;
-		}
-	};
-
-
-	public static final StyleRule FOREGROUND = new BaseRule("-swing-foreground") {
-		@Override
-		public Class[][] getParams() {return new Class[][] {
-			{Color.class}
-		};}
-
-		@Override
-		public String[][] getParamsNames() {return new String[][] {
-			{"color"}
 		};}
 
 		@Override public boolean canBeNull(int paramsId, int paramId) {
