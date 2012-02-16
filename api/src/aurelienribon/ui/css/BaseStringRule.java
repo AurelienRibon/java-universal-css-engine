@@ -15,6 +15,6 @@ public class BaseStringRule extends BaseRule {
 
 	@Override
 	public String[][] getParamsNames() {
-		return new String[][] {{"value"}};
+		return new String[][] {{"s"}};
 	}
 }

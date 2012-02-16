@@ -1,6 +1,7 @@
-package aurelienribon.ui.css.predefined;
+package aurelienribon.ui.css.swing;
 
 import aurelienribon.ui.css.BaseFunction;
+import aurelienribon.ui.css.StyleFunction;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.LinearGradientPaint;
@@ -17,14 +18,11 @@ import javax.swing.border.Border;
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
 public class SwingFunctions {
-
 	// -------------------------------------------------------------------------
 	// Files
 	// -------------------------------------------------------------------------
 
-	public static class UrlFunction extends BaseFunction {
-		public UrlFunction() {super("url");}
-
+	public static final StyleFunction URL = new BaseFunction("url") {
 		@Override public Class[][] getParams() {return new Class[][] {
 			{String.class}
 		};}
@@ -33,15 +31,17 @@ public class SwingFunctions {
 			{"absoluteUrl"}
 		};}
 
+		@Override public Class getReturn() {
+			return URL.class;
+		}
+
 		@Override public Object process(List<Object> params) {
 			String name = (String) params.get(0);
 			return getClass().getResource(name);
 		}
 	};
 
-	public static class IconFunction extends BaseFunction {
-		public IconFunction() {super("icon");}
-
+	public static final StyleFunction ICON = new BaseFunction("icon") {
 		@Override public Class[][] getParams() {return new Class[][] {
 			{URL.class},
 			{String.class}
@@ -52,6 +52,10 @@ public class SwingFunctions {
 			{"filepath"}
 		};}
 
+		@Override public Class getReturn() {
+			return ImageIcon.class;
+		}
+
 		@Override public Object process(List<Object> params) {
 			if (params.get(0) instanceof URL) return new ImageIcon((URL) params.get(0));
 			if (params.get(0) instanceof String) return new ImageIcon((String) params.get(0));
@@ -60,9 +64,7 @@ public class SwingFunctions {
 		}
 	};
 
-	public static class FontFunction extends BaseFunction {
-		public FontFunction() {super("font");}
-
+	public static final StyleFunction FONT = new BaseFunction("font") {
 		@Override public Class[][] getParams() {return new Class[][] {
 			{String.class, String.class, Integer.class}
 		};}
@@ -74,6 +76,10 @@ public class SwingFunctions {
 		@Override public String[] getKeywords(int paramsId, int paramId) {
 			if (paramId == 1) return new String[] {"plain", "italic", "bold"};
 			return null;
+		}
+
+		@Override public Class getReturn() {
+			return Font.class;
 		}
 
 		@Override public Object process(List<Object> params) {
@@ -90,15 +96,13 @@ public class SwingFunctions {
 
 			return new Font(name, style, size);
 		}
-	}
+	};
 
 	// -------------------------------------------------------------------------
 	// Colors
 	// -------------------------------------------------------------------------
 
-	public static class RgbFunction extends BaseFunction {
-		public RgbFunction() {super("rgb");}
-
+	public static final StyleFunction RGB = new BaseFunction("rgb") {
 		@Override public Class[][] getParams() {return new Class[][] {
 			{Integer.class, Integer.class, Integer.class}
 		};}
@@ -106,6 +110,10 @@ public class SwingFunctions {
 		@Override public String[][] getParamsNames() {return new String[][] {
 			{"r", "g", "b"}
 		};}
+
+		@Override public Class getReturn() {
+			return Color.class;
+		}
 
 		@Override public Object process(List<Object> params) {
 			int r = (Integer) params.get(0);
@@ -115,9 +123,7 @@ public class SwingFunctions {
 		}
 	};
 
-	public static class RgbaFunction extends BaseFunction {
-		public RgbaFunction() {super("rgba");}
-
+	public static final StyleFunction RGBA = new BaseFunction("rgba") {
 		@Override public Class[][] getParams() {return new Class[][] {
 			{Integer.class, Integer.class, Integer.class, Float.class}
 		};}
@@ -125,6 +131,10 @@ public class SwingFunctions {
 		@Override public String[][] getParamsNames() {return new String[][] {
 			{"r", "g", "b", "a"}
 		};}
+
+		@Override public Class getReturn() {
+			return Color.class;
+		}
 
 		@Override public Object process(List<Object> params) {
 			int r = (Integer) params.get(0);
@@ -135,9 +145,7 @@ public class SwingFunctions {
 		}
 	};
 
-	public static class LinearGradientFunction extends BaseFunction {
-		public LinearGradientFunction() {super("lineargradient");}
-
+	public static final StyleFunction LINEARGRADIENT = new BaseFunction("lineargradient") {
 		@Override public Class[][] getParams() {return new Class[][] {
 			{Number.class, Number.class, Number.class, Number.class, Number.class, Color.class, Number.class, Color.class},
 			{Number.class, Number.class, Number.class, Number.class, Number.class, Color.class, Number.class, Color.class, Number.class, Color.class},
@@ -151,6 +159,10 @@ public class SwingFunctions {
 			{"x1", "y1", "x2", "y2", "fraction1", "color1", "fraction2", "color2", "fraction3", "color3", "fraction4", "color4"},
 			{"x1", "y1", "x2", "y2", "fraction1", "color1", "fraction2", "color2", "fraction3", "color3", "fraction4", "color4", "fraction5", "color5"}
 		};}
+
+		@Override public Class getReturn() {
+			return LinearGradientPaint.class;
+		}
 
 		@Override public Object process(List<Object> params) {
 			float x1 = ((Number) params.get(0)).floatValue();
@@ -175,9 +187,7 @@ public class SwingFunctions {
 	// Borders
 	// -------------------------------------------------------------------------
 
-	public static class EmptyBorderFunction extends BaseFunction {
-		public EmptyBorderFunction() {super("emptyborder");}
-
+	public static final StyleFunction EMPTYBORDER = new BaseFunction("emptyborder") {
 		@Override public Class[][] getParams() {return new Class[][] {
 			{Integer.class, Integer.class, Integer.class, Integer.class}
 		};}
@@ -185,6 +195,10 @@ public class SwingFunctions {
 		@Override public String[][] getParamsNames() {return new String[][] {
 			{"top", "left", "bottom", "right"}
 		};}
+
+		@Override public Class getReturn() {
+			return Border.class;
+		}
 
 		@Override public Object process(List<Object> params) {
 			int top = (Integer) params.get(0);
@@ -195,9 +209,7 @@ public class SwingFunctions {
 		}
 	};
 
-	public static class LineBorderFunction extends BaseFunction {
-		public LineBorderFunction() {super("lineborder");}
-
+	public static final StyleFunction LINEBORDER = new BaseFunction("lineborder") {
 		@Override public Class[][] getParams() {return new Class[][] {
 			{Color.class},
 			{Color.class, Integer.class},
@@ -209,6 +221,10 @@ public class SwingFunctions {
 			{"color", "thickness"},
 			{"color", "thickness", "rounded"}
 		};}
+
+		@Override public Class getReturn() {
+			return Border.class;
+		}
 
 		@Override public Object process(List<Object> params) {
 			if (params.size() == 1) {
@@ -234,9 +250,7 @@ public class SwingFunctions {
 		}
 	};
 
-	public static class MatteBorderFunction extends BaseFunction {
-		public MatteBorderFunction() {super("matteborder");}
-
+	public static final StyleFunction MATTEBORDER = new BaseFunction("matteborder") {
 		@Override public Class[][] getParams() {return new Class[][] {
 			{Integer.class, Integer.class, Integer.class, Integer.class, Color.class},
 			{Integer.class, Integer.class, Integer.class, Integer.class, Icon.class}
@@ -246,6 +260,10 @@ public class SwingFunctions {
 			{"top", "left", "bottom", "up", "color"},
 			{"top", "left", "bottom", "up", "tileIcon"}
 		};}
+
+		@Override public Class getReturn() {
+			return Border.class;
+		}
 
 		@Override public Object process(List<Object> params) {
 			int top = (Integer) params.get(0);
@@ -268,9 +286,7 @@ public class SwingFunctions {
 		}
 	};
 
-	public static class BevelBorderFunction extends BaseFunction {
-		public BevelBorderFunction() {super("bevelborder");}
-
+	public static final StyleFunction BEVELBORDER = new BaseFunction("bevelborder") {
 		@Override public String[] getKeywords(int paramsId, int paramId) {
 			if (paramId == 0) return new String[] {"lowered", "raised"};
 			return null;
@@ -287,6 +303,10 @@ public class SwingFunctions {
 			{"type", "highlight", "shadow"},
 			{"type", "highlightOuter", "highlightInner", "shadowOuter", "shadowInner"}
 		};}
+
+		@Override public Class getReturn() {
+			return Border.class;
+		}
 
 		@Override public Object process(List<Object> params) {
 			String typeStr = (String) params.get(0);
@@ -315,9 +335,7 @@ public class SwingFunctions {
 		}
 	};
 
-	public static class SoftBevelBorderFunction extends BaseFunction {
-		public SoftBevelBorderFunction() {super("softbevelborder");}
-
+	public static final StyleFunction SOFTBEVELBORDER = new BaseFunction("softbevelborder") {
 		@Override public String[] getKeywords(int paramsId, int paramId) {
 			if (paramId == 0) return new String[] {"lowered", "raised"};
 			return null;
@@ -334,6 +352,10 @@ public class SwingFunctions {
 			{"type", "highlight", "shadow"},
 			{"type", "highlightOuter", "highlightInner", "shadowOuter", "shadowInner"}
 		};}
+
+		@Override public Class getReturn() {
+			return Border.class;
+		}
 
 		@Override public Object process(List<Object> params) {
 			String typeStr = (String) params.get(0);
@@ -362,9 +384,7 @@ public class SwingFunctions {
 		}
 	};
 
-	public static class CompoundBorderFunction extends BaseFunction {
-		public CompoundBorderFunction() {super("compoundborder");}
-
+	public static final StyleFunction COMPOUNDBORDER = new BaseFunction("compoundborder") {
 		@Override public Class[][] getParams() {return new Class[][] {
 			{},
 			{Border.class, Border.class}
@@ -377,6 +397,10 @@ public class SwingFunctions {
 
 		@Override public boolean canBeNull(int paramsId, int paramId) {
 			return true;
+		}
+
+		@Override public Class getReturn() {
+			return Border.class;
 		}
 
 		@Override public Object process(List<Object> params) {
@@ -395,9 +419,7 @@ public class SwingFunctions {
 		}
 	};
 
-	public static class DashedBorderFunction extends BaseFunction {
-		public DashedBorderFunction() {super("dashedborder");}
-
+	public static final StyleFunction DASHEDBORDER = new BaseFunction("dashedborder") {
 		@Override public Class[][] getParams() {return new Class[][] {
 			{Paint.class},
 			{Paint.class, Number.class, Number.class},
@@ -412,6 +434,10 @@ public class SwingFunctions {
 
 		@Override public boolean canBeNull(int paramsId, int paramId) {
 			return paramId == 0;
+		}
+
+		@Override public Class getReturn() {
+			return Border.class;
 		}
 
 		@Override public Object process(List<Object> params) {
@@ -441,9 +467,7 @@ public class SwingFunctions {
 		}
 	};
 
-	public static class EtchedBorderFunction extends BaseFunction {
-		public EtchedBorderFunction() {super("etchedborder");}
-
+	public static final StyleFunction ETCHEDBORDER = new BaseFunction("etchedborder") {
 		@Override public Class[][] getParams() {return new Class[][] {
 			{},
 			{Integer.class},
@@ -460,6 +484,10 @@ public class SwingFunctions {
 
 		@Override public boolean canBeNull(int paramsId, int paramId) {
 			return paramId == 0;
+		}
+
+		@Override public Class getReturn() {
+			return Border.class;
 		}
 
 		@Override public Object process(List<Object> params) {
@@ -490,9 +518,7 @@ public class SwingFunctions {
 		}
 	};
 
-	public static class TitledBorderFunction extends BaseFunction {
-		public TitledBorderFunction() {super("titledborder");}
-
+	public static final StyleFunction TITLEDBORDER = new BaseFunction("titledborder") {
 		@Override public Class[][] getParams() {return new Class[][] {
 			{Border.class},
 			{String.class},
@@ -513,6 +539,10 @@ public class SwingFunctions {
 
 		@Override public boolean canBeNull(int paramsId, int paramId) {
 			return paramId == 0;
+		}
+
+		@Override public Class getReturn() {
+			return Border.class;
 		}
 
 		@Override public Object process(List<Object> params) {

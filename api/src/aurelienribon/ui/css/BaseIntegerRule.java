@@ -15,6 +15,6 @@ public class BaseIntegerRule extends BaseRule {
 
 	@Override
 	public String[][] getParamsNames() {
-		return new String[][] {{"value"}};
+		return new String[][] {{"i"}};
 	}
 }

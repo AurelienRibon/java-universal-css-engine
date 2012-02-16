@@ -1,5 +1,6 @@
-package aurelienribon.ui.css;
+package aurelienribon.ui.css.swing;
 
+import aurelienribon.ui.css.BaseRule;
 import java.awt.Color;
 
 /**
@@ -17,6 +18,6 @@ public class BaseColorRule extends BaseRule {
 
 	@Override
 	public String[][] getParamsNames() {
-		return new String[][] {{"value"}};
+		return new String[][] {{"color"}};
 	}
 }
