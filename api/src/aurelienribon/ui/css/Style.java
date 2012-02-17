@@ -11,6 +11,67 @@ import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
 
 /**
+ * The CSS Style engine lets you easily apply any kind of parameter to your
+ * objects, using CSS stylesheets. It is not directly linked with any
+ * technology such as Swing, and therefore can be used with any kind of object,
+ * being UI components, business models, or game elements.
+ * <p/>
+ *
+ * The engine depends on three main properties: rules, functions, and
+ * processors. CSS stylesheets are composed of classes, made of rules applied to
+ * one or more selectors.
+ *
+ * <pre>
+ * selector1, selector2 {
+ *     rule: params;
+ * }
+ * </pre>
+ *
+ * <b>Selector</b>: a selector identifies a target object, either by its java
+ * class (with package '.' separators replaced by '-' to match CSS convention),
+ * or by a registered className (in CSS terms, like ".myClass"). A selector
+ * may consist of multiple cascaded selectors (like ".class1 .class2 .class3").
+ * <p/>
+ *
+ * <b>Rules</b>: a rule takes one or more parameters, separated by whitespaces.
+ * It may take different numbers of parameters. A rule is global, so it does
+ * nothing on its own: the processing behavior is managed by the target.
+ * Therefore, a rule can be treated differently by different targets, or
+ * even skipped if not relevant for a given target (but its children may
+ * use it, so its never totally irrelevant).
+ * <p/>
+ *
+ * <b>Functions</b>:a function takes one or more parameters, separated by
+ * whitespaces. It may take different numbers of parameters. A function defines
+ * a process, and always returns something. Therefore, a function can be used as
+ * a parameter to a rule, or to another function.
+ * <p/>
+ *
+ * <b>Processors</b>: a processor acts directly on a target according to the
+ * rules given to it, and their parameters. Note that upon applying a style,
+ * the targets of your application will be sent to every registered processors.
+ * Therefore, a processor should return immediatly if a target is not of a type
+ * it was built to handle.
+ * <p/>
+ *
+ * Example:
+ * <pre>
+ * /* These rules will be applied to every button * /
+ *
+ * javax-swing-JButton {
+ *     -swing-foreground: #000000;
+ *     -swing-background: #FFFFFF;
+ * }
+ *
+ * /* This rule will be applied to every object registered
+ *  * with the ".redLabel" classname, but only if it is a
+ *  * child of a panel. * /
+ *
+ * javax-swing-JPanel .redLabel {
+ *     -swing-foreground: #FF0000;
+ * }
+ * </pre>
+ *
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
 public class Style {
