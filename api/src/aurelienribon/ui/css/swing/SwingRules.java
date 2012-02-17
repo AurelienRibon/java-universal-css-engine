@@ -1,7 +1,6 @@
 package aurelienribon.ui.css.swing;
 
 import aurelienribon.ui.css.*;
-import java.awt.Color;
 import java.awt.Font;
 import java.net.URL;
 import javax.swing.Icon;

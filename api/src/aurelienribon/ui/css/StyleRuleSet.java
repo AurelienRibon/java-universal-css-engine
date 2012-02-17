@@ -71,7 +71,7 @@ public class StyleRuleSet {
 
 	private boolean isLastSelectorValid(String selector, Object target) {
 		if (selector.startsWith(".")) {
-			String className = Style.getRegisteredTargetClass(target);
+			String className = Style.getRegisteredTargetClassName(target);
 			return className != null && className.equals(selector);
 
 		} else {

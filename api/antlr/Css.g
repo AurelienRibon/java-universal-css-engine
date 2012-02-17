@@ -14,7 +14,6 @@ grammar Css;
 @header {
 	package aurelienribon.ui.css;
 	
-	import java.awt.Color;
 	import java.util.List;
 	import java.util.ArrayList;
 	import java.util.Map;
@@ -34,6 +33,16 @@ grammar Css;
 		public Function(String name, List<Object> params) {
 			this.name = name;
 			this.params = params;
+		}
+	}
+	
+	public class Color {
+		public final int r, g, b, a;
+		public Color(int r, int g, int b, int a) {
+			this.r = r;
+			this.g = g;
+			this.b = b;
+			this.a = a;
 		}
 	}
 	

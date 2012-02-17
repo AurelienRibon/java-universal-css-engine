@@ -1,8 +1,7 @@
-// $ANTLR 3.4 C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g 2012-02-15 13:07:32
+// $ANTLR 3.4 C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g 2012-02-17 09:20:52
 
 	package aurelienribon.ui.css;
 	
-	import java.awt.Color;
 	import java.util.List;
 	import java.util.ArrayList;
 	import java.util.Map;
@@ -74,6 +73,16 @@ public class CssParser extends Parser {
     		}
     	}
     	
+    	public class Color {
+    		public final int r, g, b, a;
+    		public Color(int r, int g, int b, int a) {
+    			this.r = r;
+    			this.g = g;
+    			this.b = b;
+    			this.a = a;
+    		}
+    	}
+    	
     	private void put(Map<String, Map<String, List<Object>>> classes, List<String> sels, Map<String, List<Object>> rules) {
     		for (String sel : sels) if (!classes.containsKey(sel)) classes.put(sel, new HashMap<String, List<Object>>());
     		for (String sel : sels) classes.get(sel).putAll(rules);
@@ -100,7 +109,7 @@ public class CssParser extends Parser {
 
 
     // $ANTLR start "stylesheet"
-    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:64:1: stylesheet returns [Map<String, Map<String, List<Object>>> classes] : ( styleclass )* ;
+    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:73:1: stylesheet returns [Map<String, Map<String, List<Object>>> classes] : ( styleclass )* ;
     public final Map<String, Map<String, List<Object>>> stylesheet() throws RecognitionException {
         Map<String, Map<String, List<Object>>> classes = null;
 
@@ -110,10 +119,10 @@ public class CssParser extends Parser {
 
         classes = new LinkedHashMap<String, Map<String, List<Object>>>();
         try {
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:66:2: ( ( styleclass )* )
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:66:4: ( styleclass )*
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:75:2: ( ( styleclass )* )
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:75:4: ( styleclass )*
             {
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:66:4: ( styleclass )*
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:75:4: ( styleclass )*
             loop1:
             do {
                 int alt1=2;
@@ -126,7 +135,7 @@ public class CssParser extends Parser {
 
                 switch (alt1) {
             	case 1 :
-            	    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:66:5: styleclass
+            	    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:75:5: styleclass
             	    {
             	    pushFollow(FOLLOW_styleclass_in_stylesheet51);
             	    styleclass1=styleclass();
@@ -168,7 +177,7 @@ public class CssParser extends Parser {
 
 
     // $ANTLR start "styleclass"
-    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:70:1: styleclass returns [List<String> sels, Map<String, List<Object>> rules] : selector_list_list '{' ( rule )* '}' ;
+    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:79:1: styleclass returns [List<String> sels, Map<String, List<Object>> rules] : selector_list_list '{' ( rule )* '}' ;
     public final CssParser.styleclass_return styleclass() throws RecognitionException {
         CssParser.styleclass_return retval = new CssParser.styleclass_return();
         retval.start = input.LT(1);
@@ -181,8 +190,8 @@ public class CssParser extends Parser {
 
         retval.rules = new LinkedHashMap<String, List<Object>>();
         try {
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:72:2: ( selector_list_list '{' ( rule )* '}' )
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:72:4: selector_list_list '{' ( rule )* '}'
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:81:2: ( selector_list_list '{' ( rule )* '}' )
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:81:4: selector_list_list '{' ( rule )* '}'
             {
             pushFollow(FOLLOW_selector_list_list_in_styleclass79);
             selector_list_list2=selector_list_list();
@@ -194,7 +203,7 @@ public class CssParser extends Parser {
 
             retval.sels = selector_list_list2;
 
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:73:3: ( rule )*
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:82:3: ( rule )*
             loop2:
             do {
                 int alt2=2;
@@ -207,7 +216,7 @@ public class CssParser extends Parser {
 
                 switch (alt2) {
             	case 1 :
-            	    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:73:4: rule
+            	    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:82:4: rule
             	    {
             	    pushFollow(FOLLOW_rule_in_styleclass88);
             	    rule3=rule();
@@ -249,7 +258,7 @@ public class CssParser extends Parser {
 
 
     // $ANTLR start "selector_list_list"
-    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:77:1: selector_list_list returns [List<String> sels] : ss1= selector_list ( ',' ss2= selector_list )* ;
+    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:86:1: selector_list_list returns [List<String> sels] : ss1= selector_list ( ',' ss2= selector_list )* ;
     public final List<String> selector_list_list() throws RecognitionException {
         List<String> sels = null;
 
@@ -261,8 +270,8 @@ public class CssParser extends Parser {
 
         sels = new ArrayList<String>();
         try {
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:79:2: (ss1= selector_list ( ',' ss2= selector_list )* )
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:79:4: ss1= selector_list ( ',' ss2= selector_list )*
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:88:2: (ss1= selector_list ( ',' ss2= selector_list )* )
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:88:4: ss1= selector_list ( ',' ss2= selector_list )*
             {
             pushFollow(FOLLOW_selector_list_in_selector_list_list138);
             ss1=selector_list();
@@ -272,7 +281,7 @@ public class CssParser extends Parser {
 
             sels.add(ss1);
 
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:80:3: ( ',' ss2= selector_list )*
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:89:3: ( ',' ss2= selector_list )*
             loop3:
             do {
                 int alt3=2;
@@ -285,7 +294,7 @@ public class CssParser extends Parser {
 
                 switch (alt3) {
             	case 1 :
-            	    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:80:4: ',' ss2= selector_list
+            	    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:89:4: ',' ss2= selector_list
             	    {
             	    match(input,16,FOLLOW_16_in_selector_list_list150); 
 
@@ -324,7 +333,7 @@ public class CssParser extends Parser {
 
 
     // $ANTLR start "selector_list"
-    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:84:1: selector_list returns [String sel] : ( selector )+ ;
+    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:93:1: selector_list returns [String sel] : ( selector )+ ;
     public final String selector_list() throws RecognitionException {
         String sel = null;
 
@@ -334,10 +343,10 @@ public class CssParser extends Parser {
 
         sel = "";
         try {
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:87:2: ( ( selector )+ )
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:87:4: ( selector )+
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:96:2: ( ( selector )+ )
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:96:4: ( selector )+
             {
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:87:4: ( selector )+
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:96:4: ( selector )+
             int cnt4=0;
             loop4:
             do {
@@ -351,7 +360,7 @@ public class CssParser extends Parser {
 
                 switch (alt4) {
             	case 1 :
-            	    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:87:5: selector
+            	    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:96:5: selector
             	    {
             	    pushFollow(FOLLOW_selector_in_selector_list189);
             	    selector4=selector();
@@ -396,14 +405,14 @@ public class CssParser extends Parser {
 
 
     // $ANTLR start "selector"
-    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:91:1: selector : ( '.' ID | ID );
+    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:100:1: selector : ( '.' ID | ID );
     public final CssParser.selector_return selector() throws RecognitionException {
         CssParser.selector_return retval = new CssParser.selector_return();
         retval.start = input.LT(1);
 
 
         try {
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:92:2: ( '.' ID | ID )
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:101:2: ( '.' ID | ID )
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -422,7 +431,7 @@ public class CssParser extends Parser {
             }
             switch (alt5) {
                 case 1 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:92:4: '.' ID
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:101:4: '.' ID
                     {
                     match(input,17,FOLLOW_17_in_selector208); 
 
@@ -431,7 +440,7 @@ public class CssParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:93:4: ID
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:102:4: ID
                     {
                     match(input,ID,FOLLOW_ID_in_selector215); 
 
@@ -463,7 +472,7 @@ public class CssParser extends Parser {
 
 
     // $ANTLR start "rule"
-    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:96:1: rule returns [String key, List<Object> values] : ID ':' ( rule_value )+ ';' ;
+    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:105:1: rule returns [String key, List<Object> values] : ID ':' ( rule_value )+ ';' ;
     public final CssParser.rule_return rule() throws RecognitionException {
         CssParser.rule_return retval = new CssParser.rule_return();
         retval.start = input.LT(1);
@@ -475,8 +484,8 @@ public class CssParser extends Parser {
 
         retval.values = new ArrayList<Object>();
         try {
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:98:2: ( ID ':' ( rule_value )+ ';' )
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:98:4: ID ':' ( rule_value )+ ';'
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:107:2: ( ID ':' ( rule_value )+ ';' )
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:107:4: ID ':' ( rule_value )+ ';'
             {
             ID5=(Token)match(input,ID,FOLLOW_ID_in_rule236); 
 
@@ -484,7 +493,7 @@ public class CssParser extends Parser {
 
             retval.key = (ID5!=null?ID5.getText():null);
 
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:99:3: ( rule_value )+
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:108:3: ( rule_value )+
             int cnt6=0;
             loop6:
             do {
@@ -498,7 +507,7 @@ public class CssParser extends Parser {
 
                 switch (alt6) {
             	case 1 :
-            	    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:99:4: rule_value
+            	    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:108:4: rule_value
             	    {
             	    pushFollow(FOLLOW_rule_value_in_rule250);
             	    rule_value6=rule_value();
@@ -544,7 +553,7 @@ public class CssParser extends Parser {
 
 
     // $ANTLR start "rule_value"
-    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:103:1: rule_value returns [Object o] : ( function | param );
+    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:112:1: rule_value returns [Object o] : ( function | param );
     public final Object rule_value() throws RecognitionException {
         Object o = null;
 
@@ -555,7 +564,7 @@ public class CssParser extends Parser {
 
 
         try {
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:104:2: ( function | param )
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:113:2: ( function | param )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -588,7 +597,7 @@ public class CssParser extends Parser {
             }
             switch (alt7) {
                 case 1 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:104:4: function
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:113:4: function
                     {
                     pushFollow(FOLLOW_function_in_rule_value275);
                     function7=function();
@@ -601,7 +610,7 @@ public class CssParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:105:4: param
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:114:4: param
                     {
                     pushFollow(FOLLOW_param_in_rule_value282);
                     param8=param();
@@ -631,7 +640,7 @@ public class CssParser extends Parser {
 
 
     // $ANTLR start "function"
-    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:108:1: function returns [Function f] : ID '(' (f1= function_param ( ',' f2= function_param )* )? ')' ;
+    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:117:1: function returns [Function f] : ID '(' (f1= function_param ( ',' f2= function_param )* )? ')' ;
     public final Function function() throws RecognitionException {
         Function f = null;
 
@@ -644,14 +653,14 @@ public class CssParser extends Parser {
 
         List<Object> params = new ArrayList<Object>();
         try {
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:110:2: ( ID '(' (f1= function_param ( ',' f2= function_param )* )? ')' )
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:110:4: ID '(' (f1= function_param ( ',' f2= function_param )* )? ')'
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:119:2: ( ID '(' (f1= function_param ( ',' f2= function_param )* )? ')' )
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:119:4: ID '(' (f1= function_param ( ',' f2= function_param )* )? ')'
             {
             ID9=(Token)match(input,ID,FOLLOW_ID_in_function309); 
 
             match(input,14,FOLLOW_14_in_function311); 
 
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:111:3: (f1= function_param ( ',' f2= function_param )* )?
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:120:3: (f1= function_param ( ',' f2= function_param )* )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -660,7 +669,7 @@ public class CssParser extends Parser {
             }
             switch (alt9) {
                 case 1 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:111:4: f1= function_param ( ',' f2= function_param )*
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:120:4: f1= function_param ( ',' f2= function_param )*
                     {
                     pushFollow(FOLLOW_function_param_in_function318);
                     f1=function_param();
@@ -670,7 +679,7 @@ public class CssParser extends Parser {
 
                     params.add(f1);
 
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:112:3: ( ',' f2= function_param )*
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:121:3: ( ',' f2= function_param )*
                     loop8:
                     do {
                         int alt8=2;
@@ -683,7 +692,7 @@ public class CssParser extends Parser {
 
                         switch (alt8) {
                     	case 1 :
-                    	    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:112:4: ',' f2= function_param
+                    	    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:121:4: ',' f2= function_param
                     	    {
                     	    match(input,16,FOLLOW_16_in_function330); 
 
@@ -732,7 +741,7 @@ public class CssParser extends Parser {
 
 
     // $ANTLR start "function_param"
-    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:116:1: function_param returns [Object o] : ( function | param );
+    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:125:1: function_param returns [Object o] : ( function | param );
     public final Object function_param() throws RecognitionException {
         Object o = null;
 
@@ -743,7 +752,7 @@ public class CssParser extends Parser {
 
 
         try {
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:117:2: ( function | param )
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:126:2: ( function | param )
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -776,7 +785,7 @@ public class CssParser extends Parser {
             }
             switch (alt10) {
                 case 1 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:117:4: function
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:126:4: function
                     {
                     pushFollow(FOLLOW_function_in_function_param377);
                     function10=function();
@@ -789,7 +798,7 @@ public class CssParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:118:4: param
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:127:4: param
                     {
                     pushFollow(FOLLOW_param_in_function_param384);
                     param11=param();
@@ -819,7 +828,7 @@ public class CssParser extends Parser {
 
 
     // $ANTLR start "param"
-    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:121:1: param returns [Object o] : ( INT | FLOAT | BOOLEAN | NULL | STRING | ID | COLOR );
+    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:130:1: param returns [Object o] : ( INT | FLOAT | BOOLEAN | NULL | STRING | ID | COLOR );
     public final Object param() throws RecognitionException {
         Object o = null;
 
@@ -832,7 +841,7 @@ public class CssParser extends Parser {
         Token COLOR17=null;
 
         try {
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:122:2: ( INT | FLOAT | BOOLEAN | NULL | STRING | ID | COLOR )
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:131:2: ( INT | FLOAT | BOOLEAN | NULL | STRING | ID | COLOR )
             int alt11=7;
             switch ( input.LA(1) ) {
             case INT:
@@ -880,7 +889,7 @@ public class CssParser extends Parser {
 
             switch (alt11) {
                 case 1 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:122:4: INT
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:131:4: INT
                     {
                     INT12=(Token)match(input,INT,FOLLOW_INT_in_param405); 
 
@@ -889,7 +898,7 @@ public class CssParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:123:4: FLOAT
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:132:4: FLOAT
                     {
                     FLOAT13=(Token)match(input,FLOAT,FOLLOW_FLOAT_in_param416); 
 
@@ -898,7 +907,7 @@ public class CssParser extends Parser {
                     }
                     break;
                 case 3 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:124:4: BOOLEAN
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:133:4: BOOLEAN
                     {
                     BOOLEAN14=(Token)match(input,BOOLEAN,FOLLOW_BOOLEAN_in_param425); 
 
@@ -907,7 +916,7 @@ public class CssParser extends Parser {
                     }
                     break;
                 case 4 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:125:4: NULL
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:134:4: NULL
                     {
                     match(input,NULL,FOLLOW_NULL_in_param432); 
 
@@ -916,7 +925,7 @@ public class CssParser extends Parser {
                     }
                     break;
                 case 5 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:126:4: STRING
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:135:4: STRING
                     {
                     STRING15=(Token)match(input,STRING,FOLLOW_STRING_in_param442); 
 
@@ -925,7 +934,7 @@ public class CssParser extends Parser {
                     }
                     break;
                 case 6 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:127:4: ID
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:136:4: ID
                     {
                     ID16=(Token)match(input,ID,FOLLOW_ID_in_param450); 
 
@@ -934,7 +943,7 @@ public class CssParser extends Parser {
                     }
                     break;
                 case 7 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:128:4: COLOR
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:137:4: COLOR
                     {
                     COLOR17=(Token)match(input,COLOR,FOLLOW_COLOR_in_param462); 
 

@@ -24,9 +24,9 @@ public class MainWindow extends javax.swing.JFrame {
 		SwingStyle.init();
 		AruiStyle.init();
 
-		rulesManualArea.setText(Style.generateRulesManual());
+		rulesManualArea.setText(Style.getRulesManual());
 		rulesManualArea.setCaretPosition(0);
-		functionsManualArea.setText(Style.generateFunctionsManual());
+		functionsManualArea.setText(Style.getFunctionsManual());
 		functionsManualArea.setCaretPosition(0);
 
         initComponents();

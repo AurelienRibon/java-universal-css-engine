@@ -21,6 +21,7 @@ public class SwingUtils {
 	public static Color asColor(StyleRuleSet rs, StyleRule rule, int paramId) {
 		return (Color) rs.getParams(rule).get(paramId);
 	}
+
 	public static Paint asPaint(StyleRuleSet rs, StyleRule rule, int paramId) {
 		return (Paint) rs.getParams(rule).get(paramId);
 	}

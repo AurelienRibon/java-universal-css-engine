@@ -24,6 +24,7 @@ public class Style {
 	private static final Map<Object, String> registeredTargetsClassNames = new LinkedHashMap<Object, String>();
 	private static final List<Class> registeredSkippedClasses = new ArrayList<Class>();
 	private static final Map<Class, StyleChildrenAccessor> registeredChildrenAccessors = new HashMap<Class, StyleChildrenAccessor>();
+	private static StyleParamConverter converter;
 
 	/**
 	 * Registers a new rule to the engine.
@@ -140,6 +141,45 @@ public class Style {
 	}
 
 	/**
+	 * Unregisters a children accessor.
+	 */
+	public static void unregisterChildrenAccessor(Class parentClass) {
+		registeredChildrenAccessors.remove(parentClass);
+	}
+
+	/**
+	 * Applies a stylesheet to a target and its children, if it has a
+	 * corresponding StyleChildrenAccessor registered.
+	 */
+	public static void apply(Object target, Style style) {
+		apply(target, style, new ArrayList<String>());
+	}
+
+	/**
+	 * Applies a group of attributes to a target. It may be interesting when you
+	 * want to apply the same group of rules to some objects, directly from
+	 * a StyleProcessor for instance.
+	 */
+	public static void apply(Object target, StyleRuleSet rs) {
+		for (StyleProcessor sp : registeredProcessors) sp.process(target, rs);
+	}
+
+	/**
+	 * Sets the converter that will be used to convert special objects found
+	 * during parsing into something useable. For instance, colors can be
+	 * found in CSS files with the syntax #ABCDEF. However, since there is no
+	 * Color class in generic java packages (java.awt is not available on
+	 * Android), the engine doesn't know how to treat such syntax, and will
+	 * return an undocumented object. Therefore, you'll want to set a converter
+	 * that will translate every undocomented color into java.awt.Color class
+	 * for Swing targets for instance, or android.graphics.Color for Android
+	 * targets.
+	 */
+	public static void setParamConverter(StyleParamConverter converter) {
+		Style.converter = converter;
+	}
+
+	/**
 	 * Gets a list of every registered rules.
 	 */
 	public static List<String> getRegisteredRulesNames() {
@@ -168,40 +208,37 @@ public class Style {
 	}
 
 	/**
+	 * Gets a list of every registered processor.
+	 */
+	public static List<StyleProcessor> getRegisteredProcessors() {
+		return Collections.unmodifiableList(registeredProcessors);
+	}
+
+	/**
+	 * Gets a list of every target registered with a classname.
+	 */
+	public static List<Object> getRegisteredTargets() {
+		return Collections.unmodifiableList(new ArrayList<Object>(registeredTargetsClassNames.keySet()));
+	}
+
+	/**
 	 * Gets the className associated to the given target.
 	 */
-	public static String getRegisteredTargetClass(Object target) {
+	public static String getRegisteredTargetClassName(Object target) {
 		return registeredTargetsClassNames.get(target);
-	}
-
-	/**
-	 * Applies a stylesheet to a target and its children, if it has a
-	 * corresponding StyleChildrenAccessor registered.
-	 */
-	public static void apply(Object target, Style style) {
-		apply(target, style, new ArrayList<String>());
-	}
-
-	/**
-	 * Applies a group of attributes to a target. It may be interesting when you
-	 * want to apply the same group of rules to some objects, directly from
-	 * a StyleProcessor for instance.
-	 */
-	public static void apply(Object target, StyleRuleSet rs) {
-		for (StyleProcessor sp : registeredProcessors) sp.process(target, rs);
 	}
 
 	/**
 	 * Gets the rules manual.
 	 */
-	public static String generateRulesManual() {
+	public static String getRulesManual() {
 		return generateManual(registeredRules.values());
 	}
 
 	/**
 	 * Gets the functions manual.
 	 */
-	public static String generateFunctionsManual() {
+	public static String getFunctionsManual() {
 		return generateManual(registeredFunctions.values());
 	}
 
@@ -311,6 +348,11 @@ public class Style {
 	}
 
 	private static Object evaluateParam(Object param) throws StyleException {
+		if (param instanceof CssParser.Color) {
+			CssParser.Color c = (CssParser.Color) param;
+			if (converter != null) return converter.convertColor(c.r, c.g, c.b, c.a);
+		}
+
 		if (param instanceof CssParser.Function) {
 			CssParser.Function func = (CssParser.Function) param;
 			StyleFunction regFunc = registeredFunctions.get(func.name);
