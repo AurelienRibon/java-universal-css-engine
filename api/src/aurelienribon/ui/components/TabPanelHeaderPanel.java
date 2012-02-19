@@ -123,31 +123,24 @@ class TabPanelHeaderPanel extends JLayeredPane {
 
 		int width = 0;
 
-		switch (layout) {
-			case TabPanel.LAYOUT_STACK:
-				for (int i=0; i<subPanels.size(); i++) {
-					TabPanelHeaderSubPanel subPanel = subPanels.get(i);
-					setLayer(subPanel, subPanel.getModel().selected ? SELECTED_LAYER : i);
+		for (int i=0; i<subPanels.size(); i++) {
+			TabPanelHeaderSubPanel subPanel = subPanels.get(i);
+			setLayer(subPanel, subPanel.getModel().selected ? SELECTED_LAYER : i);
 
+			switch (layout) {
+				case TabPanel.LAYOUT_STACK:
 					subPanel.setBounds(width, 0, subPanel.getPreferredSize().width, MAX_HEIGHT);
 					subPanel.reload();
-
 					width += subPanel.getPreferredSize().width - OVERLAP;
-				}
-				break;
+					break;
 
-			case TabPanel.LAYOUT_GRID:
-				for (int i=0; i<subPanels.size(); i++) {
-					TabPanelHeaderSubPanel subPanel = subPanels.get(i);
-					setLayer(subPanel, subPanel.getModel().selected ? SELECTED_LAYER : i);
-
+				case TabPanel.LAYOUT_GRID:
 					int w = i < subPanels.size()-1 ? getWidth()/subPanels.size() : getWidth()-width;
 					subPanel.setBounds(width, 0, w, MAX_HEIGHT);
 					subPanel.reload();
-
 					width += subPanel.getWidth() - OVERLAP;
-				}
-				break;
+					break;
+			}
 		}
 	}
 
