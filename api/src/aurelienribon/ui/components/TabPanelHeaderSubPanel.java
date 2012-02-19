@@ -1,8 +1,8 @@
 package aurelienribon.ui.components;
 
 import aurelienribon.ui.components.TabPanelModel.TabModel;
-import aurelienribon.ui.css.StyleRuleSet;
 import aurelienribon.ui.css.StyleProcessor;
+import aurelienribon.ui.css.StyleRuleSet;
 import aurelienribon.ui.css.swing.SwingRules;
 import aurelienribon.ui.css.swing.SwingUtils;
 import aurelienribon.ui.utils.PaintUtils;
@@ -20,15 +20,15 @@ class TabPanelHeaderSubPanel extends JComponent {
 		@Override public void process(Object target, StyleRuleSet rs) {
 			if (target instanceof TabPanelHeaderSubPanel) {
 				TabPanelHeaderSubPanel t = (TabPanelHeaderSubPanel) target;
-				if (rs.contains(SwingRules.FOREGROUND)) t.foreground = SwingUtils.asColor(rs, SwingRules.FOREGROUND, 0);
-				if (rs.contains(AruiRules.FOREGROUND_SELECTED)) t.foregroundSelected = SwingUtils.asColor(rs, AruiRules.FOREGROUND_SELECTED, 0);
-				if (rs.contains(AruiRules.FOREGROUND_MOUSEOVER)) t.foregroundMouseOver = SwingUtils.asColor(rs, AruiRules.FOREGROUND_MOUSEOVER, 0);
-				if (rs.contains(AruiRules.STROKE)) t.stroke = SwingUtils.asColor(rs, AruiRules.STROKE, 0);
-				if (rs.contains(AruiRules.STROKE_SELECTED)) t.strokeSelected = SwingUtils.asColor(rs, AruiRules.STROKE_SELECTED, 0);
-				if (rs.contains(AruiRules.STROKE_MOUSEOVER)) t.strokeMouseOver = SwingUtils.asColor(rs, AruiRules.STROKE_MOUSEOVER, 0);
-				if (rs.contains(AruiRules.FILL)) t.fill = SwingUtils.asPaint(rs, AruiRules.FILL, 0);
-				if (rs.contains(AruiRules.FILL_SELECTED)) t.fillSelected = SwingUtils.asPaint(rs, AruiRules.FILL_SELECTED, 0);
-				if (rs.contains(AruiRules.FILL_MOUSEOVER)) t.fillMouseOver = SwingUtils.asPaint(rs, AruiRules.FILL_MOUSEOVER, 0);
+				if (rs.contains(SwingRules.FOREGROUND)) t.foreground = SwingUtils.asColor(rs.getParams(SwingRules.FOREGROUND), 0);
+				if (rs.contains(AruiRules.FOREGROUND_SELECTED)) t.foregroundSelected = SwingUtils.asColor(rs.getParams(AruiRules.FOREGROUND_SELECTED), 0);
+				if (rs.contains(AruiRules.FOREGROUND_MOUSEOVER)) t.foregroundMouseOver = SwingUtils.asColor(rs.getParams(AruiRules.FOREGROUND_MOUSEOVER), 0);
+				if (rs.contains(AruiRules.STROKE)) t.stroke = SwingUtils.asColor(rs.getParams(AruiRules.STROKE), 0);
+				if (rs.contains(AruiRules.STROKE_SELECTED)) t.strokeSelected = SwingUtils.asColor(rs.getParams(AruiRules.STROKE_SELECTED), 0);
+				if (rs.contains(AruiRules.STROKE_MOUSEOVER)) t.strokeMouseOver = SwingUtils.asColor(rs.getParams(AruiRules.STROKE_MOUSEOVER), 0);
+				if (rs.contains(AruiRules.FILL)) t.fill = SwingUtils.asPaint(rs.getParams(AruiRules.FILL), 0);
+				if (rs.contains(AruiRules.FILL_SELECTED)) t.fillSelected = SwingUtils.asPaint(rs.getParams(AruiRules.FILL_SELECTED), 0);
+				if (rs.contains(AruiRules.FILL_MOUSEOVER)) t.fillMouseOver = SwingUtils.asPaint(rs.getParams(AruiRules.FILL_MOUSEOVER), 0);
 				t.reload();
 			}
 		}

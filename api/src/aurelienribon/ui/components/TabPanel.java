@@ -2,8 +2,8 @@ package aurelienribon.ui.components;
 
 import aurelienribon.ui.components.TabPanelModel.TabModel;
 import aurelienribon.ui.css.Style;
-import aurelienribon.ui.css.StyleRuleSet;
 import aurelienribon.ui.css.StyleProcessor;
+import aurelienribon.ui.css.StyleRuleSet;
 import aurelienribon.ui.css.swing.SwingUtils;
 import java.awt.*;
 import java.util.HashMap;
@@ -21,7 +21,7 @@ public class TabPanel extends JPanel {
 				TabPanel t = (TabPanel) target;
 
 				if (rs.contains(AruiRules.STROKE)) {
-					t.stroke = SwingUtils.asColor(rs, AruiRules.STROKE, 0);
+					t.stroke = SwingUtils.asColor(rs.getParams(AruiRules.STROKE), 0);
 					t.cardPanel.setBorder(new MatteBorder(0, 1, 1, 1, t.stroke));
 				}
 

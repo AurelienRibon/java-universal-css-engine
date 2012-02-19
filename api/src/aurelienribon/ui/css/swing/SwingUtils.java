@@ -1,7 +1,5 @@
 package aurelienribon.ui.css.swing;
 
-import aurelienribon.ui.css.StyleRule;
-import aurelienribon.ui.css.StyleRuleSet;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Insets;
@@ -18,16 +16,19 @@ import javax.swing.border.Border;
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
 public class SwingUtils {
-	public static Color asColor(StyleRuleSet rs, StyleRule rule, int paramId) {
-		return (Color) rs.getParams(rule).get(paramId);
+	public static Color asColor(List<Object> params, int paramId) {
+		return (Color) params.get(paramId);
 	}
 
-	public static Paint asPaint(StyleRuleSet rs, StyleRule rule, int paramId) {
-		return (Paint) rs.getParams(rule).get(paramId);
+	public static Paint asPaint(List<Object> params, int paramId) {
+		return (Paint) params.get(paramId);
 	}
 
-	public static Insets asInsets(StyleRuleSet rs, StyleRule rule) {
-		List<Object> params = rs.getParams(rule);
+	public static Border asBorder(List<Object> params, int paramId) {
+		return (Border) params.get(paramId);
+	}
+
+	public static Insets asInsets(List<Object> params) {
 		if (params.get(0) == null) return null;
 
 		int top, left, bottom, right;
@@ -55,8 +56,8 @@ public class SwingUtils {
 		return null;
 	}
 
-	public static int asHAlign(StyleRuleSet rs, StyleRule rule, int paramId) {
-		String val = (String) rs.getParams(rule).get(paramId);
+	public static int asHAlign(List<Object> params, int paramId) {
+		String val = (String) params.get(paramId);
 
 		if (val.equals("leading")) return SwingConstants.LEADING;
 		else if (val.equals("trailing")) return SwingConstants.TRAILING;
@@ -68,8 +69,8 @@ public class SwingUtils {
 		return -1;
 	}
 
-	public static int asVAlign(StyleRuleSet rs, StyleRule rule, int paramId) {
-		String val = (String) rs.getParams(rule).get(paramId);
+	public static int asVAlign(List<Object> params, int paramId) {
+		String val = (String) params.get(paramId);
 
 		if (val.equals("bottom")) return AbstractButton.BOTTOM;
 		else if (val.equals("top")) return AbstractButton.TOP;
@@ -79,8 +80,7 @@ public class SwingUtils {
 		return -1;
 	}
 
-	public static Font asFont(StyleRuleSet rs, StyleRule rule) {
-		List<Object> params = rs.getParams(rule);
+	public static Font asFont(List<Object> params) {
 		if (params.get(0) instanceof Font) return (Font) params.get(0);
 
 		String p1 = (String) params.get(0);
@@ -97,8 +97,8 @@ public class SwingUtils {
 		return new Font(p1, style, p3);
 	}
 
-	public static Icon asIcon(StyleRuleSet rs, StyleRule rule, int paramId) {
-		Object param = rs.getParams(rule).get(paramId);
+	public static Icon asIcon(List<Object> params, int paramId) {
+		Object param = params.get(paramId);
 
 		if (param instanceof URL) return new ImageIcon((URL) param);
 		if (param instanceof String) return new ImageIcon((String) param);
@@ -107,9 +107,5 @@ public class SwingUtils {
 
 		assert false;
 		return null;
-	}
-
-	public static Border asBorder(StyleRuleSet rs, StyleRule rule, int paramId) {
-		return (Border) rs.getParams(rule).get(paramId);
 	}
 }

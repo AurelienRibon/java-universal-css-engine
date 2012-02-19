@@ -1,7 +1,7 @@
 package aurelienribon.ui.components;
 
-import aurelienribon.ui.css.StyleRuleSet;
 import aurelienribon.ui.css.StyleProcessor;
+import aurelienribon.ui.css.StyleRuleSet;
 import aurelienribon.ui.css.swing.SwingUtils;
 import aurelienribon.ui.utils.PaintUtils;
 import java.awt.*;
@@ -17,14 +17,14 @@ public class Button extends JButton {
 		@Override public void process(Object target, StyleRuleSet rs) {
 			if (target instanceof Button) {
 				Button t = (Button) target;
-				if (rs.contains(AruiRules.FOREGROUND_MOUSEDOWN)) t.foregroundMouseDown = SwingUtils.asColor(rs, AruiRules.FOREGROUND_MOUSEDOWN, 0);
-				if (rs.contains(AruiRules.FOREGROUND_MOUSEOVER)) t.foregroundMouseOver = SwingUtils.asColor(rs, AruiRules.FOREGROUND_MOUSEOVER, 0);
-				if (rs.contains(AruiRules.STROKE)) t.stroke = SwingUtils.asColor(rs, AruiRules.STROKE, 0);
-				if (rs.contains(AruiRules.STROKE_MOUSEDOWN)) t.strokeMouseDown = SwingUtils.asColor(rs, AruiRules.STROKE_MOUSEDOWN, 0);
-				if (rs.contains(AruiRules.STROKE_MOUSEOVER)) t.strokeMouseOver = SwingUtils.asColor(rs, AruiRules.STROKE_MOUSEOVER, 0);
-				if (rs.contains(AruiRules.FILL)) t.fill = SwingUtils.asPaint(rs, AruiRules.FILL, 0);
-				if (rs.contains(AruiRules.FILL_MOUSEDOWN)) t.fillMouseDown = SwingUtils.asPaint(rs, AruiRules.FILL_MOUSEDOWN, 0);
-				if (rs.contains(AruiRules.FILL_MOUSEOVER)) t.fillMouseOver = SwingUtils.asPaint(rs, AruiRules.FILL_MOUSEOVER, 0);
+				if (rs.contains(AruiRules.FOREGROUND_MOUSEDOWN)) t.foregroundMouseDown = SwingUtils.asColor(rs.getParams(AruiRules.FOREGROUND_MOUSEDOWN), 0);
+				if (rs.contains(AruiRules.FOREGROUND_MOUSEOVER)) t.foregroundMouseOver = SwingUtils.asColor(rs.getParams(AruiRules.FOREGROUND_MOUSEOVER), 0);
+				if (rs.contains(AruiRules.STROKE)) t.stroke = SwingUtils.asColor(rs.getParams(AruiRules.STROKE), 0);
+				if (rs.contains(AruiRules.STROKE_MOUSEDOWN)) t.strokeMouseDown = SwingUtils.asColor(rs.getParams(AruiRules.STROKE_MOUSEDOWN), 0);
+				if (rs.contains(AruiRules.STROKE_MOUSEOVER)) t.strokeMouseOver = SwingUtils.asColor(rs.getParams(AruiRules.STROKE_MOUSEOVER), 0);
+				if (rs.contains(AruiRules.FILL)) t.fill = SwingUtils.asPaint(rs.getParams(AruiRules.FILL), 0);
+				if (rs.contains(AruiRules.FILL_MOUSEDOWN)) t.fillMouseDown = SwingUtils.asPaint(rs.getParams(AruiRules.FILL_MOUSEDOWN), 0);
+				if (rs.contains(AruiRules.FILL_MOUSEOVER)) t.fillMouseOver = SwingUtils.asPaint(rs.getParams(AruiRules.FILL_MOUSEOVER), 0);
 				if (rs.contains(AruiRules.CORNERRADIUS)) t.cornerRadius = rs.asInteger(AruiRules.CORNERRADIUS, 0);
 				t.reload();
 			}

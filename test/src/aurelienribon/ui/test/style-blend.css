@@ -1,26 +1,12 @@
 /**
- * Style based on the colors of the Microsoft Expression Blend editor
+ * Style based on the colors of the Microsoft Expression Blend editor.
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
 
-javax-swing-JScrollPane {
-	-swing-border: null;
-}
-
-javax-swing-JButton {
+aurelienribon-ui-components-Button {
 	-swing-horizontalalignment: center;
 	-swing-verticalalignment: center;
 	-swing-margin: 3 5;
-}
-
-javax-swing-JTextArea {
-	-swing-font: "Monospaced" plain 11;
-	-swing-tabsize: 4;
-	-swing-background: #CCC;
-	-swing-foreground: #000;
-}
-
-aurelienribon-ui-components-Button {
 	-swing-foreground: #FFF;
 	-arui-foreground-mouseover: #000;
 	-arui-foreground-mousedown: #FFF;
@@ -34,6 +20,8 @@ aurelienribon-ui-components-Button {
 }
 
 aurelienribon-ui-components-TabPanel {
+	-swing-background: #727272;
+	-swing-foreground: #FFF;
 	-arui-foreground-selected: #FFF;
 	-arui-foreground-mouseover: #FFF;
 	-arui-stroke: #444;
@@ -44,11 +32,22 @@ aurelienribon-ui-components-TabPanel {
 	-arui-fill-selected: #595959;
 }
 
+javax-swing-JScrollPane {
+	-swing-border: null;
+}
+
+javax-swing-JTextArea {
+	-swing-font: "Monospaced" plain 11;
+	-swing-tabsize: 4;
+	-swing-background: #CCC;
+	-swing-foreground: #000;
+}
+
 .rootPanel {
 	-swing-background: #282828;
 }
 
-.styleControlPanel, .tabPanelControlPanel, aurelienribon-ui-components-TabPanel {
+.styleControlPanel, .tabPanelControlPanel {
 	-swing-background: #727272;
 	-swing-foreground: #FFF;
 }

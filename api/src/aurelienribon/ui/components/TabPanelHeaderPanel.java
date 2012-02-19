@@ -2,8 +2,8 @@ package aurelienribon.ui.components;
 
 import aurelienribon.ui.components.TabPanelModel.TabModel;
 import aurelienribon.ui.css.Style;
-import aurelienribon.ui.css.StyleRuleSet;
 import aurelienribon.ui.css.StyleProcessor;
+import aurelienribon.ui.css.StyleRuleSet;
 import aurelienribon.ui.css.swing.SwingUtils;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
@@ -21,7 +21,7 @@ class TabPanelHeaderPanel extends JLayeredPane {
 			if (target instanceof TabPanelHeaderPanel) {
 				TabPanelHeaderPanel t = (TabPanelHeaderPanel) target;
 
-				if (rs.contains(AruiRules.STROKE)) t.tabStrokeColor = SwingUtils.asColor(rs, AruiRules.STROKE, 0);
+				if (rs.contains(AruiRules.STROKE)) t.tabStrokeColor = SwingUtils.asColor(rs.getParams(AruiRules.STROKE), 0);
 				t.styleAttrs = rs;
 
 				for (TabPanelHeaderSubPanel p : t.subPanels) Style.apply(p, rs);
