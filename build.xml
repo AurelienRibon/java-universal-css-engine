@@ -32,6 +32,9 @@
 		<local name="name" />
 		<property name="dir" value="${api.dir}" />
 		<property name="name" value="${api.name}" />
+
+		<copy todir="temp/src/"><fileset dir="${dir}/src/" /></copy>
+
 		<javac destdir="temp/bin/" srcdir="${dir}/src/" target="1.6" source="1.6" includeAntRuntime="false" />
 		<jar destfile="temp/${name}.jar" basedir="temp/bin/" />
 		<jar destfile="temp/${name}-sources.jar" basedir="${dir}/src/" />
@@ -45,10 +48,13 @@
 		<local name="name" />
 		<property name="dir" value="${backend.swing.dir}" />
 		<property name="name" value="${backend.swing.name}" />
-		<javac destdir="temp/bin/" srcdir="${dir}/src/" target="1.6" source="1.6" includeAntRuntime="false" />
+
+		<copy todir="temp/src/"><fileset dir="${dir}/src/" /></copy>
 		<copy todir="temp/bin/"><fileset dir="${dir}/src/" includes="**/*.png, **/*.jpg, **/*.gif"/></copy>
+
+		<javac destdir="temp/bin/" srcdir="${dir}/src/" target="1.6" source="1.6" includeAntRuntime="false" />
 		<jar destfile="temp/${name}.jar" basedir="temp/bin/" />
-		<jar destfile="temp/${name}-sources.jar" basedir="${dir}/src/" />
+		<jar destfile="temp/${name}-sources.jar" basedir="temp/src/" />
 		<zip destfile="${name}-${version}.zip">
 			<fileset dir="temp" includes="${name}.jar, ${name}-sources.jar" />
 		</zip>
@@ -59,19 +65,21 @@
 		<local name="name" />
 		<property name="dir" value="${backend.swing.test.dir}" />
 		<property name="name" value="${backend.swing.test.name}" />
+
 		<delete dir="temp/bin/" includes="**" />
-		<copy file="temp/${backend.swing.name}.jar" todir="temp/libs/" />
+		<copy todir="temp/bin/"><fileset dir="${dir}/src/" includes="**/*.png, **/*.jpg, **/*.gif, **/*.css"/></copy>
+		<copy todir="temp/libs/" file="temp/${backend.swing.name}.jar" />
+		<pathconvert property="classpath" pathsep=" ">
+			<path><fileset dir="temp/libs/" /></path>
+			<chainedmapper><flattenmapper /><globmapper from="*" to="libs/*" /></chainedmapper>
+		</pathconvert>
+
 		<javac destdir="temp/bin/" srcdir="${dir}/src/" target="1.6" source="1.6" includeAntRuntime="false">
 			<classpath>
 				<pathelement location="temp/bin/" />
 				<fileset dir="temp/libs/" />
 			</classpath>
 		</javac>
-		<copy todir="temp/bin/"><fileset dir="${dir}/src/" includes="**/*.png, **/*.jpg, **/*.gif, **/*.css"/></copy>
-		<pathconvert property="classpath" pathsep=" ">
-			<path><fileset dir="temp/libs/" /></path>
-			<chainedmapper><flattenmapper /><globmapper from="*" to="libs/*" /></chainedmapper>
-		</pathconvert>
 		<jar destfile="temp/${name}.jar" basedir="temp/bin/">
 			<manifest>
 				<attribute name="Main-Class" value="Main" />
