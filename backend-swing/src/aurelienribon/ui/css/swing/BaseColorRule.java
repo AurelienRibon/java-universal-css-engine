@@ -20,4 +20,9 @@ public class BaseColorRule extends BaseRule {
 	public String[][] getParamsNames() {
 		return new String[][] {{"color"}};
 	}
+
+	@Override
+	public boolean canBeNull(int paramsId, int paramId) {
+		return true;
+	}
 }

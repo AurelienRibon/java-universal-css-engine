@@ -1,6 +1,6 @@
 package aurelienribon.ui.components;
 
-import aurelienribon.ui.utils.PaintUtils;
+import aurelienribon.ui.css.swing.PaintUtils;
 import java.awt.*;
 import javax.swing.Icon;
 import javax.swing.JLabel;

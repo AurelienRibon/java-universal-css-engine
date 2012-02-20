@@ -17,4 +17,9 @@ public class BaseBooleanRule extends BaseRule {
 	public String[][] getParamsNames() {
 		return new String[][] {{"b"}};
 	}
+
+	@Override
+	public boolean canBeNull(int paramsId, int paramId) {
+		return false;
+	}
 }

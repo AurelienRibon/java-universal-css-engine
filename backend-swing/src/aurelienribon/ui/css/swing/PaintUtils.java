@@ -1,4 +1,4 @@
-package aurelienribon.ui.utils;
+package aurelienribon.ui.css.swing;
 
 import java.awt.Color;
 import java.awt.LinearGradientPaint;

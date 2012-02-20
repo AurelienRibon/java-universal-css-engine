@@ -17,4 +17,9 @@ public class BaseFloatRule extends BaseRule {
 	public String[][] getParamsNames() {
 		return new String[][] {{"f"}};
 	}
+
+	@Override
+	public boolean canBeNull(int paramsId, int paramId) {
+		return false;
+	}
 }

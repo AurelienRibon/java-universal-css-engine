@@ -5,7 +5,7 @@ import aurelienribon.ui.css.StyleProcessor;
 import aurelienribon.ui.css.StyleRuleSet;
 import aurelienribon.ui.css.swing.SwingRules;
 import aurelienribon.ui.css.swing.SwingUtils;
-import aurelienribon.ui.utils.PaintUtils;
+import aurelienribon.ui.css.swing.PaintUtils;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;

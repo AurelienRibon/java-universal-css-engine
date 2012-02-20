@@ -25,4 +25,9 @@ public class BaseKeywordRule extends BaseRule {
 	public String[] getKeywords(int paramsId, int paramId) {
 		return keywords;
 	}
+
+	@Override
+	public boolean canBeNull(int paramsId, int paramId) {
+		return false;
+	}
 }

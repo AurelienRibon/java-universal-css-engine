@@ -16,11 +16,6 @@ public abstract class BaseRule implements StyleRule {
 	}
 
 	@Override
-	public boolean canBeNull(int paramsId, int paramId) {
-		return false;
-	}
-
-	@Override
 	public String[] getKeywords(int paramsId, int paramId) {
 		return null;
 	}

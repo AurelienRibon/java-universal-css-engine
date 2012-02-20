@@ -3,7 +3,7 @@ package aurelienribon.ui.components;
 import aurelienribon.ui.css.StyleProcessor;
 import aurelienribon.ui.css.StyleRuleSet;
 import aurelienribon.ui.css.swing.SwingUtils;
-import aurelienribon.ui.utils.PaintUtils;
+import aurelienribon.ui.css.swing.PaintUtils;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;

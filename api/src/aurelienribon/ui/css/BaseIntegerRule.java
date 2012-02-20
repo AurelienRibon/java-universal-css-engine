@@ -17,4 +17,9 @@ public class BaseIntegerRule extends BaseRule {
 	public String[][] getParamsNames() {
 		return new String[][] {{"i"}};
 	}
+
+	@Override
+	public boolean canBeNull(int paramsId, int paramId) {
+		return false;
+	}
 }

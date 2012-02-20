@@ -20,4 +20,9 @@ public class BasePaintRule extends BaseRule {
 	public String[][] getParamsNames() {
 		return new String[][] {{"paint"}};
 	}
+
+	@Override
+	public boolean canBeNull(int paramsId, int paramId) {
+		return true;
+	}
 }

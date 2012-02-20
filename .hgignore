@@ -6,8 +6,14 @@ api/nbproject/*
 api/manifest.mf
 api/nbbuild.xml
 
-test/build/*
-test/dist/*
-test/nbproject/*
-test/manifest.mf
-test/nbbuild.xml
+backend-swing/build/*
+backend-swing/dist/*
+backend-swing/nbproject/*
+backend-swing/manifest.mf
+backend-swing/nbbuild.xml
+
+backend-swing-test/build/*
+backend-swing-test/dist/*
+backend-swing-test/nbproject/*
+backend-swing-test/manifest.mf
+backend-swing-test/nbbuild.xml

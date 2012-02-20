@@ -59,6 +59,11 @@ public class SwingRules {
 			{"font"}
 		};}
 
+		@Override
+		public boolean canBeNull(int paramsId, int paramId) {
+			return false;
+		}
+
 		@Override public String[] getKeywords(int paramsId, int paramId) {
 			if (paramId == 1) return new String[] {"plain", "italic", "bold"};
 			return null;

@@ -16,11 +16,9 @@ public class AruiRules {
 	public static final StyleRule STROKE_MOUSEOVER = new BaseColorRule("-arui-stroke-mouseover");
 	public static final StyleRule STROKE_MOUSEDOWN = new BaseColorRule("-arui-stroke-mousedown");
 	public static final StyleRule STROKE_SELECTED = new BaseColorRule("-arui-stroke-selected");
-
 	public static final StyleRule FILL = new BasePaintRule("-arui-fill");
 	public static final StyleRule FILL_MOUSEOVER = new BasePaintRule("-arui-fill-mouseover");
 	public static final StyleRule FILL_MOUSEDOWN = new BasePaintRule("-arui-fill-mousedown");
 	public static final StyleRule FILL_SELECTED = new BasePaintRule("-arui-fill-selected");
-
 	public static final StyleRule CORNERRADIUS = new BaseIntegerRule("-arui-cornerradius");
 }
