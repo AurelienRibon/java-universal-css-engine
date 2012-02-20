@@ -21,7 +21,7 @@ class TabPanelHeaderPanel extends JLayeredPane {
 			if (target instanceof TabPanelHeaderPanel) {
 				TabPanelHeaderPanel t = (TabPanelHeaderPanel) target;
 
-				if (rs.contains(AruiRules.STROKE)) t.tabStrokeColor = SwingUtils.asColor(rs.getParams(AruiRules.STROKE), 0);
+				if (rs.contains(AruiRules.STROKE)) t.stroke = SwingUtils.asColor(rs.getParams(AruiRules.STROKE), 0);
 				t.styleAttrs = rs;
 
 				for (TabPanelHeaderSubPanel p : t.subPanels) Style.apply(p, rs);
@@ -43,7 +43,7 @@ class TabPanelHeaderPanel extends JLayeredPane {
 	private final Callback callback;
 	private int tabsLayout;
 	private StyleRuleSet styleAttrs;
-	private Color tabStrokeColor = Color.RED;
+	private Color stroke = Color.RED;
 
 	public TabPanelHeaderPanel(int layout, Callback callback) {
 		this.tabsLayout = layout;
@@ -147,8 +147,10 @@ class TabPanelHeaderPanel extends JLayeredPane {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.setColor(tabStrokeColor);
-		g.drawLine(0, getHeight()-1, getWidth(), getHeight()-1);
+		if (stroke != null) {
+			g.setColor(stroke);
+			g.drawLine(0, getHeight()-1, getWidth(), getHeight()-1);
+		}
 	}
 
 	// -------------------------------------------------------------------------

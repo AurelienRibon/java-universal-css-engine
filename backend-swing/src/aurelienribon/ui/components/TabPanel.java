@@ -3,13 +3,13 @@ package aurelienribon.ui.components;
 import aurelienribon.ui.components.TabPanelModel.TabModel;
 import aurelienribon.ui.css.Style;
 import aurelienribon.ui.css.StyleProcessor;
+import aurelienribon.ui.css.StyleRule;
 import aurelienribon.ui.css.StyleRuleSet;
-import aurelienribon.ui.css.swing.SwingUtils;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JPanel;
-import javax.swing.border.MatteBorder;
+import javax.swing.border.Border;
 
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
@@ -20,10 +20,19 @@ public class TabPanel extends JPanel {
 			if (target instanceof TabPanel) {
 				TabPanel t = (TabPanel) target;
 
-				if (rs.contains(AruiRules.STROKE)) {
-					t.stroke = SwingUtils.asColor(rs.getParams(AruiRules.STROKE), 0);
-					t.cardPanel.setBorder(new MatteBorder(0, 1, 1, 1, t.stroke));
-				}
+				rs = new StyleRuleSet(rs, new StyleRule[] {
+					AruiRules.STROKE,
+					AruiRules.FOREGROUND_UNSELECTED,
+					AruiRules.FOREGROUND_SELECTED,
+					AruiRules.FOREGROUND_MOUSEOVER,
+					AruiRules.STROKE,
+					AruiRules.STROKE_UNSELECTED,
+					AruiRules.STROKE_SELECTED,
+					AruiRules.STROKE_MOUSEOVER,
+					AruiRules.FILL_UNSELECTED,
+					AruiRules.FILL_SELECTED,
+					AruiRules.FILL_MOUSEOVER
+				});
 
 				Style.apply(t.headerPanel, rs);
 			}
@@ -49,12 +58,8 @@ public class TabPanel extends JPanel {
 	private TabPanelModel model;
 	private int cnt = 0;
 
-	private Color stroke = Color.RED;
-
 	public TabPanel() {
 		setPreferredSize(new Dimension(50, 50));
-
-		cardPanel.setBorder(new MatteBorder(0, 1, 1, 1, stroke));
 
 		setLayout(new BorderLayout());
 		add(headerPanel, BorderLayout.NORTH);
@@ -119,6 +124,11 @@ public class TabPanel extends JPanel {
 	@Override
 	public void setBackground(Color bg) {
 		if (cardPanel != null) cardPanel.setBackground(bg);
+	}
+
+	@Override
+	public void setBorder(Border border) {
+		if (cardPanel != null) cardPanel.setBorder(border);
 	}
 
 	// -------------------------------------------------------------------------

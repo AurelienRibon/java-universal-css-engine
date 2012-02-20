@@ -18,6 +18,7 @@ public class PaintUtils {
 	}
 
 	public static int getBrightness(Paint p) {
+		if (p == null) return -1;
 		if (p instanceof Color) return getBrightness((Color) p);
 
 		if (p instanceof MultipleGradientPaint) {

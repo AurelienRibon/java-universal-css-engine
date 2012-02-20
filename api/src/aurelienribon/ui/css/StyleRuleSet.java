@@ -29,6 +29,21 @@ public class StyleRuleSet {
 		rulesParams = Collections.unmodifiableMap(tRulesParams);
 	}
 
+	public StyleRuleSet(StyleRuleSet rs, StyleRule[] rulesToKeep) {
+		List<StyleRule> tRules = new ArrayList<StyleRule>();
+		Map<StyleRule, List<Object>> tRulesParams = new HashMap<StyleRule, List<Object>>();
+
+		for (StyleRule rule : rulesToKeep) {
+			if (rs.getRules().contains(rule)) {
+				tRules.add(rule);
+				tRulesParams.put(rule, rs.getParams(rule));
+			}
+		}
+
+		this.rules = Collections.unmodifiableList(new ArrayList<StyleRule>(tRules));
+		this.rulesParams = Collections.unmodifiableMap(new HashMap<StyleRule, List<Object>>(tRulesParams));
+	}
+
 	// -------------------------------------------------------------------------
 	// Public API
 	// -------------------------------------------------------------------------

@@ -21,15 +21,17 @@ aurelienribon-ui-components-Button {
 
 aurelienribon-ui-components-TabPanel {
 	-swing-background: #727272;
-	-swing-foreground: #FFF;
+	-swing-border: null;
+	-arui-foreground-unselected: #FFF;
 	-arui-foreground-selected: #FFF;
 	-arui-foreground-mouseover: #FFF;
-	-arui-stroke: #444;
-	-arui-stroke-mouseover: #444;
-	-arui-stroke-selected: #444;
-	-arui-fill: #333;
-	-arui-fill-mouseover: #4C4C4C;
-	-arui-fill-selected: #595959;
+	-arui-stroke: null;
+	-arui-stroke-unselected: null;
+	-arui-stroke-mouseover: null;
+	-arui-stroke-selected: null;
+	-arui-fill-unselected: null;
+	-arui-fill-mouseover: #333;
+	-arui-fill-selected: #444;
 }
 
 javax-swing-JScrollPane {

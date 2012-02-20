@@ -20,14 +20,17 @@ aurelienribon-ui-components-Button {
 }
 
 aurelienribon-ui-components-TabPanel {
-	-swing-foreground: #FFF;
+	-swing-background: #BBC8D8;
+	-swing-border: matteborder(5, 0, 0, 0, #FDE1A0);
+	-arui-foreground-unselected: #FFF;
 	-arui-foreground-selected: #000;
-	-arui-foreground-mouseover: #000;
-	-arui-stroke: #2A3B57;
-	-arui-stroke-mouseover: #2A3B57;
-	-arui-stroke-selected: #2A3B57;
-	-arui-fill: #0FFF;
-	-arui-fill-mouseover: lineargradient(0, 0, 0, 1, 0.49, #FFFAE7, 0.5, #FDE1A0);
+	-arui-foreground-mouseover: #FFF;
+	-arui-stroke: null;
+	-arui-stroke-unselected: null;
+	-arui-stroke-mouseover: #9BA7B7;
+	-arui-stroke-selected: null;
+	-arui-fill-unselected: null;
+	-arui-fill-mouseover: lineargradient(0, 0, 0, 1, 0, #6F7776, 1, #4F5F74);
 	-arui-fill-selected: lineargradient(0, 0, 0, 1, 0.49, #FFFAE7, 0.5, #FDE1A0);
 }
 

@@ -269,7 +269,7 @@ public class SwingFunctions {
 			int top = (Integer) params.get(0);
 			int left = (Integer) params.get(1);
 			int bottom = (Integer) params.get(2);
-			int right = (Integer) params.get(4);
+			int right = (Integer) params.get(3);
 
 			if (params.get(4) instanceof Color) {
 				Color color = (Color) params.get(4);
@@ -318,7 +318,7 @@ public class SwingFunctions {
 
 			if (params.size() == 3) {
 				Color highlight = (Color) params.get(1);
-				Color shadow = (Color) params.get(1);
+				Color shadow = (Color) params.get(2);
 				return BorderFactory.createBevelBorder(type, highlight, shadow);
 			}
 
@@ -367,7 +367,7 @@ public class SwingFunctions {
 
 			if (params.size() == 3) {
 				Color highlight = (Color) params.get(1);
-				Color shadow = (Color) params.get(1);
+				Color shadow = (Color) params.get(2);
 				return BorderFactory.createSoftBevelBorder(type, highlight, shadow);
 			}
 
@@ -457,8 +457,8 @@ public class SwingFunctions {
 				Paint paint = (Paint) params.get(0);
 				float thickness = (Float) params.get(1);
 				float length = (Float) params.get(2);
-				float spacing = (Float) params.get(2);
-				boolean rounded = (Boolean) params.get(3);
+				float spacing = (Float) params.get(3);
+				boolean rounded = (Boolean) params.get(4);
 				return BorderFactory.createDashedBorder(paint, thickness, length, spacing, rounded);
 			}
 

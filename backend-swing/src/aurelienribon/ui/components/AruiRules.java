@@ -12,13 +12,16 @@ public class AruiRules {
 	public static final StyleRule FOREGROUND_MOUSEOVER = new BaseColorRule("-arui-foreground-mouseover");
 	public static final StyleRule FOREGROUND_MOUSEDOWN = new BaseColorRule("-arui-foreground-mousedown");
 	public static final StyleRule FOREGROUND_SELECTED = new BaseColorRule("-arui-foreground-selected");
+	public static final StyleRule FOREGROUND_UNSELECTED = new BaseColorRule("-arui-foreground-unselected");
 	public static final StyleRule STROKE = new BaseColorRule("-arui-stroke");
 	public static final StyleRule STROKE_MOUSEOVER = new BaseColorRule("-arui-stroke-mouseover");
 	public static final StyleRule STROKE_MOUSEDOWN = new BaseColorRule("-arui-stroke-mousedown");
 	public static final StyleRule STROKE_SELECTED = new BaseColorRule("-arui-stroke-selected");
+	public static final StyleRule STROKE_UNSELECTED = new BaseColorRule("-arui-stroke-unselected");
 	public static final StyleRule FILL = new BasePaintRule("-arui-fill");
 	public static final StyleRule FILL_MOUSEOVER = new BasePaintRule("-arui-fill-mouseover");
 	public static final StyleRule FILL_MOUSEDOWN = new BasePaintRule("-arui-fill-mousedown");
 	public static final StyleRule FILL_SELECTED = new BasePaintRule("-arui-fill-selected");
+	public static final StyleRule FILL_UNSELECTED = new BasePaintRule("-arui-fill-unselected");
 	public static final StyleRule CORNERRADIUS = new BaseIntegerRule("-arui-cornerradius");
 }
