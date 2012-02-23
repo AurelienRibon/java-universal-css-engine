@@ -474,10 +474,19 @@ public class Style {
 		if (registeredTargetsClassNames.containsKey(target)) stack.add(registeredTargetsClassNames.get(target));
 
 		// Iterate over the target children, if any
-		for (Class clazz : registeredChildrenAccessors.keySet()) {
-			if (clazz.isInstance(target)) {
-				StyleChildrenAccessor accessor = registeredChildrenAccessors.get(clazz);
-				for (Object child : accessor.getChildren(target)) apply(child, style, stack);
+		if (target instanceof StyleParent) {
+			StyleParent parent = (StyleParent) target;
+			if (parent.getStyleChildren() != null) {
+				for (Object child : parent.getStyleChildren()) apply(child, style, stack);
+			}
+		} else {
+			for (Class clazz : registeredChildrenAccessors.keySet()) {
+				if (clazz.isInstance(target)) {
+					StyleChildrenAccessor accessor = registeredChildrenAccessors.get(clazz);
+					if (accessor.getStyleChildren(target) != null) {
+						for (Object child : accessor.getStyleChildren(target)) apply(child, style, stack);
+					}
+				}
 			}
 		}
 	}

@@ -4,15 +4,17 @@ import aurelienribon.ui.css.StyleProcessor;
 import aurelienribon.ui.css.StyleRuleSet;
 import aurelienribon.ui.css.swing.SwingUtils;
 import aurelienribon.ui.css.swing.PaintUtils;
+import aurelienribon.ui.css.StyleParent;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 import javax.swing.*;
 
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
-public class Button extends JButton {
+public class Button extends JButton implements StyleParent {
 	public static final StyleProcessor PROCESSOR = new StyleProcessor() {
 		@Override public void process(Object target, StyleRuleSet rs) {
 			if (target instanceof Button) {
@@ -26,7 +28,7 @@ public class Button extends JButton {
 				if (rs.contains(AruiRules.FILL_MOUSEDOWN)) t.fillMouseDown = SwingUtils.asPaint(rs.getParams(AruiRules.FILL_MOUSEDOWN), 0);
 				if (rs.contains(AruiRules.FILL_MOUSEOVER)) t.fillMouseOver = SwingUtils.asPaint(rs.getParams(AruiRules.FILL_MOUSEOVER), 0);
 				if (rs.contains(AruiRules.CORNERRADIUS)) t.cornerRadius = rs.asInteger(AruiRules.CORNERRADIUS, 0);
-				t.reload();
+				t.revalidate();
 			}
 		}
 	};
@@ -46,17 +48,29 @@ public class Button extends JButton {
 	private boolean isMouseOver = false;
 
 	public Button() {
-		setOpaque(false);
 		setLayout(new BorderLayout());
 		add(label, BorderLayout.CENTER);
+
 		addMouseListener(mouseAdapter);
-		reload();
+		setOpaque(false);
 	}
 
-	private void reload() {
+	@Override
+	public List<?> getStyleChildren() {
+		return null;
+	}
+
+	@Override
+	public void revalidate() {
+		if (label == null) {super.revalidate(); return;}
+
+		label.setFont(getFont());
+		label.setText(getText());
+		label.setIcon(getIcon());
 		label.setHorizontalAlignment(getHorizontalAlignment());
 		label.setVerticalAlignment(getVerticalAlignment());
-		label.setFont(getFont());
+		label.setHorizontalTextPosition(getHorizontalTextPosition());
+		label.setVerticalTextPosition(getVerticalTextPosition());
 
 		if (isMouseDown && isMouseOver) {
 			label.setForeground(foregroundMouseDown);
@@ -66,38 +80,7 @@ public class Button extends JButton {
 			label.setForeground(getForeground());
 		}
 
-		revalidate();
-		repaint();
-	}
-
-	@Override
-	public void setText(String text) {
-		super.setText(text);
-		if (label != null) label.setText(text);
-	}
-
-	@Override
-	public void setIcon(Icon defaultIcon) {
-		super.setIcon(defaultIcon);
-		if (label != null) label.setIcon(defaultIcon);
-	}
-
-	@Override
-	public void setForeground(Color fg) {
-		super.setForeground(fg);
-		if (label != null) label.setForeground(fg);
-	}
-
-	@Override
-	public void setHorizontalAlignment(int alignment) {
-		super.setHorizontalAlignment(alignment);
-		if (label != null) label.setHorizontalAlignment(alignment);
-	}
-
-	@Override
-	public void setVerticalAlignment(int alignment) {
-		super.setVerticalAlignment(alignment);
-		if (label != null) label.setVerticalAlignment(alignment);
+		super.revalidate();
 	}
 
 	@Override
@@ -132,20 +115,20 @@ public class Button extends JButton {
 		@Override
 		public void mouseEntered(MouseEvent e) {
 			isMouseOver = true;
-			reload();
+			revalidate();
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
 			isMouseOver = false;
-			reload();
+			revalidate();
 		}
 
 		@Override
 		public void mousePressed(MouseEvent e) {
 			if (SwingUtilities.isLeftMouseButton(e)) {
 				isMouseDown = true;
-				reload();
+				revalidate();
 			}
 		}
 
@@ -153,7 +136,7 @@ public class Button extends JButton {
 		public void mouseReleased(MouseEvent e) {
 			if (SwingUtilities.isLeftMouseButton(e)) {
 				isMouseDown = false;
-				reload();
+				revalidate();
 			}
 		}
 	};

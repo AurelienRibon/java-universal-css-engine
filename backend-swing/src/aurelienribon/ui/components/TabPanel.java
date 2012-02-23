@@ -65,6 +65,7 @@ public class TabPanel extends JPanel {
 		add(headerPanel, BorderLayout.NORTH);
 		add(cardPanel, BorderLayout.CENTER);
 
+		setOpaque(false);
 		setModel(new TabPanelModel());
 	}
 

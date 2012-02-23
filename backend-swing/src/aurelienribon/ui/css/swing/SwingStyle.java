@@ -1,5 +1,6 @@
 package aurelienribon.ui.css.swing;
 
+import aurelienribon.ui.css.StyleParent;
 import aurelienribon.ui.css.*;
 import java.awt.Color;
 import java.awt.Container;
@@ -54,7 +55,7 @@ public class SwingStyle {
 		Style.registerProcessor(SwingProcessors.JTEXTAREA);
 
 		Style.registerChildrenAccessor(Container.class, new StyleChildrenAccessor<Container>() {
-			@Override public List<?> getChildren(Container target) {
+			@Override public List<?> getStyleChildren(Container target) {
 				return Arrays.asList(target.getComponents());
 			}
 		});
