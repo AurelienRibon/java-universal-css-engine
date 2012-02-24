@@ -1,6 +1,6 @@
 package aurelienribon.ui.css.swing.functions;
 
-import aurelienribon.ui.css.StyleFunction;
+import aurelienribon.ui.css.Function;
 import java.awt.Color;
 import java.awt.LinearGradientPaint;
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
-public class LinearGradientFunction implements StyleFunction {
+public class LinearGradientFunction implements Function {
 	@Override
 	public String getName() {
 		return "lineargradient";

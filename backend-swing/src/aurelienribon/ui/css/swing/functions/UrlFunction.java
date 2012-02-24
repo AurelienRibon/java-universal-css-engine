@@ -1,13 +1,13 @@
 package aurelienribon.ui.css.swing.functions;
 
-import aurelienribon.ui.css.StyleFunction;
+import aurelienribon.ui.css.Function;
 import java.net.URL;
 import java.util.List;
 
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
-public class UrlFunction implements StyleFunction {
+public class UrlFunction implements Function {
 	@Override
 	public String getName() {
 		return "url";

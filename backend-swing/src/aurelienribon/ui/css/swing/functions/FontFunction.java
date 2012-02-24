@@ -1,14 +1,14 @@
 package aurelienribon.ui.css.swing.functions;
 
 import aurelienribon.ui.css.StyleException;
-import aurelienribon.ui.css.StyleFunction;
+import aurelienribon.ui.css.Function;
 import java.awt.Font;
 import java.util.List;
 
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
-public class FontFunction implements StyleFunction {
+public class FontFunction implements Function {
 	@Override
 	public String getName() {
 		return "font";

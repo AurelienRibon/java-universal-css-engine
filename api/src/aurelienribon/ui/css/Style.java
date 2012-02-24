@@ -81,12 +81,12 @@ public class Style {
 	// Static API
 	// -------------------------------------------------------------------------
 
-	private static final Map<String, StyleRule> registeredRules = new LinkedHashMap<String, StyleRule>();
-	private static final Map<String, StyleFunction> registeredFunctions = new LinkedHashMap<String, StyleFunction>();
+	private static final Map<String, Property> registeredRules = new LinkedHashMap<String, Property>();
+	private static final Map<String, Function> registeredFunctions = new LinkedHashMap<String, Function>();
 	private static final Map<Class, List<StyleProcessor>> registeredProcessors = new LinkedHashMap<Class, List<StyleProcessor>>();
 	private static final Map<Object, String> registeredTargetsClassNames = new LinkedHashMap<Object, String>();
-	private static final Map<Class, StyleChildrenAccessor> registeredChildrenAccessors = new HashMap<Class, StyleChildrenAccessor>();
-	private static StyleParamConverter converter;
+	private static final Map<Class, ChildrenAccessor> registeredChildrenAccessors = new HashMap<Class, ChildrenAccessor>();
+	private static ParamConverter converter;
 
 	/**
 	 * Registers a new rule to the engine.
@@ -98,7 +98,7 @@ public class Style {
 	 * even skipped if not relevant for a given target (but its children may
 	 * use it, so its never totally irrelevant).
 	 */
-	public static void registerRule(StyleRule rule) {
+	public static void registerRule(Property rule) {
 		if (registeredRules.containsKey(rule.getName())) throw new RuntimeException("Rule already registered");
 		registeredRules.put(rule.getName(), rule);
 	}
@@ -111,7 +111,7 @@ public class Style {
 	 * always returns something. Therefore, a function can be used as a
 	 * parameter to a rule, or to another function.
 	 */
-	public static void registerFunction(StyleFunction function) {
+	public static void registerFunction(Function function) {
 		if (registeredFunctions.containsKey(function.getName())) throw new RuntimeException("Function already registered");
 		registeredFunctions.put(function.getName(), function);
 	}
@@ -153,7 +153,7 @@ public class Style {
 	 * Accessors are used to automatically apply a style to the children of a
 	 * target, without requiring it to manually pass it to its children.
 	 */
-	public static void registerChildrenAccessor(Class parentClass, StyleChildrenAccessor accessor) {
+	public static void registerChildrenAccessor(Class parentClass, ChildrenAccessor accessor) {
 		if (registeredChildrenAccessors.containsKey(parentClass)) throw new RuntimeException("Accessor already registered");
 		registeredChildrenAccessors.put(parentClass, accessor);
 	}
@@ -178,7 +178,7 @@ public class Style {
 	 * want to apply the same group of rules to some objects, directly from
 	 * a StyleProcessor for instance.
 	 */
-	public static void apply(Object target, StyleRuleSet rs) {
+	public static void apply(Object target, DeclarationSet rs) {
 		for (Class clazz : registeredProcessors.keySet()) {
 			if (clazz.isInstance(target)) {
 				List<StyleProcessor> processors = registeredProcessors.get(clazz);
@@ -200,7 +200,7 @@ public class Style {
 	 * for Swing targets for instance, or android.graphics.Color for Android
 	 * targets.
 	 */
-	public static void setParamConverter(StyleParamConverter converter) {
+	public static void setParamConverter(ParamConverter converter) {
 		Style.converter = converter;
 	}
 
@@ -214,7 +214,7 @@ public class Style {
 	/**
 	 * Gets a rule by its name.
 	 */
-	public static StyleRule getRegisteredRule(String name) {
+	public static Property getRegisteredRule(String name) {
 		return registeredRules.get(name);
 	}
 
@@ -228,7 +228,7 @@ public class Style {
 	/**
 	 * Gets a function by its name.
 	 */
-	public static StyleFunction getRegisteredFunction(String name) {
+	public static Function getRegisteredFunction(String name) {
 		return registeredFunctions.get(name);
 	}
 
@@ -279,7 +279,7 @@ public class Style {
 	// -------------------------------------------------------------------------
 
 	private final String styleSheet;
-	private final List<StyleClass> classes = new ArrayList<StyleClass>();
+	private final List<Rule> classes = new ArrayList<Rule>();
 
 	/**
 	 * Builds a new Style from an URL pointing to a stylesheet.
@@ -313,7 +313,7 @@ public class Style {
 	/**
 	 * Gets the retrieved classes.
 	 */
-	public List<StyleClass> getClasses() {
+	public List<Rule> getClasses() {
 		return Collections.unmodifiableList(classes);
 	}
 
@@ -354,23 +354,23 @@ public class Style {
 			for (String selector : result.keySet()) {
 				Map<String, List<Object>> resultRules = result.get(selector);
 
-				List<StyleRule> rules = new ArrayList<StyleRule>();
-				Map<StyleRule, List<Object>> rulesParams = new HashMap<StyleRule, List<Object>>();
+				List<Property> rules = new ArrayList<Property>();
+				Map<Property, List<Object>> rulesParams = new HashMap<Property, List<Object>>();
 
 				for (String name : resultRules.keySet()) {
-					StyleRule rule = registeredRules.get(name);
+					Property rule = registeredRules.get(name);
 					List<Object> params = resultRules.get(name);
 
-					if (rule == null) throw StyleException.forRule(name);
+					if (rule == null) throw StyleException.forProperty(name);
 					for (int i=0; i<params.size(); i++) params.set(i, evaluateParam(params.get(i)));
-					if (!checkParams(rule, params)) throw StyleException.forRuleParams(rule);
+					if (!checkParams(rule, params)) throw StyleException.forPropertyParams(rule);
 
 					rules.add(rule);
 					rulesParams.put(rule, params);
 				}
 
-				StyleRuleSet rs = new StyleRuleSet(rules, rulesParams);
-				StyleClass sc = new StyleClass(selector, rs);
+				DeclarationSet rs = new DeclarationSet(rules, rulesParams);
+				Rule sc = new Rule(selector, rs);
 				classes.add(sc);
 			}
 
@@ -387,7 +387,7 @@ public class Style {
 
 		if (param instanceof CssParser.Function) {
 			CssParser.Function func = (CssParser.Function) param;
-			StyleFunction regFunc = registeredFunctions.get(func.name);
+			Function regFunc = registeredFunctions.get(func.name);
 			List<Object> params = new ArrayList<Object>(func.params);
 
 			for (int i=0; i<params.size(); i++) params.set(i, evaluateParam(params.get(i)));
@@ -401,7 +401,7 @@ public class Style {
 		return param;
 	}
 
-	private static boolean checkParams(StyleRule rule, List<Object> params) {
+	private static boolean checkParams(Property rule, List<Object> params) {
 		for (int i=0; i<rule.getParams().length; i++) {
 			Class[] cs = rule.getParams()[i];
 
@@ -429,7 +429,7 @@ public class Style {
 
 	private static void apply(Object target, Style style, List<String> stack) {
 		// Retrieve all the rules belonging to the target, and apply them
-		StyleRuleSet rs = new StyleRuleSet(style, target, stack);
+		DeclarationSet rs = new DeclarationSet(style, target, stack);
 		apply(target, rs);
 
 		// Add the target class and className to the selectors stack
@@ -445,19 +445,19 @@ public class Style {
 		} else {
 			for (Class clazz : registeredChildrenAccessors.keySet()) {
 				if (clazz.isInstance(target)) {
-					StyleChildrenAccessor accessor = registeredChildrenAccessors.get(clazz);
-					if (accessor.getStyleChildren(target) != null) {
-						for (Object child : accessor.getStyleChildren(target)) apply(child, style, stack);
+					ChildrenAccessor accessor = registeredChildrenAccessors.get(clazz);
+					if (accessor.getChildren(target) != null) {
+						for (Object child : accessor.getChildren(target)) apply(child, style, stack);
 					}
 				}
 			}
 		}
 	}
 
-	private static String generateManual(Collection<? extends StyleRule> rules) {
+	private static String generateManual(Collection<? extends Property> rules) {
 		String str = "";
 
-		for (StyleRule rule : rules) {
+		for (Property rule : rules) {
 			str += rule.getName() + getReturnStatement(rule) + "\n";
 
 			for (int i=0; i<rule.getParams().length; i++) {
@@ -490,9 +490,9 @@ public class Style {
 		return clazz;
 	}
 
-	private static String getReturnStatement(StyleRule rule) {
-		if (rule instanceof StyleFunction) {
-			StyleFunction func = (StyleFunction) rule;
+	private static String getReturnStatement(Property rule) {
+		if (rule instanceof Function) {
+			Function func = (Function) rule;
 			return " [returns " + prettify(func.getReturn().getSimpleName()) + "]";
 		}
 		return "";

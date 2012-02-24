@@ -2,8 +2,8 @@ package aurelienribon.ui.components;
 
 import aurelienribon.ui.components.TabPanelModel.TabModel;
 import aurelienribon.ui.css.StyleProcessor;
-import aurelienribon.ui.css.StyleRule;
-import aurelienribon.ui.css.StyleRuleSet;
+import aurelienribon.ui.css.Property;
+import aurelienribon.ui.css.DeclarationSet;
 import aurelienribon.ui.css.swing.PaintUtils;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -235,38 +235,38 @@ class TabPanelHeaderSubPanel extends JComponent {
 
 	public static class Processor implements StyleProcessor<TabPanelHeaderSubPanel> {
 		@Override
-		public void process(TabPanelHeaderSubPanel target, StyleRuleSet rs) {
-			StyleRule rule;
+		public void process(TabPanelHeaderSubPanel target, DeclarationSet rs) {
+			Property rule;
 
 			rule = AruiRules.FOREGROUND_UNSELECTED;
-			if (rs.contains(rule)) {target.foregroundUnselected = (Color) rs.getParams(rule).get(0);}
+			if (rs.contains(rule)) {target.foregroundUnselected = (Color) rs.getValue(rule).get(0);}
 
 			rule = AruiRules.FOREGROUND_SELECTED;
-			if (rs.contains(rule)) {target.foregroundSelected = (Color) rs.getParams(rule).get(0);}
+			if (rs.contains(rule)) {target.foregroundSelected = (Color) rs.getValue(rule).get(0);}
 
 			rule = AruiRules.FOREGROUND_MOUSEOVER;
-			if (rs.contains(rule)) {target.foregroundMouseOver = (Color) rs.getParams(rule).get(0);}
+			if (rs.contains(rule)) {target.foregroundMouseOver = (Color) rs.getValue(rule).get(0);}
 
 			rule = AruiRules.STROKE;
-			if (rs.contains(rule)) {target.stroke = (Color) rs.getParams(rule).get(0);}
+			if (rs.contains(rule)) {target.stroke = (Color) rs.getValue(rule).get(0);}
 
 			rule = AruiRules.STROKE_UNSELECTED;
-			if (rs.contains(rule)) {target.strokeUnselected = (Color) rs.getParams(rule).get(0);}
+			if (rs.contains(rule)) {target.strokeUnselected = (Color) rs.getValue(rule).get(0);}
 
 			rule = AruiRules.STROKE_SELECTED;
-			if (rs.contains(rule)) {target.strokeSelected = (Color) rs.getParams(rule).get(0);}
+			if (rs.contains(rule)) {target.strokeSelected = (Color) rs.getValue(rule).get(0);}
 
 			rule = AruiRules.STROKE_MOUSEOVER;
-			if (rs.contains(rule)) {target.strokeMouseOver = (Color) rs.getParams(rule).get(0);}
+			if (rs.contains(rule)) {target.strokeMouseOver = (Color) rs.getValue(rule).get(0);}
 
 			rule = AruiRules.FILL_UNSELECTED;
-			if (rs.contains(rule)) {target.fillUnselected = (Paint) rs.getParams(rule).get(0);}
+			if (rs.contains(rule)) {target.fillUnselected = (Paint) rs.getValue(rule).get(0);}
 
 			rule = AruiRules.FILL_SELECTED;
-			if (rs.contains(rule)) {target.fillSelected = (Paint) rs.getParams(rule).get(0);}
+			if (rs.contains(rule)) {target.fillSelected = (Paint) rs.getValue(rule).get(0);}
 
 			rule = AruiRules.FILL_MOUSEOVER;
-			if (rs.contains(rule)) {target.fillMouseOver = (Paint) rs.getParams(rule).get(0);}
+			if (rs.contains(rule)) {target.fillMouseOver = (Paint) rs.getValue(rule).get(0);}
 
 			target.reload();
 		}

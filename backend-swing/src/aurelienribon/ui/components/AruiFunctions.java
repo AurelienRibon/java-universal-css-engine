@@ -1,7 +1,7 @@
 package aurelienribon.ui.components;
 
 import aurelienribon.ui.css.primitives.BaseFunction;
-import aurelienribon.ui.css.StyleFunction;
+import aurelienribon.ui.css.Function;
 import java.awt.Color;
 import java.awt.Paint;
 import java.util.List;
@@ -11,7 +11,7 @@ import javax.swing.Icon;
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
 public class AruiFunctions {
-	public static final StyleFunction groupBorder = new BaseFunction("arui-groupborder") {
+	public static final Function groupBorder = new BaseFunction("arui-groupborder") {
 		@Override public Class[][] getParams() {return new Class[][] {
 			{Icon.class, String.class, Integer.class, Integer.class, Color.class, Paint.class},
 			{Icon.class, String.class, Integer.class, Integer.class, Color.class, Paint.class, Boolean.class}

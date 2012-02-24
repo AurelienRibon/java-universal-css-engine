@@ -1,6 +1,6 @@
 package aurelienribon.ui.css.swing;
 
-import aurelienribon.ui.css.StyleFunction;
+import aurelienribon.ui.css.Function;
 import aurelienribon.ui.css.swing.functions.*;
 
 /**
@@ -8,23 +8,23 @@ import aurelienribon.ui.css.swing.functions.*;
  */
 public class SwingFunctions {
 	// General
-	public static StyleFunction font = new FontFunction();
-	public static StyleFunction icon = new IconFunction();
-	public static StyleFunction insets = new InsetsFunction();
-	public static StyleFunction url = new UrlFunction();
+	public static Function font = new FontFunction();
+	public static Function icon = new IconFunction();
+	public static Function insets = new InsetsFunction();
+	public static Function url = new UrlFunction();
 
 	// Colors + paints
-	public static StyleFunction rgb = new RgbFunction();
-	public static StyleFunction rgba = new RgbaFunction();
-	public static StyleFunction linearGradient = new LinearGradientFunction();
+	public static Function rgb = new RgbFunction();
+	public static Function rgba = new RgbaFunction();
+	public static Function linearGradient = new LinearGradientFunction();
 
 	// Borders
-	public static StyleFunction bevelBorder = new BevelBorderFunction();
-	public static StyleFunction compoundBorder = new CompoundBorderFunction();
-	public static StyleFunction dashedBorder = new DashedBorderFunction();
-	public static StyleFunction emptyBorder = new EmptyBorderFunction();
-	public static StyleFunction etchedBorder = new EtchedBorderFunction();
-	public static StyleFunction lineBorder = new LineBorderFunction();
-	public static StyleFunction matteBorder = new MatteBorderFunction();
-	public static StyleFunction titledBorder = new TitledBorderFunction();
+	public static Function bevelBorder = new BevelBorderFunction();
+	public static Function compoundBorder = new CompoundBorderFunction();
+	public static Function dashedBorder = new DashedBorderFunction();
+	public static Function emptyBorder = new EmptyBorderFunction();
+	public static Function etchedBorder = new EtchedBorderFunction();
+	public static Function lineBorder = new LineBorderFunction();
+	public static Function matteBorder = new MatteBorderFunction();
+	public static Function titledBorder = new TitledBorderFunction();
 }

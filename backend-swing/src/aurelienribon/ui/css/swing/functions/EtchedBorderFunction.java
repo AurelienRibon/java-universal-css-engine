@@ -1,6 +1,6 @@
 package aurelienribon.ui.css.swing.functions;
 
-import aurelienribon.ui.css.StyleFunction;
+import aurelienribon.ui.css.Function;
 import java.awt.Color;
 import java.util.List;
 import javax.swing.BorderFactory;
@@ -9,7 +9,7 @@ import javax.swing.border.Border;
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
-public class EtchedBorderFunction implements StyleFunction {
+public class EtchedBorderFunction implements Function {
 	@Override
 	public String getName() {
 		return "etchedborder";

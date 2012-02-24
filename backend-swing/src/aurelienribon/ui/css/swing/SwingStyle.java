@@ -61,13 +61,13 @@ public class SwingStyle {
 		Style.registerProcessor(JTextComponent.class,new JTextComponentProcessor());
 		Style.registerProcessor(JTextArea.class, new JTextAreaProcessor());
 
-		Style.registerChildrenAccessor(Container.class, new StyleChildrenAccessor<Container>() {
-			@Override public List<?> getStyleChildren(Container target) {
+		Style.registerChildrenAccessor(Container.class, new ChildrenAccessor<Container>() {
+			@Override public List<?> getChildren(Container target) {
 				return Arrays.asList(target.getComponents());
 			}
 		});
 
-		Style.setParamConverter(new StyleParamConverter() {
+		Style.setParamConverter(new ParamConverter() {
 			@Override public Object convertColor(int r, int g, int b, int a) {
 				return new Color(r, g, b, a);
 			}

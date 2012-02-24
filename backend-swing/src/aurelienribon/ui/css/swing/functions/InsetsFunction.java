@@ -1,6 +1,6 @@
 package aurelienribon.ui.css.swing.functions;
 
-import aurelienribon.ui.css.StyleFunction;
+import aurelienribon.ui.css.Function;
 import java.awt.Insets;
 import java.util.List;
 import javax.swing.Icon;
@@ -8,7 +8,7 @@ import javax.swing.Icon;
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
-public class InsetsFunction implements StyleFunction {
+public class InsetsFunction implements Function {
 	@Override
 	public String getName() {
 		return "insets";

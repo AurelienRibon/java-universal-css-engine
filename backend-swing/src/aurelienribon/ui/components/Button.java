@@ -1,10 +1,10 @@
 package aurelienribon.ui.components;
 
 import aurelienribon.ui.css.StyleProcessor;
-import aurelienribon.ui.css.StyleRuleSet;
+import aurelienribon.ui.css.DeclarationSet;
 import aurelienribon.ui.css.swing.PaintUtils;
 import aurelienribon.ui.css.StyleParent;
-import aurelienribon.ui.css.StyleRule;
+import aurelienribon.ui.css.Property;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -129,35 +129,35 @@ public class Button extends JButton implements StyleParent {
 
 	public static class Processor implements StyleProcessor<Button> {
 		@Override
-		public void process(Button target, StyleRuleSet rs) {
-			StyleRule rule;
+		public void process(Button target, DeclarationSet rs) {
+			Property rule;
 
 			rule = AruiRules.FOREGROUND_MOUSEDOWN;
-			if (rs.contains(rule)) {target.foregroundMouseDown = (Color) rs.getParams(rule).get(0);}
+			if (rs.contains(rule)) {target.foregroundMouseDown = (Color) rs.getValue(rule).get(0);}
 
 			rule = AruiRules.FOREGROUND_MOUSEOVER;
-			if (rs.contains(rule)) {target.foregroundMouseOver = (Color) rs.getParams(rule).get(0);}
+			if (rs.contains(rule)) {target.foregroundMouseOver = (Color) rs.getValue(rule).get(0);}
 
 			rule = AruiRules.STROKE;
-			if (rs.contains(rule)) {target.stroke = (Color) rs.getParams(rule).get(0);}
+			if (rs.contains(rule)) {target.stroke = (Color) rs.getValue(rule).get(0);}
 
 			rule = AruiRules.STROKE_MOUSEDOWN;
-			if (rs.contains(rule)) {target.strokeMouseDown = (Color) rs.getParams(rule).get(0);}
+			if (rs.contains(rule)) {target.strokeMouseDown = (Color) rs.getValue(rule).get(0);}
 
 			rule = AruiRules.STROKE_MOUSEOVER;
-			if (rs.contains(rule)) {target.strokeMouseOver = (Color) rs.getParams(rule).get(0);}
+			if (rs.contains(rule)) {target.strokeMouseOver = (Color) rs.getValue(rule).get(0);}
 
 			rule = AruiRules.FILL;
-			if (rs.contains(rule)) {target.fill = (Paint) rs.getParams(rule).get(0);}
+			if (rs.contains(rule)) {target.fill = (Paint) rs.getValue(rule).get(0);}
 
 			rule = AruiRules.FILL_MOUSEDOWN;
-			if (rs.contains(rule)) {target.fillMouseDown = (Paint) rs.getParams(rule).get(0);}
+			if (rs.contains(rule)) {target.fillMouseDown = (Paint) rs.getValue(rule).get(0);}
 
 			rule = AruiRules.FILL_MOUSEOVER;
-			if (rs.contains(rule)) {target.fillMouseOver = (Paint) rs.getParams(rule).get(0);}
+			if (rs.contains(rule)) {target.fillMouseOver = (Paint) rs.getValue(rule).get(0);}
 
 			rule = AruiRules.CORNERRADIUS;
-			if (rs.contains(rule)) {target.cornerRadius = (Integer) rs.getParams(rule).get(0);}
+			if (rs.contains(rule)) {target.cornerRadius = (Integer) rs.getValue(rule).get(0);}
 
 			target.revalidate();
 		}

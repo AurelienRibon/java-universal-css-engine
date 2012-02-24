@@ -1,6 +1,6 @@
 package aurelienribon.ui.css.swing.functions;
 
-import aurelienribon.ui.css.StyleFunction;
+import aurelienribon.ui.css.Function;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.List;
@@ -10,7 +10,7 @@ import javax.swing.border.Border;
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
-public class TitledBorderFunction implements StyleFunction {
+public class TitledBorderFunction implements Function {
 	@Override
 	public String getName() {
 		return "titledborder";

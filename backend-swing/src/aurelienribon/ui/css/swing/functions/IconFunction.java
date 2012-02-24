@@ -1,6 +1,6 @@
 package aurelienribon.ui.css.swing.functions;
 
-import aurelienribon.ui.css.StyleFunction;
+import aurelienribon.ui.css.Function;
 import java.net.URL;
 import java.util.List;
 import javax.swing.Icon;
@@ -9,7 +9,7 @@ import javax.swing.ImageIcon;
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
-public class IconFunction implements StyleFunction {
+public class IconFunction implements Function {
 	@Override
 	public String getName() {
 		return "icon";

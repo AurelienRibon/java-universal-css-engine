@@ -1,6 +1,6 @@
 package aurelienribon.ui.css.primitives;
 
-import aurelienribon.ui.css.StyleFunction;
+import aurelienribon.ui.css.Function;
 
 /**
  * A FunctionRule is a rule that accepts the exact same parameters as an
@@ -11,11 +11,11 @@ import aurelienribon.ui.css.StyleFunction;
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
 public class FunctionRule extends BaseRule {
-	private final StyleFunction function;
+	private final Function function;
 	private final Class paramClass;
 	private final String paramName;
 
-	public FunctionRule(String name, StyleFunction function, String paramName) {
+	public FunctionRule(String name, Function function, String paramName) {
 		super(name);
 		this.function = function;
 		this.paramClass = function.getReturn();
@@ -32,7 +32,7 @@ public class FunctionRule extends BaseRule {
 		return concat(paramName, function);
 	}
 
-	private Class[][] concat(Class newParam, StyleFunction function) {
+	private Class[][] concat(Class newParam, Function function) {
 		Class[][] ps = function.getParams();
 		Class[][] result = new Class[ps.length + 1][];
 		result[0] = new Class[] {newParam};
@@ -40,7 +40,7 @@ public class FunctionRule extends BaseRule {
 		return result;
 	}
 
-	private String[][] concat(String newParam, StyleFunction function) {
+	private String[][] concat(String newParam, Function function) {
 		String[][] ps = function.getParamsNames();
 		String[][] result = new String[ps.length + 1][];
 		result[0] = new String[] {newParam};

@@ -3,8 +3,8 @@ package aurelienribon.ui.components;
 import aurelienribon.ui.components.TabPanelModel.TabModel;
 import aurelienribon.ui.css.Style;
 import aurelienribon.ui.css.StyleProcessor;
-import aurelienribon.ui.css.StyleRule;
-import aurelienribon.ui.css.StyleRuleSet;
+import aurelienribon.ui.css.Property;
+import aurelienribon.ui.css.DeclarationSet;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -28,7 +28,7 @@ class TabPanelHeaderPanel extends JLayeredPane {
 	private final List<TabPanelHeaderSubPanel> subPanels = new ArrayList<TabPanelHeaderSubPanel>();
 	private final Callback callback;
 	private int tabsLayout;
-	private StyleRuleSet styleAttrs;
+	private DeclarationSet styleAttrs;
 	private Color stroke = Color.RED;
 
 	public TabPanelHeaderPanel(int layout, Callback callback) {
@@ -161,9 +161,9 @@ class TabPanelHeaderPanel extends JLayeredPane {
 
 	public static class Processor implements StyleProcessor<TabPanelHeaderPanel> {
 		@Override
-		public void process(TabPanelHeaderPanel target, StyleRuleSet rs) {
-			StyleRule rule = AruiRules.STROKE;
-			if (rs.contains(rule)) {target.stroke = (Color) rs.getParams(rule).get(0);}
+		public void process(TabPanelHeaderPanel target, DeclarationSet rs) {
+			Property rule = AruiRules.STROKE;
+			if (rs.contains(rule)) {target.stroke = (Color) rs.getValue(rule).get(0);}
 
 			for (TabPanelHeaderSubPanel p : target.subPanels) Style.apply(p, rs);
 			target.reload();
