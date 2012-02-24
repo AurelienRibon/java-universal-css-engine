@@ -1,5 +1,7 @@
 package aurelienribon.ui.css;
 
+import aurelienribon.ui.css.antlr.CssLexer;
+import aurelienribon.ui.css.antlr.CssParser;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -81,9 +83,8 @@ public class Style {
 
 	private static final Map<String, StyleRule> registeredRules = new LinkedHashMap<String, StyleRule>();
 	private static final Map<String, StyleFunction> registeredFunctions = new LinkedHashMap<String, StyleFunction>();
-	private static final List<StyleProcessor> registeredProcessors = new ArrayList<StyleProcessor>();
+	private static final Map<Class, List<StyleProcessor>> registeredProcessors = new LinkedHashMap<Class, List<StyleProcessor>>();
 	private static final Map<Object, String> registeredTargetsClassNames = new LinkedHashMap<Object, String>();
-	private static final List<Class> registeredSkippedClasses = new ArrayList<Class>();
 	private static final Map<Class, StyleChildrenAccessor> registeredChildrenAccessors = new HashMap<Class, StyleChildrenAccessor>();
 	private static StyleParamConverter converter;
 
@@ -124,11 +125,14 @@ public class Style {
 	 * a processor should return immediatly if a target is not of a type it
 	 * was built to handle.
 	 */
-	public static void registerProcessor(StyleProcessor processor) {
-		for (StyleProcessor sp : registeredProcessors)
-			if (sp.getClass() == processor.getClass())
-				throw new RuntimeException("Processor already registered");
-		registeredProcessors.add(processor);
+	public static void registerProcessor(Class clazz, StyleProcessor processor) {
+		List<StyleProcessor> list = registeredProcessors.get(clazz);
+		if (list == null) {
+			list = new ArrayList<StyleProcessor>();
+			registeredProcessors.put(clazz, list);
+		}
+
+		if (!list.contains(processor)) list.add(processor);
 	}
 
 	/**
@@ -144,18 +148,6 @@ public class Style {
 	}
 
 	/**
-	 * Registers a class or interface to be skipped by the engine.
-	 * <p/>
-	 * You may not always want an object type to be processed by a style.
-	 * Registering this type as a skipped class will exlude every instances
-	 * from the engine process methodology.
-	 */
-	public static void registerSkippedClass(Class clazz) {
-		if (registeredSkippedClasses.contains(clazz)) throw new RuntimeException("Skipped class already registered");
-		registeredSkippedClasses.add(clazz);
-	}
-
-	/**
 	 * Registers a children accessor with a parent class.
 	 * <p/>
 	 * Accessors are used to automatically apply a style to the children of a
@@ -167,45 +159,10 @@ public class Style {
 	}
 
 	/**
-	 * Unregisters a rule from the engine.
-	 */
-	public static void unregisterRule(StyleRule rule) {
-		registeredRules.remove(rule.getName());
-	}
-
-	/**
-	 * Unregisters a function from the engine.
-	 */
-	public static void unregisterFunction(StyleFunction function) {
-		registeredFunctions.remove(function.getName());
-	}
-
-	/**
-	 * Unregisters a processor from the engine.
-	 */
-	public static void unregisterProcessor(StyleProcessor processor) {
-		registeredProcessors.remove(processor);
-	}
-
-	/**
 	 * Unregisters a className from the engine.
 	 */
 	public static void unregisterTargetClassName(Object target) {
 		registeredTargetsClassNames.remove(target);
-	}
-
-	/**
-	 * Unregisters a skipped class or interface from the engine.
-	 */
-	public static void unregisterSkippedClass(Class clazz) {
-		registeredSkippedClasses.remove(clazz);
-	}
-
-	/**
-	 * Unregisters a children accessor.
-	 */
-	public static void unregisterChildrenAccessor(Class parentClass) {
-		registeredChildrenAccessors.remove(parentClass);
 	}
 
 	/**
@@ -222,7 +179,14 @@ public class Style {
 	 * a StyleProcessor for instance.
 	 */
 	public static void apply(Object target, StyleRuleSet rs) {
-		for (StyleProcessor sp : registeredProcessors) sp.process(target, rs);
+		for (Class clazz : registeredProcessors.keySet()) {
+			if (clazz.isInstance(target)) {
+				List<StyleProcessor> processors = registeredProcessors.get(clazz);
+				for (StyleProcessor proc : processors) {
+					proc.process(target, rs);
+				}
+			}
+		}
 	}
 
 	/**
@@ -271,8 +235,15 @@ public class Style {
 	/**
 	 * Gets a list of every registered processor.
 	 */
-	public static List<StyleProcessor> getRegisteredProcessors() {
-		return Collections.unmodifiableList(registeredProcessors);
+	public static List<Class> getRegisteredProcessorsClasses() {
+		return Collections.unmodifiableList(new ArrayList<Class>(registeredProcessors.keySet()));
+	}
+
+	/**
+	 * Gets a list of every registered processor.
+	 */
+	public static List<StyleProcessor> getRegisteredProcessors(Class clazz) {
+		return Collections.unmodifiableList(registeredProcessors.get(clazz));
 	}
 
 	/**
@@ -433,38 +404,30 @@ public class Style {
 	private static boolean checkParams(StyleRule rule, List<Object> params) {
 		for (int i=0; i<rule.getParams().length; i++) {
 			Class[] cs = rule.getParams()[i];
-			if (params.size() != cs.length) continue;
 
-			boolean isMatch = true;
+			if (params.size() == cs.length) {
+				boolean isMatch = true;
 
-			for (int ii=0; ii<params.size(); ii++) {
-				assert cs[ii] != null;
-				if (cs[ii].isInstance(params.get(ii))) continue;
-				if (params.get(ii) == null && rule.canBeNull(i, ii)) continue;
-				isMatch = false;
-				break;
-			}
+				for (int ii=0; ii<params.size(); ii++) {
+					assert cs[ii] != null;
+					Object param = params.get(ii);
 
-			if (!isMatch) continue;
-
-			for (int ii=0; ii<params.size(); ii++) {
-				String[] keywords = rule.getKeywords(i, ii);
-
-				if (keywords != null && !Arrays.asList(keywords).contains((String) params.get(ii))) {
-					return false;
+					if (param == null || cs[ii].isInstance(param)) {
+						continue;
+					} else {
+						isMatch = false;
+						break;
+					}
 				}
-			}
 
-			return true;
+				if (isMatch) return true;
+			}
 		}
 
 		return false;
 	}
 
 	private static void apply(Object target, Style style, List<String> stack) {
-		// Skip target if required
-		for (Class clazz : registeredSkippedClasses) if (clazz.isInstance(target)) return;
-
 		// Retrieve all the rules belonging to the target, and apply them
 		StyleRuleSet rs = new StyleRuleSet(style, target, stack);
 		apply(target, rs);

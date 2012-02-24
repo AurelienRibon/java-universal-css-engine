@@ -1,7 +1,7 @@
 // $ANTLR 3.4 C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g 2012-02-17 09:20:52
 
-	package aurelienribon.ui.css;
-	
+	package aurelienribon.ui.css.antlr;
+
 	import java.util.List;
 	import java.util.ArrayList;
 	import java.util.Map;
@@ -63,7 +63,7 @@ public class CssParser extends Parser {
     	public void emitErrorMessage(String msg) {
     		throw new RuntimeException(msg);
     	}
-    	
+
     	public class Function {
     		public final String name;
     		public final List<Object> params;
@@ -72,7 +72,7 @@ public class CssParser extends Parser {
     			this.params = params;
     		}
     	}
-    	
+
     	public class Color {
     		public final int r, g, b, a;
     		public Color(int r, int g, int b, int a) {
@@ -82,12 +82,12 @@ public class CssParser extends Parser {
     			this.a = a;
     		}
     	}
-    	
+
     	private void put(Map<String, Map<String, List<Object>>> classes, List<String> sels, Map<String, List<Object>> rules) {
     		for (String sel : sels) if (!classes.containsKey(sel)) classes.put(sel, new HashMap<String, List<Object>>());
     		for (String sel : sels) classes.get(sel).putAll(rules);
     	}
-    	
+
     	private Color parseColor(String s) {
        		int r, g, b, a = 255, i = 1;
 
@@ -199,7 +199,7 @@ public class CssParser extends Parser {
             state._fsp--;
 
 
-            match(input,20,FOLLOW_20_in_styleclass81); 
+            match(input,20,FOLLOW_20_in_styleclass81);
 
             retval.sels = selector_list_list2;
 
@@ -235,7 +235,7 @@ public class CssParser extends Parser {
             } while (true);
 
 
-            match(input,21,FOLLOW_21_in_styleclass114); 
+            match(input,21,FOLLOW_21_in_styleclass114);
 
             }
 
@@ -296,7 +296,7 @@ public class CssParser extends Parser {
             	case 1 :
             	    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:89:4: ',' ss2= selector_list
             	    {
-            	    match(input,16,FOLLOW_16_in_selector_list_list150); 
+            	    match(input,16,FOLLOW_16_in_selector_list_list150);
 
             	    pushFollow(FOLLOW_selector_list_in_selector_list_list154);
             	    ss2=selector_list();
@@ -433,16 +433,16 @@ public class CssParser extends Parser {
                 case 1 :
                     // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:101:4: '.' ID
                     {
-                    match(input,17,FOLLOW_17_in_selector208); 
+                    match(input,17,FOLLOW_17_in_selector208);
 
-                    match(input,ID,FOLLOW_ID_in_selector210); 
+                    match(input,ID,FOLLOW_ID_in_selector210);
 
                     }
                     break;
                 case 2 :
                     // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:102:4: ID
                     {
-                    match(input,ID,FOLLOW_ID_in_selector215); 
+                    match(input,ID,FOLLOW_ID_in_selector215);
 
                     }
                     break;
@@ -487,9 +487,9 @@ public class CssParser extends Parser {
             // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:107:2: ( ID ':' ( rule_value )+ ';' )
             // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:107:4: ID ':' ( rule_value )+ ';'
             {
-            ID5=(Token)match(input,ID,FOLLOW_ID_in_rule236); 
+            ID5=(Token)match(input,ID,FOLLOW_ID_in_rule236);
 
-            match(input,18,FOLLOW_18_in_rule238); 
+            match(input,18,FOLLOW_18_in_rule238);
 
             retval.key = (ID5!=null?ID5.getText():null);
 
@@ -530,7 +530,7 @@ public class CssParser extends Parser {
             } while (true);
 
 
-            match(input,19,FOLLOW_19_in_rule259); 
+            match(input,19,FOLLOW_19_in_rule259);
 
             }
 
@@ -656,9 +656,9 @@ public class CssParser extends Parser {
             // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:119:2: ( ID '(' (f1= function_param ( ',' f2= function_param )* )? ')' )
             // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:119:4: ID '(' (f1= function_param ( ',' f2= function_param )* )? ')'
             {
-            ID9=(Token)match(input,ID,FOLLOW_ID_in_function309); 
+            ID9=(Token)match(input,ID,FOLLOW_ID_in_function309);
 
-            match(input,14,FOLLOW_14_in_function311); 
+            match(input,14,FOLLOW_14_in_function311);
 
             // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:120:3: (f1= function_param ( ',' f2= function_param )* )?
             int alt9=2;
@@ -694,7 +694,7 @@ public class CssParser extends Parser {
                     	case 1 :
                     	    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:121:4: ',' f2= function_param
                     	    {
-                    	    match(input,16,FOLLOW_16_in_function330); 
+                    	    match(input,16,FOLLOW_16_in_function330);
 
                     	    pushFollow(FOLLOW_function_param_in_function334);
                     	    f2=function_param();
@@ -719,7 +719,7 @@ public class CssParser extends Parser {
             }
 
 
-            match(input,15,FOLLOW_15_in_function346); 
+            match(input,15,FOLLOW_15_in_function346);
 
             f = new Function((ID9!=null?ID9.getText():null), params);
 
@@ -891,7 +891,7 @@ public class CssParser extends Parser {
                 case 1 :
                     // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:131:4: INT
                     {
-                    INT12=(Token)match(input,INT,FOLLOW_INT_in_param405); 
+                    INT12=(Token)match(input,INT,FOLLOW_INT_in_param405);
 
                     o = Integer.parseInt((INT12!=null?INT12.getText():null));
 
@@ -900,7 +900,7 @@ public class CssParser extends Parser {
                 case 2 :
                     // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:132:4: FLOAT
                     {
-                    FLOAT13=(Token)match(input,FLOAT,FOLLOW_FLOAT_in_param416); 
+                    FLOAT13=(Token)match(input,FLOAT,FOLLOW_FLOAT_in_param416);
 
                     o = Float.parseFloat((FLOAT13!=null?FLOAT13.getText():null));
 
@@ -909,7 +909,7 @@ public class CssParser extends Parser {
                 case 3 :
                     // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:133:4: BOOLEAN
                     {
-                    BOOLEAN14=(Token)match(input,BOOLEAN,FOLLOW_BOOLEAN_in_param425); 
+                    BOOLEAN14=(Token)match(input,BOOLEAN,FOLLOW_BOOLEAN_in_param425);
 
                     o = Boolean.parseBoolean((BOOLEAN14!=null?BOOLEAN14.getText():null));
 
@@ -918,7 +918,7 @@ public class CssParser extends Parser {
                 case 4 :
                     // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:134:4: NULL
                     {
-                    match(input,NULL,FOLLOW_NULL_in_param432); 
+                    match(input,NULL,FOLLOW_NULL_in_param432);
 
                     o = null;
 
@@ -927,7 +927,7 @@ public class CssParser extends Parser {
                 case 5 :
                     // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:135:4: STRING
                     {
-                    STRING15=(Token)match(input,STRING,FOLLOW_STRING_in_param442); 
+                    STRING15=(Token)match(input,STRING,FOLLOW_STRING_in_param442);
 
                     o = (STRING15!=null?STRING15.getText():null).substring(1, (STRING15!=null?STRING15.getText():null).length()-1);
 
@@ -936,7 +936,7 @@ public class CssParser extends Parser {
                 case 6 :
                     // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:136:4: ID
                     {
-                    ID16=(Token)match(input,ID,FOLLOW_ID_in_param450); 
+                    ID16=(Token)match(input,ID,FOLLOW_ID_in_param450);
 
                     o = (ID16!=null?ID16.getText():null);
 
@@ -945,7 +945,7 @@ public class CssParser extends Parser {
                 case 7 :
                     // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:137:4: COLOR
                     {
-                    COLOR17=(Token)match(input,COLOR,FOLLOW_COLOR_in_param462); 
+                    COLOR17=(Token)match(input,COLOR,FOLLOW_COLOR_in_param462);
 
                     o = parseColor((COLOR17!=null?COLOR17.getText():null));
 
@@ -969,7 +969,7 @@ public class CssParser extends Parser {
     // Delegated rules
 
 
- 
+
 
     public static final BitSet FOLLOW_styleclass_in_stylesheet51 = new BitSet(new long[]{0x0000000000020202L});
     public static final BitSet FOLLOW_selector_list_list_in_styleclass79 = new BitSet(new long[]{0x0000000000100000L});

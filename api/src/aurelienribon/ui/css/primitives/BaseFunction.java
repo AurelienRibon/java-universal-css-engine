@@ -1,4 +1,6 @@
-package aurelienribon.ui.css;
+package aurelienribon.ui.css.primitives;
+
+import aurelienribon.ui.css.StyleFunction;
 
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
@@ -13,15 +15,5 @@ public abstract class BaseFunction implements StyleFunction {
 	@Override
 	public String getName() {
 		return name;
-	}
-
-	@Override
-	public boolean canBeNull(int paramsId, int paramId) {
-		return false;
-	}
-
-	@Override
-	public String[] getKeywords(int paramsId, int paramId) {
-		return null;
 	}
 }

@@ -3,8 +3,8 @@ package aurelienribon.ui.components;
 import aurelienribon.ui.components.TabPanelModel.TabModel;
 import aurelienribon.ui.css.Style;
 import aurelienribon.ui.css.StyleProcessor;
+import aurelienribon.ui.css.StyleRule;
 import aurelienribon.ui.css.StyleRuleSet;
-import aurelienribon.ui.css.swing.SwingUtils;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -16,20 +16,6 @@ import javax.swing.JLayeredPane;
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
 class TabPanelHeaderPanel extends JLayeredPane {
-	public static final StyleProcessor PROCESSOR = new StyleProcessor() {
-		@Override public void process(Object target, StyleRuleSet rs) {
-			if (target instanceof TabPanelHeaderPanel) {
-				TabPanelHeaderPanel t = (TabPanelHeaderPanel) target;
-
-				if (rs.contains(AruiRules.STROKE)) t.stroke = SwingUtils.asColor(rs.getParams(AruiRules.STROKE), 0);
-				t.styleAttrs = rs;
-
-				for (TabPanelHeaderSubPanel p : t.subPanels) Style.apply(p, rs);
-				t.reload();
-			}
-		}
-	};
-
 	// -------------------------------------------------------------------------
 	// Attributes + ctor
 	// -------------------------------------------------------------------------
@@ -168,4 +154,19 @@ class TabPanelHeaderPanel extends JLayeredPane {
 		for (TabPanelHeaderSubPanel subPanel : subPanels) if (subPanel.getModel() == model) return subPanel;
 		return null;
 	}
+
+	// -------------------------------------------------------------------------
+	// StyleProcessor
+	// -------------------------------------------------------------------------
+
+	public static class Processor implements StyleProcessor<TabPanelHeaderPanel> {
+		@Override
+		public void process(TabPanelHeaderPanel target, StyleRuleSet rs) {
+			StyleRule rule = AruiRules.STROKE;
+			if (rs.contains(rule)) {target.stroke = (Color) rs.getParams(rule).get(0);}
+
+			for (TabPanelHeaderSubPanel p : target.subPanels) Style.apply(p, rs);
+			target.reload();
+		}
+	};
 }

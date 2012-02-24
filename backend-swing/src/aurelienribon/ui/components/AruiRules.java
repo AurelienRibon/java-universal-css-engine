@@ -1,27 +1,29 @@
 package aurelienribon.ui.components;
 
-import aurelienribon.ui.css.BaseIntegerRule;
 import aurelienribon.ui.css.StyleRule;
-import aurelienribon.ui.css.swing.BaseColorRule;
-import aurelienribon.ui.css.swing.BasePaintRule;
+import aurelienribon.ui.css.primitives.SingleParamRule;
+import java.awt.Color;
+import java.awt.Paint;
 
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
 public class AruiRules {
-	public static final StyleRule FOREGROUND_MOUSEOVER = new BaseColorRule("-arui-foreground-mouseover");
-	public static final StyleRule FOREGROUND_MOUSEDOWN = new BaseColorRule("-arui-foreground-mousedown");
-	public static final StyleRule FOREGROUND_SELECTED = new BaseColorRule("-arui-foreground-selected");
-	public static final StyleRule FOREGROUND_UNSELECTED = new BaseColorRule("-arui-foreground-unselected");
-	public static final StyleRule STROKE = new BaseColorRule("-arui-stroke");
-	public static final StyleRule STROKE_MOUSEOVER = new BaseColorRule("-arui-stroke-mouseover");
-	public static final StyleRule STROKE_MOUSEDOWN = new BaseColorRule("-arui-stroke-mousedown");
-	public static final StyleRule STROKE_SELECTED = new BaseColorRule("-arui-stroke-selected");
-	public static final StyleRule STROKE_UNSELECTED = new BaseColorRule("-arui-stroke-unselected");
-	public static final StyleRule FILL = new BasePaintRule("-arui-fill");
-	public static final StyleRule FILL_MOUSEOVER = new BasePaintRule("-arui-fill-mouseover");
-	public static final StyleRule FILL_MOUSEDOWN = new BasePaintRule("-arui-fill-mousedown");
-	public static final StyleRule FILL_SELECTED = new BasePaintRule("-arui-fill-selected");
-	public static final StyleRule FILL_UNSELECTED = new BasePaintRule("-arui-fill-unselected");
-	public static final StyleRule CORNERRADIUS = new BaseIntegerRule("-arui-cornerradius");
+	public static final StyleRule FOREGROUND_MOUSEOVER = new SingleParamRule("-arui-foreground-mouseover", Color.class, "color");
+	public static final StyleRule FOREGROUND_MOUSEDOWN = new SingleParamRule("-arui-foreground-mousedown", Color.class, "color");
+	public static final StyleRule FOREGROUND_SELECTED = new SingleParamRule("-arui-foreground-selected", Color.class, "color");
+	public static final StyleRule FOREGROUND_UNSELECTED = new SingleParamRule("-arui-foreground-unselected", Color.class, "color");
+	public static final StyleRule STROKE = new SingleParamRule("-arui-stroke", Color.class, "color");
+	public static final StyleRule STROKE_MOUSEOVER = new SingleParamRule("-arui-stroke-mouseover", Color.class, "color");
+	public static final StyleRule STROKE_MOUSEDOWN = new SingleParamRule("-arui-stroke-mousedown", Color.class, "color");
+	public static final StyleRule STROKE_SELECTED = new SingleParamRule("-arui-stroke-selected", Color.class, "color");
+	public static final StyleRule STROKE_UNSELECTED = new SingleParamRule("-arui-stroke-unselected", Color.class, "color");
+
+	public static final StyleRule FILL = new SingleParamRule("-arui-fill", Paint.class, "paint");
+	public static final StyleRule FILL_MOUSEOVER = new SingleParamRule("-arui-fill-mouseover", Paint.class, "paint");
+	public static final StyleRule FILL_MOUSEDOWN = new SingleParamRule("-arui-fill-mousedown", Paint.class, "paint");
+	public static final StyleRule FILL_SELECTED = new SingleParamRule("-arui-fill-selected", Paint.class, "paint");
+	public static final StyleRule FILL_UNSELECTED = new SingleParamRule("-arui-fill-unselected", Paint.class, "paint");
+
+	public static final StyleRule CORNERRADIUS = new SingleParamRule("-arui-cornerradius", Integer.class, "radius");
 }

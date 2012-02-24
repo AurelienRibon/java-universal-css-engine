@@ -1,6 +1,6 @@
 // $ANTLR 3.4 C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g 2012-02-17 09:20:52
 
-	package aurelienribon.ui.css;
+	package aurelienribon.ui.css.antlr;
 
 
 import org.antlr.runtime.*;
@@ -42,7 +42,7 @@ public class CssLexer extends Lexer {
         return new Lexer[] {};
     }
 
-    public CssLexer() {} 
+    public CssLexer() {}
     public CssLexer(CharStream input) {
         this(input, new RecognizerSharedState());
     }
@@ -59,7 +59,7 @@ public class CssLexer extends Lexer {
             // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:12:7: ( '(' )
             // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:12:9: '('
             {
-            match('('); 
+            match('(');
 
             }
 
@@ -80,7 +80,7 @@ public class CssLexer extends Lexer {
             // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:13:7: ( ')' )
             // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:13:9: ')'
             {
-            match(')'); 
+            match(')');
 
             }
 
@@ -101,7 +101,7 @@ public class CssLexer extends Lexer {
             // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:14:7: ( ',' )
             // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:14:9: ','
             {
-            match(','); 
+            match(',');
 
             }
 
@@ -122,7 +122,7 @@ public class CssLexer extends Lexer {
             // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:15:7: ( '.' )
             // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:15:9: '.'
             {
-            match('.'); 
+            match('.');
 
             }
 
@@ -143,7 +143,7 @@ public class CssLexer extends Lexer {
             // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:16:7: ( ':' )
             // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:16:9: ':'
             {
-            match(':'); 
+            match(':');
 
             }
 
@@ -164,7 +164,7 @@ public class CssLexer extends Lexer {
             // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:17:7: ( ';' )
             // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:17:9: ';'
             {
-            match(';'); 
+            match(';');
 
             }
 
@@ -185,7 +185,7 @@ public class CssLexer extends Lexer {
             // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:18:7: ( '{' )
             // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:18:9: '{'
             {
-            match('{'); 
+            match('{');
 
             }
 
@@ -206,7 +206,7 @@ public class CssLexer extends Lexer {
             // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:19:7: ( '}' )
             // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:19:9: '}'
             {
-            match('}'); 
+            match('}');
 
             }
 
@@ -307,30 +307,30 @@ public class CssLexer extends Lexer {
                 case 1 :
                     // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:141:4: '#' HEX HEX HEX HEX HEX HEX HEX HEX
                     {
-                    match('#'); 
+                    match('#');
 
-                    mHEX(); 
-
-
-                    mHEX(); 
+                    mHEX();
 
 
-                    mHEX(); 
+                    mHEX();
 
 
-                    mHEX(); 
+                    mHEX();
 
 
-                    mHEX(); 
+                    mHEX();
 
 
-                    mHEX(); 
+                    mHEX();
 
 
-                    mHEX(); 
+                    mHEX();
 
 
-                    mHEX(); 
+                    mHEX();
+
+
+                    mHEX();
 
 
                     }
@@ -338,24 +338,24 @@ public class CssLexer extends Lexer {
                 case 2 :
                     // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:142:4: '#' HEX HEX HEX HEX HEX HEX
                     {
-                    match('#'); 
+                    match('#');
 
-                    mHEX(); 
-
-
-                    mHEX(); 
+                    mHEX();
 
 
-                    mHEX(); 
+                    mHEX();
 
 
-                    mHEX(); 
+                    mHEX();
 
 
-                    mHEX(); 
+                    mHEX();
 
 
-                    mHEX(); 
+                    mHEX();
+
+
+                    mHEX();
 
 
                     }
@@ -363,18 +363,18 @@ public class CssLexer extends Lexer {
                 case 3 :
                     // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:143:4: '#' HEX HEX HEX HEX
                     {
-                    match('#'); 
+                    match('#');
 
-                    mHEX(); 
-
-
-                    mHEX(); 
+                    mHEX();
 
 
-                    mHEX(); 
+                    mHEX();
 
 
-                    mHEX(); 
+                    mHEX();
+
+
+                    mHEX();
 
 
                     }
@@ -382,15 +382,15 @@ public class CssLexer extends Lexer {
                 case 4 :
                     // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:144:4: '#' HEX HEX HEX
                     {
-                    match('#'); 
+                    match('#');
 
-                    mHEX(); 
-
-
-                    mHEX(); 
+                    mHEX();
 
 
-                    mHEX(); 
+                    mHEX();
+
+
+                    mHEX();
 
 
                     }
@@ -490,7 +490,7 @@ public class CssLexer extends Lexer {
                 case 2 :
                     // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:148:4: '0x' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
                     {
-                    match("0x"); 
+                    match("0x");
 
 
 
@@ -538,7 +538,7 @@ public class CssLexer extends Lexer {
                 case 3 :
                     // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:149:4: '0X' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
                     {
-                    match("0X"); 
+                    match("0X");
 
 
 
@@ -659,7 +659,7 @@ public class CssLexer extends Lexer {
                     } while (true);
 
 
-                    match('.'); 
+                    match('.');
 
                     // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:153:20: ( '0' .. '9' )*
                     loop7:
@@ -700,7 +700,7 @@ public class CssLexer extends Lexer {
                 case 2 :
                     // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:154:4: '.' ( '0' .. '9' )+
                     {
-                    match('.'); 
+                    match('.');
 
                     // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:154:8: ( '0' .. '9' )+
                     int cnt8=0;
@@ -783,7 +783,7 @@ public class CssLexer extends Lexer {
                 case 1 :
                     // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:158:5: 'true'
                     {
-                    match("true"); 
+                    match("true");
 
 
 
@@ -792,7 +792,7 @@ public class CssLexer extends Lexer {
                 case 2 :
                     // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:158:12: 'false'
                     {
-                    match("false"); 
+                    match("false");
 
 
 
@@ -821,7 +821,7 @@ public class CssLexer extends Lexer {
             // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:162:2: ( 'null' )
             // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:162:4: 'null'
             {
-            match("null"); 
+            match("null");
 
 
 
@@ -907,7 +907,7 @@ public class CssLexer extends Lexer {
             // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:169:2: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) |~ ( '\\\\' | '\"' ) )* '\"' )
             // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:169:4: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) |~ ( '\\\\' | '\"' ) )* '\"'
             {
-            match('\"'); 
+            match('\"');
 
             // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:169:8: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) |~ ( '\\\\' | '\"' ) )*
             loop12:
@@ -927,7 +927,7 @@ public class CssLexer extends Lexer {
             	case 1 :
             	    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:169:10: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
             	    {
-            	    match('\\'); 
+            	    match('\\');
 
             	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
             	        input.consume();
@@ -963,7 +963,7 @@ public class CssLexer extends Lexer {
             } while (true);
 
 
-            match('\"'); 
+            match('\"');
 
             }
 
@@ -1041,7 +1041,7 @@ public class CssLexer extends Lexer {
             // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:180:2: ( '/*' ( options {greedy=false; } : . )* '*/' )
             // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:180:4: '/*' ( options {greedy=false; } : . )* '*/'
             {
-            match("/*"); 
+            match("/*");
 
 
 
@@ -1072,7 +1072,7 @@ public class CssLexer extends Lexer {
             	case 1 :
             	    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:180:37: .
             	    {
-            	    matchAny(); 
+            	    matchAny();
 
             	    }
             	    break;
@@ -1083,7 +1083,7 @@ public class CssLexer extends Lexer {
             } while (true);
 
 
-            match("*/"); 
+            match("*/");
 
 
 
@@ -1108,7 +1108,7 @@ public class CssLexer extends Lexer {
             case 1 :
                 // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:10: T__14
                 {
-                mT__14(); 
+                mT__14();
 
 
                 }
@@ -1116,7 +1116,7 @@ public class CssLexer extends Lexer {
             case 2 :
                 // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:16: T__15
                 {
-                mT__15(); 
+                mT__15();
 
 
                 }
@@ -1124,7 +1124,7 @@ public class CssLexer extends Lexer {
             case 3 :
                 // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:22: T__16
                 {
-                mT__16(); 
+                mT__16();
 
 
                 }
@@ -1132,7 +1132,7 @@ public class CssLexer extends Lexer {
             case 4 :
                 // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:28: T__17
                 {
-                mT__17(); 
+                mT__17();
 
 
                 }
@@ -1140,7 +1140,7 @@ public class CssLexer extends Lexer {
             case 5 :
                 // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:34: T__18
                 {
-                mT__18(); 
+                mT__18();
 
 
                 }
@@ -1148,7 +1148,7 @@ public class CssLexer extends Lexer {
             case 6 :
                 // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:40: T__19
                 {
-                mT__19(); 
+                mT__19();
 
 
                 }
@@ -1156,7 +1156,7 @@ public class CssLexer extends Lexer {
             case 7 :
                 // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:46: T__20
                 {
-                mT__20(); 
+                mT__20();
 
 
                 }
@@ -1164,7 +1164,7 @@ public class CssLexer extends Lexer {
             case 8 :
                 // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:52: T__21
                 {
-                mT__21(); 
+                mT__21();
 
 
                 }
@@ -1172,7 +1172,7 @@ public class CssLexer extends Lexer {
             case 9 :
                 // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:58: COLOR
                 {
-                mCOLOR(); 
+                mCOLOR();
 
 
                 }
@@ -1180,7 +1180,7 @@ public class CssLexer extends Lexer {
             case 10 :
                 // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:64: INT
                 {
-                mINT(); 
+                mINT();
 
 
                 }
@@ -1188,7 +1188,7 @@ public class CssLexer extends Lexer {
             case 11 :
                 // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:68: FLOAT
                 {
-                mFLOAT(); 
+                mFLOAT();
 
 
                 }
@@ -1196,7 +1196,7 @@ public class CssLexer extends Lexer {
             case 12 :
                 // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:74: BOOLEAN
                 {
-                mBOOLEAN(); 
+                mBOOLEAN();
 
 
                 }
@@ -1204,7 +1204,7 @@ public class CssLexer extends Lexer {
             case 13 :
                 // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:82: NULL
                 {
-                mNULL(); 
+                mNULL();
 
 
                 }
@@ -1212,7 +1212,7 @@ public class CssLexer extends Lexer {
             case 14 :
                 // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:87: ID
                 {
-                mID(); 
+                mID();
 
 
                 }
@@ -1220,7 +1220,7 @@ public class CssLexer extends Lexer {
             case 15 :
                 // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:90: STRING
                 {
-                mSTRING(); 
+                mSTRING();
 
 
                 }
@@ -1228,7 +1228,7 @@ public class CssLexer extends Lexer {
             case 16 :
                 // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:97: WS
                 {
-                mWS(); 
+                mWS();
 
 
                 }
@@ -1236,7 +1236,7 @@ public class CssLexer extends Lexer {
             case 17 :
                 // C:\\Users\\Aurelien\\Home\\Dev\\Java\\arui\\api\\antlr\\Css.g:1:100: COMMENT
                 {
-                mCOMMENT(); 
+                mCOMMENT();
 
 
                 }
@@ -1337,6 +1337,6 @@ public class CssLexer extends Lexer {
             return "1:1: Tokens : ( T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | COLOR | INT | FLOAT | BOOLEAN | NULL | ID | STRING | WS | COMMENT );";
         }
     }
- 
+
 
 }

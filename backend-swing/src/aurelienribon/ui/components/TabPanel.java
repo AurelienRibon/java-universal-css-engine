@@ -15,35 +15,6 @@ import javax.swing.border.Border;
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
 public class TabPanel extends JPanel {
-	public static final StyleProcessor PROCESSOR = new StyleProcessor() {
-		@Override public void process(Object target, StyleRuleSet rs) {
-			if (target instanceof TabPanel) {
-				TabPanel t = (TabPanel) target;
-
-				rs = new StyleRuleSet(rs, new StyleRule[] {
-					AruiRules.STROKE,
-					AruiRules.FOREGROUND_UNSELECTED,
-					AruiRules.FOREGROUND_SELECTED,
-					AruiRules.FOREGROUND_MOUSEOVER,
-					AruiRules.STROKE,
-					AruiRules.STROKE_UNSELECTED,
-					AruiRules.STROKE_SELECTED,
-					AruiRules.STROKE_MOUSEOVER,
-					AruiRules.FILL_UNSELECTED,
-					AruiRules.FILL_SELECTED,
-					AruiRules.FILL_MOUSEOVER
-				});
-
-				Style.apply(t.headerPanel, rs);
-			}
-		}
-	};
-
-	static {
-		Style.registerSkippedClass(TabPanelHeaderPanel.class);
-		Style.registerSkippedClass(TabPanelHeaderSubPanel.class);
-	}
-
 	// -------------------------------------------------------------------------
 	// Attributes + ctor
 	// -------------------------------------------------------------------------
@@ -176,4 +147,29 @@ public class TabPanel extends JPanel {
 		if (model.getTabModels().isEmpty()) selectModel(null);
 		else selectModel(model.getTabModels().get(model.getTabModels().size()-1));
 	}
+
+	// -------------------------------------------------------------------------
+	// StyleProcessor
+	// -------------------------------------------------------------------------
+
+	public static class Processor implements StyleProcessor<TabPanel> {
+		@Override
+		public void process(TabPanel target, StyleRuleSet rs) {
+			rs = new StyleRuleSet(rs, new StyleRule[] {
+				AruiRules.STROKE,
+				AruiRules.FOREGROUND_UNSELECTED,
+				AruiRules.FOREGROUND_SELECTED,
+				AruiRules.FOREGROUND_MOUSEOVER,
+				AruiRules.STROKE,
+				AruiRules.STROKE_UNSELECTED,
+				AruiRules.STROKE_SELECTED,
+				AruiRules.STROKE_MOUSEOVER,
+				AruiRules.FILL_UNSELECTED,
+				AruiRules.FILL_SELECTED,
+				AruiRules.FILL_MOUSEOVER
+			});
+
+			Style.apply(target.headerPanel, rs);
+		}
+	};
 }

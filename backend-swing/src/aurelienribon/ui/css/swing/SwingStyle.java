@@ -1,11 +1,17 @@
 package aurelienribon.ui.css.swing;
 
-import aurelienribon.ui.css.StyleParent;
 import aurelienribon.ui.css.*;
+import aurelienribon.ui.css.swing.processors.*;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Container;
 import java.util.Arrays;
 import java.util.List;
+import javax.swing.AbstractButton;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JTextArea;
+import javax.swing.text.JTextComponent;
 
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
@@ -32,27 +38,28 @@ public class SwingStyle {
 		Style.registerRule(SwingRules.ICON);
 		Style.registerRule(SwingRules.BORDER);
 
-		Style.registerFunction(SwingFunctions.URL);
-		Style.registerFunction(SwingFunctions.ICON);
-		Style.registerFunction(SwingFunctions.FONT);
-		Style.registerFunction(SwingFunctions.RGB);
-		Style.registerFunction(SwingFunctions.RGBA);
-		Style.registerFunction(SwingFunctions.LINEARGRADIENT);
-		Style.registerFunction(SwingFunctions.EMPTYBORDER);
-		Style.registerFunction(SwingFunctions.LINEBORDER);
-		Style.registerFunction(SwingFunctions.MATTEBORDER);
-		Style.registerFunction(SwingFunctions.BEVELBORDER);
-		Style.registerFunction(SwingFunctions.SOFTBEVELBORDER);
-		Style.registerFunction(SwingFunctions.DASHEDBORDER);
-		Style.registerFunction(SwingFunctions.ETCHEDBORDER);
-		Style.registerFunction(SwingFunctions.TITLEDBORDER);
+		Style.registerFunction(SwingFunctions.bevelBorder);
+		Style.registerFunction(SwingFunctions.compoundBorder);
+		Style.registerFunction(SwingFunctions.dashedBorder);
+		Style.registerFunction(SwingFunctions.emptyBorder);
+		Style.registerFunction(SwingFunctions.etchedBorder);
+		Style.registerFunction(SwingFunctions.font);
+		Style.registerFunction(SwingFunctions.icon);
+		Style.registerFunction(SwingFunctions.insets);
+		Style.registerFunction(SwingFunctions.lineBorder);
+		Style.registerFunction(SwingFunctions.linearGradient);
+		Style.registerFunction(SwingFunctions.matteBorder);
+		Style.registerFunction(SwingFunctions.rgb);
+		Style.registerFunction(SwingFunctions.rgba);
+		Style.registerFunction(SwingFunctions.titledBorder);
+		Style.registerFunction(SwingFunctions.url);
 
-		Style.registerProcessor(SwingProcessors.COMPONENT);
-		Style.registerProcessor(SwingProcessors.JCOMPONENT);
-		Style.registerProcessor(SwingProcessors.ABSTRACTBUTTON);
-		Style.registerProcessor(SwingProcessors.JLABEL);
-		Style.registerProcessor(SwingProcessors.JTEXTCOMPONENT);
-		Style.registerProcessor(SwingProcessors.JTEXTAREA);
+		Style.registerProcessor(Component.class, new ComponentProcessor());
+		Style.registerProcessor(JComponent.class, new JComponentProcessor());
+		Style.registerProcessor(AbstractButton.class, new AbstractButtonProcessor());
+		Style.registerProcessor(JLabel.class, new JLabelProcessor());
+		Style.registerProcessor(JTextComponent.class,new JTextComponentProcessor());
+		Style.registerProcessor(JTextArea.class, new JTextAreaProcessor());
 
 		Style.registerChildrenAccessor(Container.class, new StyleChildrenAccessor<Container>() {
 			@Override public List<?> getStyleChildren(Container target) {

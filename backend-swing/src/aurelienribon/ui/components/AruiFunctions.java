@@ -1,6 +1,6 @@
 package aurelienribon.ui.components;
 
-import aurelienribon.ui.css.BaseFunction;
+import aurelienribon.ui.css.primitives.BaseFunction;
 import aurelienribon.ui.css.StyleFunction;
 import java.awt.Color;
 import java.awt.Paint;
@@ -11,7 +11,7 @@ import javax.swing.Icon;
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
 public class AruiFunctions {
-	public static final StyleFunction GROUPBORDER = new BaseFunction("arui-groupborder") {
+	public static final StyleFunction groupBorder = new BaseFunction("arui-groupborder") {
 		@Override public Class[][] getParams() {return new Class[][] {
 			{Icon.class, String.class, Integer.class, Integer.class, Color.class, Paint.class},
 			{Icon.class, String.class, Integer.class, Integer.class, Color.class, Paint.class, Boolean.class}
@@ -21,10 +21,6 @@ public class AruiFunctions {
 			{"icon", "title", "titleHeight", "padding", "stroke", "fill"},
 			{"icon", "title", "titleHeight", "padding", "stroke", "fill", "headerStrokeVisible"}
 		};}
-
-		@Override public boolean canBeNull(int paramsId, int paramId) {
-			return paramId == 0 || paramId == 4;
-		}
 
 		@Override public Class getReturn() {
 			return GroupBorder.class;

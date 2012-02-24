@@ -1,0 +1,43 @@
+package aurelienribon.ui.css.swing.processors;
+
+import aurelienribon.ui.css.StyleProcessor;
+import aurelienribon.ui.css.StyleRule;
+import aurelienribon.ui.css.StyleRuleSet;
+import aurelienribon.ui.css.swing.SwingRules;
+import aurelienribon.ui.css.swing.SwingUtils;
+import javax.swing.Icon;
+import javax.swing.JLabel;
+
+/**
+ * @author Aurelien Ribon | http://www.aurelienribon.com/
+ */
+public class JLabelProcessor implements StyleProcessor<JLabel> {
+	@Override
+	public void process(JLabel target, StyleRuleSet rs) {
+		StyleRule rule;
+
+		rule = SwingRules.H_ALIGN;
+		if (rs.contains(rule)) {
+			int value = SwingUtils.asHAlign(rs.getParams(rule), 0);
+			target.setHorizontalAlignment(value);
+		}
+
+		rule = SwingRules.V_ALIGN;
+		if (rs.contains(rule)) {
+			int value = SwingUtils.asVAlign(rs.getParams(rule), 0);
+			target.setVerticalAlignment(value);
+		}
+
+		rule = SwingRules.TEXT;
+		if (rs.contains(rule)) {
+			String value = (String) rs.getParams(rule).get(0);
+			target.setText(value);
+		}
+
+		rule = SwingRules.ICON;
+		if (rs.contains(rule)) {
+			Icon value = (Icon) rs.getParams(rule).get(0);
+			target.setIcon(value);
+		}
+	}
+}

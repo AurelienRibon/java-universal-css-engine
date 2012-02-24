@@ -64,22 +64,6 @@ public class StyleRuleSet {
 		return rules.contains(rule);
 	}
 
-	public Boolean asBoolean(StyleRule rule, int paramId) {
-		return (Boolean) rulesParams.get(rule).get(paramId);
-	}
-
-	public Integer asInteger(StyleRule rule, int paramId) {
-		return (Integer) rulesParams.get(rule).get(paramId);
-	}
-
-	public Float asFloat(StyleRule rule, int paramId) {
-		return (Float) rulesParams.get(rule).get(paramId);
-	}
-
-	public String asString(StyleRule rule, int paramId) {
-		return (String) rulesParams.get(rule).get(paramId);
-	}
-
 	// -------------------------------------------------------------------------
 	// Helpers
 	// -------------------------------------------------------------------------

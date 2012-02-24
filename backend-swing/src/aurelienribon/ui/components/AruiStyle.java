@@ -23,11 +23,11 @@ public class AruiStyle {
 		Style.registerRule(AruiRules.FILL_UNSELECTED);
 		Style.registerRule(AruiRules.CORNERRADIUS);
 
-		Style.registerFunction(AruiFunctions.GROUPBORDER);
+		Style.registerFunction(AruiFunctions.groupBorder);
 
-		Style.registerProcessor(Button.PROCESSOR);
-		Style.registerProcessor(TabPanel.PROCESSOR);
-		Style.registerProcessor(TabPanelHeaderPanel.PROCESSOR);
-		Style.registerProcessor(TabPanelHeaderSubPanel.PROCESSOR);
+		Style.registerProcessor(Button.class, new Button.Processor());
+		Style.registerProcessor(TabPanel.class, new TabPanel.Processor());
+		Style.registerProcessor(TabPanelHeaderPanel.class, new TabPanelHeaderPanel.Processor());
+		Style.registerProcessor(TabPanelHeaderSubPanel.class, new TabPanelHeaderSubPanel.Processor());
 	}
 }
