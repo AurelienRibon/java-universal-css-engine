@@ -1,9 +1,9 @@
 package aurelienribon.ui.components;
 
-import aurelienribon.ui.css.StyleProcessor;
+import aurelienribon.ui.css.DeclarationSetProcessor;
 import aurelienribon.ui.css.DeclarationSet;
 import aurelienribon.ui.css.swing.PaintUtils;
-import aurelienribon.ui.css.StyleParent;
+import aurelienribon.ui.css.Container;
 import aurelienribon.ui.css.Property;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -14,7 +14,7 @@ import javax.swing.*;
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
-public class Button extends JButton implements StyleParent {
+public class Button extends JButton implements Container {
 	private Color foregroundMouseDown = Color.RED;
 	private Color foregroundMouseOver = Color.RED;
 	private Color stroke = Color.RED;
@@ -38,7 +38,7 @@ public class Button extends JButton implements StyleParent {
 	}
 
 	@Override
-	public List<?> getStyleChildren() {
+	public List<?> getChildren() {
 		return null;
 	}
 
@@ -127,7 +127,7 @@ public class Button extends JButton implements StyleParent {
 	// StyleProcessor
 	// -------------------------------------------------------------------------
 
-	public static class Processor implements StyleProcessor<Button> {
+	public static class Processor implements DeclarationSetProcessor<Button> {
 		@Override
 		public void process(Button target, DeclarationSet rs) {
 			Property rule;

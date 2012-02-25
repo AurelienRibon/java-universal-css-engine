@@ -2,7 +2,7 @@ package aurelienribon.ui.components;
 
 import aurelienribon.ui.components.TabPanelModel.TabModel;
 import aurelienribon.ui.css.Style;
-import aurelienribon.ui.css.StyleProcessor;
+import aurelienribon.ui.css.DeclarationSetProcessor;
 import aurelienribon.ui.css.Property;
 import aurelienribon.ui.css.DeclarationSet;
 import java.awt.*;
@@ -159,7 +159,7 @@ class TabPanelHeaderPanel extends JLayeredPane {
 	// StyleProcessor
 	// -------------------------------------------------------------------------
 
-	public static class Processor implements StyleProcessor<TabPanelHeaderPanel> {
+	public static class Processor implements DeclarationSetProcessor<TabPanelHeaderPanel> {
 		@Override
 		public void process(TabPanelHeaderPanel target, DeclarationSet rs) {
 			Property rule = AruiRules.STROKE;

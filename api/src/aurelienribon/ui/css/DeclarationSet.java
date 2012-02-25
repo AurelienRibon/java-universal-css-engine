@@ -49,8 +49,8 @@ public class DeclarationSet {
 
 		for (Rule sc : style.getClasses()) {
 			if (isLastSelectorValid(sc.getLastSelector(), target) && isStackValid(sc.getSelectors(), stack)) {
-				tRules.addAll(sc.getRuleSet().getProperties());
-				tRulesParams.putAll(sc.getRuleSet().getPropertiesValues());
+				tRules.addAll(sc.getDeclarations().getProperties());
+				tRulesParams.putAll(sc.getDeclarations().getPropertiesValues());
 			}
 		}
 

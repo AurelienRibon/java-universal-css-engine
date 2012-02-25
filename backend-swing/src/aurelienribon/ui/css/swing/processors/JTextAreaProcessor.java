@@ -1,6 +1,6 @@
 package aurelienribon.ui.css.swing.processors;
 
-import aurelienribon.ui.css.StyleProcessor;
+import aurelienribon.ui.css.DeclarationSetProcessor;
 import aurelienribon.ui.css.Property;
 import aurelienribon.ui.css.DeclarationSet;
 import aurelienribon.ui.css.swing.SwingRules;
@@ -9,7 +9,7 @@ import javax.swing.JTextArea;
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
-public class JTextAreaProcessor implements StyleProcessor<JTextArea> {
+public class JTextAreaProcessor implements DeclarationSetProcessor<JTextArea> {
 	@Override
 	public void process(JTextArea target, DeclarationSet rs) {
 		Property rule;

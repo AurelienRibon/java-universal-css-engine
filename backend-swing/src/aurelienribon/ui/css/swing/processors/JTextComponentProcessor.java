@@ -1,6 +1,6 @@
 package aurelienribon.ui.css.swing.processors;
 
-import aurelienribon.ui.css.StyleProcessor;
+import aurelienribon.ui.css.DeclarationSetProcessor;
 import aurelienribon.ui.css.Property;
 import aurelienribon.ui.css.DeclarationSet;
 import aurelienribon.ui.css.swing.SwingFunctions;
@@ -11,7 +11,7 @@ import javax.swing.text.JTextComponent;
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
-public class JTextComponentProcessor implements StyleProcessor<JTextComponent> {
+public class JTextComponentProcessor implements DeclarationSetProcessor<JTextComponent> {
 	@Override
 	public void process(JTextComponent target, DeclarationSet rs) {
 		Property rule;

@@ -83,7 +83,7 @@ public class Style {
 
 	private static final Map<String, Property> registeredRules = new LinkedHashMap<String, Property>();
 	private static final Map<String, Function> registeredFunctions = new LinkedHashMap<String, Function>();
-	private static final Map<Class, List<StyleProcessor>> registeredProcessors = new LinkedHashMap<Class, List<StyleProcessor>>();
+	private static final Map<Class, List<DeclarationSetProcessor>> registeredProcessors = new LinkedHashMap<Class, List<DeclarationSetProcessor>>();
 	private static final Map<Object, String> registeredTargetsClassNames = new LinkedHashMap<Object, String>();
 	private static final Map<Class, ChildrenAccessor> registeredChildrenAccessors = new HashMap<Class, ChildrenAccessor>();
 	private static ParamConverter converter;
@@ -125,10 +125,10 @@ public class Style {
 	 * a processor should return immediatly if a target is not of a type it
 	 * was built to handle.
 	 */
-	public static void registerProcessor(Class clazz, StyleProcessor processor) {
-		List<StyleProcessor> list = registeredProcessors.get(clazz);
+	public static void registerProcessor(Class clazz, DeclarationSetProcessor processor) {
+		List<DeclarationSetProcessor> list = registeredProcessors.get(clazz);
 		if (list == null) {
-			list = new ArrayList<StyleProcessor>();
+			list = new ArrayList<DeclarationSetProcessor>();
 			registeredProcessors.put(clazz, list);
 		}
 
@@ -181,8 +181,8 @@ public class Style {
 	public static void apply(Object target, DeclarationSet rs) {
 		for (Class clazz : registeredProcessors.keySet()) {
 			if (clazz.isInstance(target)) {
-				List<StyleProcessor> processors = registeredProcessors.get(clazz);
-				for (StyleProcessor proc : processors) {
+				List<DeclarationSetProcessor> processors = registeredProcessors.get(clazz);
+				for (DeclarationSetProcessor proc : processors) {
 					proc.process(target, rs);
 				}
 			}
@@ -242,7 +242,7 @@ public class Style {
 	/**
 	 * Gets a list of every registered processor.
 	 */
-	public static List<StyleProcessor> getRegisteredProcessors(Class clazz) {
+	public static List<DeclarationSetProcessor> getRegisteredProcessors(Class clazz) {
 		return Collections.unmodifiableList(registeredProcessors.get(clazz));
 	}
 
@@ -437,10 +437,10 @@ public class Style {
 		if (registeredTargetsClassNames.containsKey(target)) stack.add(registeredTargetsClassNames.get(target));
 
 		// Iterate over the target children, if any
-		if (target instanceof StyleParent) {
-			StyleParent parent = (StyleParent) target;
-			if (parent.getStyleChildren() != null) {
-				for (Object child : parent.getStyleChildren()) apply(child, style, stack);
+		if (target instanceof Container) {
+			Container parent = (Container) target;
+			if (parent.getChildren() != null) {
+				for (Object child : parent.getChildren()) apply(child, style, stack);
 			}
 		} else {
 			for (Class clazz : registeredChildrenAccessors.keySet()) {

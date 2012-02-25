@@ -1,6 +1,6 @@
 package aurelienribon.ui.css.swing.processors;
 
-import aurelienribon.ui.css.StyleProcessor;
+import aurelienribon.ui.css.DeclarationSetProcessor;
 import aurelienribon.ui.css.Property;
 import aurelienribon.ui.css.DeclarationSet;
 import aurelienribon.ui.css.swing.SwingFunctions;
@@ -13,7 +13,7 @@ import javax.swing.Icon;
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
-public class AbstractButtonProcessor implements StyleProcessor<AbstractButton> {
+public class AbstractButtonProcessor implements DeclarationSetProcessor<AbstractButton> {
 	@Override
 	public void process(AbstractButton target, DeclarationSet rs) {
 		Property rule;
