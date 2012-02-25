@@ -19,58 +19,86 @@ import org.antlr.runtime.RecognitionException;
  * being UI components, business models, or game elements.
  * <p/>
  *
- * The engine depends on three main properties: rules, functions, and
- * processors. CSS stylesheets are composed of classes, made of rules applied to
- * one or more selectors.
+ * <h2>What is CSS?</h2>
+ * To understand how to customize the engine with your own elements, you must
+ * first quickly understand how a CSS stylesheet is built. A stylesheet is
+ * composed of rules, which are each defined by a selector, and a group of
+ * declarations. Finally, a declaration is made of a property associated to
+ * a value. The following image sums-up all of this:
+ * <p/>
  *
+ * <img src="http://www.w3schools.com/css/selector.gif" />
+ * <p/>
+ *
+ * As it is commonly used in CSS stylesheets, the engine supports: <br/>
+ * + Nested selectors, like ".parent .child {...}"<br/>
+ * + Groups of selectors, like ".class1, .class2, .class3 {...}"
+ * <p/>
+ *
+ * <h2>How can I use the engine?</h2>
+ * The engine is built around 3 kinds of components: {@link Property
+ * properties}, {@link Function functions}, and
+ * {@link DeclarationSetProcessor processors}, and you will need to register
+ * these components to the engine, since it comes as naked as possible.
+ * <p/>
+ *
+ * <b>Important:</b> <font color="#AA0000">remember that the engine is completely naked, this means
+ * that it comes without any registered property, function, or processor. You
+ * first need to register these entities to the engine to let it understand
+ * how to parse CSS stylesheets and apply them to your targets. Some
+ * already made entities (for <b>Swing UIs</b> for instance) can be found at
+ * the</font> <a href="http://code.google.com/p/java-universal-css-engine/">
+ * project website</a>.
+ * <p/>
+ *
+ * 1. <b>Properties:</b> a property defines a style attribute, like "margin",
+ * "border" or "color" in common CSS syntax. A property is always associated
+ * with a value in declarations, like "color: #FFF", and this value can be made
+ * of one or more parameters. Actually, a property can support different sets of
+ * parameters. For instance, the common "margin" CSS property can be called with
+ * either 1, 2 or 4 parameters, defining the margin insets.
+ * <p/>
+ *
+ * 2. <b>Functions:</b> a function, or a "functional notation", is used to
+ * produce a value for a parameter of a declaration value. It takes one or more
+ * parameters (which can be functions too), processes them and returns an
+ * object.
+ * <p/>
+ *
+ * 3. <b>Processors:</b> a declarations processor is responsible for applying a
+ * group of declarations to a target object. These declarations are retrieved
+ * from the stylesheet and correspond to the rules which selectors were
+ * walidated by the target object.
+ * <p/>
+ *
+ * <h2>Examples</h2>
+ * For examples on how to create custom properties, functions and processors,
+ * please see the proposed implementation for Swing, at the <a href=
+ * "http://code.google.com/p/java-universal-css-engine/">project website</a>.
+ * <p/>
+ *
+ * Simple rule: this rule will by applied to every JButton of the application
+ * (if using the Swing backend for properties/functions/processors of course):
  * <pre>
- * selector1, selector2 {
- *     rule: params;
+ * javax-swing-JButton {
+ *     -swing-foreground: #000;
+ *     -swing-background: #FFF;
  * }
  * </pre>
  *
- * <b>Selector</b>: a selector identifies a target object, either by its java
- * class (with package '.' separators replaced by '-' to match CSS convention),
- * or by a registered className (in CSS terms, like ".myClass"). A selector
- * may consist of multiple cascaded selectors (like ".class1 .class2 .class3").
- * <p/>
- *
- * <b>Rules</b>: a rule takes one or more parameters, separated by whitespaces.
- * It may take different numbers of parameters. A rule is global, so it does
- * nothing on its own: the processing behavior is managed by the target.
- * Therefore, a rule can be treated differently by different targets, or
- * even skipped if not relevant for a given target (but its children may
- * use it, so its never totally irrelevant).
- * <p/>
- *
- * <b>Functions</b>:a function takes one or more parameters, separated by
- * whitespaces. It may take different numbers of parameters. A function defines
- * a process, and always returns something. Therefore, a function can be used as
- * a parameter to a rule, or to another function.
- * <p/>
- *
- * <b>Processors</b>: a processor acts directly on a target according to the
- * rules given to it, and their parameters. Note that upon applying a style,
- * the targets of your application will be sent to every registered processors.
- * Therefore, a processor should return immediatly if a target is not of a type
- * it was built to handle.
- * <p/>
- *
- * Example:
+ * Nested seelctors: this rule will be applied to every object registered with
+ * the ".redLabel" classname, but only if it is a child of a toolbar:
  * <pre>
- * /* These rules will be applied to every button * /
- *
- * javax-swing-JButton {
- *     -swing-foreground: #000000;
- *     -swing-background: #FFFFFF;
+ * javax-swing-JToolBar .redLabel {
+ *     -swing-foreground: #F00;
  * }
+ * </pre>
  *
- * /* This rule will be applied to every object registered
- *  * with the ".redLabel" classname, but only if it is a
- *  * child of a panel. * /
- *
- * javax-swing-JPanel .redLabel {
- *     -swing-foreground: #FF0000;
+ * Grouped selectors: this rule will be applied to every object registered with
+ * either the ".redLabel" classname, or the ".importantLabel" classname:
+ * <pre>
+ * .redLabel, .importantLabel {
+ *     -swing-foreground: #F00;
  * }
  * </pre>
  *
