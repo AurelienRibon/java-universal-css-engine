@@ -109,35 +109,34 @@ public class Style {
 	// Static API
 	// -------------------------------------------------------------------------
 
-	private static final Map<String, Property> registeredRules = new LinkedHashMap<String, Property>();
+	private static final Map<String, Property> registeredProperties = new LinkedHashMap<String, Property>();
 	private static final Map<String, Function> registeredFunctions = new LinkedHashMap<String, Function>();
 	private static final Map<Class, List<DeclarationSetProcessor>> registeredProcessors = new LinkedHashMap<Class, List<DeclarationSetProcessor>>();
-	private static final Map<Object, String> registeredTargetsClassNames = new LinkedHashMap<Object, String>();
+	private static final Map<Object, String> registeredTargets = new LinkedHashMap<Object, String>();
 	private static final Map<Class, ChildrenAccessor> registeredChildrenAccessors = new HashMap<Class, ChildrenAccessor>();
 	private static ParamConverter converter;
 
 	/**
-	 * Registers a new rule to the engine.
+	 * Registers a new property to the engine.
 	 * <p/>
-	 * A rule takes one or more parameters, separated by whitespaces. It may
-	 * take different numbers of parameters. A rule is global, so it does
-	 * nothing on its own: the processing behavior is managed by the target.
-	 * Therefore, a rule can be treated differently by different targets, or
-	 * even skipped if not relevant for a given target (but its children may
-	 * use it, so its never totally irrelevant).
+	 * A property defines a style attribute, like "margin", "border" or "color"
+	 * in common CSS syntax. A property is always associated with a value in
+	 * declarations, like "color: #FFF", and this value can be made of one or
+	 * more parameters. Actually, a property can support different sets of
+	 * parameters. For instance, the common "margin" CSS property can be called
+	 * with either 1, 2 or 4 parameters, defining the margin insets.
 	 */
-	public static void registerRule(Property rule) {
-		if (registeredRules.containsKey(rule.getName())) throw new RuntimeException("Rule already registered");
-		registeredRules.put(rule.getName(), rule);
+	public static void registerProperty(Property property) {
+		if (registeredProperties.containsKey(property.getName())) throw new RuntimeException("Property already registered");
+		registeredProperties.put(property.getName(), property);
 	}
 
 	/**
 	 * Registers a new function to the engine.
 	 * <p/>
-	 * A function takes one or more parameters, separated by whitespaces. It may
-	 * take different numbers of parameters. A function defines a process, and
-	 * always returns something. Therefore, a function can be used as a
-	 * parameter to a rule, or to another function.
+	 * A function, or a "functional notation", is used to produce a value for a
+	 * parameter of a declaration value. It takes one or more parameters (which
+	 * can be functions too), processes them and returns an object.
 	 */
 	public static void registerFunction(Function function) {
 		if (registeredFunctions.containsKey(function.getName())) throw new RuntimeException("Function already registered");
@@ -147,11 +146,10 @@ public class Style {
 	/**
 	 * Registers a new processor to the engine.
 	 * <p/>
-	 * A processor acts directly on a target according to the rules given to it,
-	 * and their parameters. Note that upon applying a style, the targets of
-	 * your application will be sent to every registered processors. Therefore,
-	 * a processor should return immediatly if a target is not of a type it
-	 * was built to handle.
+	 * A declarations processor is responsible for applying a group of
+	 * declarations to a target object. These declarations are retrieved from
+	 * the stylesheet and correspond to the rules which selectors were walidated
+	 * by the target object.
 	 */
 	public static void registerProcessor(Class clazz, DeclarationSetProcessor processor) {
 		List<DeclarationSetProcessor> list = registeredProcessors.get(clazz);
@@ -164,15 +162,15 @@ public class Style {
 	}
 
 	/**
-	 * Registers a target with a className.
+	 * Registers a target with a CSS classname.
 	 * <p/>
 	 * This is used to assign CSS classnames (like ".something" to a target).
 	 * Don't forget to unregister the target when you dispose of it, to remove
 	 * it from memory.
 	 */
-	public static void registerTargetClassName(Object target, String className) {
+	public static void registerTarget(Object target, String className) {
 		if (!className.startsWith(".")) className = "." + className;
-		registeredTargetsClassNames.put(target, className);
+		registeredTargets.put(target, className);
 	}
 
 	/**
@@ -187,24 +185,25 @@ public class Style {
 	}
 
 	/**
-	 * Unregisters a className from the engine.
+	 * Unregisters a classname from the engine.
 	 */
-	public static void unregisterTargetClassName(Object target) {
-		registeredTargetsClassNames.remove(target);
+	public static void unregisterTarget(Object target) {
+		registeredTargets.remove(target);
 	}
 
 	/**
 	 * Applies a stylesheet to a target and its children, if it has a
-	 * corresponding StyleChildrenAccessor registered.
+	 * corresponding children accessor registered.
 	 */
 	public static void apply(Object target, Style style) {
 		apply(target, style, new ArrayList<String>());
 	}
 
 	/**
-	 * Applies a group of attributes to a target. It may be interesting when you
-	 * want to apply the same group of rules to some objects, directly from
-	 * a StyleProcessor for instance.
+	 * Applies a group of declarations to a target. It is often used as an
+	 * advanced technique to propagate the declarations of a target to its
+	 * children, even if they should not validate the same rules of the
+	 * stylesheet. Complicated to understand, but still useful :)
 	 */
 	public static void apply(Object target, DeclarationSet rs) {
 		for (Class clazz : registeredProcessors.keySet()) {
@@ -219,31 +218,31 @@ public class Style {
 
 	/**
 	 * Sets the converter that will be used to convert special objects found
-	 * during parsing into something useable. For instance, colors can be
-	 * found in CSS files with the syntax #ABCDEF. However, since there is no
-	 * Color class in generic java packages (java.awt is not available on
-	 * Android), the engine doesn't know how to treat such syntax, and will
-	 * return an undocumented object. Therefore, you'll want to set a converter
-	 * that will translate every undocomented color into java.awt.Color class
-	 * for Swing targets for instance, or android.graphics.Color for Android
-	 * targets.
+	 * during parsing into something useable.
+	 * <p/>
+	 * Indeed, some definitions in a CSS stylesheet may correspond to some
+	 * objects that are not defined. This is the case for color definitions,
+	 * like "#FFF", which need to be assigned to a color object. However, since
+	 * the CSS engine is not bound to any UI technology, it will ask you to
+	 * create a color object from every color definition, according to your
+	 * framework.
 	 */
 	public static void setParamConverter(ParamConverter converter) {
 		Style.converter = converter;
 	}
 
 	/**
-	 * Gets a list of every registered rules.
+	 * Gets a list of every registered properties names.
 	 */
-	public static List<String> getRegisteredRulesNames() {
-		return Collections.unmodifiableList(new ArrayList<String>(registeredRules.keySet()));
+	public static List<String> getRegisteredPropertiesNames() {
+		return Collections.unmodifiableList(new ArrayList<String>(registeredProperties.keySet()));
 	}
 
 	/**
-	 * Gets a rule by its name.
+	 * Gets a property by its name.
 	 */
-	public static Property getRegisteredRule(String name) {
-		return registeredRules.get(name);
+	public static Property getRegisteredProperty(String name) {
+		return registeredProperties.get(name);
 	}
 
 	/**
@@ -261,38 +260,24 @@ public class Style {
 	}
 
 	/**
-	 * Gets a list of every registered processor.
-	 */
-	public static List<Class> getRegisteredProcessorsClasses() {
-		return Collections.unmodifiableList(new ArrayList<Class>(registeredProcessors.keySet()));
-	}
-
-	/**
-	 * Gets a list of every registered processor.
-	 */
-	public static List<DeclarationSetProcessor> getRegisteredProcessors(Class clazz) {
-		return Collections.unmodifiableList(registeredProcessors.get(clazz));
-	}
-
-	/**
 	 * Gets a list of every target registered with a classname.
 	 */
 	public static List<Object> getRegisteredTargets() {
-		return Collections.unmodifiableList(new ArrayList<Object>(registeredTargetsClassNames.keySet()));
+		return Collections.unmodifiableList(new ArrayList<Object>(registeredTargets.keySet()));
 	}
 
 	/**
-	 * Gets the className associated to the given target.
+	 * Gets the CSS classname associated to the given target.
 	 */
 	public static String getRegisteredTargetClassName(Object target) {
-		return registeredTargetsClassNames.get(target);
+		return registeredTargets.get(target);
 	}
 
 	/**
 	 * Gets the rules manual.
 	 */
 	public static String getRulesManual() {
-		return generateManual(registeredRules.values());
+		return generateManual(registeredProperties.values());
 	}
 
 	/**
@@ -307,22 +292,20 @@ public class Style {
 	// -------------------------------------------------------------------------
 
 	private final String styleSheet;
-	private final List<Rule> classes = new ArrayList<Rule>();
+	private final List<Rule> rules = new ArrayList<Rule>();
 
 	/**
 	 * Builds a new Style from an URL pointing to a stylesheet.
-	 * @throws StyleException
 	 */
-	public Style(URL styleSheetUrl) throws StyleException {
+	public Style(URL styleSheetUrl) {
 		this.styleSheet = getStyleSheet(styleSheetUrl);
 		parse(styleSheet);
 	}
 
 	/**
 	 * Builds a new Style from String stylesheet.
-	 * @throws StyleException
 	 */
-	public Style(String styleSheet) throws StyleException {
+	public Style(String styleSheet) {
 		this.styleSheet = styleSheet;
 		parse(styleSheet);
 	}
@@ -339,10 +322,10 @@ public class Style {
 	}
 
 	/**
-	 * Gets the retrieved classes.
+	 * Gets the rules extracted from the stylesheet.
 	 */
-	public List<Rule> getClasses() {
-		return Collections.unmodifiableList(classes);
+	public List<Rule> getRules() {
+		return Collections.unmodifiableList(rules);
 	}
 
 	// -------------------------------------------------------------------------
@@ -382,24 +365,24 @@ public class Style {
 			for (String selector : result.keySet()) {
 				Map<String, List<Object>> resultRules = result.get(selector);
 
-				List<Property> rules = new ArrayList<Property>();
-				Map<Property, List<Object>> rulesParams = new HashMap<Property, List<Object>>();
+				List<Property> properties = new ArrayList<Property>();
+				Map<Property, List<Object>> propertiesValues = new HashMap<Property, List<Object>>();
 
 				for (String name : resultRules.keySet()) {
-					Property rule = registeredRules.get(name);
+					Property property = registeredProperties.get(name);
 					List<Object> params = resultRules.get(name);
 
-					if (rule == null) throw StyleException.forProperty(name);
+					if (property == null) throw StyleException.forProperty(name);
 					for (int i=0; i<params.size(); i++) params.set(i, evaluateParam(params.get(i)));
-					if (!checkParams(rule, params)) throw StyleException.forPropertyParams(rule);
+					if (!checkParams(property, params)) throw StyleException.forPropertyParams(property);
 
-					rules.add(rule);
-					rulesParams.put(rule, params);
+					properties.add(property);
+					propertiesValues.put(property, params);
 				}
 
-				DeclarationSet rs = new DeclarationSet(rules, rulesParams);
+				DeclarationSet rs = new DeclarationSet(properties, propertiesValues);
 				Rule sc = new Rule(selector, rs);
-				classes.add(sc);
+				rules.add(sc);
 			}
 
 		} catch (RecognitionException ex) {
@@ -414,16 +397,16 @@ public class Style {
 		}
 
 		if (param instanceof CssParser.Function) {
-			CssParser.Function func = (CssParser.Function) param;
-			Function regFunc = registeredFunctions.get(func.name);
-			List<Object> params = new ArrayList<Object>(func.params);
+			CssParser.Function parserFunction = (CssParser.Function) param;
+			Function function = registeredFunctions.get(parserFunction.name);
+			List<Object> params = new ArrayList<Object>(parserFunction.params);
 
 			for (int i=0; i<params.size(); i++) params.set(i, evaluateParam(params.get(i)));
 
-			if (regFunc == null) throw StyleException.forFunction(func.name);
-			if (!checkParams(regFunc, params)) throw StyleException.forFunctionParams(regFunc);
+			if (function == null) throw StyleException.forFunction(parserFunction.name);
+			if (!checkParams(function, params)) throw StyleException.forFunctionParams(function);
 
-			return regFunc.process(params);
+			return function.process(params);
 		}
 
 		return param;
@@ -456,13 +439,13 @@ public class Style {
 	}
 
 	private static void apply(Object target, Style style, List<String> stack) {
-		// Retrieve all the rules belonging to the target, and apply them
-		DeclarationSet rs = new DeclarationSet(style, target, stack);
-		apply(target, rs);
+		// Retrieve all the declarations belonging to the target, and apply them
+		DeclarationSet ds = new DeclarationSet(style, target, stack);
+		apply(target, ds);
 
-		// Add the target class and className to the selectors stack
+		// Add the target class and classname to the selectors stack
 		stack.add(target.getClass().getName());
-		if (registeredTargetsClassNames.containsKey(target)) stack.add(registeredTargetsClassNames.get(target));
+		if (registeredTargets.containsKey(target)) stack.add(registeredTargets.get(target));
 
 		// Iterate over the target children, if any
 		if (target instanceof Container) {
@@ -482,20 +465,20 @@ public class Style {
 		}
 	}
 
-	private static String generateManual(Collection<? extends Property> rules) {
+	private static String generateManual(Collection<? extends Property> properties) {
 		String str = "";
 
-		for (Property rule : rules) {
-			str += rule.getName() + getReturnStatement(rule) + "\n";
+		for (Property property : properties) {
+			str += property.getName() + getReturnStatement(property) + "\n";
 
-			for (int i=0; i<rule.getParams().length; i++) {
+			for (int i=0; i<property.getParams().length; i++) {
 				str += "    ";
 
-				if (rule.getParams()[i].length == 0) str += "nothing";
+				if (property.getParams()[i].length == 0) str += "nothing";
 
-				for (int ii=0; ii<rule.getParams()[i].length; ii++) {
-					String clazz = rule.getParams()[i][ii].getSimpleName();
-					String name = rule.getParamsNames()[i][ii];
+				for (int ii=0; ii<property.getParams()[i].length; ii++) {
+					String clazz = property.getParams()[i][ii].getSimpleName();
+					String name = property.getParamsNames()[i][ii];
 
 					if (ii > 0) str += ", ";
 					str += prettify(clazz) + " " + name;

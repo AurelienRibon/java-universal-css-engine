@@ -86,11 +86,11 @@ public class MainWindow extends javax.swing.JFrame {
 			}
 		});
 
-		Style.registerTargetClassName(getContentPane(), "rootPanel");
-		Style.registerTargetClassName(styleControlPanel, "styleControlPanel");
-		Style.registerTargetClassName(tabPanelControlPanel, "tabPanelControlPanel");
-		Style.registerTargetClassName(applyBtn, "applyButton");
-		Style.registerTargetClassName(resetBtn, "resetButton");
+		Style.registerTarget(getContentPane(), "rootPanel");
+		Style.registerTarget(styleControlPanel, "styleControlPanel");
+		Style.registerTarget(tabPanelControlPanel, "tabPanelControlPanel");
+		Style.registerTarget(applyBtn, "applyButton");
+		Style.registerTarget(resetBtn, "resetButton");
 
 		tabPanel.getModel().add(new JScrollPane(editorArea), "Style editor", Gfx.getIcon("ic_edit.png"), false);
 		tabPanel.getModel().add(new JScrollPane(rulesManualArea), "CSS rules", Gfx.getIcon("ic_manual.png"), false);

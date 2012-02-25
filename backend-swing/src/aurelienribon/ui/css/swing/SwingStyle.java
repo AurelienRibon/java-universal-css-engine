@@ -18,25 +18,25 @@ import javax.swing.text.JTextComponent;
  */
 public class SwingStyle {
 	public static void init() {
-		Style.registerRule(SwingRules.BACKGROUND);
-		Style.registerRule(SwingRules.FOREGROUND);
-		Style.registerRule(SwingRules.VISIBLE);
-		Style.registerRule(SwingRules.ENABLED);
-		Style.registerRule(SwingRules.FOCUSABLE);
-		Style.registerRule(SwingRules.OPAQUE);
-		Style.registerRule(SwingRules.EDITABLE);
-		Style.registerRule(SwingRules.LINEWRAP);
-		Style.registerRule(SwingRules.WRAPSTYLEWORD);
-		Style.registerRule(SwingRules.TABSIZE);
-		Style.registerRule(SwingRules.CARETPOSITION);
-		Style.registerRule(SwingRules.TOOLTIP);
-		Style.registerRule(SwingRules.TEXT);
-		Style.registerRule(SwingRules.H_ALIGN);
-		Style.registerRule(SwingRules.V_ALIGN);
-		Style.registerRule(SwingRules.MARGIN);
-		Style.registerRule(SwingRules.FONT);
-		Style.registerRule(SwingRules.ICON);
-		Style.registerRule(SwingRules.BORDER);
+		Style.registerProperty(SwingRules.BACKGROUND);
+		Style.registerProperty(SwingRules.FOREGROUND);
+		Style.registerProperty(SwingRules.VISIBLE);
+		Style.registerProperty(SwingRules.ENABLED);
+		Style.registerProperty(SwingRules.FOCUSABLE);
+		Style.registerProperty(SwingRules.OPAQUE);
+		Style.registerProperty(SwingRules.EDITABLE);
+		Style.registerProperty(SwingRules.LINEWRAP);
+		Style.registerProperty(SwingRules.WRAPSTYLEWORD);
+		Style.registerProperty(SwingRules.TABSIZE);
+		Style.registerProperty(SwingRules.CARETPOSITION);
+		Style.registerProperty(SwingRules.TOOLTIP);
+		Style.registerProperty(SwingRules.TEXT);
+		Style.registerProperty(SwingRules.H_ALIGN);
+		Style.registerProperty(SwingRules.V_ALIGN);
+		Style.registerProperty(SwingRules.MARGIN);
+		Style.registerProperty(SwingRules.FONT);
+		Style.registerProperty(SwingRules.ICON);
+		Style.registerProperty(SwingRules.BORDER);
 
 		Style.registerFunction(SwingFunctions.bevelBorder);
 		Style.registerFunction(SwingFunctions.compoundBorder);

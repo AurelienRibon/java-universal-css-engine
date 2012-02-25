@@ -47,7 +47,7 @@ public class DeclarationSet {
 		List<Property> tRules = new ArrayList<Property>();
 		Map<Property, List<Object>> tRulesParams = new HashMap<Property, List<Object>>();
 
-		for (Rule sc : style.getClasses()) {
+		for (Rule sc : style.getRules()) {
 			if (isLastSelectorValid(sc.getLastSelector(), target) && isStackValid(sc.getSelectors(), stack)) {
 				tRules.addAll(sc.getDeclarations().getProperties());
 				tRulesParams.putAll(sc.getDeclarations().getPropertiesValues());

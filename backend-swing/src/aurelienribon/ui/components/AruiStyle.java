@@ -7,21 +7,21 @@ import aurelienribon.ui.css.Style;
  */
 public class AruiStyle {
 	public static void init() {
-		Style.registerRule(AruiRules.FOREGROUND_MOUSEOVER);
-		Style.registerRule(AruiRules.FOREGROUND_MOUSEDOWN);
-		Style.registerRule(AruiRules.FOREGROUND_SELECTED);
-		Style.registerRule(AruiRules.FOREGROUND_UNSELECTED);
-		Style.registerRule(AruiRules.STROKE);
-		Style.registerRule(AruiRules.STROKE_MOUSEOVER);
-		Style.registerRule(AruiRules.STROKE_MOUSEDOWN);
-		Style.registerRule(AruiRules.STROKE_SELECTED);
-		Style.registerRule(AruiRules.STROKE_UNSELECTED);
-		Style.registerRule(AruiRules.FILL);
-		Style.registerRule(AruiRules.FILL_MOUSEOVER);
-		Style.registerRule(AruiRules.FILL_MOUSEDOWN);
-		Style.registerRule(AruiRules.FILL_SELECTED);
-		Style.registerRule(AruiRules.FILL_UNSELECTED);
-		Style.registerRule(AruiRules.CORNERRADIUS);
+		Style.registerProperty(AruiRules.FOREGROUND_MOUSEOVER);
+		Style.registerProperty(AruiRules.FOREGROUND_MOUSEDOWN);
+		Style.registerProperty(AruiRules.FOREGROUND_SELECTED);
+		Style.registerProperty(AruiRules.FOREGROUND_UNSELECTED);
+		Style.registerProperty(AruiRules.STROKE);
+		Style.registerProperty(AruiRules.STROKE_MOUSEOVER);
+		Style.registerProperty(AruiRules.STROKE_MOUSEDOWN);
+		Style.registerProperty(AruiRules.STROKE_SELECTED);
+		Style.registerProperty(AruiRules.STROKE_UNSELECTED);
+		Style.registerProperty(AruiRules.FILL);
+		Style.registerProperty(AruiRules.FILL_MOUSEOVER);
+		Style.registerProperty(AruiRules.FILL_MOUSEDOWN);
+		Style.registerProperty(AruiRules.FILL_SELECTED);
+		Style.registerProperty(AruiRules.FILL_UNSELECTED);
+		Style.registerProperty(AruiRules.CORNERRADIUS);
 
 		Style.registerFunction(AruiFunctions.groupBorder);
 
