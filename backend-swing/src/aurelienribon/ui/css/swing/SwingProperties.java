@@ -9,7 +9,7 @@ import javax.swing.border.Border;
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
-public class SwingRules {
+public class SwingProperties {
 	public static final Property BACKGROUND = new SingleParamRule("-swing-background", Color.class, "color");
 	public static final Property FOREGROUND = new SingleParamRule("-swing-foreground", Color.class, "color");
 

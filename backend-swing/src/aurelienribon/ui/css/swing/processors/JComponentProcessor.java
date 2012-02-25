@@ -1,9 +1,9 @@
 package aurelienribon.ui.css.swing.processors;
 
+import aurelienribon.ui.css.DeclarationSet;
 import aurelienribon.ui.css.DeclarationSetProcessor;
 import aurelienribon.ui.css.Property;
-import aurelienribon.ui.css.DeclarationSet;
-import aurelienribon.ui.css.swing.SwingRules;
+import aurelienribon.ui.css.swing.SwingProperties;
 import javax.swing.JComponent;
 import javax.swing.border.Border;
 
@@ -12,24 +12,24 @@ import javax.swing.border.Border;
  */
 public class JComponentProcessor implements DeclarationSetProcessor<JComponent> {
 	@Override
-	public void process(JComponent target, DeclarationSet rs) {
+	public void process(JComponent target, DeclarationSet ds) {
 		Property rule;
 
-		rule = SwingRules.OPAQUE;
-		if (rs.contains(rule)) {
-			boolean value = (Boolean) rs.getValue(rule).get(0);
+		rule = SwingProperties.OPAQUE;
+		if (ds.contains(rule)) {
+			boolean value = (Boolean) ds.getValue(rule).get(0);
 			target.setOpaque(value);
 		}
 
-		rule = SwingRules.TOOLTIP;
-		if (rs.contains(rule)) {
-			String value = (String) rs.getValue(rule).get(0);
+		rule = SwingProperties.TOOLTIP;
+		if (ds.contains(rule)) {
+			String value = (String) ds.getValue(rule).get(0);
 			target.setToolTipText(value);
 		}
 
-		rule = SwingRules.BORDER;
-		if (rs.contains(rule)) {
-			Border value = (Border) rs.getValue(rule).get(0);
+		rule = SwingProperties.BORDER;
+		if (ds.contains(rule)) {
+			Border value = (Border) ds.getValue(rule).get(0);
 			target.setBorder(value);
 		}
 	}

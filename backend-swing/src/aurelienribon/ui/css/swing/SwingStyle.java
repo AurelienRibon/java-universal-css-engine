@@ -17,26 +17,33 @@ import javax.swing.text.JTextComponent;
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
 public class SwingStyle {
+
+	/**
+	 * Registers all the properties, functions and processors of the Swing
+	 * backend to the CSS engine. Also registers a children accessor used
+	 * to return every children of an AWT Container, and a param converter
+	 * used to convert undefined colors into AWT Color objects.
+	 */
 	public static void init() {
-		Style.registerProperty(SwingRules.BACKGROUND);
-		Style.registerProperty(SwingRules.FOREGROUND);
-		Style.registerProperty(SwingRules.VISIBLE);
-		Style.registerProperty(SwingRules.ENABLED);
-		Style.registerProperty(SwingRules.FOCUSABLE);
-		Style.registerProperty(SwingRules.OPAQUE);
-		Style.registerProperty(SwingRules.EDITABLE);
-		Style.registerProperty(SwingRules.LINEWRAP);
-		Style.registerProperty(SwingRules.WRAPSTYLEWORD);
-		Style.registerProperty(SwingRules.TABSIZE);
-		Style.registerProperty(SwingRules.CARETPOSITION);
-		Style.registerProperty(SwingRules.TOOLTIP);
-		Style.registerProperty(SwingRules.TEXT);
-		Style.registerProperty(SwingRules.H_ALIGN);
-		Style.registerProperty(SwingRules.V_ALIGN);
-		Style.registerProperty(SwingRules.MARGIN);
-		Style.registerProperty(SwingRules.FONT);
-		Style.registerProperty(SwingRules.ICON);
-		Style.registerProperty(SwingRules.BORDER);
+		Style.registerProperty(SwingProperties.BACKGROUND);
+		Style.registerProperty(SwingProperties.FOREGROUND);
+		Style.registerProperty(SwingProperties.VISIBLE);
+		Style.registerProperty(SwingProperties.ENABLED);
+		Style.registerProperty(SwingProperties.FOCUSABLE);
+		Style.registerProperty(SwingProperties.OPAQUE);
+		Style.registerProperty(SwingProperties.EDITABLE);
+		Style.registerProperty(SwingProperties.LINEWRAP);
+		Style.registerProperty(SwingProperties.WRAPSTYLEWORD);
+		Style.registerProperty(SwingProperties.TABSIZE);
+		Style.registerProperty(SwingProperties.CARETPOSITION);
+		Style.registerProperty(SwingProperties.TOOLTIP);
+		Style.registerProperty(SwingProperties.TEXT);
+		Style.registerProperty(SwingProperties.H_ALIGN);
+		Style.registerProperty(SwingProperties.V_ALIGN);
+		Style.registerProperty(SwingProperties.MARGIN);
+		Style.registerProperty(SwingProperties.FONT);
+		Style.registerProperty(SwingProperties.ICON);
+		Style.registerProperty(SwingProperties.BORDER);
 
 		Style.registerFunction(SwingFunctions.bevelBorder);
 		Style.registerFunction(SwingFunctions.compoundBorder);

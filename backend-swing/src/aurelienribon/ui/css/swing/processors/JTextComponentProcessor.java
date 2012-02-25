@@ -1,10 +1,10 @@
 package aurelienribon.ui.css.swing.processors;
 
+import aurelienribon.ui.css.DeclarationSet;
 import aurelienribon.ui.css.DeclarationSetProcessor;
 import aurelienribon.ui.css.Property;
-import aurelienribon.ui.css.DeclarationSet;
 import aurelienribon.ui.css.swing.SwingFunctions;
-import aurelienribon.ui.css.swing.SwingRules;
+import aurelienribon.ui.css.swing.SwingProperties;
 import java.awt.Insets;
 import javax.swing.text.JTextComponent;
 
@@ -13,33 +13,33 @@ import javax.swing.text.JTextComponent;
  */
 public class JTextComponentProcessor implements DeclarationSetProcessor<JTextComponent> {
 	@Override
-	public void process(JTextComponent target, DeclarationSet rs) {
+	public void process(JTextComponent target, DeclarationSet ds) {
 		Property rule;
 
-		rule = SwingRules.CARETPOSITION;
-		if (rs.contains(rule)) {
-			int value = (Integer) rs.getValue(rule).get(0);
+		rule = SwingProperties.CARETPOSITION;
+		if (ds.contains(rule)) {
+			int value = (Integer) ds.getValue(rule).get(0);
 			target.setCaretPosition(value);
 		}
 
-		rule = SwingRules.EDITABLE;
-		if (rs.contains(rule)) {
-			boolean value = (Boolean) rs.getValue(rule).get(0);
+		rule = SwingProperties.EDITABLE;
+		if (ds.contains(rule)) {
+			boolean value = (Boolean) ds.getValue(rule).get(0);
 			target.setEditable(value);
 		}
 
-		rule = SwingRules.MARGIN;
-		if (rs.contains(rule)) {
-			Object param = rs.getValue(rule).get(0);
+		rule = SwingProperties.MARGIN;
+		if (ds.contains(rule)) {
+			Object param = ds.getValue(rule).get(0);
 			Insets value = param instanceof Insets
 				? (Insets) param
-				: (Insets) SwingFunctions.insets.process(rs.getValue(rule));
+				: (Insets) SwingFunctions.insets.process(ds.getValue(rule));
 			target.setMargin(value);
 		}
 
-		rule = SwingRules.TEXT;
-		if (rs.contains(rule)) {
-			String value = (String) rs.getValue(rule).get(0);
+		rule = SwingProperties.TEXT;
+		if (ds.contains(rule)) {
+			String value = (String) ds.getValue(rule).get(0);
 			target.setText(value);
 		}
 	}
