@@ -3,6 +3,8 @@ package aurelienribon.ui.css.primitives;
 import aurelienribon.ui.css.Function;
 
 /**
+ * Convenience class to create a function.
+ *
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
 public abstract class BaseFunction implements Function {

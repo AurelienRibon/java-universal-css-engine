@@ -12,23 +12,23 @@ import javax.swing.JTextArea;
 public class JTextAreaProcessor implements DeclarationSetProcessor<JTextArea> {
 	@Override
 	public void process(JTextArea target, DeclarationSet ds) {
-		Property rule;
+		Property property;
 
-		rule = SwingProperties.lineWrap;
-		if (ds.contains(rule)) {
-			boolean value = (Boolean) ds.getValue(rule).get(0);
+		property = SwingProperties.lineWrap;
+		if (ds.contains(property)) {
+			boolean value = (Boolean) ds.getValue(property).get(0);
 			target.setLineWrap(value);
 		}
 
-		rule = SwingProperties.wrapStyleWord;
-		if (ds.contains(rule)) {
-			boolean value = (Boolean) ds.getValue(rule).get(0);
+		property = SwingProperties.wrapStyleWord;
+		if (ds.contains(property)) {
+			boolean value = (Boolean) ds.getValue(property).get(0);
 			target.setWrapStyleWord(value);
 		}
 
-		rule = SwingProperties.tabSize;
-		if (ds.contains(rule)) {
-			int value = (Integer) ds.getValue(rule).get(0);
+		property = SwingProperties.tabSize;
+		if (ds.contains(property)) {
+			int value = (Integer) ds.getValue(property).get(0);
 			target.setTabSize(value);
 		}
 	}

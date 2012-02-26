@@ -14,29 +14,29 @@ import javax.swing.JLabel;
 public class JLabelProcessor implements DeclarationSetProcessor<JLabel> {
 	@Override
 	public void process(JLabel target, DeclarationSet ds) {
-		Property rule;
+		Property property;
 
-		rule = SwingProperties.horizAlign;
-		if (ds.contains(rule)) {
-			int value = SwingUtils.asHAlign(ds.getValue(rule), 0);
+		property = SwingProperties.horizAlign;
+		if (ds.contains(property)) {
+			int value = SwingUtils.asHAlign(ds.getValue(property), 0);
 			target.setHorizontalAlignment(value);
 		}
 
-		rule = SwingProperties.vertAlign;
-		if (ds.contains(rule)) {
-			int value = SwingUtils.asVAlign(ds.getValue(rule), 0);
+		property = SwingProperties.vertAlign;
+		if (ds.contains(property)) {
+			int value = SwingUtils.asVAlign(ds.getValue(property), 0);
 			target.setVerticalAlignment(value);
 		}
 
-		rule = SwingProperties.text;
-		if (ds.contains(rule)) {
-			String value = (String) ds.getValue(rule).get(0);
+		property = SwingProperties.text;
+		if (ds.contains(property)) {
+			String value = (String) ds.getValue(property).get(0);
 			target.setText(value);
 		}
 
-		rule = SwingProperties.icon;
-		if (ds.contains(rule)) {
-			Icon value = (Icon) ds.getValue(rule).get(0);
+		property = SwingProperties.icon;
+		if (ds.contains(property)) {
+			Icon value = (Icon) ds.getValue(property).get(0);
 			target.setIcon(value);
 		}
 	}

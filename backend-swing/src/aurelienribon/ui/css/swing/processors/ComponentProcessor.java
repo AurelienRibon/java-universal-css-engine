@@ -15,44 +15,44 @@ import java.awt.Font;
 public class ComponentProcessor implements DeclarationSetProcessor<Component> {
 	@Override
 	public void process(Component target, DeclarationSet ds) {
-		Property rule;
+		Property property;
 
-		rule = SwingProperties.background;
-		if (ds.contains(rule)) {
-			Color value = (Color) ds.getValue(rule).get(0);
+		property = SwingProperties.background;
+		if (ds.contains(property)) {
+			Color value = (Color) ds.getValue(property).get(0);
 			target.setBackground(value);
 		}
 
-		rule = SwingProperties.foreground;
-		if (ds.contains(rule)) {
-			Color value = (Color) ds.getValue(rule).get(0);
+		property = SwingProperties.foreground;
+		if (ds.contains(property)) {
+			Color value = (Color) ds.getValue(property).get(0);
 			target.setForeground(value);
 		}
 
-		rule = SwingProperties.visible;
-		if (ds.contains(rule)) {
-			boolean value = (Boolean) ds.getValue(rule).get(0);
+		property = SwingProperties.visible;
+		if (ds.contains(property)) {
+			boolean value = (Boolean) ds.getValue(property).get(0);
 			target.setVisible(value);
 		}
 
-		rule = SwingProperties.enabled;
-		if (ds.contains(rule)) {
-			boolean value = (Boolean) ds.getValue(rule).get(0);
+		property = SwingProperties.enabled;
+		if (ds.contains(property)) {
+			boolean value = (Boolean) ds.getValue(property).get(0);
 			target.setEnabled(value);
 		}
 
-		rule = SwingProperties.focusable;
-		if (ds.contains(rule)) {
-			boolean value = (Boolean) ds.getValue(rule).get(0);
+		property = SwingProperties.focusable;
+		if (ds.contains(property)) {
+			boolean value = (Boolean) ds.getValue(property).get(0);
 			target.setFocusable(value);
 		}
 
-		rule = SwingProperties.font;
-		if (ds.contains(rule)) {
-			Object param = ds.getValue(rule).get(0);
+		property = SwingProperties.font;
+		if (ds.contains(property)) {
+			Object param = ds.getValue(property).get(0);
 			Font value = param instanceof Font
 				? (Font) param
-				: (Font) SwingFunctions.font.process(ds.getValue(rule));
+				: (Font) SwingFunctions.font.process(ds.getValue(property));
 			target.setFont(value);
 		}
 	}

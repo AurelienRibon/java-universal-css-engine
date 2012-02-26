@@ -1,7 +1,7 @@
 grammar Css;
 
 @lexer::header {
-	package aurelienribon.ui.css;
+	package aurelienribon.ui.css.antlr;
 }
 
 @lexer::members {
@@ -12,7 +12,7 @@ grammar Css;
 }
 
 @header {
-	package aurelienribon.ui.css;
+	package aurelienribon.ui.css.antlr;
 	
 	import java.util.List;
 	import java.util.ArrayList;
@@ -46,9 +46,9 @@ grammar Css;
 		}
 	}
 	
-	private void put(Map<String, Map<String, List<Object>>> classes, List<String> sels, Map<String, List<Object>> rules) {
-		for (String sel : sels) if (!classes.containsKey(sel)) classes.put(sel, new HashMap<String, List<Object>>());
-		for (String sel : sels) classes.get(sel).putAll(rules);
+	private void put(Map<String, Map<String, List<Object>>> rules, List<String> ss, Map<String, List<Object>> ds) {
+		for (String s : ss) if (!rules.containsKey(s)) rules.put(s, new HashMap<String, List<Object>>());
+		for (String s : ss) rules.get(s).putAll(ds);
 	}
 	
 	private Color parseColor(String s) {
@@ -70,46 +70,46 @@ grammar Css;
 	}
 }
 
-stylesheet returns [Map<String, Map<String, List<Object>>> classes]
-@init {$classes = new LinkedHashMap<String, Map<String, List<Object>>>();}
-	:	(styleclass {put(classes, $styleclass.sels, $styleclass.rules);}
+stylesheet returns [Map<String, Map<String, List<Object>>> rules]
+@init {$rules = new LinkedHashMap<String, Map<String, List<Object>>>();}
+	:	(rule {put(rules, $rule.ss, $rule.ds);}
 		)*
 	;
 	
-styleclass returns [List<String> sels, Map<String, List<Object>> rules]
-@init {$rules = new LinkedHashMap<String, List<Object>>();}
-	:	selector_list_list '{' {$sels = $selector_list_list.sels;}
-		(rule                  {$rules.put($rule.key, $rule.values);}
+rule returns [List<String> ss, Map<String, List<Object>> ds]
+@init {$ds = new LinkedHashMap<String, List<Object>>();}
+	:	selector_list '{' {$ss = $selector_list.ss;}
+		(declaration      {$ds.put($declaration.prop, $declaration.params);}
 		)* '}'
 	;
 		
-selector_list_list returns [List<String> sels]
-@init {$sels = new ArrayList<String>();}
-	:	ss1=selector_list      {$sels.add($ss1.sel);}
-		(',' ss2=selector_list {$sels.add($ss2.sel);}
+selector_list returns [List<String> ss]
+@init {$ss = new ArrayList<String>();}
+	:	s1=selector      {$ss.add($s1.s);}
+		(',' s2=selector {$ss.add($s2.s);}
 		)*
 	;
 	
-selector_list returns [String sel]
-@init  {$sel = "";}
-@after {$sel = $sel.trim();}
-	:	(selector {$sel += $selector.text + " ";}
+selector returns [String s]
+@init  {$s = "";}
+@after {$s = $s.trim();}
+	:	(selector_atom {$s += $selector_atom.text + " ";}
 		)+
 	;
 	
-selector
+selector_atom
 	: '.' ID
 	| ID
 	;
 	
-rule returns [String key, List<Object> values]
-@init {$values = new ArrayList<Object>();}
-	:	ID ':'      {$key = $ID.text;}
-		(rule_value {$values.add($rule_value.o);}
+declaration returns [String prop, List<Object> params]
+@init {$params = new ArrayList<Object>();}
+	:	ID ':'             {$prop = $ID.text;}
+		(declaration_param {$params.add($declaration_param.o);}
 		)+ ';'
 	;
 	
-rule_value returns [Object o]
+declaration_param returns [Object o]
 	:	function {$o = $function.f;}
 	|	param    {$o = $param.o;}
 	;

@@ -4,38 +4,52 @@ import aurelienribon.ui.css.swing.PaintUtils;
 import java.awt.*;
 import javax.swing.Icon;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
+import javax.swing.border.MatteBorder;
 
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
 public class GroupBorder implements Border {
 	private final JLabel label = new JLabel();
-	private int titleHeight;
-	private int padding;
-	private Color stroke;
-	private Paint fill;
-	private boolean headerStrokeVisible;
+
+	private Border bodyBorder;
+	private Border headerBorder;
+	private Insets headerMargin;
+	private Paint headerFill;
+	private String title;
+	private Icon icon;
+	private Color foreground;
+	private Font font;
+	private int horizontalAlignment;
+	private int verticalAlignment;
 
 	public GroupBorder() {
-		this(null, "GroupBorder", 20, 6, Color.BLACK, Color.LIGHT_GRAY, true);
+		this(new LineBorder(Color.GRAY, 1),
+			new MatteBorder(1, 1, 0, 1, Color.GRAY),
+			new Insets(5, 5, 5, 5),
+			null,
+			"GroupBorder",
+			null,
+			Color.BLACK,
+			null,
+			SwingConstants.LEFT,
+			SwingConstants.CENTER);
 	}
 
-	public GroupBorder(Icon icon, String title, int titleHeight, int padding, Color stroke, Paint fill) {
-		this(icon, title, titleHeight, padding, stroke, fill, true);
-	}
-
-	public GroupBorder(Icon icon, String title, int titleHeight, int padding, Color stroke, Paint fill, boolean headerStrokeVisible) {
-		this.titleHeight = titleHeight;
-		this.padding = padding;
-		this.stroke = stroke;
-		this.fill = fill;
-		this.headerStrokeVisible = headerStrokeVisible;
-
-		label.setIcon(icon);
-		label.setText(title);
-		label.setHorizontalAlignment(JLabel.LEFT);
-		label.setVerticalAlignment(JLabel.CENTER);
+	public GroupBorder(Border bodyBorder, Border headerBorder, Insets headerMargin, Paint headerFill, String title, Icon icon, Color foreground, Font font, int horizontalAlignment, int verticalAlignment) {
+		this.bodyBorder = bodyBorder;
+		this.headerBorder = headerBorder;
+		this.headerMargin = headerMargin;
+		this.headerFill = headerFill;
+		this.title = title;
+		this.icon = icon;
+		this.foreground = foreground;
+		this.font = font;
+		this.horizontalAlignment = horizontalAlignment;
+		this.verticalAlignment = verticalAlignment;
 	}
 
 	@Override
@@ -43,29 +57,21 @@ public class GroupBorder implements Border {
 		Graphics2D gg = (Graphics2D) g.create();
 		gg.translate(x, y);
 
-		if (fill != null) {
-			gg.setPaint(PaintUtils.buildPaint(fill, width, titleHeight));
-			gg.fillRect(0, 0, width, titleHeight);
+		int hh = getHeaderHeight(c);
+
+		if (headerFill != null) {
+			gg.setPaint(PaintUtils.buildPaint(headerFill, width, hh));
+			gg.fillRect(0, 0, width, hh);
 		}
 
-		if (stroke != null) {
-			gg.setColor(stroke);
-			gg.drawLine(0, titleHeight, 0, height);
-			gg.drawLine(width-1, titleHeight, width-1, height);
-			gg.drawLine(0, height-1, width, height-1);
+		if (headerBorder != null) headerBorder.paintBorder(c, gg, 0, 0, width, hh);
+		if (bodyBorder != null) bodyBorder.paintBorder(c, gg, 0, hh, width, height - hh);
 
-			if (headerStrokeVisible) {
-				gg.drawLine(0, 0, 0, titleHeight);
-				gg.drawLine(width-1, 0, width-1, titleHeight);
-				gg.drawLine(0, 0, width, 0);
-			}
-		}
+		label.setSize(
+			width - headerMargin.left - headerMargin.right,
+			hh - headerMargin.top - headerMargin.bottom);
 
-		label.setFont(c.getFont());
-		label.setForeground(c.getForeground());
-		label.setSize(width - padding*2, titleHeight);
-
-		gg.translate(padding, 0);
+		gg.translate(headerMargin.left, headerMargin.top);
 		label.paint(gg);
 
 		gg.dispose();
@@ -73,8 +79,18 @@ public class GroupBorder implements Border {
 
 	@Override
 	public Insets getBorderInsets(Component c) {
-		if (stroke != null) return new Insets(titleHeight, 1, 1, 1);
-		return new Insets(titleHeight, 0, 0, 0);
+		Insets insets = new Insets(0, 0, 0, 0);
+
+		if (bodyBorder != null) {
+			insets.left += bodyBorder.getBorderInsets(c).left;
+			insets.right += bodyBorder.getBorderInsets(c).right;
+			insets.top += bodyBorder.getBorderInsets(c).top;
+			insets.bottom += bodyBorder.getBorderInsets(c).bottom;
+		}
+
+		insets.top += getHeaderHeight(c);
+
+		return insets;
 	}
 
 	@Override
@@ -82,67 +98,111 @@ public class GroupBorder implements Border {
 		return false;
 	}
 
-	public int getTitleHeight() {
-		return titleHeight;
+	public Border getBodyBorder() {
+		return bodyBorder;
 	}
 
-	public void setTitleHeight(int titleHeight) {
-		this.titleHeight = titleHeight;
+	public Border getHeaderBorder() {
+		return headerBorder;
 	}
 
-	public int getPadding() {
-		return padding;
+	public Insets getHeaderMargin() {
+		return headerMargin;
 	}
 
-	public void setPadding(int padding) {
-		this.padding = padding;
-	}
-
-	public Color getStroke() {
-		return stroke;
-	}
-
-	public void setStroke(Color stroke) {
-		this.stroke = stroke;
-	}
-
-	public Paint getFill() {
-		return fill;
-	}
-
-	public void setFill(Paint fill) {
-		this.fill = fill;
-	}
-
-	public Color getForeground() {
-		return label.getForeground();
-	}
-
-	public void setForeground(Color foreground) {
-		label.setForeground(foreground);
-	}
-
-	public Icon getIcon() {
-		return label.getIcon();
-	}
-
-	public void setIcon(Icon icon) {
-		label.setIcon(icon);
+	public Paint getHeaderFill() {
+		return headerFill;
 	}
 
 	public String getTitle() {
-		return label.getText();
+		return title;
+	}
+
+	public Icon getIcon() {
+		return icon;
+	}
+
+	public Color getForeground() {
+		return foreground;
+	}
+
+	public Font getFont() {
+		return font;
+	}
+
+	public int getHorizontalAlignment() {
+		return horizontalAlignment;
+	}
+
+	public int getVerticalAlignment() {
+		return verticalAlignment;
+	}
+
+	public void setBodyBorder(Border bodyBorder) {
+		this.bodyBorder = bodyBorder;
+	}
+
+	public void setHeaderBorder(Border headerBorder) {
+		this.headerBorder = headerBorder;
+	}
+
+	public void setHeaderMargin(Insets headerMargin) {
+		this.headerMargin = headerMargin;
+	}
+
+	public void setHeaderFill(Paint headerFill) {
+		this.headerFill = headerFill;
 	}
 
 	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public void setIcon(Icon icon) {
+		this.icon = icon;
+	}
+
+	public void setForeground(Color foreground) {
+		this.foreground = foreground;
+	}
+
+	public void setFont(Font font) {
+		this.font = font;
+	}
+
+	public void setHorizontalAlignment(int horizontalAlignment) {
+		this.horizontalAlignment = horizontalAlignment;
+	}
+
+	public void setVerticalAlignment(int verticalAlignment) {
+		this.verticalAlignment = verticalAlignment;
+	}
+
+	// -------------------------------------------------------------------------
+	// Helpers
+	// -------------------------------------------------------------------------
+
+	private int getHeaderHeight(Component c) {
+		int h = 0;
+
+		h += headerMargin.top + headerMargin.bottom;
+		h += getLabel(c).getPreferredSize().height;
+
+		if (headerBorder != null) {
+			h += headerBorder.getBorderInsets(c).top;
+			h += headerBorder.getBorderInsets(c).bottom;
+		}
+
+		return h;
+	}
+
+	private JLabel getLabel(Component c) {
+		label.setFont(font != null ? font : c.getFont());
 		label.setText(title);
-	}
-
-	public boolean isHeaderStrokeVisible() {
-		return headerStrokeVisible;
-	}
-
-	public void setHeaderStrokeVisible(boolean headerStrokeVisible) {
-		this.headerStrokeVisible = headerStrokeVisible;
+		label.setIcon(icon);
+		label.setForeground(foreground);
+		label.setHorizontalAlignment(horizontalAlignment);
+		label.setVerticalAlignment(verticalAlignment);
+		return label;
 	}
 }

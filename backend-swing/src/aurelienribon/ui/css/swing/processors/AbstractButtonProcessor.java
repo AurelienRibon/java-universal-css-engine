@@ -16,38 +16,38 @@ import javax.swing.Icon;
 public class AbstractButtonProcessor implements DeclarationSetProcessor<AbstractButton> {
 	@Override
 	public void process(AbstractButton target, DeclarationSet ds) {
-		Property rule;
+		Property property;
 
-		rule = SwingProperties.margin;
-		if (ds.contains(rule)) {
-			Object param = ds.getValue(rule).get(0);
+		property = SwingProperties.margin;
+		if (ds.contains(property)) {
+			Object param = ds.getValue(property).get(0);
 			Insets value = param instanceof Insets
 				? (Insets) param
-				: (Insets) SwingFunctions.insets.process(ds.getValue(rule));
+				: (Insets) SwingFunctions.insets.process(ds.getValue(property));
 			target.setMargin(value);
 		}
 
-		rule = SwingProperties.horizAlign;
-		if (ds.contains(rule)) {
-			int value = SwingUtils.asHAlign(ds.getValue(rule), 0);
+		property = SwingProperties.horizAlign;
+		if (ds.contains(property)) {
+			int value = SwingUtils.asHAlign(ds.getValue(property), 0);
 			target.setHorizontalAlignment(value);
 		}
 
-		rule = SwingProperties.vertAlign;
-		if (ds.contains(rule)) {
-			int value = SwingUtils.asVAlign(ds.getValue(rule), 0);
+		property = SwingProperties.vertAlign;
+		if (ds.contains(property)) {
+			int value = SwingUtils.asVAlign(ds.getValue(property), 0);
 			target.setVerticalAlignment(value);
 		}
 
-		rule = SwingProperties.text;
-		if (ds.contains(rule)) {
-			String value = (String) ds.getValue(rule).get(0);
+		property = SwingProperties.text;
+		if (ds.contains(property)) {
+			String value = (String) ds.getValue(property).get(0);
 			target.setText(value);
 		}
 
-		rule = SwingProperties.icon;
-		if (ds.contains(rule)) {
-			Icon value = (Icon) ds.getValue(rule).get(0);
+		property = SwingProperties.icon;
+		if (ds.contains(property)) {
+			Icon value = (Icon) ds.getValue(property).get(0);
 			target.setIcon(value);
 		}
 	}

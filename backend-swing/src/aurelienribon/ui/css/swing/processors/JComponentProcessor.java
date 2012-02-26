@@ -13,23 +13,23 @@ import javax.swing.border.Border;
 public class JComponentProcessor implements DeclarationSetProcessor<JComponent> {
 	@Override
 	public void process(JComponent target, DeclarationSet ds) {
-		Property rule;
+		Property property;
 
-		rule = SwingProperties.opaque;
-		if (ds.contains(rule)) {
-			boolean value = (Boolean) ds.getValue(rule).get(0);
+		property = SwingProperties.opaque;
+		if (ds.contains(property)) {
+			boolean value = (Boolean) ds.getValue(property).get(0);
 			target.setOpaque(value);
 		}
 
-		rule = SwingProperties.tooltip;
-		if (ds.contains(rule)) {
-			String value = (String) ds.getValue(rule).get(0);
+		property = SwingProperties.tooltip;
+		if (ds.contains(property)) {
+			String value = (String) ds.getValue(property).get(0);
 			target.setToolTipText(value);
 		}
 
-		rule = SwingProperties.border;
-		if (ds.contains(rule)) {
-			Border value = (Border) ds.getValue(rule).get(0);
+		property = SwingProperties.border;
+		if (ds.contains(property)) {
+			Border value = (Border) ds.getValue(property).get(0);
 			target.setBorder(value);
 		}
 	}

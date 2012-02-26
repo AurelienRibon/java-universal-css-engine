@@ -363,14 +363,14 @@ public class Style {
 			Map<String, Map<String, List<Object>>> result = parser.stylesheet();
 
 			for (String selector : result.keySet()) {
-				Map<String, List<Object>> resultRules = result.get(selector);
+				Map<String, List<Object>> declarations = result.get(selector);
 
 				List<Property> properties = new ArrayList<Property>();
 				Map<Property, List<Object>> propertiesValues = new HashMap<Property, List<Object>>();
 
-				for (String name : resultRules.keySet()) {
+				for (String name : declarations.keySet()) {
 					Property property = registeredProperties.get(name);
-					List<Object> params = resultRules.get(name);
+					List<Object> params = new ArrayList<Object>(declarations.get(name));
 
 					if (property == null) throw StyleException.forProperty(name);
 					for (int i=0; i<params.size(); i++) params.set(i, evaluateParam(params.get(i)));

@@ -1,16 +1,16 @@
 package aurelienribon.ui.css.primitives;
 
 /**
- * A SingleParamRule, as says its name, defines a rule that accepts only one
- * parameter.
+ * Convenience class to define a property that accepts only one parameter as 
+ * value.
  *
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
-public class SingleParamRule extends BaseRule {
+public class SingleParamProperty extends BaseProperty {
 	private Class paramClass;
 	private String paramName;
 
-	public SingleParamRule(String name, Class paramClass, String paramName) {
+	public SingleParamProperty(String name, Class paramClass, String paramName) {
 		super(name);
 		this.paramClass = paramClass;
 		this.paramName = paramName;

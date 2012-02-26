@@ -1,5 +1,6 @@
 package aurelienribon.ui.css;
 
+import aurelienribon.ui.css.primitives.FunctionProperty;
 import java.util.*;
 
 /**
@@ -107,11 +108,42 @@ public class DeclarationSet {
 	}
 
 	/**
+	 * Convenience method to return the first and only parameter of a value.
+	 * Shouldn't be used if the value has more than one parameter.
+	 */
+	public <T> T getValue(Property property, Class<T> paramClass) {
+		return (T) getValue(property).get(0);
+	}
+
+	/**
+	 * Convenience method to return the first and only parameter of a value if
+	 * it is of class paramClass. Else, returns the result of the given
+	 * function. Should be used with properties based on functions.
+	 * @see FunctionProperty
+	 */
+	public <T> T getValue(Property property, Class<T> paramClass, Function function) {
+		List<Object> params = getValue(property);
+		Object param = getValue(property).get(0);
+
+		if (paramClass.isInstance(param)) return (T) param;
+		return (T) function.process(params);
+	}
+
+	/**
 	 * Returns true of the declaration set contains a declaration with the
 	 * given property.
 	 */
 	public boolean contains(Property property) {
 		return properties.contains(property);
+	}
+
+	/**
+	 * Returns true if the property p1 comes after the property p2 in the
+	 * declaration set. If true, p1 should override p2 if they define similar
+	 * behavior.
+	 */
+	public boolean isAfter(Property p1, Property p2) {
+		return properties.indexOf(p1) > properties.indexOf(p2);
 	}
 
 	// -------------------------------------------------------------------------

@@ -1,6 +1,8 @@
 package aurelienribon.ui.components;
 
+import aurelienribon.ui.components.processors.JComponentProcessor;
 import aurelienribon.ui.css.Style;
+import javax.swing.JComponent;
 
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
@@ -27,9 +29,18 @@ public class AruiStyle {
 		Style.registerProperty(AruiProperties.fillSelected);
 		Style.registerProperty(AruiProperties.fillUnselected);
 		Style.registerProperty(AruiProperties.corderRadius);
+		Style.registerProperty(AruiProperties.borderBody);
+		Style.registerProperty(AruiProperties.borderHeader);
+		Style.registerProperty(AruiProperties.borderFill);
+		Style.registerProperty(AruiProperties.borderMargin);
+		Style.registerProperty(AruiProperties.borderTitle);
+		Style.registerProperty(AruiProperties.borderIcon);
+		Style.registerProperty(AruiProperties.borderFont);
+		Style.registerProperty(AruiProperties.borderForeground);
 
 		Style.registerFunction(AruiFunctions.groupBorder);
 
+		Style.registerProcessor(JComponent.class, new JComponentProcessor());
 		Style.registerProcessor(Button.class, new Button.Processor());
 		Style.registerProcessor(TabPanel.class, new TabPanel.Processor());
 		Style.registerProcessor(TabPanelHeaderPanel.class, new TabPanelHeaderPanel.Processor());

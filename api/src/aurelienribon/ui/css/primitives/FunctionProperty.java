@@ -3,19 +3,19 @@ package aurelienribon.ui.css.primitives;
 import aurelienribon.ui.css.Function;
 
 /**
- * A FunctionRule is a rule that accepts the exact same parameters as an
+ * A FunctionProperty is a property that accepts the exact same parameters as an
  * existing function, plus the function result itself. To avoid duplicating
- * code, the params classes and names of the rule are computed from the
+ * code, the params classes and names of the property are computed from the
  * function.
  *
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
-public class FunctionRule extends BaseRule {
+public class FunctionProperty extends BaseProperty {
 	private final Function function;
 	private final Class paramClass;
 	private final String paramName;
 
-	public FunctionRule(String name, Function function, String paramName) {
+	public FunctionProperty(String name, Function function, String paramName) {
 		super(name);
 		this.function = function;
 		this.paramClass = function.getReturn();

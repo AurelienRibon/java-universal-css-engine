@@ -14,32 +14,32 @@ import javax.swing.text.JTextComponent;
 public class JTextComponentProcessor implements DeclarationSetProcessor<JTextComponent> {
 	@Override
 	public void process(JTextComponent target, DeclarationSet ds) {
-		Property rule;
+		Property property;
 
-		rule = SwingProperties.caretPosition;
-		if (ds.contains(rule)) {
-			int value = (Integer) ds.getValue(rule).get(0);
+		property = SwingProperties.caretPosition;
+		if (ds.contains(property)) {
+			int value = (Integer) ds.getValue(property).get(0);
 			target.setCaretPosition(value);
 		}
 
-		rule = SwingProperties.editable;
-		if (ds.contains(rule)) {
-			boolean value = (Boolean) ds.getValue(rule).get(0);
+		property = SwingProperties.editable;
+		if (ds.contains(property)) {
+			boolean value = (Boolean) ds.getValue(property).get(0);
 			target.setEditable(value);
 		}
 
-		rule = SwingProperties.margin;
-		if (ds.contains(rule)) {
-			Object param = ds.getValue(rule).get(0);
+		property = SwingProperties.margin;
+		if (ds.contains(property)) {
+			Object param = ds.getValue(property).get(0);
 			Insets value = param instanceof Insets
 				? (Insets) param
-				: (Insets) SwingFunctions.insets.process(ds.getValue(rule));
+				: (Insets) SwingFunctions.insets.process(ds.getValue(property));
 			target.setMargin(value);
 		}
 
-		rule = SwingProperties.text;
-		if (ds.contains(rule)) {
-			String value = (String) ds.getValue(rule).get(0);
+		property = SwingProperties.text;
+		if (ds.contains(property)) {
+			String value = (String) ds.getValue(property).get(0);
 			target.setText(value);
 		}
 	}
