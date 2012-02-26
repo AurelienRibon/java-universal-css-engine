@@ -8,6 +8,8 @@ import aurelienribon.ui.utils.PaintUtils;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.geom.Rectangle2D;
+import java.awt.geom.RoundRectangle2D;
 import java.util.List;
 import javax.swing.*;
 
@@ -73,30 +75,40 @@ public class Button extends JButton implements Container {
 
 		int w = getWidth();
 		int h = getHeight();
-		int innerGap = strokeThickness / 2;
-		int innerW = w - innerGap*2;
-		int innerH = h - innerGap*2;
+		double innerGap = strokeThickness / 2f;
+		double innerW = w - innerGap*2 - 1;
+		double innerH = h - innerGap*2 - 1;
+
+		Shape rect = cornerRadius > 0
+			? new RoundRectangle2D.Double(innerGap, innerGap, innerW, innerH, cornerRadius, cornerRadius)
+			: new Rectangle2D.Double(innerGap, innerGap, innerW, innerH);
 
 		gg.setStroke(new BasicStroke(strokeThickness));
 
 		if (isMouseDown && isMouseOver) {
 			gg.setPaint(PaintUtils.buildPaint(fillMouseDown, innerGap, innerGap, innerW, innerH));
-			gg.fillRoundRect(innerGap, innerGap, innerW, innerH, cornerRadius, cornerRadius);
-			gg.setPaint(PaintUtils.buildPaint(strokeMouseDown, 0, 0, w, h));
+			gg.fill(rect);
+			if (strokeThickness > 0) {
+				gg.setPaint(PaintUtils.buildPaint(strokeMouseDown, 0, 0, w, h));
+				gg.draw(rect);
+			}
 
 		} else if (isMouseOver || (isMouseDown && !isMouseOver)) {
 			gg.setPaint(PaintUtils.buildPaint(fillMouseOver, innerGap, innerGap, innerW, innerH));
-			gg.fillRoundRect(innerGap, innerGap, innerW, innerH, cornerRadius, cornerRadius);
-			gg.setPaint(PaintUtils.buildPaint(strokeMouseOver, 0, 0, w, h));
+			gg.fill(rect);
+			if (strokeThickness > 0) {
+				gg.setPaint(PaintUtils.buildPaint(strokeMouseOver, 0, 0, w, h));
+				gg.draw(rect);
+			}
 
 		} else {
 			gg.setPaint(PaintUtils.buildPaint(fill, innerGap, innerGap, innerW, innerH));
-			gg.fillRoundRect(innerGap, innerGap, innerW, innerH, cornerRadius, cornerRadius);
-			gg.setPaint(PaintUtils.buildPaint(stroke, 0, 0, w, h));
+			gg.fill(rect);
+			if (strokeThickness > 0) {
+				gg.setPaint(PaintUtils.buildPaint(stroke, 0, 0, w, h));
+				gg.draw(rect);
+			}
 		}
-
-		if (cornerRadius > 0) gg.drawRoundRect(innerGap, innerGap, innerW-1, innerH-1, cornerRadius, cornerRadius);
-		else gg.drawRect(innerGap, innerGap, innerW-1, innerH-1);
 
 		gg.dispose();
 	}

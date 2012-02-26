@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.LinearGradientPaint;
 import java.awt.MultipleGradientPaint;
 import java.awt.Paint;
+import java.awt.geom.Point2D;
 
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
@@ -31,16 +32,16 @@ public class PaintUtils {
 		return -1;
 	}
 
-	public static Paint buildPaint(Paint p, int x, int y, int w, int h) {
+	public static Paint buildPaint(Paint p, double x, double y, double w, double h) {
 		if (p instanceof Color) return p;
 
 		if (p instanceof LinearGradientPaint) {
 			LinearGradientPaint gp = (LinearGradientPaint) p;
-			float x1 = (float) (gp.getStartPoint().getX() * w) + x;
-			float y1 = (float) (gp.getStartPoint().getY() * h) + y;
-			float x2 = (float) (gp.getEndPoint().getX() * w) + x;
-			float y2 = (float) (gp.getEndPoint().getY() * h) + y;
-			return new LinearGradientPaint(x1, y1, x2, y2, gp.getFractions(), gp.getColors());
+			double x1 = gp.getStartPoint().getX() * w + x;
+			double y1 = gp.getStartPoint().getY() * h + y;
+			double x2 = gp.getEndPoint().getX() * w + x;
+			double y2 = gp.getEndPoint().getY() * h + y;
+			return new LinearGradientPaint(new Point2D.Double(x1, y1), new Point2D.Double(x2, y2), gp.getFractions(), gp.getColors());
 		}
 
 		assert false;
