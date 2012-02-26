@@ -34,7 +34,7 @@ public class InsetsFunction implements Function {
 
 	@Override
 	public Class getReturn() {
-		return Icon.class;
+		return Insets.class;
 	}
 
 	@Override
