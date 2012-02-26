@@ -1,10 +1,10 @@
 package aurelienribon.ui.components;
 
-import aurelienribon.ui.css.DeclarationSetProcessor;
-import aurelienribon.ui.css.DeclarationSet;
-import aurelienribon.ui.css.swing.PaintUtils;
 import aurelienribon.ui.css.Container;
+import aurelienribon.ui.css.DeclarationSet;
+import aurelienribon.ui.css.DeclarationSetProcessor;
 import aurelienribon.ui.css.Property;
+import aurelienribon.ui.css.swing.PaintUtils;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -132,31 +132,31 @@ public class Button extends JButton implements Container {
 		public void process(Button target, DeclarationSet rs) {
 			Property rule;
 
-			rule = AruiRules.FOREGROUND_MOUSEDOWN;
+			rule = AruiProperties.foregroundMouseDown;
 			if (rs.contains(rule)) {target.foregroundMouseDown = (Color) rs.getValue(rule).get(0);}
 
-			rule = AruiRules.FOREGROUND_MOUSEOVER;
+			rule = AruiProperties.foregroundMouseOver;
 			if (rs.contains(rule)) {target.foregroundMouseOver = (Color) rs.getValue(rule).get(0);}
 
-			rule = AruiRules.STROKE;
+			rule = AruiProperties.stroke;
 			if (rs.contains(rule)) {target.stroke = (Color) rs.getValue(rule).get(0);}
 
-			rule = AruiRules.STROKE_MOUSEDOWN;
+			rule = AruiProperties.strokeMouseDown;
 			if (rs.contains(rule)) {target.strokeMouseDown = (Color) rs.getValue(rule).get(0);}
 
-			rule = AruiRules.STROKE_MOUSEOVER;
+			rule = AruiProperties.strokeMouseOver;
 			if (rs.contains(rule)) {target.strokeMouseOver = (Color) rs.getValue(rule).get(0);}
 
-			rule = AruiRules.FILL;
+			rule = AruiProperties.fill;
 			if (rs.contains(rule)) {target.fill = (Paint) rs.getValue(rule).get(0);}
 
-			rule = AruiRules.FILL_MOUSEDOWN;
+			rule = AruiProperties.fillMouseDown;
 			if (rs.contains(rule)) {target.fillMouseDown = (Paint) rs.getValue(rule).get(0);}
 
-			rule = AruiRules.FILL_MOUSEOVER;
+			rule = AruiProperties.fillMouseOver;
 			if (rs.contains(rule)) {target.fillMouseOver = (Paint) rs.getValue(rule).get(0);}
 
-			rule = AruiRules.CORNERRADIUS;
+			rule = AruiProperties.corderRadius;
 			if (rs.contains(rule)) {target.cornerRadius = (Integer) rs.getValue(rule).get(0);}
 
 			target.revalidate();

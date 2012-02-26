@@ -14,19 +14,19 @@ public class JTextAreaProcessor implements DeclarationSetProcessor<JTextArea> {
 	public void process(JTextArea target, DeclarationSet ds) {
 		Property rule;
 
-		rule = SwingProperties.LINEWRAP;
+		rule = SwingProperties.lineWrap;
 		if (ds.contains(rule)) {
 			boolean value = (Boolean) ds.getValue(rule).get(0);
 			target.setLineWrap(value);
 		}
 
-		rule = SwingProperties.WRAPSTYLEWORD;
+		rule = SwingProperties.wrapStyleWord;
 		if (ds.contains(rule)) {
 			boolean value = (Boolean) ds.getValue(rule).get(0);
 			target.setWrapStyleWord(value);
 		}
 
-		rule = SwingProperties.TABSIZE;
+		rule = SwingProperties.tabSize;
 		if (ds.contains(rule)) {
 			int value = (Integer) ds.getValue(rule).get(0);
 			target.setTabSize(value);

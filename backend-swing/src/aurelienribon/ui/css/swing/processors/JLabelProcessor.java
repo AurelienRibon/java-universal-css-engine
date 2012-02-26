@@ -16,25 +16,25 @@ public class JLabelProcessor implements DeclarationSetProcessor<JLabel> {
 	public void process(JLabel target, DeclarationSet ds) {
 		Property rule;
 
-		rule = SwingProperties.H_ALIGN;
+		rule = SwingProperties.horizAlign;
 		if (ds.contains(rule)) {
 			int value = SwingUtils.asHAlign(ds.getValue(rule), 0);
 			target.setHorizontalAlignment(value);
 		}
 
-		rule = SwingProperties.V_ALIGN;
+		rule = SwingProperties.vertAlign;
 		if (ds.contains(rule)) {
 			int value = SwingUtils.asVAlign(ds.getValue(rule), 0);
 			target.setVerticalAlignment(value);
 		}
 
-		rule = SwingProperties.TEXT;
+		rule = SwingProperties.text;
 		if (ds.contains(rule)) {
 			String value = (String) ds.getValue(rule).get(0);
 			target.setText(value);
 		}
 
-		rule = SwingProperties.ICON;
+		rule = SwingProperties.icon;
 		if (ds.contains(rule)) {
 			Icon value = (Icon) ds.getValue(rule).get(0);
 			target.setIcon(value);

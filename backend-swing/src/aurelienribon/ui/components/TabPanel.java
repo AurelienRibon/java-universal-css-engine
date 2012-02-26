@@ -1,10 +1,10 @@
 package aurelienribon.ui.components;
 
 import aurelienribon.ui.components.TabPanelModel.TabModel;
-import aurelienribon.ui.css.Style;
+import aurelienribon.ui.css.DeclarationSet;
 import aurelienribon.ui.css.DeclarationSetProcessor;
 import aurelienribon.ui.css.Property;
-import aurelienribon.ui.css.DeclarationSet;
+import aurelienribon.ui.css.Style;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -156,17 +156,17 @@ public class TabPanel extends JPanel {
 		@Override
 		public void process(TabPanel target, DeclarationSet rs) {
 			rs = new DeclarationSet(rs, new Property[] {
-				AruiRules.STROKE,
-				AruiRules.FOREGROUND_UNSELECTED,
-				AruiRules.FOREGROUND_SELECTED,
-				AruiRules.FOREGROUND_MOUSEOVER,
-				AruiRules.STROKE,
-				AruiRules.STROKE_UNSELECTED,
-				AruiRules.STROKE_SELECTED,
-				AruiRules.STROKE_MOUSEOVER,
-				AruiRules.FILL_UNSELECTED,
-				AruiRules.FILL_SELECTED,
-				AruiRules.FILL_MOUSEOVER
+				AruiProperties.stroke,
+				AruiProperties.foregroundUnselected,
+				AruiProperties.foregroundSelected,
+				AruiProperties.foregroundMouseOver,
+				AruiProperties.stroke,
+				AruiProperties.strokeUnselected,
+				AruiProperties.strokeSelected,
+				AruiProperties.strokeMouseOver,
+				AruiProperties.fillUnselected,
+				AruiProperties.fillSelected,
+				AruiProperties.fillMouseOver
 			});
 
 			Style.apply(target.headerPanel, rs);

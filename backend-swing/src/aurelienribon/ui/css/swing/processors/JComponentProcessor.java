@@ -15,19 +15,19 @@ public class JComponentProcessor implements DeclarationSetProcessor<JComponent> 
 	public void process(JComponent target, DeclarationSet ds) {
 		Property rule;
 
-		rule = SwingProperties.OPAQUE;
+		rule = SwingProperties.opaque;
 		if (ds.contains(rule)) {
 			boolean value = (Boolean) ds.getValue(rule).get(0);
 			target.setOpaque(value);
 		}
 
-		rule = SwingProperties.TOOLTIP;
+		rule = SwingProperties.tooltip;
 		if (ds.contains(rule)) {
 			String value = (String) ds.getValue(rule).get(0);
 			target.setToolTipText(value);
 		}
 
-		rule = SwingProperties.BORDER;
+		rule = SwingProperties.border;
 		if (ds.contains(rule)) {
 			Border value = (Border) ds.getValue(rule).get(0);
 			target.setBorder(value);

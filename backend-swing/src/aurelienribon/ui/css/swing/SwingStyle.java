@@ -25,25 +25,25 @@ public class SwingStyle {
 	 * used to convert undefined colors into AWT Color objects.
 	 */
 	public static void init() {
-		Style.registerProperty(SwingProperties.BACKGROUND);
-		Style.registerProperty(SwingProperties.FOREGROUND);
-		Style.registerProperty(SwingProperties.VISIBLE);
-		Style.registerProperty(SwingProperties.ENABLED);
-		Style.registerProperty(SwingProperties.FOCUSABLE);
-		Style.registerProperty(SwingProperties.OPAQUE);
-		Style.registerProperty(SwingProperties.EDITABLE);
-		Style.registerProperty(SwingProperties.LINEWRAP);
-		Style.registerProperty(SwingProperties.WRAPSTYLEWORD);
-		Style.registerProperty(SwingProperties.TABSIZE);
-		Style.registerProperty(SwingProperties.CARETPOSITION);
-		Style.registerProperty(SwingProperties.TOOLTIP);
-		Style.registerProperty(SwingProperties.TEXT);
-		Style.registerProperty(SwingProperties.H_ALIGN);
-		Style.registerProperty(SwingProperties.V_ALIGN);
-		Style.registerProperty(SwingProperties.MARGIN);
-		Style.registerProperty(SwingProperties.FONT);
-		Style.registerProperty(SwingProperties.ICON);
-		Style.registerProperty(SwingProperties.BORDER);
+		Style.registerProperty(SwingProperties.background);
+		Style.registerProperty(SwingProperties.foreground);
+		Style.registerProperty(SwingProperties.visible);
+		Style.registerProperty(SwingProperties.enabled);
+		Style.registerProperty(SwingProperties.focusable);
+		Style.registerProperty(SwingProperties.opaque);
+		Style.registerProperty(SwingProperties.editable);
+		Style.registerProperty(SwingProperties.lineWrap);
+		Style.registerProperty(SwingProperties.wrapStyleWord);
+		Style.registerProperty(SwingProperties.tabSize);
+		Style.registerProperty(SwingProperties.caretPosition);
+		Style.registerProperty(SwingProperties.tooltip);
+		Style.registerProperty(SwingProperties.text);
+		Style.registerProperty(SwingProperties.horizAlign);
+		Style.registerProperty(SwingProperties.vertAlign);
+		Style.registerProperty(SwingProperties.margin);
+		Style.registerProperty(SwingProperties.font);
+		Style.registerProperty(SwingProperties.icon);
+		Style.registerProperty(SwingProperties.border);
 
 		Style.registerFunction(SwingFunctions.bevelBorder);
 		Style.registerFunction(SwingFunctions.compoundBorder);

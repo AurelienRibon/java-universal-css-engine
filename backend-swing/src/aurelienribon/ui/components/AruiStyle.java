@@ -6,22 +6,27 @@ import aurelienribon.ui.css.Style;
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
 public class AruiStyle {
+
+	/**
+	 * Registers all the properties, functions and processors of the Arui
+	 * backend to the CSS engine. Requires the Swing backend to be initialized.
+	 */
 	public static void init() {
-		Style.registerProperty(AruiRules.FOREGROUND_MOUSEOVER);
-		Style.registerProperty(AruiRules.FOREGROUND_MOUSEDOWN);
-		Style.registerProperty(AruiRules.FOREGROUND_SELECTED);
-		Style.registerProperty(AruiRules.FOREGROUND_UNSELECTED);
-		Style.registerProperty(AruiRules.STROKE);
-		Style.registerProperty(AruiRules.STROKE_MOUSEOVER);
-		Style.registerProperty(AruiRules.STROKE_MOUSEDOWN);
-		Style.registerProperty(AruiRules.STROKE_SELECTED);
-		Style.registerProperty(AruiRules.STROKE_UNSELECTED);
-		Style.registerProperty(AruiRules.FILL);
-		Style.registerProperty(AruiRules.FILL_MOUSEOVER);
-		Style.registerProperty(AruiRules.FILL_MOUSEDOWN);
-		Style.registerProperty(AruiRules.FILL_SELECTED);
-		Style.registerProperty(AruiRules.FILL_UNSELECTED);
-		Style.registerProperty(AruiRules.CORNERRADIUS);
+		Style.registerProperty(AruiProperties.foregroundMouseOver);
+		Style.registerProperty(AruiProperties.foregroundMouseDown);
+		Style.registerProperty(AruiProperties.foregroundSelected);
+		Style.registerProperty(AruiProperties.foregroundUnselected);
+		Style.registerProperty(AruiProperties.stroke);
+		Style.registerProperty(AruiProperties.strokeMouseOver);
+		Style.registerProperty(AruiProperties.strokeMouseDown);
+		Style.registerProperty(AruiProperties.strokeSelected);
+		Style.registerProperty(AruiProperties.strokeUnselected);
+		Style.registerProperty(AruiProperties.fill);
+		Style.registerProperty(AruiProperties.fillMouseOver);
+		Style.registerProperty(AruiProperties.fillMouseDown);
+		Style.registerProperty(AruiProperties.fillSelected);
+		Style.registerProperty(AruiProperties.fillUnselected);
+		Style.registerProperty(AruiProperties.corderRadius);
 
 		Style.registerFunction(AruiFunctions.groupBorder);
 

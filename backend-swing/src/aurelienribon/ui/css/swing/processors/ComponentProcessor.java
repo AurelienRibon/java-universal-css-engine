@@ -17,37 +17,37 @@ public class ComponentProcessor implements DeclarationSetProcessor<Component> {
 	public void process(Component target, DeclarationSet ds) {
 		Property rule;
 
-		rule = SwingProperties.BACKGROUND;
+		rule = SwingProperties.background;
 		if (ds.contains(rule)) {
 			Color value = (Color) ds.getValue(rule).get(0);
 			target.setBackground(value);
 		}
 
-		rule = SwingProperties.FOREGROUND;
+		rule = SwingProperties.foreground;
 		if (ds.contains(rule)) {
 			Color value = (Color) ds.getValue(rule).get(0);
 			target.setForeground(value);
 		}
 
-		rule = SwingProperties.VISIBLE;
+		rule = SwingProperties.visible;
 		if (ds.contains(rule)) {
 			boolean value = (Boolean) ds.getValue(rule).get(0);
 			target.setVisible(value);
 		}
 
-		rule = SwingProperties.ENABLED;
+		rule = SwingProperties.enabled;
 		if (ds.contains(rule)) {
 			boolean value = (Boolean) ds.getValue(rule).get(0);
 			target.setEnabled(value);
 		}
 
-		rule = SwingProperties.FOCUSABLE;
+		rule = SwingProperties.focusable;
 		if (ds.contains(rule)) {
 			boolean value = (Boolean) ds.getValue(rule).get(0);
 			target.setFocusable(value);
 		}
 
-		rule = SwingProperties.FONT;
+		rule = SwingProperties.font;
 		if (ds.contains(rule)) {
 			Object param = ds.getValue(rule).get(0);
 			Font value = param instanceof Font

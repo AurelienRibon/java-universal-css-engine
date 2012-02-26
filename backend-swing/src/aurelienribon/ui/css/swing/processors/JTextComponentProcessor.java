@@ -16,19 +16,19 @@ public class JTextComponentProcessor implements DeclarationSetProcessor<JTextCom
 	public void process(JTextComponent target, DeclarationSet ds) {
 		Property rule;
 
-		rule = SwingProperties.CARETPOSITION;
+		rule = SwingProperties.caretPosition;
 		if (ds.contains(rule)) {
 			int value = (Integer) ds.getValue(rule).get(0);
 			target.setCaretPosition(value);
 		}
 
-		rule = SwingProperties.EDITABLE;
+		rule = SwingProperties.editable;
 		if (ds.contains(rule)) {
 			boolean value = (Boolean) ds.getValue(rule).get(0);
 			target.setEditable(value);
 		}
 
-		rule = SwingProperties.MARGIN;
+		rule = SwingProperties.margin;
 		if (ds.contains(rule)) {
 			Object param = ds.getValue(rule).get(0);
 			Insets value = param instanceof Insets
@@ -37,7 +37,7 @@ public class JTextComponentProcessor implements DeclarationSetProcessor<JTextCom
 			target.setMargin(value);
 		}
 
-		rule = SwingProperties.TEXT;
+		rule = SwingProperties.text;
 		if (ds.contains(rule)) {
 			String value = (String) ds.getValue(rule).get(0);
 			target.setText(value);
