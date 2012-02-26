@@ -5,7 +5,7 @@
 	<!-- ****************************************************************** -->
 
 	<!-- version -->
-	<property name="version" value="1.0.0" />
+	<property name="version" value="1.1.0" />
 
 	<!-- projects properties -->
 	<property name="api.dir" value="api" />
@@ -66,20 +66,9 @@
 		<property name="dir" value="${backend.swing.test.dir}" />
 		<property name="name" value="${backend.swing.test.name}" />
 
-		<delete dir="temp/bin/" includes="**" />
 		<copy todir="temp/bin/"><fileset dir="${dir}/src/" includes="**/*.png, **/*.jpg, **/*.gif, **/*.css"/></copy>
-		<copy todir="temp/libs/" file="temp/${backend.swing.name}.jar" />
-		<pathconvert property="classpath" pathsep=" ">
-			<path><fileset dir="temp/libs/" /></path>
-			<chainedmapper><flattenmapper /><globmapper from="*" to="libs/*" /></chainedmapper>
-		</pathconvert>
 
-		<javac destdir="temp/bin/" srcdir="${dir}/src/" target="1.6" source="1.6" includeAntRuntime="false">
-			<classpath>
-				<pathelement location="temp/bin/" />
-				<fileset dir="temp/libs/" />
-			</classpath>
-		</javac>
+		<javac destdir="temp/bin/" srcdir="${dir}/src/" target="1.6" source="1.6" includeAntRuntime="false"/>
 		<jar destfile="temp/${name}.jar" basedir="temp/bin/">
 			<manifest>
 				<attribute name="Main-Class" value="Main" />
@@ -87,7 +76,7 @@
 			</manifest>
 		</jar>
 		<zip destfile="${name}-${version}.zip">
-			<fileset dir="temp" includes="${name}.jar, libs/" />
+			<fileset dir="temp" includes="${name}.jar" />
 		</zip>
 	</target>
 

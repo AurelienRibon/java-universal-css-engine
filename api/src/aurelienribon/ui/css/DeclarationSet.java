@@ -152,8 +152,8 @@ public class DeclarationSet {
 
 	private boolean isLastSelectorValid(String selector, Object target) {
 		if (selector.startsWith(".")) {
-			String className = Style.getRegisteredTargetClassName(target);
-			return className != null && className.equals(selector);
+			List<String> classNames = Style.getRegisteredTargetClassNames(target);
+			return classNames != null && classNames.contains(selector);
 
 		} else {
 			try {

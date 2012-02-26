@@ -112,7 +112,7 @@ public class Style {
 	private static final Map<String, Property> registeredProperties = new LinkedHashMap<String, Property>();
 	private static final Map<String, Function> registeredFunctions = new LinkedHashMap<String, Function>();
 	private static final Map<Class, List<DeclarationSetProcessor>> registeredProcessors = new LinkedHashMap<Class, List<DeclarationSetProcessor>>();
-	private static final Map<Object, String> registeredTargets = new LinkedHashMap<Object, String>();
+	private static final Map<Object, List<String>> registeredTargets = new LinkedHashMap<Object, List<String>>();
 	private static final Map<Class, ChildrenAccessor> registeredChildrenAccessors = new HashMap<Class, ChildrenAccessor>();
 	private static ParamConverter converter;
 
@@ -162,15 +162,18 @@ public class Style {
 	}
 
 	/**
-	 * Registers a target with a CSS classname.
+	 * Registers a target with one ore more CSS classnames.
 	 * <p/>
 	 * This is used to assign CSS classnames (like ".something" to a target).
 	 * Don't forget to unregister the target when you dispose of it, to remove
 	 * it from memory.
 	 */
-	public static void registerTarget(Object target, String className) {
-		if (!className.startsWith(".")) className = "." + className;
-		registeredTargets.put(target, className);
+	public static void registerTarget(Object target, String... classNames) {
+		if (!registeredTargets.containsKey(target)) registeredTargets.put(target, new ArrayList<String>());
+		for (String className : classNames) {
+			String name = className.startsWith(".") ? className : "." + className;
+			registeredTargets.get(target).add(name);
+		}
 	}
 
 	/**
@@ -267,9 +270,9 @@ public class Style {
 	}
 
 	/**
-	 * Gets the CSS classname associated to the given target.
+	 * Gets the CSS classnames associated to the given target.
 	 */
-	public static String getRegisteredTargetClassName(Object target) {
+	public static List<String> getRegisteredTargetClassNames(Object target) {
 		return registeredTargets.get(target);
 	}
 
@@ -445,7 +448,7 @@ public class Style {
 
 		// Add the target class and classname to the selectors stack
 		stack.add(target.getClass().getName());
-		if (registeredTargets.containsKey(target)) stack.add(registeredTargets.get(target));
+		if (registeredTargets.containsKey(target)) stack.addAll(registeredTargets.get(target));
 
 		// Iterate over the target children, if any
 		if (target instanceof Container) {
