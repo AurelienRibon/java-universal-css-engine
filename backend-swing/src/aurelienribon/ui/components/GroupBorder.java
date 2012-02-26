@@ -29,9 +29,9 @@ public class GroupBorder implements Border {
 	public GroupBorder() {
 		this(new LineBorder(Color.GRAY, 1),
 			new MatteBorder(1, 1, 0, 1, Color.GRAY),
-			new Insets(5, 5, 5, 5),
+			new Insets(0, 0, 0, 0),
 			null,
-			"GroupBorder",
+			"",
 			null,
 			Color.BLACK,
 			null,

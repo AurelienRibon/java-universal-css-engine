@@ -49,17 +49,32 @@ javax-swing-JTextArea {
 	-swing-background: #282828;
 }
 
-.styleControlPanel, .tabPanelControlPanel {
-	-swing-background: #727272;
-	-swing-foreground: #FFF;
-}
-
 .styleControlPanel {
 	-swing-border: arui-groupborder(null, "Style", 20, 6, #444, #444, false);
 }
 
 .tabPanelControlPanel {
 	-swing-border: arui-groupborder(null, "TabPanel", 20, 6, #444, #444, false);
+}
+
+
+.styleControlPanel, .tabPanelControlPanel {
+	-swing-background: #727272;
+	-swing-foreground: #FFF;
+	-swing-border: arui-groupborder(custom);
+	-arui-border-body: lineborder(#444);
+	-arui-border-header: matteborder(1, 1, 0, 1, #444);
+	-arui-border-margin: 3 6;
+	-arui-border-fill: #444;
+	-arui-border-foreground: #FFF;
+}
+
+.styleControlPanel {
+	-arui-border-title: "Style";
+}
+
+.tabPanelControlPanel {
+	-arui-border-title: "TabPanel demo";
 }
 
 .applyButton {

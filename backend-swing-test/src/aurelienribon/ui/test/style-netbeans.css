@@ -50,16 +50,20 @@ javax-swing-JTextArea {
 }
 
 .styleControlPanel, .tabPanelControlPanel {
-	-swing-background: #CDCED1;
-	-swing-foreground: #000;
+	-swing-border: arui-groupborder(custom);
+	-arui-border-body: lineborder(#898C95);
+	-arui-border-header: matteborder(1, 1, 0, 1, #898C95);
+	-arui-border-margin: 3 6;
+	-arui-border-fill: lineargradient(0, 0, 0, 1, 0.49, #F2F9FC, 0.5, #DCEEF7);
+	-arui-border-foreground: #000;
 }
 
 .styleControlPanel {
-	-swing-border: arui-groupborder(null, "Style", 20, 6, #898C95, lineargradient(0, 0, 0, 1, 0.49, #F2F9FC, 0.5, #DCEEF7));
+	-arui-border-title: "Style";
 }
 
 .tabPanelControlPanel {
-	-swing-border: arui-groupborder(null, "TabPanel", 20, 6, #898C95, lineargradient(0, 0, 0, 1, 0.49, #F2F9FC, 0.5, #DCEEF7));
+	-arui-border-title: "TabPanel demo";
 }
 
 .applyButton {
