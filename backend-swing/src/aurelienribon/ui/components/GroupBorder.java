@@ -6,8 +6,6 @@ import javax.swing.Icon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
-import javax.swing.border.MatteBorder;
 
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
@@ -15,42 +13,18 @@ import javax.swing.border.MatteBorder;
 public class GroupBorder implements Border {
 	private final JLabel label = new JLabel();
 
-	private Border bodyBorder;
-	private Border headerBorder;
-	private Insets headerMargin;
-	private Paint headerFill;
-	private String title;
-	private Icon icon;
-	private Color foreground;
-	private Font font;
-	private int horizontalAlignment;
-	private int verticalAlignment;
-
-	public GroupBorder() {
-		this(new LineBorder(Color.GRAY, 1),
-			new MatteBorder(1, 1, 0, 1, Color.GRAY),
-			new Insets(0, 0, 0, 0),
-			null,
-			"",
-			null,
-			Color.BLACK,
-			null,
-			SwingConstants.LEFT,
-			SwingConstants.CENTER);
-	}
-
-	public GroupBorder(Border bodyBorder, Border headerBorder, Insets headerMargin, Paint headerFill, String title, Icon icon, Color foreground, Font font, int horizontalAlignment, int verticalAlignment) {
-		this.bodyBorder = bodyBorder;
-		this.headerBorder = headerBorder;
-		this.headerMargin = headerMargin;
-		this.headerFill = headerFill;
-		this.title = title;
-		this.icon = icon;
-		this.foreground = foreground;
-		this.font = font;
-		this.horizontalAlignment = horizontalAlignment;
-		this.verticalAlignment = verticalAlignment;
-	}
+	private Paint stroke = Color.GRAY;
+	private Insets thickness = new Insets(1, 1, 1, 1);
+	private Paint headerStroke = Color.GRAY;
+	private Insets headerThickness = new Insets(1, 1, 0, 1);
+	private Paint headerFill = Color.LIGHT_GRAY;
+	private String title = "";
+	private Icon titleIcon = null;
+	private Font titleFont = null;
+	private Color titleForeground = Color.BLACK;
+	private Insets titleMargin = new Insets(0, 0, 0, 0);
+	private int titleHorizontalAlignment = SwingConstants.LEFT;
+	private int titleVerticalAlignment = SwingConstants.CENTER;
 
 	@Override
 	public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
@@ -58,38 +32,113 @@ public class GroupBorder implements Border {
 		gg.translate(x, y);
 
 		int hh = getHeaderHeight(c);
+		int delta;
 
-		if (headerFill != null) {
-			gg.setPaint(PaintUtils.buildPaint(headerFill, width, hh));
+		// Header fill
+
+		if (headerFill != null && headerStroke != null) {
+			int fx = headerThickness.left;
+			int fy = headerThickness.top;
+			int fw = width - headerThickness.left - headerThickness.right;
+			int fh = hh - headerThickness.top - headerThickness.bottom;
+			gg.setPaint(PaintUtils.buildPaint(headerFill, fx, fy, fw, fh));
+			gg.fillRect(fx, fy, fw, fh);
+		} else if (headerFill != null) {
+			gg.setPaint(PaintUtils.buildPaint(headerFill, 0, 0, width, hh));
 			gg.fillRect(0, 0, width, hh);
 		}
 
-		if (headerBorder != null) headerBorder.paintBorder(c, gg, 0, 0, width, hh);
-		if (bodyBorder != null) bodyBorder.paintBorder(c, gg, 0, hh, width, height - hh);
+		// Header stroke
 
-		label.setSize(
-			width - headerMargin.left - headerMargin.right,
-			hh - headerMargin.top - headerMargin.bottom);
+		if (headerStroke != null) {
+			gg.setPaint(PaintUtils.buildPaint(headerStroke, 0, 0, width, hh));
 
-		gg.translate(headerMargin.left, headerMargin.top);
+			if (headerThickness.top > 0) {
+				delta = headerThickness.top / 2;
+				gg.setStroke(new BasicStroke(headerThickness.top, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
+				gg.drawLine(0, delta, width-1, delta);
+			}
+
+			if (headerThickness.left > 0) {
+				delta = headerThickness.left / 2;
+				gg.setStroke(new BasicStroke(headerThickness.left, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
+				gg.drawLine(delta, 0, delta, hh-1);
+			}
+
+			if (headerThickness.bottom > 0) {
+				delta = -(headerThickness.bottom + 1) / 2 + 1;
+				gg.setStroke(new BasicStroke(headerThickness.bottom, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
+				gg.drawLine(0, delta+hh-1, width-1, delta+hh-1);
+			}
+
+			if (headerThickness.right > 0) {
+				delta = -(headerThickness.right + 1) / 2 + 1;
+				gg.setStroke(new BasicStroke(headerThickness.right, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
+				gg.drawLine(delta+width-1, 0, delta+width-1, hh-1);
+			}
+		}
+
+		// Header title
+
+		int labelW = width - titleMargin.left - titleMargin.right;
+		int labelH = hh - titleMargin.top - titleMargin.bottom;
+
+		if (headerStroke != null) labelW -= headerThickness.left + headerThickness.right;
+		if (headerStroke != null) labelH -= headerThickness.top + headerThickness.bottom;
+
+		if (headerStroke != null) {
+			gg.translate(headerThickness.left + titleMargin.left, headerThickness.top + titleMargin.top);
+		} else {
+			gg.translate(titleMargin.left, titleMargin.top);
+		}
+
+		label.setSize(labelW, labelH);
 		label.paint(gg);
+
+		// Body stroke
+
+		if (stroke != null) {
+			gg.setPaint(PaintUtils.buildPaint(stroke, 0, hh, width, height-hh));
+
+			if (thickness.top > 0) {
+				delta = thickness.top / 2;
+				gg.setStroke(new BasicStroke(thickness.top, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
+				gg.drawLine(0, hh+delta, width-1, hh+delta);
+			}
+
+			if (thickness.left > 0) {
+				delta = thickness.left / 2;
+				gg.setStroke(new BasicStroke(thickness.left, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
+				gg.drawLine(delta, hh, delta, height-1);
+			}
+
+			if (thickness.bottom > 0) {
+				delta = -(thickness.bottom + 1) / 2 + 1;
+				gg.setStroke(new BasicStroke(thickness.bottom, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
+				gg.drawLine(0, delta+height-1, width-1, delta+height-1);
+			}
+
+			if (thickness.right > 0) {
+				delta = -(thickness.right + 1) / 2 + 1;
+				gg.setStroke(new BasicStroke(thickness.right, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
+				gg.drawLine(delta+width-1, hh, delta+width-1, height-1);
+			}
+		}
+
+		// Dispose
 
 		gg.dispose();
 	}
 
 	@Override
 	public Insets getBorderInsets(Component c) {
-		Insets insets = new Insets(0, 0, 0, 0);
-
-		if (bodyBorder != null) {
-			insets.left += bodyBorder.getBorderInsets(c).left;
-			insets.right += bodyBorder.getBorderInsets(c).right;
-			insets.top += bodyBorder.getBorderInsets(c).top;
-			insets.bottom += bodyBorder.getBorderInsets(c).bottom;
+		Insets insets = new Insets(getHeaderHeight(c), 0, 0, 0);
+		if (stroke != null) {
+			insets.top += thickness.top;
+			insets.left += thickness.left;
+			insets.bottom += thickness.bottom;
+			insets.right += thickness.right;
 		}
-
-		insets.top += getHeaderHeight(c);
-
 		return insets;
 	}
 
@@ -98,16 +147,24 @@ public class GroupBorder implements Border {
 		return false;
 	}
 
-	public Border getBodyBorder() {
-		return bodyBorder;
+	// -------------------------------------------------------------------------
+	// Getters / setters
+	// -------------------------------------------------------------------------
+
+	public Paint getStroke() {
+		return stroke;
 	}
 
-	public Border getHeaderBorder() {
-		return headerBorder;
+	public Insets getThickness() {
+		return thickness;
 	}
 
-	public Insets getHeaderMargin() {
-		return headerMargin;
+	public Paint getHeaderStroke() {
+		return headerStroke;
+	}
+
+	public Insets getHeaderThickness() {
+		return headerThickness;
 	}
 
 	public Paint getHeaderFill() {
@@ -118,36 +175,44 @@ public class GroupBorder implements Border {
 		return title;
 	}
 
-	public Icon getIcon() {
-		return icon;
+	public Icon getTitleIcon() {
+		return titleIcon;
 	}
 
-	public Color getForeground() {
-		return foreground;
+	public Font getTitleFont() {
+		return titleFont;
 	}
 
-	public Font getFont() {
-		return font;
+	public Color getTitleForeground() {
+		return titleForeground;
 	}
 
-	public int getHorizontalAlignment() {
-		return horizontalAlignment;
+	public Insets getTitleMargin() {
+		return titleMargin;
 	}
 
-	public int getVerticalAlignment() {
-		return verticalAlignment;
+	public int getTitleHorizontalAlignment() {
+		return titleHorizontalAlignment;
 	}
 
-	public void setBodyBorder(Border bodyBorder) {
-		this.bodyBorder = bodyBorder;
+	public int getTitleVerticalAlignment() {
+		return titleVerticalAlignment;
 	}
 
-	public void setHeaderBorder(Border headerBorder) {
-		this.headerBorder = headerBorder;
+	public void setStroke(Paint stroke) {
+		this.stroke = stroke;
 	}
 
-	public void setHeaderMargin(Insets headerMargin) {
-		this.headerMargin = headerMargin;
+	public void setThickness(Insets thickness) {
+		this.thickness = thickness;
+	}
+
+	public void setHeaderStroke(Paint headerStroke) {
+		this.headerStroke = headerStroke;
+	}
+
+	public void setHeaderThickness(Insets headerThickness) {
+		this.headerThickness = headerThickness;
 	}
 
 	public void setHeaderFill(Paint headerFill) {
@@ -158,24 +223,28 @@ public class GroupBorder implements Border {
 		this.title = title;
 	}
 
-	public void setIcon(Icon icon) {
-		this.icon = icon;
+	public void setTitleIcon(Icon titleIcon) {
+		this.titleIcon = titleIcon;
 	}
 
-	public void setForeground(Color foreground) {
-		this.foreground = foreground;
+	public void setTitleFont(Font titleFont) {
+		this.titleFont = titleFont;
 	}
 
-	public void setFont(Font font) {
-		this.font = font;
+	public void setTitleForeground(Color titleForeground) {
+		this.titleForeground = titleForeground;
 	}
 
-	public void setHorizontalAlignment(int horizontalAlignment) {
-		this.horizontalAlignment = horizontalAlignment;
+	public void setTitleMargin(Insets titleMargin) {
+		this.titleMargin = titleMargin;
 	}
 
-	public void setVerticalAlignment(int verticalAlignment) {
-		this.verticalAlignment = verticalAlignment;
+	public void setTitleHorizontalAlignment(int titleHorizontalAlignment) {
+		this.titleHorizontalAlignment = titleHorizontalAlignment;
+	}
+
+	public void setTitleVerticalAlignment(int titleVerticalAlignment) {
+		this.titleVerticalAlignment = titleVerticalAlignment;
 	}
 
 	// -------------------------------------------------------------------------
@@ -184,25 +253,19 @@ public class GroupBorder implements Border {
 
 	private int getHeaderHeight(Component c) {
 		int h = 0;
-
-		h += headerMargin.top + headerMargin.bottom;
+		if (headerStroke != null) h += headerThickness.top + headerThickness.bottom;
+		h += titleMargin.top + titleMargin.bottom;
 		h += getLabel(c).getPreferredSize().height;
-
-		if (headerBorder != null) {
-			h += headerBorder.getBorderInsets(c).top;
-			h += headerBorder.getBorderInsets(c).bottom;
-		}
-
 		return h;
 	}
 
 	private JLabel getLabel(Component c) {
-		label.setFont(font != null ? font : c.getFont());
 		label.setText(title);
-		label.setIcon(icon);
-		label.setForeground(foreground);
-		label.setHorizontalAlignment(horizontalAlignment);
-		label.setVerticalAlignment(verticalAlignment);
+		label.setIcon(titleIcon);
+		label.setForeground(titleForeground != null ? titleForeground : c.getForeground());
+		label.setFont(titleFont != null ? titleFont : c.getFont());
+		label.setHorizontalAlignment(titleHorizontalAlignment);
+		label.setVerticalAlignment(titleVerticalAlignment);
 		return label;
 	}
 }

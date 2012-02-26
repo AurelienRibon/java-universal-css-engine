@@ -108,7 +108,7 @@ class TabPanelHeaderSubPanel extends JComponent {
 
 		if (model.selected) {
 			if (fillSelected != null) {
-				gg.setPaint(PaintUtils.buildPaint(fillSelected, w, h));
+				gg.setPaint(PaintUtils.buildPaint(fillSelected, 0, 0, w, h));
 				gg.fillRect(0, 0, w, h);
 			}
 			if (strokeSelected != null) {
@@ -120,7 +120,7 @@ class TabPanelHeaderSubPanel extends JComponent {
 
 		} else if (isMouseOver) {
 			if (fillMouseOver != null) {
-				gg.setPaint(PaintUtils.buildPaint(fillMouseOver, w, h));
+				gg.setPaint(PaintUtils.buildPaint(fillMouseOver, 0, 0, w, h));
 				gg.fillRect(0, 0, w, h);
 			}
 			if (strokeMouseOver != null) {
@@ -136,7 +136,7 @@ class TabPanelHeaderSubPanel extends JComponent {
 
 		} else {
 			if (fillUnselected != null) {
-				gg.setPaint(PaintUtils.buildPaint(fillUnselected, w, h));
+				gg.setPaint(PaintUtils.buildPaint(fillUnselected, 0, 0, w, h));
 				gg.fillRect(0, 0, w, h);
 			}
 			if (strokeUnselected != null) {

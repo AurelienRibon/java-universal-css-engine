@@ -29,14 +29,16 @@ public class AruiStyle {
 		Style.registerProperty(AruiProperties.fillSelected);
 		Style.registerProperty(AruiProperties.fillUnselected);
 		Style.registerProperty(AruiProperties.corderRadius);
-		Style.registerProperty(AruiProperties.borderBody);
-		Style.registerProperty(AruiProperties.borderHeader);
-		Style.registerProperty(AruiProperties.borderFill);
-		Style.registerProperty(AruiProperties.borderMargin);
+		Style.registerProperty(AruiProperties.borderStroke);
+		Style.registerProperty(AruiProperties.borderThickness);
+		Style.registerProperty(AruiProperties.borderHeaderStroke);
+		Style.registerProperty(AruiProperties.borderHeaderThickness);
+		Style.registerProperty(AruiProperties.borderHeaderFill);
 		Style.registerProperty(AruiProperties.borderTitle);
 		Style.registerProperty(AruiProperties.borderIcon);
 		Style.registerProperty(AruiProperties.borderFont);
 		Style.registerProperty(AruiProperties.borderForeground);
+		Style.registerProperty(AruiProperties.borderMargin);
 
 		Style.registerFunction(AruiFunctions.groupBorder);
 

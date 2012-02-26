@@ -74,19 +74,19 @@ public class Button extends JButton implements Container {
 		int h = getHeight();
 
 		if (isMouseDown && isMouseOver) {
-			gg.setPaint(PaintUtils.buildPaint(fillMouseDown, w, h));
+			gg.setPaint(PaintUtils.buildPaint(fillMouseDown, 0, 0, w, h));
 			gg.fillRoundRect(0, 0, w, h, cornerRadius, cornerRadius);
 			gg.setColor(strokeMouseDown);
 			gg.drawRoundRect(0, 0, w-1, h-1, cornerRadius, cornerRadius);
 
 		} else if (isMouseOver || (isMouseDown && !isMouseOver)) {
-			gg.setPaint(PaintUtils.buildPaint(fillMouseOver, w, h));
+			gg.setPaint(PaintUtils.buildPaint(fillMouseOver, 0, 0, w, h));
 			gg.fillRoundRect(0, 0, w, h, cornerRadius, cornerRadius);
 			gg.setColor(strokeMouseOver);
 			gg.drawRoundRect(0, 0, w-1, h-1, cornerRadius, cornerRadius);
 
 		} else {
-			gg.setPaint(PaintUtils.buildPaint(fill, w, h));
+			gg.setPaint(PaintUtils.buildPaint(fill, 0, 0, w, h));
 			gg.fillRoundRect(0, 0, w, h, cornerRadius, cornerRadius);
 			gg.setColor(stroke);
 			gg.drawRoundRect(0, 0, w-1, h-1, cornerRadius, cornerRadius);

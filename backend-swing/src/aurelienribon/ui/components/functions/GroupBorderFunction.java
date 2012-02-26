@@ -23,7 +23,7 @@ public class GroupBorderFunction implements Function {
 	@Override
 	public String[][] getParamsNames() {
 		return new String[][] {
-			{"custom"}
+			{"noarg"}
 		};
 	}
 

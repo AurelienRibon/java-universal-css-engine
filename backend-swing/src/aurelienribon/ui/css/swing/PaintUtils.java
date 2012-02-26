@@ -31,15 +31,15 @@ public class PaintUtils {
 		return -1;
 	}
 
-	public static Paint buildPaint(Paint p, int w, int h) {
+	public static Paint buildPaint(Paint p, int x, int y, int w, int h) {
 		if (p instanceof Color) return p;
 
 		if (p instanceof LinearGradientPaint) {
 			LinearGradientPaint gp = (LinearGradientPaint) p;
-			float x1 = (float) (gp.getStartPoint().getX() * w);
-			float y1 = (float) (gp.getStartPoint().getY() * h);
-			float x2 = (float) (gp.getEndPoint().getX() * w);
-			float y2 = (float) (gp.getEndPoint().getY() * h);
+			float x1 = (float) (gp.getStartPoint().getX() * w) + x;
+			float y1 = (float) (gp.getStartPoint().getY() * h) + y;
+			float x2 = (float) (gp.getEndPoint().getX() * w) + x;
+			float y2 = (float) (gp.getEndPoint().getY() * h) + y;
 			return new LinearGradientPaint(x1, y1, x2, y2, gp.getFractions(), gp.getColors());
 		}
 
