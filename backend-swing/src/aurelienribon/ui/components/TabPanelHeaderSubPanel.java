@@ -4,7 +4,7 @@ import aurelienribon.ui.components.TabPanelModel.TabModel;
 import aurelienribon.ui.css.DeclarationSet;
 import aurelienribon.ui.css.DeclarationSetProcessor;
 import aurelienribon.ui.css.Property;
-import aurelienribon.ui.css.swing.PaintUtils;
+import aurelienribon.ui.utils.PaintUtils;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
