@@ -17,12 +17,13 @@ import javax.swing.*;
 public class Button extends JButton implements Container {
 	private Color foregroundMouseDown = Color.RED;
 	private Color foregroundMouseOver = Color.RED;
-	private Color stroke = Color.RED;
-	private Color strokeMouseDown = Color.RED;
-	private Color strokeMouseOver = Color.RED;
+	private Paint stroke = Color.RED;
+	private Paint strokeMouseDown = Color.RED;
+	private Paint strokeMouseOver = Color.RED;
 	private Paint fill = Color.RED;
 	private Paint fillMouseDown = Color.RED;
 	private Paint fillMouseOver = Color.RED;
+	private int strokeThickness = 0;
 	private int cornerRadius = 0;
 
 	private final JLabel label = new JLabel();
@@ -67,30 +68,37 @@ public class Button extends JButton implements Container {
 
 	@Override
 	protected void paintComponent(Graphics g) {
-		Graphics2D gg = (Graphics2D) g;
+		Graphics2D gg = (Graphics2D) g.create();
 		gg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
 		int w = getWidth();
 		int h = getHeight();
+		int innerGap = strokeThickness / 2;
+		int innerW = w - innerGap*2;
+		int innerH = h - innerGap*2;
+
+		gg.setStroke(new BasicStroke(strokeThickness));
 
 		if (isMouseDown && isMouseOver) {
-			gg.setPaint(PaintUtils.buildPaint(fillMouseDown, 0, 0, w, h));
-			gg.fillRoundRect(0, 0, w, h, cornerRadius, cornerRadius);
-			gg.setColor(strokeMouseDown);
-			gg.drawRoundRect(0, 0, w-1, h-1, cornerRadius, cornerRadius);
+			gg.setPaint(PaintUtils.buildPaint(fillMouseDown, innerGap, innerGap, innerW, innerH));
+			gg.fillRoundRect(innerGap, innerGap, innerW, innerH, cornerRadius, cornerRadius);
+			gg.setPaint(PaintUtils.buildPaint(strokeMouseDown, 0, 0, w, h));
 
 		} else if (isMouseOver || (isMouseDown && !isMouseOver)) {
-			gg.setPaint(PaintUtils.buildPaint(fillMouseOver, 0, 0, w, h));
-			gg.fillRoundRect(0, 0, w, h, cornerRadius, cornerRadius);
-			gg.setColor(strokeMouseOver);
-			gg.drawRoundRect(0, 0, w-1, h-1, cornerRadius, cornerRadius);
+			gg.setPaint(PaintUtils.buildPaint(fillMouseOver, innerGap, innerGap, innerW, innerH));
+			gg.fillRoundRect(innerGap, innerGap, innerW, innerH, cornerRadius, cornerRadius);
+			gg.setPaint(PaintUtils.buildPaint(strokeMouseOver, 0, 0, w, h));
 
 		} else {
-			gg.setPaint(PaintUtils.buildPaint(fill, 0, 0, w, h));
-			gg.fillRoundRect(0, 0, w, h, cornerRadius, cornerRadius);
-			gg.setColor(stroke);
-			gg.drawRoundRect(0, 0, w-1, h-1, cornerRadius, cornerRadius);
+			gg.setPaint(PaintUtils.buildPaint(fill, innerGap, innerGap, innerW, innerH));
+			gg.fillRoundRect(innerGap, innerGap, innerW, innerH, cornerRadius, cornerRadius);
+			gg.setPaint(PaintUtils.buildPaint(stroke, 0, 0, w, h));
 		}
+
+		if (cornerRadius > 0) gg.drawRoundRect(innerGap, innerGap, innerW-1, innerH-1, cornerRadius, cornerRadius);
+		else gg.drawRect(innerGap, innerGap, innerW-1, innerH-1);
+
+		gg.dispose();
 	}
 
 	private final MouseAdapter mouseAdapter = new MouseAdapter() {
@@ -129,35 +137,44 @@ public class Button extends JButton implements Container {
 
 	public static class Processor implements DeclarationSetProcessor<Button> {
 		@Override
-		public void process(Button target, DeclarationSet rs) {
-			Property rule;
+		public void process(Button target, DeclarationSet ds) {
+			Property p;
 
-			rule = AruiProperties.foregroundMouseDown;
-			if (rs.contains(rule)) {target.foregroundMouseDown = (Color) rs.getValue(rule).get(0);}
+			p = AruiProperties.foregroundMouseDown;
+			if (ds.contains(p)) target.foregroundMouseDown = ds.getValue(p, Color.class);
+			else target.foregroundMouseDown = target.getForeground();
 
-			rule = AruiProperties.foregroundMouseOver;
-			if (rs.contains(rule)) {target.foregroundMouseOver = (Color) rs.getValue(rule).get(0);}
+			p = AruiProperties.foregroundMouseOver;
+			if (ds.contains(p)) target.foregroundMouseOver = ds.getValue(p, Color.class);
+			else target.foregroundMouseOver = target.getForeground();
 
-			rule = AruiProperties.stroke;
-			if (rs.contains(rule)) {target.stroke = (Color) rs.getValue(rule).get(0);}
+			p = AruiProperties.stroke;
+			if (ds.contains(p)) target.stroke = ds.getValue(p, Paint.class);
 
-			rule = AruiProperties.strokeMouseDown;
-			if (rs.contains(rule)) {target.strokeMouseDown = (Color) rs.getValue(rule).get(0);}
+			p = AruiProperties.strokeMouseDown;
+			if (ds.contains(p)) target.strokeMouseDown = ds.getValue(p, Paint.class);
+			else target.strokeMouseDown = target.stroke;
 
-			rule = AruiProperties.strokeMouseOver;
-			if (rs.contains(rule)) {target.strokeMouseOver = (Color) rs.getValue(rule).get(0);}
+			p = AruiProperties.strokeMouseOver;
+			if (ds.contains(p)) target.strokeMouseOver = ds.getValue(p, Paint.class);
+			else target.strokeMouseOver = target.stroke;
 
-			rule = AruiProperties.fill;
-			if (rs.contains(rule)) {target.fill = (Paint) rs.getValue(rule).get(0);}
+			p = AruiProperties.fill;
+			if (ds.contains(p)) target.fill = ds.getValue(p, Paint.class);
 
-			rule = AruiProperties.fillMouseDown;
-			if (rs.contains(rule)) {target.fillMouseDown = (Paint) rs.getValue(rule).get(0);}
+			p = AruiProperties.fillMouseDown;
+			if (ds.contains(p)) target.fillMouseDown = ds.getValue(p, Paint.class);
+			else target.fillMouseDown = target.stroke;
 
-			rule = AruiProperties.fillMouseOver;
-			if (rs.contains(rule)) {target.fillMouseOver = (Paint) rs.getValue(rule).get(0);}
+			p = AruiProperties.fillMouseOver;
+			if (ds.contains(p)) target.fillMouseOver = ds.getValue(p, Paint.class);
+			else target.fillMouseOver = target.stroke;
 
-			rule = AruiProperties.corderRadius;
-			if (rs.contains(rule)) {target.cornerRadius = (Integer) rs.getValue(rule).get(0);}
+			p = AruiProperties.corderRadius;
+			if (ds.contains(p)) target.cornerRadius = ds.getValue(p, Integer.class);
+
+			p = AruiProperties.strokeThickness;
+			if (ds.contains(p)) target.strokeThickness = ds.getValue(p, Integer.class);
 
 			target.revalidate();
 		}

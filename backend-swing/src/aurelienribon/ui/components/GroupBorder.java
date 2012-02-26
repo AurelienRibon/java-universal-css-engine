@@ -1,7 +1,6 @@
 package aurelienribon.ui.components;
 
 import aurelienribon.ui.utils.PaintUtils;
-import aurelienribon.ui.utils.StrokeUtils;
 import java.awt.*;
 import javax.swing.Icon;
 import javax.swing.JLabel;
@@ -30,10 +29,10 @@ public class GroupBorder implements Border {
 	@Override
 	public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
 		Graphics2D gg = (Graphics2D) g.create();
+		gg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		gg.translate(x, y);
 
 		int hh = getHeaderHeight(c);
-		int delta;
 
 		// Header fill
 
@@ -55,27 +54,27 @@ public class GroupBorder implements Border {
 			gg.setPaint(PaintUtils.buildPaint(headerStroke, 0, 0, width, hh));
 
 			if (headerThickness.top > 0) {
-				delta = StrokeUtils.getTopDelta(headerThickness.top);
+				int gap = headerThickness.top / 2;
 				gg.setStroke(new BasicStroke(headerThickness.top, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
-				gg.drawLine(0, delta, width-1, delta);
+				gg.drawLine(0, gap, width-1, gap);
 			}
 
 			if (headerThickness.left > 0) {
-				delta = StrokeUtils.getTopDelta(headerThickness.left);
+				int gap = headerThickness.left / 2;
 				gg.setStroke(new BasicStroke(headerThickness.left, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
-				gg.drawLine(delta, 0, delta, hh-1);
+				gg.drawLine(gap, 0, gap, hh-1);
 			}
 
 			if (headerThickness.bottom > 0) {
-				delta = StrokeUtils.getTopDelta(headerThickness.bottom);
+				int gap = headerThickness.bottom / 2;
 				gg.setStroke(new BasicStroke(headerThickness.bottom, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
-				gg.drawLine(0, delta+hh-1, width-1, delta+hh-1);
+				gg.drawLine(0, gap+hh-1, width-1, gap+hh-1);
 			}
 
 			if (headerThickness.right > 0) {
-				delta = StrokeUtils.getTopDelta(headerThickness.right);
+				int gap = headerThickness.right / 2;
 				gg.setStroke(new BasicStroke(headerThickness.right, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
-				gg.drawLine(delta+width-1, 0, delta+width-1, hh-1);
+				gg.drawLine(gap+width-1, 0, gap+width-1, hh-1);
 			}
 		}
 
@@ -102,27 +101,27 @@ public class GroupBorder implements Border {
 			gg.setPaint(PaintUtils.buildPaint(stroke, 0, hh, width, height-hh));
 
 			if (thickness.top > 0) {
-				delta = StrokeUtils.getTopDelta(thickness.top);
+				int gap = thickness.top;
 				gg.setStroke(new BasicStroke(thickness.top, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
-				gg.drawLine(0, hh+delta, width-1, hh+delta);
+				gg.drawLine(0, hh+gap, width-1, hh+gap);
 			}
 
 			if (thickness.left > 0) {
-				delta = StrokeUtils.getTopDelta(thickness.left);
+				int gap = thickness.left;
 				gg.setStroke(new BasicStroke(thickness.left, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
-				gg.drawLine(delta, hh, delta, height-1);
+				gg.drawLine(gap, hh, gap, height-1);
 			}
 
 			if (thickness.bottom > 0) {
-				delta = StrokeUtils.getTopDelta(thickness.bottom);
+				int gap = thickness.bottom;
 				gg.setStroke(new BasicStroke(thickness.bottom, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
-				gg.drawLine(0, delta+height-1, width-1, delta+height-1);
+				gg.drawLine(0, gap+height-1, width-1, gap+height-1);
 			}
 
 			if (thickness.right > 0) {
-				delta = StrokeUtils.getTopDelta(thickness.right);
+				int gap = thickness.right;
 				gg.setStroke(new BasicStroke(thickness.right, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
-				gg.drawLine(delta+width-1, hh, delta+width-1, height-1);
+				gg.drawLine(gap+width-1, hh, gap+width-1, height-1);
 			}
 		}
 

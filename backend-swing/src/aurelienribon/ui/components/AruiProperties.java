@@ -15,11 +15,11 @@ public class AruiProperties {
 	public static final Property foregroundMouseDown = new SingleParamProperty("-arui-foreground-mousedown", Color.class, "color");
 	public static final Property foregroundSelected = new SingleParamProperty("-arui-foreground-selected", Color.class, "color");
 	public static final Property foregroundUnselected = new SingleParamProperty("-arui-foreground-unselected", Color.class, "color");
-	public static final Property stroke = new SingleParamProperty("-arui-stroke", Color.class, "color");
-	public static final Property strokeMouseOver = new SingleParamProperty("-arui-stroke-mouseover", Color.class, "color");
-	public static final Property strokeMouseDown = new SingleParamProperty("-arui-stroke-mousedown", Color.class, "color");
-	public static final Property strokeSelected = new SingleParamProperty("-arui-stroke-selected", Color.class, "color");
-	public static final Property strokeUnselected = new SingleParamProperty("-arui-stroke-unselected", Color.class, "color");
+	public static final Property stroke = new SingleParamProperty("-arui-stroke", Paint.class, "paint");
+	public static final Property strokeMouseOver = new SingleParamProperty("-arui-stroke-mouseover", Paint.class, "paint");
+	public static final Property strokeMouseDown = new SingleParamProperty("-arui-stroke-mousedown", Paint.class, "paint");
+	public static final Property strokeSelected = new SingleParamProperty("-arui-stroke-selected", Paint.class, "paint");
+	public static final Property strokeUnselected = new SingleParamProperty("-arui-stroke-unselected", Paint.class, "paint");
 
 	public static final Property fill = new SingleParamProperty("-arui-fill", Paint.class, "paint");
 	public static final Property fillMouseOver = new SingleParamProperty("-arui-fill-mouseover", Paint.class, "paint");
@@ -27,6 +27,7 @@ public class AruiProperties {
 	public static final Property fillSelected = new SingleParamProperty("-arui-fill-selected", Paint.class, "paint");
 	public static final Property fillUnselected = new SingleParamProperty("-arui-fill-unselected", Paint.class, "paint");
 
+	public static final Property strokeThickness = new SingleParamProperty("-arui-strokethickness", Integer.class, "thickness");
 	public static final Property corderRadius = new SingleParamProperty("-arui-cornerradius", Integer.class, "radius");
 
 	public static final Property borderStroke = new SingleParamProperty("-arui-border-stroke", Paint.class, "stroke");

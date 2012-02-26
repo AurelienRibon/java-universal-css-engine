@@ -28,6 +28,7 @@ public class AruiStyle {
 		Style.registerProperty(AruiProperties.fillMouseDown);
 		Style.registerProperty(AruiProperties.fillSelected);
 		Style.registerProperty(AruiProperties.fillUnselected);
+		Style.registerProperty(AruiProperties.strokeThickness);
 		Style.registerProperty(AruiProperties.corderRadius);
 		Style.registerProperty(AruiProperties.borderStroke);
 		Style.registerProperty(AruiProperties.borderThickness);

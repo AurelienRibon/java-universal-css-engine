@@ -20,41 +20,41 @@ import javax.swing.JComponent;
 public class JComponentProcessor implements DeclarationSetProcessor<JComponent> {
 	@Override
 	public void process(JComponent target, DeclarationSet ds) {
-		Property rule;
+		Property p;
 
-		rule = SwingProperties.border;
-		if (ds.contains(rule) && ds.getValue(rule).get(0) instanceof GroupBorder) {
-			GroupBorder border = (GroupBorder) ds.getValue(rule).get(0);
+		p = SwingProperties.border;
+		if (ds.contains(p) && ds.getValue(p).get(0) instanceof GroupBorder) {
+			GroupBorder border = (GroupBorder) ds.getValue(p).get(0);
 
-			rule = AruiProperties.borderStroke;
-			if (ds.contains(rule)) border.setStroke(ds.getValue(rule, Paint.class));
+			p = AruiProperties.borderStroke;
+			if (ds.contains(p)) border.setStroke(ds.getValue(p, Paint.class));
 
-			rule = AruiProperties.borderThickness;
-			if (ds.contains(rule)) border.setThickness(ds.getValue(rule, Insets.class, SwingFunctions.insets));
+			p = AruiProperties.borderThickness;
+			if (ds.contains(p)) border.setThickness(ds.getValue(p, Insets.class, SwingFunctions.insets));
 
-			rule = AruiProperties.borderHeaderStroke;
-			if (ds.contains(rule)) border.setHeaderStroke(ds.getValue(rule, Paint.class));
+			p = AruiProperties.borderHeaderStroke;
+			if (ds.contains(p)) border.setHeaderStroke(ds.getValue(p, Paint.class));
 
-			rule = AruiProperties.borderHeaderThickness;
-			if (ds.contains(rule)) border.setHeaderThickness(ds.getValue(rule, Insets.class, SwingFunctions.insets));
+			p = AruiProperties.borderHeaderThickness;
+			if (ds.contains(p)) border.setHeaderThickness(ds.getValue(p, Insets.class, SwingFunctions.insets));
 
-			rule = AruiProperties.borderHeaderFill;
-			if (ds.contains(rule)) border.setHeaderFill(ds.getValue(rule, Paint.class));
+			p = AruiProperties.borderHeaderFill;
+			if (ds.contains(p)) border.setHeaderFill(ds.getValue(p, Paint.class));
 
-			rule = AruiProperties.borderTitle;
-			if (ds.contains(rule)) border.setTitle(ds.getValue(rule, String.class));
+			p = AruiProperties.borderTitle;
+			if (ds.contains(p)) border.setTitle(ds.getValue(p, String.class));
 
-			rule = AruiProperties.borderIcon;
-			if (ds.contains(rule)) border.setTitleIcon(ds.getValue(rule, Icon.class, SwingFunctions.icon));
+			p = AruiProperties.borderIcon;
+			if (ds.contains(p)) border.setTitleIcon(ds.getValue(p, Icon.class, SwingFunctions.icon));
 
-			rule = AruiProperties.borderFont;
-			if (ds.contains(rule)) border.setTitleFont(ds.getValue(rule, Font.class, SwingFunctions.font));
+			p = AruiProperties.borderFont;
+			if (ds.contains(p)) border.setTitleFont(ds.getValue(p, Font.class, SwingFunctions.font));
 
-			rule = AruiProperties.borderForeground;
-			if (ds.contains(rule)) border.setTitleForeground(ds.getValue(rule, Color.class));
+			p = AruiProperties.borderForeground;
+			if (ds.contains(p)) border.setTitleForeground(ds.getValue(p, Color.class));
 
-			rule = AruiProperties.borderMargin;
-			if (ds.contains(rule)) border.setTitleMargin(ds.getValue(rule, Insets.class, SwingFunctions.insets));
+			p = AruiProperties.borderMargin;
+			if (ds.contains(p)) border.setTitleMargin(ds.getValue(p, Insets.class, SwingFunctions.insets));
 		}
 	}
 }

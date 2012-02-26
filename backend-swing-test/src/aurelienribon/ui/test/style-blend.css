@@ -16,6 +16,7 @@ aurelienribon-ui-components-Button {
 	-arui-fill: #595959;
 	-arui-fill-mouseover: #AAAAAA;
 	-arui-fill-mousedown: #424242;
+	-arui-strokethickness: 1;
 	-arui-cornerradius: 10;
 }
 
