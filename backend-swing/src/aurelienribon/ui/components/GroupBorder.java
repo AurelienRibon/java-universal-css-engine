@@ -78,6 +78,36 @@ public class GroupBorder implements Border {
 			}
 		}
 
+		// Body stroke
+
+		if (stroke != null) {
+			gg.setPaint(PaintUtils.buildPaint(stroke, 0, hh, width, height-hh));
+
+			if (thickness.top > 0) {
+				int gap = thickness.top / 2;
+				gg.setStroke(new BasicStroke(thickness.top, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
+				gg.drawLine(0, hh+gap, width-1, hh+gap);
+			}
+
+			if (thickness.left > 0) {
+				int gap = thickness.left / 2;
+				gg.setStroke(new BasicStroke(thickness.left, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
+				gg.drawLine(gap, hh, gap, height-1);
+			}
+
+			if (thickness.bottom > 0) {
+				int gap = thickness.bottom / 2;
+				gg.setStroke(new BasicStroke(thickness.bottom, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
+				gg.drawLine(0, gap+height-1, width-1, gap+height-1);
+			}
+
+			if (thickness.right > 0) {
+				int gap = thickness.right / 2;
+				gg.setStroke(new BasicStroke(thickness.right, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
+				gg.drawLine(gap+width-1, hh, gap+width-1, height-1);
+			}
+		}
+
 		// Header title
 
 		int labelW = width - titleMargin.left - titleMargin.right;
@@ -94,36 +124,6 @@ public class GroupBorder implements Border {
 
 		label.setSize(labelW, labelH);
 		label.paint(gg);
-
-		// Body stroke
-
-		if (stroke != null) {
-			gg.setPaint(PaintUtils.buildPaint(stroke, 0, hh, width, height-hh));
-
-			if (thickness.top > 0) {
-				int gap = thickness.top;
-				gg.setStroke(new BasicStroke(thickness.top, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
-				gg.drawLine(0, hh+gap, width-1, hh+gap);
-			}
-
-			if (thickness.left > 0) {
-				int gap = thickness.left;
-				gg.setStroke(new BasicStroke(thickness.left, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
-				gg.drawLine(gap, hh, gap, height-1);
-			}
-
-			if (thickness.bottom > 0) {
-				int gap = thickness.bottom;
-				gg.setStroke(new BasicStroke(thickness.bottom, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
-				gg.drawLine(0, gap+height-1, width-1, gap+height-1);
-			}
-
-			if (thickness.right > 0) {
-				int gap = thickness.right;
-				gg.setStroke(new BasicStroke(thickness.right, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
-				gg.drawLine(gap+width-1, hh, gap+width-1, height-1);
-			}
-		}
 
 		// Dispose
 
