@@ -394,7 +394,7 @@ public class Style {
 					propertiesValues.put(property, params);
 				}
 
-				DeclarationSet ds = new DeclarationSet(properties, propertiesValues);
+				DeclarationSet ds = new DeclarationSet(this, properties, propertiesValues);
 				rules.add(new Rule(selector, ds));
 			}
 
