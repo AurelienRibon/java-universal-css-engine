@@ -17,6 +17,7 @@ public class SwingFunctions {
 	public static Function rgb = new RgbFunction();
 	public static Function rgba = new RgbaFunction();
 	public static Function linearGradient = new LinearGradientFunction();
+	public static Function texture = new TextureFunction();
 
 	// Borders
 	public static Function bevelBorder = new BevelBorderFunction();

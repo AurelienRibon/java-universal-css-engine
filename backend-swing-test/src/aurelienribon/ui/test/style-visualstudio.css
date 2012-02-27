@@ -47,7 +47,7 @@ javax-swing-JTextArea {
 }
 
 #rootPanel {
-	-swing-background: #2A3B57;
+	-arui-fill: texture(url("/gfx/back_vs2010.png"));
 }
 
 #styleControlPanel, #tabPanelControlPanel {

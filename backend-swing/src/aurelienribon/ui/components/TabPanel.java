@@ -171,5 +171,5 @@ public class TabPanel extends JPanel {
 
 			Style.apply(target.headerPanel, rs);
 		}
-	};
+	}
 }

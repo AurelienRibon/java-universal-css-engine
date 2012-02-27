@@ -45,21 +45,22 @@ public class SwingStyle {
 		Style.registerProperty(SwingProperties.icon);
 		Style.registerProperty(SwingProperties.border);
 
+		Style.registerFunction(SwingFunctions.url);
+		Style.registerFunction(SwingFunctions.font);
+		Style.registerFunction(SwingFunctions.icon);
+		Style.registerFunction(SwingFunctions.insets);
+		Style.registerFunction(SwingFunctions.rgb);
+		Style.registerFunction(SwingFunctions.rgba);
+		Style.registerFunction(SwingFunctions.linearGradient);
+		Style.registerFunction(SwingFunctions.texture);
 		Style.registerFunction(SwingFunctions.bevelBorder);
 		Style.registerFunction(SwingFunctions.compoundBorder);
 		Style.registerFunction(SwingFunctions.dashedBorder);
 		Style.registerFunction(SwingFunctions.emptyBorder);
 		Style.registerFunction(SwingFunctions.etchedBorder);
-		Style.registerFunction(SwingFunctions.font);
-		Style.registerFunction(SwingFunctions.icon);
-		Style.registerFunction(SwingFunctions.insets);
 		Style.registerFunction(SwingFunctions.lineBorder);
-		Style.registerFunction(SwingFunctions.linearGradient);
 		Style.registerFunction(SwingFunctions.matteBorder);
-		Style.registerFunction(SwingFunctions.rgb);
-		Style.registerFunction(SwingFunctions.rgba);
 		Style.registerFunction(SwingFunctions.titledBorder);
-		Style.registerFunction(SwingFunctions.url);
 
 		Style.registerProcessor(Component.class, new ComponentProcessor());
 		Style.registerProcessor(JComponent.class, new JComponentProcessor());

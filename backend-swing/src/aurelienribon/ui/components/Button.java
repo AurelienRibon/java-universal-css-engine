@@ -190,5 +190,5 @@ public class Button extends JButton implements Container {
 
 			target.revalidate();
 		}
-	};
+	}
 }

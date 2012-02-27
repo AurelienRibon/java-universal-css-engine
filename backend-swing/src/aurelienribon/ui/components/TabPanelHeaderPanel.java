@@ -168,5 +168,5 @@ class TabPanelHeaderPanel extends JLayeredPane {
 			for (TabPanelHeaderSubPanel p : target.subPanels) Style.apply(p, rs);
 			target.reload();
 		}
-	};
+	}
 }

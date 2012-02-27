@@ -270,5 +270,5 @@ class TabPanelHeaderSubPanel extends JComponent {
 
 			target.reload();
 		}
-	};
+	}
 }

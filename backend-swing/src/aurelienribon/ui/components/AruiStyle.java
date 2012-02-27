@@ -48,5 +48,6 @@ public class AruiStyle {
 		Style.registerProcessor(TabPanel.class, new TabPanel.Processor());
 		Style.registerProcessor(TabPanelHeaderPanel.class, new TabPanelHeaderPanel.Processor());
 		Style.registerProcessor(TabPanelHeaderSubPanel.class, new TabPanelHeaderSubPanel.Processor());
+		Style.registerProcessor(PaintedPanel.class, new PaintedPanel.Processor());
 	}
 }
