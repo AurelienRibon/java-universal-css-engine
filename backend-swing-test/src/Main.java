@@ -19,7 +19,7 @@ public class Main {
 				}
 
 				MainWindow mw = new MainWindow();
-				mw.setSize(1000, 600);
+				mw.setSize(850, 600);
 				mw.setLocationRelativeTo(null);
 				mw.setVisible(true);
 			}
