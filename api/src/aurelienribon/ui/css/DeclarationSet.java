@@ -21,6 +21,7 @@ import java.util.*;
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
 public class DeclarationSet {
+	private final Style style;
 	private final List<Property> properties;
 	private final Map<Property, List<Object>> propertiesValues;
 
@@ -30,7 +31,8 @@ public class DeclarationSet {
 	 * @param properties A list of properties.
 	 * @param propertiesValues A map of values associated to the properties.
 	 */
-	public DeclarationSet(List<Property> properties, Map<Property, List<Object>> propertiesValues) {
+	public DeclarationSet(Style style, List<Property> properties, Map<Property, List<Object>> propertiesValues) {
+		this.style = style;
 		this.properties = Collections.unmodifiableList(new ArrayList<Property>(properties));
 		this.propertiesValues = Collections.unmodifiableMap(new HashMap<Property, List<Object>>(propertiesValues));
 	}
@@ -65,6 +67,7 @@ public class DeclarationSet {
 			}
 		}
 
+		this.style = style;
 		this.properties = Collections.unmodifiableList(tProperties);
 		this.propertiesValues = Collections.unmodifiableMap(tPropertiesValues);
 	}
@@ -76,23 +79,31 @@ public class DeclarationSet {
 	 * @param propertiesToKeep An array of the properties to keep.
 	 */
 	public DeclarationSet(DeclarationSet ds, Property[] propertiesToKeep) {
-		List<Property> tRules = new ArrayList<Property>();
-		Map<Property, List<Object>> tRulesParams = new HashMap<Property, List<Object>>();
+		List<Property> tProperties = new ArrayList<Property>();
+		Map<Property, List<Object>> tPropertiesValues = new HashMap<Property, List<Object>>();
 
-		for (Property rule : propertiesToKeep) {
-			if (ds.getProperties().contains(rule)) {
-				tRules.add(rule);
-				tRulesParams.put(rule, ds.getValue(rule));
+		for (Property property : propertiesToKeep) {
+			if (ds.getProperties().contains(property)) {
+				tProperties.add(property);
+				tPropertiesValues.put(property, ds.getValue(property));
 			}
 		}
 
-		this.properties = Collections.unmodifiableList(new ArrayList<Property>(tRules));
-		this.propertiesValues = Collections.unmodifiableMap(new HashMap<Property, List<Object>>(tRulesParams));
+		this.style = ds.style;
+		this.properties = Collections.unmodifiableList(new ArrayList<Property>(tProperties));
+		this.propertiesValues = Collections.unmodifiableMap(new HashMap<Property, List<Object>>(tPropertiesValues));
 	}
 
 	// -------------------------------------------------------------------------
 	// Public API
 	// -------------------------------------------------------------------------
+
+	/**
+	 * Gets the style used to extract these declarations.
+	 */
+	public Style getStyle() {
+		return style;
+	}
 
 	/**
 	 * Gets the list of every properties contained in this set.
