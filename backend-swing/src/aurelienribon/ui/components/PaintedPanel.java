@@ -7,6 +7,10 @@ import java.awt.*;
 import javax.swing.JPanel;
 
 /**
+ * A PaintedPanel lets you use any {@link Paint} object as a filler. If the
+ * paint is not completely opaque, the panel background will be shown under it,
+ * if the panel is opaque.
+ *
  * @author Aurelien Ribon | http://www.aurelienribon.com
  */
 public class PaintedPanel extends JPanel {

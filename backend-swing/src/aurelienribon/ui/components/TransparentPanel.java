@@ -5,6 +5,10 @@ import java.awt.LayoutManager;
 import javax.swing.JPanel;
 
 /**
+ * A TransparentPanel is always non-opaque, and always paints its background
+ * color. This is useful when you need to paint a color with an alpha channel
+ * as background.
+ *
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
 public class TransparentPanel extends JPanel {

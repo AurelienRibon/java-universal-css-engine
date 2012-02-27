@@ -8,6 +8,12 @@ import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
 /**
+ * A GroupBorder is a highly customizable titled border. It is composed of a
+ * stroke around your component, and a header. The body stroke can be any
+ * {@link Paint} object, and the stroke thickness can be specified with
+ * independant values for the four sides. The header supports the same kind of
+ * stroke, as well as a fill {@link Paint} object, a title and an icon.
+ *
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
 public class GroupBorder implements Border {
