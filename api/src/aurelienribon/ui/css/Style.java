@@ -279,15 +279,15 @@ public class Style {
 	/**
 	 * Gets the rules manual.
 	 */
-	public static String getRulesManual() {
-		return generateManual(registeredProperties.values());
+	public static String getPropertiesManual() {
+		return generatePropertiesManual();
 	}
 
 	/**
 	 * Gets the functions manual.
 	 */
 	public static String getFunctionsManual() {
-		return generateManual(registeredFunctions.values());
+		return generateFunctionsManual();
 	}
 
 	// -------------------------------------------------------------------------
@@ -380,7 +380,7 @@ public class Style {
 					if (property == null) throw StyleException.forProperty(name);
 
 					List<Object> params = declarations.get(name);
-					checkParams(property, params);
+					if (!checkParams(property, params)) throw StyleException.forPropertyParams(property);
 
 					properties.add(property);
 					propertiesValues.put(property, params);
@@ -399,17 +399,17 @@ public class Style {
 	// Helpers - check
 	// -------------------------------------------------------------------------
 
-	private void checkParams(Property property, List<Object> params) {
+	private boolean checkParams(Parameterized call, List<Object> params) {
 		boolean valid = false;
 
-		for (Class[] classes : property.getParams()) {
+		for (Class[] classes : call.getParams()) {
 			if (isMatch(params, classes)) {
 				valid = true;
 				break;
 			}
 		}
 
-		if (!valid) throw StyleException.forPropertyParams(property);
+		return valid;
 	}
 
 	private boolean isMatch(List<Object> params, Class[] classes) {
@@ -436,7 +436,7 @@ public class Style {
 			if (function == null) throw StyleException.forFunction(parserFunction.name);
 
 			List<Object> functionParams = parserFunction.params;
-			checkParams(function, functionParams);
+			if (!checkParams(function, functionParams)) throw StyleException.forFunctionParams(function);
 
 			return function.getReturn();
 		}
@@ -513,20 +513,44 @@ public class Style {
 	// Helpers - manual
 	// -------------------------------------------------------------------------
 
-	private static String generateManual(Collection<? extends Property> properties) {
+	private static String generatePropertiesManual() {
 		String str = "";
 
-		for (Property property : properties) {
-			str += property.getName() + getReturnStatement(property) + "\n";
+		for (Property property : registeredProperties.values()) {
+			str += property.getName() + "\n";
 
 			for (int i=0; i<property.getParams().length; i++) {
 				str += "    ";
 
-				if (property.getParams()[i].length == 0) str += "nothing";
-
 				for (int ii=0; ii<property.getParams()[i].length; ii++) {
 					String clazz = property.getParams()[i][ii].getSimpleName();
 					String name = property.getParamsNames()[i][ii];
+
+					if (ii > 0) str += ", ";
+					str += prettify(clazz) + " " + name;
+				}
+
+				str += "\n";
+			}
+
+			str += "\n";
+		}
+
+		return str.trim();
+	}
+
+	private static String generateFunctionsManual() {
+		String str = "";
+
+		for (Function function : registeredFunctions.values()) {
+			str += function.getName() + getReturnStatement(function) + "\n";
+
+			for (int i=0; i<function.getParams().length; i++) {
+				str += "    ";
+
+				for (int ii=0; ii<function.getParams()[i].length; ii++) {
+					String clazz = function.getParams()[i][ii].getSimpleName();
+					String name = function.getParamsNames()[i][ii];
 
 					if (ii > 0) str += ", ";
 					str += prettify(clazz) + " " + name;
@@ -549,11 +573,7 @@ public class Style {
 		return clazz;
 	}
 
-	private static String getReturnStatement(Property rule) {
-		if (rule instanceof Function) {
-			Function func = (Function) rule;
-			return " [returns " + prettify(func.getReturn().getSimpleName()) + "]";
-		}
-		return "";
+	private static String getReturnStatement(Function function) {
+		return " [returns " + prettify(function.getReturn().getSimpleName()) + "]";
 	}
 }

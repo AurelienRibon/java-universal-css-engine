@@ -22,7 +22,7 @@ package aurelienribon.ui.css;
  * @see Style
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
-public interface Property {
+public interface Property extends Parameterized {
 	/**
 	 * Gets the name of the property, as it will be called in a CSS rule.
 	 */
@@ -43,10 +43,12 @@ public interface Property {
 	 * };
 	 * </pre>
 	 */
+	@Override
 	public Class[][] getParams();
 
 	/**
 	 * Gets the parameters names.
 	 */
+	@Override
 	public String[][] getParamsNames();
 }

@@ -14,7 +14,26 @@ import java.util.List;
  * @see Style
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
-public interface Function extends Property {
+public interface Function extends Parameterized {
+	/**
+	 * Gets the name of the function, as it will be called in a CSS declaration.
+	 */
+	public String getName();
+
+	/**
+	 * Gets the parameters configuration. A configuration describes one or
+	 * more sets of valid parameter classes. See {@link Property#getParams()}
+	 * documentation for more information.
+	 */
+	@Override
+	public Class[][] getParams();
+
+	/**
+	 * Gets the parameters names.
+	 */
+	@Override
+	public String[][] getParamsNames();
+
 	/**
 	 * Gets the class of the returned object.
 	 */
