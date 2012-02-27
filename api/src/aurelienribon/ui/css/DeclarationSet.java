@@ -169,7 +169,7 @@ public class DeclarationSet {
 	// -------------------------------------------------------------------------
 
 	private boolean isLastSelectorValid(String selector, Object target) {
-		if (selector.startsWith(".")) {
+		if (selector.startsWith(".") || selector.startsWith("#")) {
 			List<String> classNames = Style.getRegisteredTargetClassNames(target);
 			return classNames != null && classNames.contains(selector);
 

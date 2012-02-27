@@ -46,11 +46,11 @@ javax-swing-JTextArea {
 	-swing-foreground: #000;
 }
 
-.rootPanel {
+#rootPanel {
 	-swing-background: #2A3B57;
 }
 
-.styleControlPanel, .tabPanelControlPanel {
+#styleControlPanel, #tabPanelControlPanel {
 	-swing-background: #BBC8D8;
 	-swing-border: arui-groupborder(noarg);
 	-arui-border-stroke: null;
@@ -62,11 +62,11 @@ javax-swing-JTextArea {
 	-arui-border-foreground: #FFF;
 }
 
-.styleControlPanel {
+#styleControlPanel {
 	-arui-border-title: "Style";
 }
 
-.tabPanelControlPanel {
+#tabPanelControlPanel {
 	-arui-border-title: "TabPanel demo";
 }
 

@@ -98,8 +98,9 @@ selector returns [String s]
 	;
 	
 selector_atom
-	: '.' ID
-	| ID
+	:	'.' ID
+	|	'#' ID
+	|	ID
 	;
 	
 declaration returns [String prop, List<Object> params]

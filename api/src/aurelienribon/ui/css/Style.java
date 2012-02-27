@@ -162,17 +162,25 @@ public class Style {
 	}
 
 	/**
-	 * Registers a target with one ore more CSS classnames.
+	 * Registers a target with one ore more CSS classnames or ids.
 	 * <p/>
-	 * This is used to assign CSS classnames (like ".something" to a target).
-	 * Don't forget to unregister the target when you dispose of it, to remove
-	 * it from memory.
+	 * This is used to assign CSS classnames (like ".something"), or ids (like
+	 * "#something") to a target. Don't forget to unregister the target when
+	 * you dispose of it, to remove it from memory.
 	 */
-	public static void registerTarget(Object target, String... classNames) {
+	public static void registerCssClasses(Object target, String... classes) {
 		if (!registeredTargets.containsKey(target)) registeredTargets.put(target, new ArrayList<String>());
-		for (String className : classNames) {
-			String name = className.startsWith(".") ? className : "." + className;
-			registeredTargets.get(target).add(name);
+		for (String name : classes) {
+			if (name.startsWith("#")) {
+				for (List<String> names : registeredTargets.values()) {
+					if (names.contains(name)) throw new RuntimeException("ID " + name + " has already been registered.");
+				}
+				registeredTargets.get(target).add(name);
+			} else if (name.startsWith(".")) {
+				registeredTargets.get(target).add(name);
+			} else {
+				throw new RuntimeException("Names have to start with a '.' for classes or a '#' for ids");
+			}
 		}
 	}
 
@@ -190,7 +198,7 @@ public class Style {
 	/**
 	 * Unregisters a classname from the engine.
 	 */
-	public static void unregisterTarget(Object target) {
+	public static void unregister(Object target) {
 		registeredTargets.remove(target);
 	}
 

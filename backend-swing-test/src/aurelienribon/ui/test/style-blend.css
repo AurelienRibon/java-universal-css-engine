@@ -46,19 +46,11 @@ javax-swing-JTextArea {
 	-swing-foreground: #000;
 }
 
-.rootPanel {
+#rootPanel {
 	-swing-background: #282828;
 }
 
-.styleControlPanel {
-	-swing-border: arui-groupborder(null, "Style", 20, 6, #444, #444, false);
-}
-
-.tabPanelControlPanel {
-	-swing-border: arui-groupborder(null, "TabPanel", 20, 6, #444, #444, false);
-}
-
-.styleControlPanel, .tabPanelControlPanel {
+#styleControlPanel, #tabPanelControlPanel {
 	-swing-background: #727272;
 	-swing-border: arui-groupborder(noarg);
 	-arui-border-stroke: #444;
@@ -70,11 +62,11 @@ javax-swing-JTextArea {
 	-arui-border-foreground: #FFF;
 }
 
-.styleControlPanel {
+#styleControlPanel {
 	-arui-border-title: "Style";
 }
 
-.tabPanelControlPanel {
+#tabPanelControlPanel {
 	-arui-border-title: "TabPanel demo";
 }
 
