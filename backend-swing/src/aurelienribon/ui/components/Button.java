@@ -10,7 +10,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RoundRectangle2D;
-import java.util.List;
 import javax.swing.*;
 
 /**
@@ -46,7 +45,7 @@ public class Button extends JButton implements Container {
 	}
 
 	@Override
-	public List<?> getChildren() {
+	public Object[] getChildren() {
 		return null;
 	}
 

@@ -5,8 +5,14 @@ import aurelienribon.ui.css.DeclarationSet;
 import aurelienribon.ui.css.DeclarationSetProcessor;
 import aurelienribon.ui.css.Property;
 import aurelienribon.ui.css.Style;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
@@ -14,7 +20,7 @@ import javax.swing.border.Border;
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
-public class TabPanel extends JPanel {
+public class TabPanel extends JPanel implements aurelienribon.ui.css.Container {
 	// -------------------------------------------------------------------------
 	// Attributes + ctor
 	// -------------------------------------------------------------------------
@@ -38,6 +44,11 @@ public class TabPanel extends JPanel {
 
 		setOpaque(false);
 		setModel(new TabPanelModel());
+	}
+
+	@Override
+	public Object[] getChildren() {
+		return new Object[] {cardPanel};
 	}
 
 	// -------------------------------------------------------------------------
@@ -154,8 +165,8 @@ public class TabPanel extends JPanel {
 
 	public static class Processor implements DeclarationSetProcessor<TabPanel> {
 		@Override
-		public void process(TabPanel target, DeclarationSet rs) {
-			rs = new DeclarationSet(rs, new Property[] {
+		public void process(TabPanel target, DeclarationSet ds) {
+			ds = new DeclarationSet(ds, new Property[] {
 				AruiProperties.stroke,
 				AruiProperties.foregroundUnselected,
 				AruiProperties.foregroundSelected,
@@ -169,7 +180,7 @@ public class TabPanel extends JPanel {
 				AruiProperties.fillMouseOver
 			});
 
-			Style.apply(target.headerPanel, rs);
+			Style.apply(target.headerPanel, ds);
 		}
 	}
 }

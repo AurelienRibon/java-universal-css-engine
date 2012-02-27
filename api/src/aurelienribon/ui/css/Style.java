@@ -216,12 +216,12 @@ public class Style {
 	 * children, even if they should not validate the same rules of the
 	 * stylesheet. Complicated to understand, but still useful :)
 	 */
-	public static void apply(Object target, DeclarationSet rs) {
+	public static void apply(Object target, DeclarationSet ds) {
 		for (Class clazz : registeredProcessors.keySet()) {
 			if (clazz.isInstance(target)) {
 				List<DeclarationSetProcessor> processors = registeredProcessors.get(clazz);
 				for (DeclarationSetProcessor proc : processors) {
-					proc.process(target, rs);
+					proc.process(target, ds);
 				}
 			}
 		}

@@ -236,37 +236,37 @@ class TabPanelHeaderSubPanel extends JComponent {
 	public static class Processor implements DeclarationSetProcessor<TabPanelHeaderSubPanel> {
 		@Override
 		public void process(TabPanelHeaderSubPanel target, DeclarationSet rs) {
-			Property rule;
+			Property prop;
 
-			rule = AruiProperties.foregroundUnselected;
-			if (rs.contains(rule)) {target.foregroundUnselected = (Color) rs.getValue(rule).get(0);}
+			prop = AruiProperties.foregroundUnselected;
+			if (rs.contains(prop)) {target.foregroundUnselected = (Color) rs.getValue(prop).get(0);}
 
-			rule = AruiProperties.foregroundSelected;
-			if (rs.contains(rule)) {target.foregroundSelected = (Color) rs.getValue(rule).get(0);}
+			prop = AruiProperties.foregroundSelected;
+			if (rs.contains(prop)) {target.foregroundSelected = (Color) rs.getValue(prop).get(0);}
 
-			rule = AruiProperties.foregroundMouseOver;
-			if (rs.contains(rule)) {target.foregroundMouseOver = (Color) rs.getValue(rule).get(0);}
+			prop = AruiProperties.foregroundMouseOver;
+			if (rs.contains(prop)) {target.foregroundMouseOver = (Color) rs.getValue(prop).get(0);}
 
-			rule = AruiProperties.stroke;
-			if (rs.contains(rule)) {target.stroke = (Color) rs.getValue(rule).get(0);}
+			prop = AruiProperties.stroke;
+			if (rs.contains(prop)) {target.stroke = (Color) rs.getValue(prop).get(0);}
 
-			rule = AruiProperties.strokeUnselected;
-			if (rs.contains(rule)) {target.strokeUnselected = (Color) rs.getValue(rule).get(0);}
+			prop = AruiProperties.strokeUnselected;
+			if (rs.contains(prop)) {target.strokeUnselected = (Color) rs.getValue(prop).get(0);}
 
-			rule = AruiProperties.strokeSelected;
-			if (rs.contains(rule)) {target.strokeSelected = (Color) rs.getValue(rule).get(0);}
+			prop = AruiProperties.strokeSelected;
+			if (rs.contains(prop)) {target.strokeSelected = (Color) rs.getValue(prop).get(0);}
 
-			rule = AruiProperties.strokeMouseOver;
-			if (rs.contains(rule)) {target.strokeMouseOver = (Color) rs.getValue(rule).get(0);}
+			prop = AruiProperties.strokeMouseOver;
+			if (rs.contains(prop)) {target.strokeMouseOver = (Color) rs.getValue(prop).get(0);}
 
-			rule = AruiProperties.fillUnselected;
-			if (rs.contains(rule)) {target.fillUnselected = (Paint) rs.getValue(rule).get(0);}
+			prop = AruiProperties.fillUnselected;
+			if (rs.contains(prop)) {target.fillUnselected = (Paint) rs.getValue(prop).get(0);}
 
-			rule = AruiProperties.fillSelected;
-			if (rs.contains(rule)) {target.fillSelected = (Paint) rs.getValue(rule).get(0);}
+			prop = AruiProperties.fillSelected;
+			if (rs.contains(prop)) {target.fillSelected = (Paint) rs.getValue(prop).get(0);}
 
-			rule = AruiProperties.fillMouseOver;
-			if (rs.contains(rule)) {target.fillMouseOver = (Paint) rs.getValue(rule).get(0);}
+			prop = AruiProperties.fillMouseOver;
+			if (rs.contains(prop)) {target.fillMouseOver = (Paint) rs.getValue(prop).get(0);}
 
 			target.reload();
 		}

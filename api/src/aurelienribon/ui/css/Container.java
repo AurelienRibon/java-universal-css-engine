@@ -1,7 +1,5 @@
 package aurelienribon.ui.css;
 
-import java.util.List;
-
 /**
  * If a class implements the Container interface, then its children are the
  * one returned by the getChildren() method, no matter what ChildrenAccessor
@@ -11,5 +9,5 @@ import java.util.List;
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
 public interface Container {
-	public List<?> getChildren();
+	public Object[] getChildren();
 }

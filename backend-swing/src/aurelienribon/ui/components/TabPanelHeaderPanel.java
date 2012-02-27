@@ -15,7 +15,7 @@ import javax.swing.JLayeredPane;
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
-class TabPanelHeaderPanel extends JLayeredPane {
+class TabPanelHeaderPanel extends JLayeredPane implements aurelienribon.ui.css.Container {
 	// -------------------------------------------------------------------------
 	// Attributes + ctor
 	// -------------------------------------------------------------------------
@@ -28,7 +28,7 @@ class TabPanelHeaderPanel extends JLayeredPane {
 	private final List<TabPanelHeaderSubPanel> subPanels = new ArrayList<TabPanelHeaderSubPanel>();
 	private final Callback callback;
 	private int tabsLayout;
-	private DeclarationSet styleAttrs;
+	private DeclarationSet ds;
 	private Color stroke = Color.RED;
 
 	public TabPanelHeaderPanel(int layout, Callback callback) {
@@ -43,6 +43,11 @@ class TabPanelHeaderPanel extends JLayeredPane {
 				reload();
 			}
 		});
+	}
+
+	@Override
+	public Object[] getChildren() {
+		return null;
 	}
 
 	// -------------------------------------------------------------------------
@@ -77,7 +82,7 @@ class TabPanelHeaderPanel extends JLayeredPane {
 		subPanels.add(subPanel);
 		reload();
 		setHeight(MAX_HEIGHT);
-		if (styleAttrs != null) Style.apply(subPanel, styleAttrs);
+		if (ds != null) Style.apply(subPanel, ds);
 	}
 
 	public void removeTab(TabModel model) {
@@ -161,11 +166,13 @@ class TabPanelHeaderPanel extends JLayeredPane {
 
 	public static class Processor implements DeclarationSetProcessor<TabPanelHeaderPanel> {
 		@Override
-		public void process(TabPanelHeaderPanel target, DeclarationSet rs) {
-			Property rule = AruiProperties.stroke;
-			if (rs.contains(rule)) {target.stroke = (Color) rs.getValue(rule).get(0);}
+		public void process(TabPanelHeaderPanel target, DeclarationSet ds) {
+			target.ds = ds;
 
-			for (TabPanelHeaderSubPanel p : target.subPanels) Style.apply(p, rs);
+			Property prop = AruiProperties.stroke;
+			if (ds.contains(prop)) {target.stroke = (Color) ds.getValue(prop).get(0);}
+
+			for (TabPanelHeaderSubPanel p : target.subPanels) Style.apply(p, ds);
 			target.reload();
 		}
 	}
