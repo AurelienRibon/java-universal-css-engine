@@ -332,10 +332,10 @@ public class Style {
 	}
 
 	// -------------------------------------------------------------------------
-	// Helpers
+	// Helpers - load
 	// -------------------------------------------------------------------------
 
-	private static String getStyleSheet(URL styleSheetUrl) {
+	private String getStyleSheet(URL styleSheetUrl) {
 		if (styleSheetUrl == null) throw new NullPointerException("styleSheetUrl");
 		BufferedReader reader = null;
 
@@ -355,6 +355,10 @@ public class Style {
 		}
 	}
 
+	// -------------------------------------------------------------------------
+	// Helpers - parse
+	// -------------------------------------------------------------------------
+
 	private void parse(String styleSheet) throws StyleException {
 		CharStream cs = new ANTLRStringStream(styleSheet);
 		CssLexer lexer = new CssLexer(cs);
@@ -373,19 +377,17 @@ public class Style {
 
 				for (String name : declarations.keySet()) {
 					Property property = registeredProperties.get(name);
-					List<Object> params = new ArrayList<Object>(declarations.get(name));
-
 					if (property == null) throw StyleException.forProperty(name);
-					for (int i=0; i<params.size(); i++) params.set(i, evaluateParam(params.get(i)));
-					if (!checkParams(property, params)) throw StyleException.forPropertyParams(property);
+
+					List<Object> params = declarations.get(name);
+					checkParams(property, params);
 
 					properties.add(property);
 					propertiesValues.put(property, params);
 				}
 
-				DeclarationSet rs = new DeclarationSet(properties, propertiesValues);
-				Rule sc = new Rule(selector, rs);
-				rules.add(sc);
+				DeclarationSet ds = new DeclarationSet(properties, propertiesValues);
+				rules.add(new Rule(selector, ds));
 			}
 
 		} catch (RecognitionException ex) {
@@ -393,57 +395,75 @@ public class Style {
 		}
 	}
 
-	private static Object evaluateParam(Object param) throws StyleException {
-		if (param instanceof CssParser.Color) {
-			CssParser.Color c = (CssParser.Color) param;
-			if (converter != null) return converter.convertColor(c.r, c.g, c.b, c.a);
+	// -------------------------------------------------------------------------
+	// Helpers - check
+	// -------------------------------------------------------------------------
+
+	private void checkParams(Property property, List<Object> params) {
+		boolean valid = false;
+
+		for (Class[] classes : property.getParams()) {
+			if (isMatch(params, classes)) {
+				valid = true;
+				break;
+			}
 		}
+
+		if (!valid) throw StyleException.forPropertyParams(property);
+	}
+
+	private boolean isMatch(List<Object> params, Class[] classes) {
+		if (params.size() != classes.length) return false;
+
+		for (int i=0; i<params.size(); i++) {
+			Object param = params.get(i);
+			Class paramClass = getParamClass(param);
+
+			if (param != null && !classes[i].isAssignableFrom(paramClass)) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	private Class getParamClass(Object param) {
+		if (param == null) return null;
 
 		if (param instanceof CssParser.Function) {
 			CssParser.Function parserFunction = (CssParser.Function) param;
 			Function function = registeredFunctions.get(parserFunction.name);
-			List<Object> params = new ArrayList<Object>(parserFunction.params);
-
-			for (int i=0; i<params.size(); i++) params.set(i, evaluateParam(params.get(i)));
-
 			if (function == null) throw StyleException.forFunction(parserFunction.name);
-			if (!checkParams(function, params)) throw StyleException.forFunctionParams(function);
 
-			return function.process(params);
+			List<Object> functionParams = parserFunction.params;
+			checkParams(function, functionParams);
+
+			return function.getReturn();
 		}
 
-		return param;
+		if (param instanceof CssParser.Color) {
+			if (converter != null) return converter.getColorClass();
+		}
+
+		return param.getClass();
 	}
 
-	private static boolean checkParams(Property rule, List<Object> params) {
-		for (int i=0; i<rule.getParams().length; i++) {
-			Class[] cs = rule.getParams()[i];
+	// -------------------------------------------------------------------------
+	// Helpers - apply
+	// -------------------------------------------------------------------------
 
-			if (params.size() == cs.length) {
-				boolean isMatch = true;
-
-				for (int ii=0; ii<params.size(); ii++) {
-					assert cs[ii] != null;
-					Object param = params.get(ii);
-
-					if (param == null || cs[ii].isInstance(param)) {
-						continue;
-					} else {
-						isMatch = false;
-						break;
-					}
-				}
-
-				if (isMatch) return true;
+	private static void apply(Object target, Style style, List<String> stack) {
+		// Retrieve all the declarations belonging to the target, evaluate
+		// their parameters
+		DeclarationSet ds = new DeclarationSet(style, target, stack);
+		for (Property property : ds.getProperties()) {
+			for (int i=0; i<ds.getValue(property).size(); i++) {
+				Object param = ds.getValue(property).get(i);
+				ds.replaceValueParam(property, i, evaluateParam(param));
 			}
 		}
 
-		return false;
-	}
-
-	private static void apply(Object target, Style style, List<String> stack) {
-		// Retrieve all the declarations belonging to the target, and apply them
-		DeclarationSet ds = new DeclarationSet(style, target, stack);
+		// Apply the declarations to the target
 		apply(target, ds);
 
 		// Add the target class and classname to the selectors stack
@@ -467,6 +487,31 @@ public class Style {
 			}
 		}
 	}
+
+	private static Object evaluateParam(Object param) throws StyleException {
+		if (param instanceof CssParser.Color) {
+			CssParser.Color c = (CssParser.Color) param;
+			if (converter != null) return converter.convertColor(c.r, c.g, c.b, c.a);
+		}
+
+		if (param instanceof CssParser.Function) {
+			CssParser.Function parserFunction = (CssParser.Function) param;
+			Function function = registeredFunctions.get(parserFunction.name);
+			List<Object> params = new ArrayList<Object>(parserFunction.params);
+
+			for (int i=0; i<params.size(); i++) {
+				params.set(i, evaluateParam(params.get(i)));
+			}
+
+			return function.process(params);
+		}
+
+		return param;
+	}
+
+	// -------------------------------------------------------------------------
+	// Helpers - manual
+	// -------------------------------------------------------------------------
 
 	private static String generateManual(Collection<? extends Property> properties) {
 		String str = "";

@@ -45,18 +45,28 @@ public class DeclarationSet {
 	 * target correspond to some nested selectors.
 	 */
 	public DeclarationSet(Style style, Object target, List<String> stack) {
-		List<Property> tRules = new ArrayList<Property>();
-		Map<Property, List<Object>> tRulesParams = new HashMap<Property, List<Object>>();
+		List<Property> tProperties = new ArrayList<Property>();
+		Map<Property, List<Object>> tPropertiesValues = new HashMap<Property, List<Object>>();
 
-		for (Rule sc : style.getRules()) {
-			if (isLastSelectorValid(sc.getLastSelector(), target) && isStackValid(sc.getSelectors(), stack)) {
-				tRules.addAll(sc.getDeclarations().getProperties());
-				tRulesParams.putAll(sc.getDeclarations().getPropertiesValues());
+		for (Rule rule : style.getRules()) {
+			assert rule != null;
+			assert rule.getDeclarations() != null;
+
+			if (isLastSelectorValid(rule.getLastSelector(), target) && isStackValid(rule.getSelectors(), stack)) {
+				tProperties.addAll(rule.getDeclarations().getProperties());
+
+				for (Property property : rule.getDeclarations().getProperties()) {
+					assert rule.getDeclarations().getValue(property) != null;
+
+					List<Object> value = new ArrayList<Object>();
+					value.addAll(rule.getDeclarations().getValue(property));
+					tPropertiesValues.put(property, value);
+				}
 			}
 		}
 
-		this.properties = Collections.unmodifiableList(tRules);
-		this.propertiesValues = Collections.unmodifiableMap(tRulesParams);
+		this.properties = Collections.unmodifiableList(tProperties);
+		this.propertiesValues = Collections.unmodifiableMap(tPropertiesValues);
 	}
 
 	/**
@@ -144,6 +154,14 @@ public class DeclarationSet {
 	 */
 	public boolean isAfter(Property p1, Property p2) {
 		return properties.indexOf(p1) > properties.indexOf(p2);
+	}
+
+	// -------------------------------------------------------------------------
+	// Package API
+	// -------------------------------------------------------------------------
+
+	void replaceValueParam(Property property, int paramIdx, Object param) {
+		propertiesValues.get(property).set(paramIdx, param);
 	}
 
 	// -------------------------------------------------------------------------

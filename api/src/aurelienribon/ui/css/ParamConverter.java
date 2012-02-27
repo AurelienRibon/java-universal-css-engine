@@ -14,4 +14,9 @@ public interface ParamConverter {
 	 * Creates an object representing a color from a color definition (rgba).
 	 */
 	public Object convertColor(int r, int g, int b, int a);
+
+	/**
+	 * Gets the class of the returned result for convertColor method.
+	 */
+	public Class getColorClass();
 }
