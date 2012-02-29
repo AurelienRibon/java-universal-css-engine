@@ -44,6 +44,8 @@ public class SwingStyle {
 		Style.registerProperty(SwingProperties.font);
 		Style.registerProperty(SwingProperties.icon);
 		Style.registerProperty(SwingProperties.border);
+		Style.registerProperty(SwingProperties.borderPainted);
+		Style.registerProperty(SwingProperties.contentAreaFilled);
 
 		Style.registerFunction(SwingFunctions.url);
 		Style.registerFunction(SwingFunctions.font);

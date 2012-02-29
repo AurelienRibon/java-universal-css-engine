@@ -9,27 +9,13 @@ import javax.swing.JTextArea;
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
-public class JTextAreaProcessor implements DeclarationSetProcessor<JTextArea> {
+public class JTextAreaProcessor implements DeclarationSetProcessor<JTextArea>, SwingProperties {
 	@Override
-	public void process(JTextArea target, DeclarationSet ds) {
-		Property property;
+	public void process(JTextArea t, DeclarationSet ds) {
+		Property p;
 
-		property = SwingProperties.lineWrap;
-		if (ds.contains(property)) {
-			boolean value = (Boolean) ds.getValue(property).get(0);
-			target.setLineWrap(value);
-		}
-
-		property = SwingProperties.wrapStyleWord;
-		if (ds.contains(property)) {
-			boolean value = (Boolean) ds.getValue(property).get(0);
-			target.setWrapStyleWord(value);
-		}
-
-		property = SwingProperties.tabSize;
-		if (ds.contains(property)) {
-			int value = (Integer) ds.getValue(property).get(0);
-			target.setTabSize(value);
-		}
+		p = lineWrap; if (ds.contains(p)) t.setLineWrap(ds.getValue(p, Boolean.class));
+		p = wrapStyleWord; if (ds.contains(p)) t.setWrapStyleWord(ds.getValue(p, Boolean.class));
+		p = tabSize; if (ds.contains(p)) t.setTabSize(ds.getValue(p, Integer.class));
 	}
 }

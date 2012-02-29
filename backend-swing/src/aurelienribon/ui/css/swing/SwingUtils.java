@@ -1,6 +1,5 @@
 package aurelienribon.ui.css.swing;
 
-import java.util.List;
 import javax.swing.AbstractButton;
 import javax.swing.SwingConstants;
 
@@ -8,9 +7,7 @@ import javax.swing.SwingConstants;
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
 public class SwingUtils {
-	public static int asHAlign(List<Object> params, int paramId) {
-		String val = (String) params.get(paramId);
-
+	public static int asHAlign(String val) {
 		if (val.equals("leading")) return SwingConstants.LEADING;
 		else if (val.equals("trailing")) return SwingConstants.TRAILING;
 		else if (val.equals("left")) return SwingConstants.LEFT;
@@ -21,9 +18,7 @@ public class SwingUtils {
 		return -1;
 	}
 
-	public static int asVAlign(List<Object> params, int paramId) {
-		String val = (String) params.get(paramId);
-
+	public static int asVAlign(String val) {
 		if (val.equals("bottom")) return AbstractButton.BOTTOM;
 		else if (val.equals("top")) return AbstractButton.TOP;
 		else if (val.equals("center")) return AbstractButton.CENTER;

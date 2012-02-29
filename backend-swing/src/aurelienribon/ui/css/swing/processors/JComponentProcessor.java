@@ -10,27 +10,13 @@ import javax.swing.border.Border;
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
-public class JComponentProcessor implements DeclarationSetProcessor<JComponent> {
+public class JComponentProcessor implements DeclarationSetProcessor<JComponent>, SwingProperties {
 	@Override
-	public void process(JComponent target, DeclarationSet ds) {
-		Property property;
+	public void process(JComponent t, DeclarationSet ds) {
+		Property p;
 
-		property = SwingProperties.opaque;
-		if (ds.contains(property)) {
-			boolean value = (Boolean) ds.getValue(property).get(0);
-			target.setOpaque(value);
-		}
-
-		property = SwingProperties.tooltip;
-		if (ds.contains(property)) {
-			String value = (String) ds.getValue(property).get(0);
-			target.setToolTipText(value);
-		}
-
-		property = SwingProperties.border;
-		if (ds.contains(property)) {
-			Border value = (Border) ds.getValue(property).get(0);
-			target.setBorder(value);
-		}
+		p = opaque; if (ds.contains(p)) t.setOpaque(ds.getValue(p, Boolean.class));
+		p = tooltip; if (ds.contains(p)) t.setToolTipText(ds.getValue(p, String.class));
+		p = border; if (ds.contains(p)) t.setBorder(ds.getValue(p, Border.class));
 	}
 }

@@ -12,48 +12,16 @@ import java.awt.Font;
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
-public class ComponentProcessor implements DeclarationSetProcessor<Component> {
+public class ComponentProcessor implements DeclarationSetProcessor<Component>, SwingProperties {
 	@Override
-	public void process(Component target, DeclarationSet ds) {
-		Property property;
+	public void process(Component t, DeclarationSet ds) {
+		Property p;
 
-		property = SwingProperties.background;
-		if (ds.contains(property)) {
-			Color value = (Color) ds.getValue(property).get(0);
-			target.setBackground(value);
-		}
-
-		property = SwingProperties.foreground;
-		if (ds.contains(property)) {
-			Color value = (Color) ds.getValue(property).get(0);
-			target.setForeground(value);
-		}
-
-		property = SwingProperties.visible;
-		if (ds.contains(property)) {
-			boolean value = (Boolean) ds.getValue(property).get(0);
-			target.setVisible(value);
-		}
-
-		property = SwingProperties.enabled;
-		if (ds.contains(property)) {
-			boolean value = (Boolean) ds.getValue(property).get(0);
-			target.setEnabled(value);
-		}
-
-		property = SwingProperties.focusable;
-		if (ds.contains(property)) {
-			boolean value = (Boolean) ds.getValue(property).get(0);
-			target.setFocusable(value);
-		}
-
-		property = SwingProperties.font;
-		if (ds.contains(property)) {
-			Object param = ds.getValue(property).get(0);
-			Font value = param instanceof Font
-				? (Font) param
-				: (Font) SwingFunctions.font.process(ds.getValue(property));
-			target.setFont(value);
-		}
+		p = background; if (ds.contains(p)) t.setBackground(ds.getValue(p, Color.class));
+		p = foreground; if (ds.contains(p)) t.setForeground(ds.getValue(p, Color.class));
+		p = visible; if (ds.contains(p)) t.setVisible(ds.getValue(p, Boolean.class));
+		p = enabled; if (ds.contains(p)) t.setEnabled(ds.getValue(p, Boolean.class));
+		p = focusable; if (ds.contains(p)) t.setFocusable(ds.getValue(p, Boolean.class));
+		p = font; if (ds.contains(p)) t.setFont(ds.getValue(p, Font.class, SwingFunctions.font));
 	}
 }

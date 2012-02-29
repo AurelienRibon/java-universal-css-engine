@@ -13,42 +13,17 @@ import javax.swing.Icon;
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
-public class AbstractButtonProcessor implements DeclarationSetProcessor<AbstractButton> {
+public class AbstractButtonProcessor implements DeclarationSetProcessor<AbstractButton>, SwingProperties {
 	@Override
-	public void process(AbstractButton target, DeclarationSet ds) {
-		Property property;
+	public void process(AbstractButton t, DeclarationSet ds) {
+		Property p;
 
-		property = SwingProperties.margin;
-		if (ds.contains(property)) {
-			Object param = ds.getValue(property).get(0);
-			Insets value = param instanceof Insets
-				? (Insets) param
-				: (Insets) SwingFunctions.insets.process(ds.getValue(property));
-			target.setMargin(value);
-		}
-
-		property = SwingProperties.horizAlign;
-		if (ds.contains(property)) {
-			int value = SwingUtils.asHAlign(ds.getValue(property), 0);
-			target.setHorizontalAlignment(value);
-		}
-
-		property = SwingProperties.vertAlign;
-		if (ds.contains(property)) {
-			int value = SwingUtils.asVAlign(ds.getValue(property), 0);
-			target.setVerticalAlignment(value);
-		}
-
-		property = SwingProperties.text;
-		if (ds.contains(property)) {
-			String value = (String) ds.getValue(property).get(0);
-			target.setText(value);
-		}
-
-		property = SwingProperties.icon;
-		if (ds.contains(property)) {
-			Icon value = (Icon) ds.getValue(property).get(0);
-			target.setIcon(value);
-		}
+		p = borderPainted; if (ds.contains(p)) t.setBorderPainted(ds.getValue(p, Boolean.class));
+		p = contentAreaFilled; if (ds.contains(p)) t.setContentAreaFilled(ds.getValue(p, Boolean.class));
+		p = margin; if (ds.contains(p)) t.setMargin(ds.getValue(p, Insets.class, SwingFunctions.insets));
+		p = horizAlign; if (ds.contains(p)) t.setHorizontalAlignment(SwingUtils.asHAlign(ds.getValue(p, String.class)));
+		p = vertAlign; if (ds.contains(p)) t.setVerticalAlignment(SwingUtils.asVAlign(ds.getValue(p, String.class)));
+		p = text; if (ds.contains(p)) t.setText(ds.getValue(p, String.class));
+		p = icon; if (ds.contains(p)) t.setIcon(ds.getValue(p, Icon.class, SwingFunctions.icon));
 	}
 }

@@ -11,36 +11,14 @@ import javax.swing.text.JTextComponent;
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
-public class JTextComponentProcessor implements DeclarationSetProcessor<JTextComponent> {
+public class JTextComponentProcessor implements DeclarationSetProcessor<JTextComponent>, SwingProperties {
 	@Override
-	public void process(JTextComponent target, DeclarationSet ds) {
-		Property property;
+	public void process(JTextComponent t, DeclarationSet ds) {
+		Property p;
 
-		property = SwingProperties.caretPosition;
-		if (ds.contains(property)) {
-			int value = (Integer) ds.getValue(property).get(0);
-			target.setCaretPosition(value);
-		}
-
-		property = SwingProperties.editable;
-		if (ds.contains(property)) {
-			boolean value = (Boolean) ds.getValue(property).get(0);
-			target.setEditable(value);
-		}
-
-		property = SwingProperties.margin;
-		if (ds.contains(property)) {
-			Object param = ds.getValue(property).get(0);
-			Insets value = param instanceof Insets
-				? (Insets) param
-				: (Insets) SwingFunctions.insets.process(ds.getValue(property));
-			target.setMargin(value);
-		}
-
-		property = SwingProperties.text;
-		if (ds.contains(property)) {
-			String value = (String) ds.getValue(property).get(0);
-			target.setText(value);
-		}
+		p = caretPosition; if (ds.contains(p)) t.setCaretPosition(ds.getValue(p, Integer.class));
+		p = editable; if (ds.contains(p)) t.setEditable(ds.getValue(p, Boolean.class));
+		p = margin; if (ds.contains(p)) t.setMargin(ds.getValue(p, Insets.class, SwingFunctions.insets));
+		p = text; if (ds.contains(p)) t.setText(ds.getValue(p, String.class));
 	}
 }

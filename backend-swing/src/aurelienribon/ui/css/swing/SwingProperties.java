@@ -9,7 +9,7 @@ import javax.swing.border.Border;
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
-public class SwingProperties {
+public interface SwingProperties {
 	public static final Property background = new SingleParamProperty("-swing-background", Color.class, "color");
 	public static final Property foreground = new SingleParamProperty("-swing-foreground", Color.class, "color");
 
@@ -34,4 +34,7 @@ public class SwingProperties {
 	public static final Property margin = new FunctionProperty("-swing-margin", SwingFunctions.insets, "insets");
 	public static final Property font = new FunctionProperty("-swing-font", SwingFunctions.font, "font");
 	public static final Property icon = new FunctionProperty("-swing-icon", SwingFunctions.icon, "icon");
+
+	public static final Property borderPainted = new SingleParamProperty("-swing-borderpainted", Boolean.class, "b");
+	public static final Property contentAreaFilled = new SingleParamProperty("-swing-contentareafilled", Boolean.class, "b");
 }

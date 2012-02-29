@@ -6,7 +6,7 @@ import aurelienribon.ui.css.swing.functions.*;
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
-public class SwingFunctions {
+public interface SwingFunctions {
 	// General
 	public static Function font = new FontFunction();
 	public static Function icon = new IconFunction();
