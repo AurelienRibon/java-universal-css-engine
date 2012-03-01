@@ -1,4 +1,4 @@
-// $ANTLR 3.4 C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g 2012-02-27 14:23:15
+// $ANTLR 3.4 C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g 2012-02-29 15:32:59
 
 	package aurelienribon.ui.css.antlr;
 	
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 @SuppressWarnings({"all", "warnings", "unchecked"})
 public class CssParser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "BOOLEAN", "COLOR", "COMMENT", "FLOAT", "HEX", "ID", "INT", "NULL", "STRING", "WS", "'#'", "'('", "')'", "','", "'.'", "':'", "';'", "'{'", "'}'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "BOOLEAN", "COLOR", "COMMENT", "FLOAT", "HEX", "ID", "INT", "NULL", "STRING", "WS", "'#'", "'('", "')'", "','", "'.'", "':'", "';'", "'active'", "'disabled'", "'focus'", "'hover'", "'{'", "'}'"
     };
 
     public static final int EOF=-1;
@@ -30,6 +30,10 @@ public class CssParser extends Parser {
     public static final int T__20=20;
     public static final int T__21=21;
     public static final int T__22=22;
+    public static final int T__23=23;
+    public static final int T__24=24;
+    public static final int T__25=25;
+    public static final int T__26=26;
     public static final int BOOLEAN=4;
     public static final int COLOR=5;
     public static final int COMMENT=6;
@@ -200,7 +204,7 @@ public class CssParser extends Parser {
             state._fsp--;
 
 
-            match(input,21,FOLLOW_21_in_rule81); 
+            match(input,25,FOLLOW_25_in_rule81); 
 
             retval.ss = selector_list2;
 
@@ -236,7 +240,7 @@ public class CssParser extends Parser {
             } while (true);
 
 
-            match(input,22,FOLLOW_22_in_rule102); 
+            match(input,26,FOLLOW_26_in_rule102); 
 
             }
 
@@ -334,20 +338,22 @@ public class CssParser extends Parser {
 
 
     // $ANTLR start "selector"
-    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:93:1: selector returns [String s] : ( selector_atom )+ ;
+    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:93:1: selector returns [String s] : ( selector_name )+ ( selector_pseudo )? ;
     public final String selector() throws RecognitionException {
         String s = null;
 
 
-        CssParser.selector_atom_return selector_atom4 =null;
+        CssParser.selector_name_return selector_name4 =null;
+
+        CssParser.selector_pseudo_return selector_pseudo5 =null;
 
 
         s = "";
         try {
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:96:2: ( ( selector_atom )+ )
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:96:4: ( selector_atom )+
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:96:2: ( ( selector_name )+ ( selector_pseudo )? )
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:96:4: ( selector_name )+ ( selector_pseudo )?
             {
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:96:4: ( selector_atom )+
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:96:4: ( selector_name )+
             int cnt4=0;
             loop4:
             do {
@@ -361,15 +367,15 @@ public class CssParser extends Parser {
 
                 switch (alt4) {
             	case 1 :
-            	    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:96:5: selector_atom
+            	    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:96:5: selector_name
             	    {
-            	    pushFollow(FOLLOW_selector_atom_in_selector177);
-            	    selector_atom4=selector_atom();
+            	    pushFollow(FOLLOW_selector_name_in_selector177);
+            	    selector_name4=selector_name();
 
             	    state._fsp--;
 
 
-            	    s += (selector_atom4!=null?input.toString(selector_atom4.start,selector_atom4.stop):null) + " ";
+            	    s += (selector_name4!=null?input.toString(selector_name4.start,selector_name4.stop):null) + " ";
 
             	    }
             	    break;
@@ -382,6 +388,31 @@ public class CssParser extends Parser {
                 }
                 cnt4++;
             } while (true);
+
+
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:97:6: ( selector_pseudo )?
+            int alt5=2;
+            int LA5_0 = input.LA(1);
+
+            if ( (LA5_0==19) ) {
+                alt5=1;
+            }
+            switch (alt5) {
+                case 1 :
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:97:7: selector_pseudo
+                    {
+                    pushFollow(FOLLOW_selector_pseudo_in_selector187);
+                    selector_pseudo5=selector_pseudo();
+
+                    state._fsp--;
+
+
+                    s += (selector_pseudo5!=null?input.toString(selector_pseudo5.start,selector_pseudo5.stop):null);
+
+                    }
+                    break;
+
+            }
 
 
             }
@@ -401,72 +432,52 @@ public class CssParser extends Parser {
     // $ANTLR end "selector"
 
 
-    public static class selector_atom_return extends ParserRuleReturnScope {
+    public static class selector_name_return extends ParserRuleReturnScope {
     };
 
 
-    // $ANTLR start "selector_atom"
-    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:100:1: selector_atom : ( '.' ID | '#' ID | ID );
-    public final CssParser.selector_atom_return selector_atom() throws RecognitionException {
-        CssParser.selector_atom_return retval = new CssParser.selector_atom_return();
+    // $ANTLR start "selector_name"
+    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:100:1: selector_name : ( '.' | '#' )? ID ;
+    public final CssParser.selector_name_return selector_name() throws RecognitionException {
+        CssParser.selector_name_return retval = new CssParser.selector_name_return();
         retval.start = input.LT(1);
 
 
         try {
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:101:2: ( '.' ID | '#' ID | ID )
-            int alt5=3;
-            switch ( input.LA(1) ) {
-            case 18:
-                {
-                alt5=1;
-                }
-                break;
-            case 14:
-                {
-                alt5=2;
-                }
-                break;
-            case ID:
-                {
-                alt5=3;
-                }
-                break;
-            default:
-                NoViableAltException nvae =
-                    new NoViableAltException("", 5, 0, input);
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:101:2: ( ( '.' | '#' )? ID )
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:101:4: ( '.' | '#' )? ID
+            {
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:101:4: ( '.' | '#' )?
+            int alt6=2;
+            int LA6_0 = input.LA(1);
 
-                throw nvae;
-
+            if ( (LA6_0==14||LA6_0==18) ) {
+                alt6=1;
             }
-
-            switch (alt5) {
+            switch (alt6) {
                 case 1 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:101:4: '.' ID
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:
                     {
-                    match(input,18,FOLLOW_18_in_selector_atom196); 
-
-                    match(input,ID,FOLLOW_ID_in_selector_atom198); 
-
+                    if ( input.LA(1)==14||input.LA(1)==18 ) {
+                        input.consume();
+                        state.errorRecovery=false;
                     }
-                    break;
-                case 2 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:102:4: '#' ID
-                    {
-                    match(input,14,FOLLOW_14_in_selector_atom203); 
-
-                    match(input,ID,FOLLOW_ID_in_selector_atom205); 
-
+                    else {
+                        MismatchedSetException mse = new MismatchedSetException(null,input);
+                        throw mse;
                     }
-                    break;
-                case 3 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:103:4: ID
-                    {
-                    match(input,ID,FOLLOW_ID_in_selector_atom210); 
+
 
                     }
                     break;
 
             }
+
+
+            match(input,ID,FOLLOW_ID_in_selector_name212); 
+
+            }
+
             retval.stop = input.LT(-1);
 
 
@@ -481,7 +492,53 @@ public class CssParser extends Parser {
         }
         return retval;
     }
-    // $ANTLR end "selector_atom"
+    // $ANTLR end "selector_name"
+
+
+    public static class selector_pseudo_return extends ParserRuleReturnScope {
+    };
+
+
+    // $ANTLR start "selector_pseudo"
+    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:104:1: selector_pseudo : ':' ( 'hover' | 'focus' | 'active' | 'disabled' ) ;
+    public final CssParser.selector_pseudo_return selector_pseudo() throws RecognitionException {
+        CssParser.selector_pseudo_return retval = new CssParser.selector_pseudo_return();
+        retval.start = input.LT(1);
+
+
+        try {
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:105:2: ( ':' ( 'hover' | 'focus' | 'active' | 'disabled' ) )
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:105:4: ':' ( 'hover' | 'focus' | 'active' | 'disabled' )
+            {
+            match(input,19,FOLLOW_19_in_selector_pseudo224); 
+
+            if ( (input.LA(1) >= 21 && input.LA(1) <= 24) ) {
+                input.consume();
+                state.errorRecovery=false;
+            }
+            else {
+                MismatchedSetException mse = new MismatchedSetException(null,input);
+                throw mse;
+            }
+
+
+            }
+
+            retval.stop = input.LT(-1);
+
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+
+        finally {
+        	// do for sure before leaving
+        }
+        return retval;
+    }
+    // $ANTLR end "selector_pseudo"
 
 
     public static class declaration_return extends ParserRuleReturnScope {
@@ -491,65 +548,65 @@ public class CssParser extends Parser {
 
 
     // $ANTLR start "declaration"
-    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:106:1: declaration returns [String prop, List<Object> params] : ID ':' ( declaration_param )+ ';' ;
+    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:108:1: declaration returns [String prop, List<Object> params] : ID ':' ( declaration_param )+ ';' ;
     public final CssParser.declaration_return declaration() throws RecognitionException {
         CssParser.declaration_return retval = new CssParser.declaration_return();
         retval.start = input.LT(1);
 
 
-        Token ID5=null;
-        Object declaration_param6 =null;
+        Token ID6=null;
+        Object declaration_param7 =null;
 
 
         retval.params = new ArrayList<Object>();
         try {
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:108:2: ( ID ':' ( declaration_param )+ ';' )
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:108:4: ID ':' ( declaration_param )+ ';'
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:110:2: ( ID ':' ( declaration_param )+ ';' )
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:110:4: ID ':' ( declaration_param )+ ';'
             {
-            ID5=(Token)match(input,ID,FOLLOW_ID_in_declaration231); 
+            ID6=(Token)match(input,ID,FOLLOW_ID_in_declaration255); 
 
-            match(input,19,FOLLOW_19_in_declaration233); 
+            match(input,19,FOLLOW_19_in_declaration257); 
 
-            retval.prop = (ID5!=null?ID5.getText():null);
+            retval.prop = (ID6!=null?ID6.getText():null);
 
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:109:3: ( declaration_param )+
-            int cnt6=0;
-            loop6:
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:111:3: ( declaration_param )+
+            int cnt7=0;
+            loop7:
             do {
-                int alt6=2;
-                int LA6_0 = input.LA(1);
+                int alt7=2;
+                int LA7_0 = input.LA(1);
 
-                if ( ((LA6_0 >= BOOLEAN && LA6_0 <= COLOR)||LA6_0==FLOAT||(LA6_0 >= ID && LA6_0 <= STRING)) ) {
-                    alt6=1;
+                if ( ((LA7_0 >= BOOLEAN && LA7_0 <= COLOR)||LA7_0==FLOAT||(LA7_0 >= ID && LA7_0 <= STRING)) ) {
+                    alt7=1;
                 }
 
 
-                switch (alt6) {
+                switch (alt7) {
             	case 1 :
-            	    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:109:4: declaration_param
+            	    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:111:4: declaration_param
             	    {
-            	    pushFollow(FOLLOW_declaration_param_in_declaration252);
-            	    declaration_param6=declaration_param();
+            	    pushFollow(FOLLOW_declaration_param_in_declaration276);
+            	    declaration_param7=declaration_param();
 
             	    state._fsp--;
 
 
-            	    retval.params.add(declaration_param6);
+            	    retval.params.add(declaration_param7);
 
             	    }
             	    break;
 
             	default :
-            	    if ( cnt6 >= 1 ) break loop6;
+            	    if ( cnt7 >= 1 ) break loop7;
                         EarlyExitException eee =
-                            new EarlyExitException(6, input);
+                            new EarlyExitException(7, input);
                         throw eee;
                 }
-                cnt6++;
+                cnt7++;
             } while (true);
 
 
-            match(input,20,FOLLOW_20_in_declaration261); 
+            match(input,20,FOLLOW_20_in_declaration285); 
 
             }
 
@@ -572,72 +629,72 @@ public class CssParser extends Parser {
 
 
     // $ANTLR start "declaration_param"
-    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:113:1: declaration_param returns [Object o] : ( function | param );
+    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:115:1: declaration_param returns [Object o] : ( function | param );
     public final Object declaration_param() throws RecognitionException {
         Object o = null;
 
 
-        Function function7 =null;
+        Function function8 =null;
 
-        Object param8 =null;
+        Object param9 =null;
 
 
         try {
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:114:2: ( function | param )
-            int alt7=2;
-            int LA7_0 = input.LA(1);
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:116:2: ( function | param )
+            int alt8=2;
+            int LA8_0 = input.LA(1);
 
-            if ( (LA7_0==ID) ) {
-                int LA7_1 = input.LA(2);
+            if ( (LA8_0==ID) ) {
+                int LA8_1 = input.LA(2);
 
-                if ( (LA7_1==15) ) {
-                    alt7=1;
+                if ( (LA8_1==15) ) {
+                    alt8=1;
                 }
-                else if ( ((LA7_1 >= BOOLEAN && LA7_1 <= COLOR)||LA7_1==FLOAT||(LA7_1 >= ID && LA7_1 <= STRING)||LA7_1==20) ) {
-                    alt7=2;
+                else if ( ((LA8_1 >= BOOLEAN && LA8_1 <= COLOR)||LA8_1==FLOAT||(LA8_1 >= ID && LA8_1 <= STRING)||LA8_1==20) ) {
+                    alt8=2;
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 7, 1, input);
+                        new NoViableAltException("", 8, 1, input);
 
                     throw nvae;
 
                 }
             }
-            else if ( ((LA7_0 >= BOOLEAN && LA7_0 <= COLOR)||LA7_0==FLOAT||(LA7_0 >= INT && LA7_0 <= STRING)) ) {
-                alt7=2;
+            else if ( ((LA8_0 >= BOOLEAN && LA8_0 <= COLOR)||LA8_0==FLOAT||(LA8_0 >= INT && LA8_0 <= STRING)) ) {
+                alt8=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 7, 0, input);
+                    new NoViableAltException("", 8, 0, input);
 
                 throw nvae;
 
             }
-            switch (alt7) {
+            switch (alt8) {
                 case 1 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:114:4: function
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:116:4: function
                     {
-                    pushFollow(FOLLOW_function_in_declaration_param277);
-                    function7=function();
+                    pushFollow(FOLLOW_function_in_declaration_param301);
+                    function8=function();
 
                     state._fsp--;
 
 
-                    o = function7;
+                    o = function8;
 
                     }
                     break;
                 case 2 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:115:4: param
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:117:4: param
                     {
-                    pushFollow(FOLLOW_param_in_declaration_param284);
-                    param8=param();
+                    pushFollow(FOLLOW_param_in_declaration_param308);
+                    param9=param();
 
                     state._fsp--;
 
 
-                    o = param8;
+                    o = param9;
 
                     }
                     break;
@@ -659,12 +716,12 @@ public class CssParser extends Parser {
 
 
     // $ANTLR start "function"
-    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:118:1: function returns [Function f] : ID '(' (f1= function_param ( ',' f2= function_param )* )? ')' ;
+    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:120:1: function returns [Function f] : ID '(' (f1= function_param ( ',' f2= function_param )* )? ')' ;
     public final Function function() throws RecognitionException {
         Function f = null;
 
 
-        Token ID9=null;
+        Token ID10=null;
         Object f1 =null;
 
         Object f2 =null;
@@ -672,25 +729,25 @@ public class CssParser extends Parser {
 
         List<Object> params = new ArrayList<Object>();
         try {
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:120:2: ( ID '(' (f1= function_param ( ',' f2= function_param )* )? ')' )
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:120:4: ID '(' (f1= function_param ( ',' f2= function_param )* )? ')'
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:122:2: ( ID '(' (f1= function_param ( ',' f2= function_param )* )? ')' )
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:122:4: ID '(' (f1= function_param ( ',' f2= function_param )* )? ')'
             {
-            ID9=(Token)match(input,ID,FOLLOW_ID_in_function311); 
+            ID10=(Token)match(input,ID,FOLLOW_ID_in_function335); 
 
-            match(input,15,FOLLOW_15_in_function313); 
+            match(input,15,FOLLOW_15_in_function337); 
 
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:121:3: (f1= function_param ( ',' f2= function_param )* )?
-            int alt9=2;
-            int LA9_0 = input.LA(1);
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:123:3: (f1= function_param ( ',' f2= function_param )* )?
+            int alt10=2;
+            int LA10_0 = input.LA(1);
 
-            if ( ((LA9_0 >= BOOLEAN && LA9_0 <= COLOR)||LA9_0==FLOAT||(LA9_0 >= ID && LA9_0 <= STRING)) ) {
-                alt9=1;
+            if ( ((LA10_0 >= BOOLEAN && LA10_0 <= COLOR)||LA10_0==FLOAT||(LA10_0 >= ID && LA10_0 <= STRING)) ) {
+                alt10=1;
             }
-            switch (alt9) {
+            switch (alt10) {
                 case 1 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:121:4: f1= function_param ( ',' f2= function_param )*
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:123:4: f1= function_param ( ',' f2= function_param )*
                     {
-                    pushFollow(FOLLOW_function_param_in_function320);
+                    pushFollow(FOLLOW_function_param_in_function344);
                     f1=function_param();
 
                     state._fsp--;
@@ -698,24 +755,24 @@ public class CssParser extends Parser {
 
                     params.add(f1);
 
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:122:3: ( ',' f2= function_param )*
-                    loop8:
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:124:3: ( ',' f2= function_param )*
+                    loop9:
                     do {
-                        int alt8=2;
-                        int LA8_0 = input.LA(1);
+                        int alt9=2;
+                        int LA9_0 = input.LA(1);
 
-                        if ( (LA8_0==17) ) {
-                            alt8=1;
+                        if ( (LA9_0==17) ) {
+                            alt9=1;
                         }
 
 
-                        switch (alt8) {
+                        switch (alt9) {
                     	case 1 :
-                    	    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:122:4: ',' f2= function_param
+                    	    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:124:4: ',' f2= function_param
                     	    {
-                    	    match(input,17,FOLLOW_17_in_function332); 
+                    	    match(input,17,FOLLOW_17_in_function356); 
 
-                    	    pushFollow(FOLLOW_function_param_in_function336);
+                    	    pushFollow(FOLLOW_function_param_in_function360);
                     	    f2=function_param();
 
                     	    state._fsp--;
@@ -727,7 +784,7 @@ public class CssParser extends Parser {
                     	    break;
 
                     	default :
-                    	    break loop8;
+                    	    break loop9;
                         }
                     } while (true);
 
@@ -738,9 +795,9 @@ public class CssParser extends Parser {
             }
 
 
-            match(input,16,FOLLOW_16_in_function348); 
+            match(input,16,FOLLOW_16_in_function372); 
 
-            f = new Function((ID9!=null?ID9.getText():null), params);
+            f = new Function((ID10!=null?ID10.getText():null), params);
 
             }
 
@@ -760,72 +817,72 @@ public class CssParser extends Parser {
 
 
     // $ANTLR start "function_param"
-    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:126:1: function_param returns [Object o] : ( function | param );
+    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:128:1: function_param returns [Object o] : ( function | param );
     public final Object function_param() throws RecognitionException {
         Object o = null;
 
 
-        Function function10 =null;
+        Function function11 =null;
 
-        Object param11 =null;
+        Object param12 =null;
 
 
         try {
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:127:2: ( function | param )
-            int alt10=2;
-            int LA10_0 = input.LA(1);
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:129:2: ( function | param )
+            int alt11=2;
+            int LA11_0 = input.LA(1);
 
-            if ( (LA10_0==ID) ) {
-                int LA10_1 = input.LA(2);
+            if ( (LA11_0==ID) ) {
+                int LA11_1 = input.LA(2);
 
-                if ( (LA10_1==15) ) {
-                    alt10=1;
+                if ( (LA11_1==15) ) {
+                    alt11=1;
                 }
-                else if ( ((LA10_1 >= 16 && LA10_1 <= 17)) ) {
-                    alt10=2;
+                else if ( ((LA11_1 >= 16 && LA11_1 <= 17)) ) {
+                    alt11=2;
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 10, 1, input);
+                        new NoViableAltException("", 11, 1, input);
 
                     throw nvae;
 
                 }
             }
-            else if ( ((LA10_0 >= BOOLEAN && LA10_0 <= COLOR)||LA10_0==FLOAT||(LA10_0 >= INT && LA10_0 <= STRING)) ) {
-                alt10=2;
+            else if ( ((LA11_0 >= BOOLEAN && LA11_0 <= COLOR)||LA11_0==FLOAT||(LA11_0 >= INT && LA11_0 <= STRING)) ) {
+                alt11=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 10, 0, input);
+                    new NoViableAltException("", 11, 0, input);
 
                 throw nvae;
 
             }
-            switch (alt10) {
+            switch (alt11) {
                 case 1 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:127:4: function
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:129:4: function
                     {
-                    pushFollow(FOLLOW_function_in_function_param379);
-                    function10=function();
+                    pushFollow(FOLLOW_function_in_function_param403);
+                    function11=function();
 
                     state._fsp--;
 
 
-                    o = function10;
+                    o = function11;
 
                     }
                     break;
                 case 2 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:128:4: param
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:130:4: param
                     {
-                    pushFollow(FOLLOW_param_in_function_param386);
-                    param11=param();
+                    pushFollow(FOLLOW_param_in_function_param410);
+                    param12=param();
 
                     state._fsp--;
 
 
-                    o = param11;
+                    o = param12;
 
                     }
                     break;
@@ -847,126 +904,126 @@ public class CssParser extends Parser {
 
 
     // $ANTLR start "param"
-    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:131:1: param returns [Object o] : ( INT | FLOAT | BOOLEAN | NULL | STRING | ID | COLOR );
+    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:133:1: param returns [Object o] : ( INT | FLOAT | BOOLEAN | NULL | STRING | ID | COLOR );
     public final Object param() throws RecognitionException {
         Object o = null;
 
 
-        Token INT12=null;
-        Token FLOAT13=null;
-        Token BOOLEAN14=null;
-        Token STRING15=null;
-        Token ID16=null;
-        Token COLOR17=null;
+        Token INT13=null;
+        Token FLOAT14=null;
+        Token BOOLEAN15=null;
+        Token STRING16=null;
+        Token ID17=null;
+        Token COLOR18=null;
 
         try {
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:132:2: ( INT | FLOAT | BOOLEAN | NULL | STRING | ID | COLOR )
-            int alt11=7;
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:134:2: ( INT | FLOAT | BOOLEAN | NULL | STRING | ID | COLOR )
+            int alt12=7;
             switch ( input.LA(1) ) {
             case INT:
                 {
-                alt11=1;
+                alt12=1;
                 }
                 break;
             case FLOAT:
                 {
-                alt11=2;
+                alt12=2;
                 }
                 break;
             case BOOLEAN:
                 {
-                alt11=3;
+                alt12=3;
                 }
                 break;
             case NULL:
                 {
-                alt11=4;
+                alt12=4;
                 }
                 break;
             case STRING:
                 {
-                alt11=5;
+                alt12=5;
                 }
                 break;
             case ID:
                 {
-                alt11=6;
+                alt12=6;
                 }
                 break;
             case COLOR:
                 {
-                alt11=7;
+                alt12=7;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 11, 0, input);
+                    new NoViableAltException("", 12, 0, input);
 
                 throw nvae;
 
             }
 
-            switch (alt11) {
+            switch (alt12) {
                 case 1 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:132:4: INT
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:134:4: INT
                     {
-                    INT12=(Token)match(input,INT,FOLLOW_INT_in_param407); 
+                    INT13=(Token)match(input,INT,FOLLOW_INT_in_param431); 
 
-                    o = Integer.parseInt((INT12!=null?INT12.getText():null));
+                    o = Integer.parseInt((INT13!=null?INT13.getText():null));
 
                     }
                     break;
                 case 2 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:133:4: FLOAT
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:135:4: FLOAT
                     {
-                    FLOAT13=(Token)match(input,FLOAT,FOLLOW_FLOAT_in_param418); 
+                    FLOAT14=(Token)match(input,FLOAT,FOLLOW_FLOAT_in_param442); 
 
-                    o = Float.parseFloat((FLOAT13!=null?FLOAT13.getText():null));
+                    o = Float.parseFloat((FLOAT14!=null?FLOAT14.getText():null));
 
                     }
                     break;
                 case 3 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:134:4: BOOLEAN
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:136:4: BOOLEAN
                     {
-                    BOOLEAN14=(Token)match(input,BOOLEAN,FOLLOW_BOOLEAN_in_param427); 
+                    BOOLEAN15=(Token)match(input,BOOLEAN,FOLLOW_BOOLEAN_in_param451); 
 
-                    o = Boolean.parseBoolean((BOOLEAN14!=null?BOOLEAN14.getText():null));
+                    o = Boolean.parseBoolean((BOOLEAN15!=null?BOOLEAN15.getText():null));
 
                     }
                     break;
                 case 4 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:135:4: NULL
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:137:4: NULL
                     {
-                    match(input,NULL,FOLLOW_NULL_in_param434); 
+                    match(input,NULL,FOLLOW_NULL_in_param458); 
 
                     o = null;
 
                     }
                     break;
                 case 5 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:136:4: STRING
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:138:4: STRING
                     {
-                    STRING15=(Token)match(input,STRING,FOLLOW_STRING_in_param444); 
+                    STRING16=(Token)match(input,STRING,FOLLOW_STRING_in_param468); 
 
-                    o = (STRING15!=null?STRING15.getText():null).substring(1, (STRING15!=null?STRING15.getText():null).length()-1);
+                    o = (STRING16!=null?STRING16.getText():null).substring(1, (STRING16!=null?STRING16.getText():null).length()-1);
 
                     }
                     break;
                 case 6 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:137:4: ID
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:139:4: ID
                     {
-                    ID16=(Token)match(input,ID,FOLLOW_ID_in_param452); 
+                    ID17=(Token)match(input,ID,FOLLOW_ID_in_param476); 
 
-                    o = (ID16!=null?ID16.getText():null);
+                    o = (ID17!=null?ID17.getText():null);
 
                     }
                     break;
                 case 7 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:138:4: COLOR
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:140:4: COLOR
                     {
-                    COLOR17=(Token)match(input,COLOR,FOLLOW_COLOR_in_param464); 
+                    COLOR18=(Token)match(input,COLOR,FOLLOW_COLOR_in_param488); 
 
-                    o = parseColor((COLOR17!=null?COLOR17.getText():null));
+                    o = parseColor((COLOR18!=null?COLOR18.getText():null));
 
                     }
                     break;
@@ -991,39 +1048,38 @@ public class CssParser extends Parser {
  
 
     public static final BitSet FOLLOW_rule_in_stylesheet51 = new BitSet(new long[]{0x0000000000044202L});
-    public static final BitSet FOLLOW_selector_list_in_rule79 = new BitSet(new long[]{0x0000000000200000L});
-    public static final BitSet FOLLOW_21_in_rule81 = new BitSet(new long[]{0x0000000000400200L});
-    public static final BitSet FOLLOW_declaration_in_rule88 = new BitSet(new long[]{0x0000000000400200L});
-    public static final BitSet FOLLOW_22_in_rule102 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_selector_list_in_rule79 = new BitSet(new long[]{0x0000000002000000L});
+    public static final BitSet FOLLOW_25_in_rule81 = new BitSet(new long[]{0x0000000004000200L});
+    public static final BitSet FOLLOW_declaration_in_rule88 = new BitSet(new long[]{0x0000000004000200L});
+    public static final BitSet FOLLOW_26_in_rule102 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_selector_in_selector_list126 = new BitSet(new long[]{0x0000000000020002L});
     public static final BitSet FOLLOW_17_in_selector_list138 = new BitSet(new long[]{0x0000000000044200L});
     public static final BitSet FOLLOW_selector_in_selector_list142 = new BitSet(new long[]{0x0000000000020002L});
-    public static final BitSet FOLLOW_selector_atom_in_selector177 = new BitSet(new long[]{0x0000000000044202L});
-    public static final BitSet FOLLOW_18_in_selector_atom196 = new BitSet(new long[]{0x0000000000000200L});
-    public static final BitSet FOLLOW_ID_in_selector_atom198 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_selector_atom203 = new BitSet(new long[]{0x0000000000000200L});
-    public static final BitSet FOLLOW_ID_in_selector_atom205 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ID_in_selector_atom210 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ID_in_declaration231 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_19_in_declaration233 = new BitSet(new long[]{0x0000000000001EB0L});
-    public static final BitSet FOLLOW_declaration_param_in_declaration252 = new BitSet(new long[]{0x0000000000101EB0L});
-    public static final BitSet FOLLOW_20_in_declaration261 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_function_in_declaration_param277 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_param_in_declaration_param284 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ID_in_function311 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_function313 = new BitSet(new long[]{0x0000000000011EB0L});
-    public static final BitSet FOLLOW_function_param_in_function320 = new BitSet(new long[]{0x0000000000030000L});
-    public static final BitSet FOLLOW_17_in_function332 = new BitSet(new long[]{0x0000000000001EB0L});
-    public static final BitSet FOLLOW_function_param_in_function336 = new BitSet(new long[]{0x0000000000030000L});
-    public static final BitSet FOLLOW_16_in_function348 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_function_in_function_param379 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_param_in_function_param386 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_INT_in_param407 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_FLOAT_in_param418 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_BOOLEAN_in_param427 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_NULL_in_param434 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_STRING_in_param444 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ID_in_param452 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_COLOR_in_param464 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_selector_name_in_selector177 = new BitSet(new long[]{0x00000000000C4202L});
+    public static final BitSet FOLLOW_selector_pseudo_in_selector187 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ID_in_selector_name212 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_19_in_selector_pseudo224 = new BitSet(new long[]{0x0000000001E00000L});
+    public static final BitSet FOLLOW_set_in_selector_pseudo226 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ID_in_declaration255 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_19_in_declaration257 = new BitSet(new long[]{0x0000000000001EB0L});
+    public static final BitSet FOLLOW_declaration_param_in_declaration276 = new BitSet(new long[]{0x0000000000101EB0L});
+    public static final BitSet FOLLOW_20_in_declaration285 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_function_in_declaration_param301 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_param_in_declaration_param308 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ID_in_function335 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_function337 = new BitSet(new long[]{0x0000000000011EB0L});
+    public static final BitSet FOLLOW_function_param_in_function344 = new BitSet(new long[]{0x0000000000030000L});
+    public static final BitSet FOLLOW_17_in_function356 = new BitSet(new long[]{0x0000000000001EB0L});
+    public static final BitSet FOLLOW_function_param_in_function360 = new BitSet(new long[]{0x0000000000030000L});
+    public static final BitSet FOLLOW_16_in_function372 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_function_in_function_param403 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_param_in_function_param410 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_INT_in_param431 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_FLOAT_in_param442 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_BOOLEAN_in_param451 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_NULL_in_param458 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_STRING_in_param468 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ID_in_param476 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_COLOR_in_param488 = new BitSet(new long[]{0x0000000000000002L});
 
 }

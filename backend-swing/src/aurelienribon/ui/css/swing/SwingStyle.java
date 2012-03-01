@@ -71,6 +71,8 @@ public class SwingStyle {
 		Style.registerProcessor(JTextComponent.class,new JTextComponentProcessor());
 		Style.registerProcessor(JTextArea.class, new JTextAreaProcessor());
 
+		Style.registerDeclarationSetManager(Component.class, new SwingDeclarationSetManager());
+
 		Style.registerChildrenAccessor(Container.class, new ChildrenAccessor<Container>() {
 			@Override public List<?> getChildren(Container target) {
 				return Arrays.asList(target.getComponents());

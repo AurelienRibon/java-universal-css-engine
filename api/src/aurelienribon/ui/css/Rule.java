@@ -38,10 +38,12 @@ import java.util.List;
  */
 public class Rule {
 	private final List<String> selectors;
+	private final PseudoClass pseudoClass;
 	private final DeclarationSet declarations;
 
-	public Rule(String selectors, DeclarationSet declarations) {
-		this.selectors = Collections.unmodifiableList(Arrays.asList(selectors.split(" ")));
+	public Rule(List<String> selectors, PseudoClass pseudoClass, DeclarationSet declarations) {
+		this.selectors = Collections.unmodifiableList(selectors);
+		this.pseudoClass = pseudoClass;
 		this.declarations = declarations;
 	}
 
@@ -51,6 +53,10 @@ public class Rule {
 
 	public String getLastSelector() {
 		return selectors.get(selectors.size()-1);
+	}
+
+	public PseudoClass getPseudoClass() {
+		return pseudoClass;
 	}
 
 	public DeclarationSet getDeclarations() {

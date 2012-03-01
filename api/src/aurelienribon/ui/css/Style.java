@@ -114,6 +114,7 @@ public class Style {
 	private static final Map<Class, List<DeclarationSetProcessor>> registeredProcessors = new LinkedHashMap<Class, List<DeclarationSetProcessor>>();
 	private static final Map<Object, List<String>> registeredTargets = new LinkedHashMap<Object, List<String>>();
 	private static final Map<Class, ChildrenAccessor> registeredChildrenAccessors = new HashMap<Class, ChildrenAccessor>();
+	private static final Map<Class, DeclarationSetManager> registeredDeclarationSetManagers = new HashMap<Class, DeclarationSetManager>();
 	private static ParamConverter converter;
 
 	/**
@@ -191,8 +192,18 @@ public class Style {
 	 * target, without requiring it to manually pass it to its children.
 	 */
 	public static void registerChildrenAccessor(Class parentClass, ChildrenAccessor accessor) {
-		if (registeredChildrenAccessors.containsKey(parentClass)) throw new RuntimeException("Accessor already registered");
 		registeredChildrenAccessors.put(parentClass, accessor);
+	}
+
+	/**
+	 * Registers a declaration set manager with a parent class.
+	 * <p/>
+	 * Managers are used to handle actions needed by pseudo classes. Usually,
+	 * they add a mouse listener to the targets to listen for mouse over (for
+	 * the ':hover' pseudo class, etc.
+	 */
+	public static void registerDeclarationSetManager(Class parentClass, DeclarationSetManager manager) {
+		registeredDeclarationSetManagers.put(parentClass, manager);
 	}
 
 	/**
@@ -217,6 +228,7 @@ public class Style {
 	 * stylesheet. Complicated to understand, but still useful :)
 	 */
 	public static void apply(Object target, DeclarationSet ds) {
+		if (ds.isEmpty()) return;
 		for (Class clazz : registeredProcessors.keySet()) {
 			if (clazz.isInstance(target)) {
 				List<DeclarationSetProcessor> processors = registeredProcessors.get(clazz);
@@ -394,8 +406,17 @@ public class Style {
 					propertiesValues.put(property, params);
 				}
 
-				DeclarationSet ds = new DeclarationSet(this, properties, propertiesValues);
-				rules.add(new Rule(selector, ds));
+				List<String> selectors = Arrays.asList(selector.split(" "));
+				String lastSelector = selectors.get(selectors.size() - 1);
+				PseudoClass pseudoClass = PseudoClass.NONE;
+
+				if (lastSelector.startsWith(":")) {
+					pseudoClass = PseudoClass.valueOf(lastSelector.substring(1).toUpperCase());
+					selectors = selectors.subList(0, selectors.size()-1);
+				}
+
+				DeclarationSet ds = new DeclarationSet(this, pseudoClass, properties, propertiesValues);
+				rules.add(new Rule(selectors, pseudoClass, ds));
 			}
 
 		} catch (RecognitionException ex) {
@@ -461,29 +482,41 @@ public class Style {
 	// -------------------------------------------------------------------------
 
 	private static void apply(Object target, Style style, List<String> stack) {
-		// Retrieve all the declarations belonging to the target, evaluate
+		// Retrieve all the declarations belonging to the target and evaluate
 		// their parameters
-		DeclarationSet ds = new DeclarationSet(style, target, stack);
-		for (Property property : ds.getProperties()) {
-			for (int i=0; i<ds.getValue(property).size(); i++) {
-				Object param = ds.getValue(property).get(i);
-				ds.replaceValueParam(property, i, evaluateParam(param));
+		Map<PseudoClass, DeclarationSet> dss = new EnumMap<PseudoClass, DeclarationSet>(PseudoClass.class);
+
+		for (PseudoClass pseudoClass : PseudoClass.values()) {
+			DeclarationSet ds = new DeclarationSet(style, target, stack, pseudoClass);
+			dss.put(pseudoClass, ds);
+
+			for (Property property : ds.getProperties()) {
+				for (int i=0; i<ds.getValue(property).size(); i++) {
+					Object param = ds.getValue(property).get(i);
+					ds.replaceValueParam(property, i, evaluateParam(param));
+				}
 			}
 		}
 
-		// Apply the declarations to the target
-		apply(target, ds);
+		// Apply these declarations to the target
+		for (Class clazz : registeredDeclarationSetManagers.keySet()) {
+			if (clazz.isInstance(target)) {
+				DeclarationSetManager manager = registeredDeclarationSetManagers.get(clazz);
+				manager.manage(target, dss);
+			}
+		}
 
 		// Add the target class and classname to the selectors stack
 		stack.add(target.getClass().getName());
 		if (registeredTargets.containsKey(target)) stack.addAll(registeredTargets.get(target));
 
-		// Iterate over the target children, if any
+		// Iterate over the target children, if there is any
 		if (target instanceof Container) {
 			Container parent = (Container) target;
 			if (parent.getChildren() != null) {
 				for (Object child : parent.getChildren()) apply(child, style, stack);
 			}
+
 		} else {
 			for (Class clazz : registeredChildrenAccessors.keySet()) {
 				if (clazz.isInstance(target)) {

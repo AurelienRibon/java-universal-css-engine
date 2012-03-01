@@ -1,4 +1,4 @@
-// $ANTLR 3.4 C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g 2012-02-27 14:23:15
+// $ANTLR 3.4 C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g 2012-02-29 15:32:59
 
 	package aurelienribon.ui.css.antlr;
 
@@ -20,6 +20,10 @@ public class CssLexer extends Lexer {
     public static final int T__20=20;
     public static final int T__21=21;
     public static final int T__22=22;
+    public static final int T__23=23;
+    public static final int T__24=24;
+    public static final int T__25=25;
+    public static final int T__26=26;
     public static final int BOOLEAN=4;
     public static final int COLOR=5;
     public static final int COMMENT=6;
@@ -204,10 +208,12 @@ public class CssLexer extends Lexer {
         try {
             int _type = T__21;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:19:7: ( '{' )
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:19:9: '{'
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:19:7: ( 'active' )
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:19:9: 'active'
             {
-            match('{'); 
+            match("active"); 
+
+
 
             }
 
@@ -225,10 +231,12 @@ public class CssLexer extends Lexer {
         try {
             int _type = T__22;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:20:7: ( '}' )
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:20:9: '}'
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:20:7: ( 'disabled' )
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:20:9: 'disabled'
             {
-            match('}'); 
+            match("disabled"); 
+
+
 
             }
 
@@ -241,12 +249,100 @@ public class CssLexer extends Lexer {
     }
     // $ANTLR end "T__22"
 
+    // $ANTLR start "T__23"
+    public final void mT__23() throws RecognitionException {
+        try {
+            int _type = T__23;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:21:7: ( 'focus' )
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:21:9: 'focus'
+            {
+            match("focus"); 
+
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__23"
+
+    // $ANTLR start "T__24"
+    public final void mT__24() throws RecognitionException {
+        try {
+            int _type = T__24;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:22:7: ( 'hover' )
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:22:9: 'hover'
+            {
+            match("hover"); 
+
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__24"
+
+    // $ANTLR start "T__25"
+    public final void mT__25() throws RecognitionException {
+        try {
+            int _type = T__25;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:23:7: ( '{' )
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:23:9: '{'
+            {
+            match('{'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__25"
+
+    // $ANTLR start "T__26"
+    public final void mT__26() throws RecognitionException {
+        try {
+            int _type = T__26;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:24:7: ( '}' )
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:24:9: '}'
+            {
+            match('}'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__26"
+
     // $ANTLR start "COLOR"
     public final void mCOLOR() throws RecognitionException {
         try {
             int _type = COLOR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:142:2: ( '#' HEX HEX HEX HEX HEX HEX HEX HEX | '#' HEX HEX HEX HEX HEX HEX | '#' HEX HEX HEX HEX | '#' HEX HEX HEX )
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:144:2: ( '#' HEX HEX HEX HEX HEX HEX HEX HEX | '#' HEX HEX HEX HEX HEX HEX | '#' HEX HEX HEX HEX | '#' HEX HEX HEX )
             int alt1=4;
             int LA1_0 = input.LA(1);
 
@@ -327,7 +423,7 @@ public class CssLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:142:4: '#' HEX HEX HEX HEX HEX HEX HEX HEX
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:144:4: '#' HEX HEX HEX HEX HEX HEX HEX HEX
                     {
                     match('#'); 
 
@@ -358,7 +454,7 @@ public class CssLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:143:4: '#' HEX HEX HEX HEX HEX HEX
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:145:4: '#' HEX HEX HEX HEX HEX HEX
                     {
                     match('#'); 
 
@@ -383,7 +479,7 @@ public class CssLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:144:4: '#' HEX HEX HEX HEX
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:146:4: '#' HEX HEX HEX HEX
                     {
                     match('#'); 
 
@@ -402,7 +498,7 @@ public class CssLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:145:4: '#' HEX HEX HEX
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:147:4: '#' HEX HEX HEX
                     {
                     match('#'); 
 
@@ -433,7 +529,7 @@ public class CssLexer extends Lexer {
         try {
             int _type = INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:148:5: ( ( '0' .. '9' )+ | '0x' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+ | '0X' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+ )
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:150:5: ( ( '0' .. '9' )+ | '0x' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+ | '0X' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+ )
             int alt5=3;
             int LA5_0 = input.LA(1);
 
@@ -466,9 +562,9 @@ public class CssLexer extends Lexer {
             }
             switch (alt5) {
                 case 1 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:148:7: ( '0' .. '9' )+
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:150:7: ( '0' .. '9' )+
                     {
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:148:7: ( '0' .. '9' )+
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:150:7: ( '0' .. '9' )+
                     int cnt2=0;
                     loop2:
                     do {
@@ -510,13 +606,13 @@ public class CssLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:149:4: '0x' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:151:4: '0x' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
                     {
                     match("0x"); 
 
 
 
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:149:9: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:151:9: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
                     int cnt3=0;
                     loop3:
                     do {
@@ -558,13 +654,13 @@ public class CssLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:150:4: '0X' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:152:4: '0X' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
                     {
                     match("0X"); 
 
 
 
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:150:9: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:152:9: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
                     int cnt4=0;
                     loop4:
                     do {
@@ -621,7 +717,7 @@ public class CssLexer extends Lexer {
         try {
             int _type = FLOAT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:154:2: ( ( '0' .. '9' )+ '.' ( '0' .. '9' )* | '.' ( '0' .. '9' )+ )
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:156:2: ( ( '0' .. '9' )+ '.' ( '0' .. '9' )* | '.' ( '0' .. '9' )+ )
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -640,9 +736,9 @@ public class CssLexer extends Lexer {
             }
             switch (alt9) {
                 case 1 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:154:4: ( '0' .. '9' )+ '.' ( '0' .. '9' )*
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:156:4: ( '0' .. '9' )+ '.' ( '0' .. '9' )*
                     {
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:154:4: ( '0' .. '9' )+
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:156:4: ( '0' .. '9' )+
                     int cnt6=0;
                     loop6:
                     do {
@@ -683,7 +779,7 @@ public class CssLexer extends Lexer {
 
                     match('.'); 
 
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:154:20: ( '0' .. '9' )*
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:156:20: ( '0' .. '9' )*
                     loop7:
                     do {
                         int alt7=2;
@@ -720,11 +816,11 @@ public class CssLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:155:4: '.' ( '0' .. '9' )+
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:157:4: '.' ( '0' .. '9' )+
                     {
                     match('.'); 
 
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:155:8: ( '0' .. '9' )+
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:157:8: ( '0' .. '9' )+
                     int cnt8=0;
                     loop8:
                     do {
@@ -781,10 +877,10 @@ public class CssLexer extends Lexer {
         try {
             int _type = BOOLEAN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:159:2: ( ( 'true' | 'false' ) )
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:159:4: ( 'true' | 'false' )
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:161:2: ( ( 'true' | 'false' ) )
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:161:4: ( 'true' | 'false' )
             {
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:159:4: ( 'true' | 'false' )
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:161:4: ( 'true' | 'false' )
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -803,7 +899,7 @@ public class CssLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:159:5: 'true'
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:161:5: 'true'
                     {
                     match("true"); 
 
@@ -812,7 +908,7 @@ public class CssLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:159:12: 'false'
+                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:161:12: 'false'
                     {
                     match("false"); 
 
@@ -840,8 +936,8 @@ public class CssLexer extends Lexer {
         try {
             int _type = NULL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:163:2: ( 'null' )
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:163:4: 'null'
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:165:2: ( 'null' )
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:165:4: 'null'
             {
             match("null"); 
 
@@ -863,8 +959,8 @@ public class CssLexer extends Lexer {
         try {
             int _type = ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:166:4: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '-' )* )
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:166:6: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '-' )*
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:168:4: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '-' )* )
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:168:6: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '-' )*
             {
             if ( input.LA(1)=='-'||(input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
                 input.consume();
@@ -876,7 +972,7 @@ public class CssLexer extends Lexer {
             }
 
 
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:166:34: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '-' )*
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:168:34: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '-' )*
             loop11:
             do {
                 int alt11=2;
@@ -926,12 +1022,12 @@ public class CssLexer extends Lexer {
         try {
             int _type = STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:170:2: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) |~ ( '\\\\' | '\"' ) )* '\"' )
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:170:4: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) |~ ( '\\\\' | '\"' ) )* '\"'
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:172:2: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) |~ ( '\\\\' | '\"' ) )* '\"' )
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:172:4: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) |~ ( '\\\\' | '\"' ) )* '\"'
             {
             match('\"'); 
 
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:170:8: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) |~ ( '\\\\' | '\"' ) )*
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:172:8: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) |~ ( '\\\\' | '\"' ) )*
             loop12:
             do {
                 int alt12=3;
@@ -947,7 +1043,7 @@ public class CssLexer extends Lexer {
 
                 switch (alt12) {
             	case 1 :
-            	    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:170:10: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
+            	    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:172:10: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
             	    {
             	    match('\\'); 
 
@@ -964,7 +1060,7 @@ public class CssLexer extends Lexer {
             	    }
             	    break;
             	case 2 :
-            	    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:170:54: ~ ( '\\\\' | '\"' )
+            	    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:172:54: ~ ( '\\\\' | '\"' )
             	    {
             	    if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '!')||(input.LA(1) >= '#' && input.LA(1) <= '[')||(input.LA(1) >= ']' && input.LA(1) <= '\uFFFF') ) {
             	        input.consume();
@@ -1001,7 +1097,7 @@ public class CssLexer extends Lexer {
     // $ANTLR start "HEX"
     public final void mHEX() throws RecognitionException {
         try {
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:174:2: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:176:2: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )
             // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:
             {
             if ( (input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'F')||(input.LA(1) >= 'a' && input.LA(1) <= 'f') ) {
@@ -1029,8 +1125,8 @@ public class CssLexer extends Lexer {
         try {
             int _type = WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:177:4: ( ( ' ' | '\\t' | '\\r' | '\\n' ) )
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:177:6: ( ' ' | '\\t' | '\\r' | '\\n' )
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:179:4: ( ( ' ' | '\\t' | '\\r' | '\\n' ) )
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:179:6: ( ' ' | '\\t' | '\\r' | '\\n' )
             {
             if ( (input.LA(1) >= '\t' && input.LA(1) <= '\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
                 input.consume();
@@ -1060,14 +1156,14 @@ public class CssLexer extends Lexer {
         try {
             int _type = COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:181:2: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:181:4: '/*' ( options {greedy=false; } : . )* '*/'
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:183:2: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:183:4: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
 
 
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:181:9: ( options {greedy=false; } : . )*
+            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:183:9: ( options {greedy=false; } : . )*
             loop13:
             do {
                 int alt13=2;
@@ -1092,7 +1188,7 @@ public class CssLexer extends Lexer {
 
                 switch (alt13) {
             	case 1 :
-            	    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:181:37: .
+            	    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:183:37: .
             	    {
             	    matchAny(); 
 
@@ -1123,8 +1219,8 @@ public class CssLexer extends Lexer {
     // $ANTLR end "COMMENT"
 
     public void mTokens() throws RecognitionException {
-        // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:8: ( T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | COLOR | INT | FLOAT | BOOLEAN | NULL | ID | STRING | WS | COMMENT )
-        int alt14=18;
+        // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:8: ( T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | COLOR | INT | FLOAT | BOOLEAN | NULL | ID | STRING | WS | COMMENT )
+        int alt14=22;
         alt14 = dfa14.predict(input);
         switch (alt14) {
             case 1 :
@@ -1200,71 +1296,103 @@ public class CssLexer extends Lexer {
                 }
                 break;
             case 10 :
-                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:64: COLOR
+                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:64: T__23
+                {
+                mT__23(); 
+
+
+                }
+                break;
+            case 11 :
+                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:70: T__24
+                {
+                mT__24(); 
+
+
+                }
+                break;
+            case 12 :
+                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:76: T__25
+                {
+                mT__25(); 
+
+
+                }
+                break;
+            case 13 :
+                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:82: T__26
+                {
+                mT__26(); 
+
+
+                }
+                break;
+            case 14 :
+                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:88: COLOR
                 {
                 mCOLOR(); 
 
 
                 }
                 break;
-            case 11 :
-                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:70: INT
+            case 15 :
+                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:94: INT
                 {
                 mINT(); 
 
 
                 }
                 break;
-            case 12 :
-                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:74: FLOAT
+            case 16 :
+                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:98: FLOAT
                 {
                 mFLOAT(); 
 
 
                 }
                 break;
-            case 13 :
-                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:80: BOOLEAN
+            case 17 :
+                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:104: BOOLEAN
                 {
                 mBOOLEAN(); 
 
 
                 }
                 break;
-            case 14 :
-                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:88: NULL
+            case 18 :
+                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:112: NULL
                 {
                 mNULL(); 
 
 
                 }
                 break;
-            case 15 :
-                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:93: ID
+            case 19 :
+                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:117: ID
                 {
                 mID(); 
 
 
                 }
                 break;
-            case 16 :
-                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:96: STRING
+            case 20 :
+                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:120: STRING
                 {
                 mSTRING(); 
 
 
                 }
                 break;
-            case 17 :
-                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:103: WS
+            case 21 :
+                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:127: WS
                 {
                 mWS(); 
 
 
                 }
                 break;
-            case 18 :
-                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:106: COMMENT
+            case 22 :
+                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:130: COMMENT
                 {
                 mCOMMENT(); 
 
@@ -1279,61 +1407,95 @@ public class CssLexer extends Lexer {
 
     protected DFA14 dfa14 = new DFA14(this);
     static final String DFA14_eotS =
-        "\1\uffff\1\23\3\uffff\1\25\4\uffff\2\27\3\17\11\uffff\6\17\1\41"+
-        "\1\17\1\43\1\uffff\1\41\1\uffff";
+        "\1\uffff\1\26\3\uffff\1\30\2\uffff\4\22\2\uffff\2\37\2\22\10\uffff"+
+        "\5\22\1\uffff\16\22\1\65\1\66\2\22\1\71\1\65\1\72\2\uffff\1\73\1"+
+        "\22\3\uffff\1\22\1\76\1\uffff";
     static final String DFA14_eofS =
-        "\44\uffff";
+        "\77\uffff";
     static final String DFA14_minS =
-        "\1\11\1\60\3\uffff\1\60\4\uffff\2\56\1\162\1\141\1\165\11\uffff"+
-        "\1\165\2\154\1\145\1\163\1\154\1\55\1\145\1\55\1\uffff\1\55\1\uffff";
+        "\1\11\1\60\3\uffff\1\60\2\uffff\1\143\1\151\1\141\1\157\2\uffff"+
+        "\2\56\1\162\1\165\10\uffff\1\164\1\163\1\143\1\154\1\166\1\uffff"+
+        "\1\165\1\154\1\151\1\141\1\165\1\163\2\145\1\154\1\166\1\142\1\163"+
+        "\1\145\1\162\2\55\1\145\1\154\3\55\2\uffff\1\55\1\145\3\uffff\1"+
+        "\144\1\55\1\uffff";
     static final String DFA14_maxS =
-        "\1\175\1\146\3\uffff\1\71\4\uffff\2\71\1\162\1\141\1\165\11\uffff"+
-        "\1\165\2\154\1\145\1\163\1\154\1\172\1\145\1\172\1\uffff\1\172\1"+
-        "\uffff";
+        "\1\175\1\146\3\uffff\1\71\2\uffff\1\143\1\151\2\157\2\uffff\2\71"+
+        "\1\162\1\165\10\uffff\1\164\1\163\1\143\1\154\1\166\1\uffff\1\165"+
+        "\1\154\1\151\1\141\1\165\1\163\2\145\1\154\1\166\1\142\1\163\1\145"+
+        "\1\162\2\172\1\145\1\154\3\172\2\uffff\1\172\1\145\3\uffff\1\144"+
+        "\1\172\1\uffff";
     static final String DFA14_acceptS =
-        "\2\uffff\1\2\1\3\1\4\1\uffff\1\6\1\7\1\10\1\11\5\uffff\1\17\1\20"+
-        "\1\21\1\22\1\1\1\12\1\5\1\14\1\13\11\uffff\1\15\1\uffff\1\16";
+        "\2\uffff\1\2\1\3\1\4\1\uffff\1\6\1\7\4\uffff\1\14\1\15\4\uffff\1"+
+        "\23\1\24\1\25\1\26\1\1\1\16\1\5\1\20\5\uffff\1\17\25\uffff\1\21"+
+        "\1\22\2\uffff\1\12\1\13\1\10\2\uffff\1\11";
     static final String DFA14_specialS =
-        "\44\uffff}>";
+        "\77\uffff}>";
     static final String[] DFA14_transitionS = {
-            "\2\21\2\uffff\1\21\22\uffff\1\21\1\uffff\1\20\1\1\4\uffff\1"+
-            "\2\1\3\2\uffff\1\4\1\17\1\5\1\22\1\12\11\13\1\6\1\7\5\uffff"+
-            "\32\17\4\uffff\1\17\1\uffff\5\17\1\15\7\17\1\16\5\17\1\14\6"+
-            "\17\1\10\1\uffff\1\11",
-            "\12\24\7\uffff\6\24\32\uffff\6\24",
+            "\2\24\2\uffff\1\24\22\uffff\1\24\1\uffff\1\23\1\1\4\uffff\1"+
+            "\2\1\3\2\uffff\1\4\1\22\1\5\1\25\1\16\11\17\1\6\1\7\5\uffff"+
+            "\32\22\4\uffff\1\22\1\uffff\1\10\2\22\1\11\1\22\1\12\1\22\1"+
+            "\13\5\22\1\21\5\22\1\20\6\22\1\14\1\uffff\1\15",
+            "\12\27\7\uffff\6\27\32\uffff\6\27",
             "",
             "",
             "",
-            "\12\26",
+            "\12\31",
             "",
             "",
-            "",
-            "",
-            "\1\26\1\uffff\12\13",
-            "\1\26\1\uffff\12\13",
-            "\1\30",
-            "\1\31",
             "\1\32",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
             "\1\33",
-            "\1\34",
-            "\1\35",
+            "\1\35\15\uffff\1\34",
             "\1\36",
-            "\1\37",
-            "\1\40",
-            "\1\17\2\uffff\12\17\7\uffff\32\17\4\uffff\1\17\1\uffff\32\17",
-            "\1\42",
-            "\1\17\2\uffff\12\17\7\uffff\32\17\4\uffff\1\17\1\uffff\32\17",
             "",
-            "\1\17\2\uffff\12\17\7\uffff\32\17\4\uffff\1\17\1\uffff\32\17",
+            "",
+            "\1\31\1\uffff\12\17",
+            "\1\31\1\uffff\12\17",
+            "\1\40",
+            "\1\41",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "\1\42",
+            "\1\43",
+            "\1\44",
+            "\1\45",
+            "\1\46",
+            "",
+            "\1\47",
+            "\1\50",
+            "\1\51",
+            "\1\52",
+            "\1\53",
+            "\1\54",
+            "\1\55",
+            "\1\56",
+            "\1\57",
+            "\1\60",
+            "\1\61",
+            "\1\62",
+            "\1\63",
+            "\1\64",
+            "\1\22\2\uffff\12\22\7\uffff\32\22\4\uffff\1\22\1\uffff\32\22",
+            "\1\22\2\uffff\12\22\7\uffff\32\22\4\uffff\1\22\1\uffff\32\22",
+            "\1\67",
+            "\1\70",
+            "\1\22\2\uffff\12\22\7\uffff\32\22\4\uffff\1\22\1\uffff\32\22",
+            "\1\22\2\uffff\12\22\7\uffff\32\22\4\uffff\1\22\1\uffff\32\22",
+            "\1\22\2\uffff\12\22\7\uffff\32\22\4\uffff\1\22\1\uffff\32\22",
+            "",
+            "",
+            "\1\22\2\uffff\12\22\7\uffff\32\22\4\uffff\1\22\1\uffff\32\22",
+            "\1\74",
+            "",
+            "",
+            "",
+            "\1\75",
+            "\1\22\2\uffff\12\22\7\uffff\32\22\4\uffff\1\22\1\uffff\32\22",
             ""
     };
 
@@ -1367,7 +1529,7 @@ public class CssLexer extends Lexer {
             this.transition = DFA14_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | COLOR | INT | FLOAT | BOOLEAN | NULL | ID | STRING | WS | COMMENT );";
+            return "1:1: Tokens : ( T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | COLOR | INT | FLOAT | BOOLEAN | NULL | ID | STRING | WS | COMMENT );";
         }
     }
  

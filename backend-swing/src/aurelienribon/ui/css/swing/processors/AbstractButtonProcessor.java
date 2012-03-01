@@ -17,7 +17,7 @@ public class AbstractButtonProcessor implements DeclarationSetProcessor<Abstract
 	@Override
 	public void process(AbstractButton t, DeclarationSet ds) {
 		Property p;
-
+		
 		p = borderPainted; if (ds.contains(p)) t.setBorderPainted(ds.getValue(p, Boolean.class));
 		p = contentAreaFilled; if (ds.contains(p)) t.setContentAreaFilled(ds.getValue(p, Boolean.class));
 		p = margin; if (ds.contains(p)) t.setMargin(ds.getValue(p, Insets.class, SwingFunctions.insets));

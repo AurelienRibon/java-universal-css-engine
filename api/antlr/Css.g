@@ -93,14 +93,16 @@ selector_list returns [List<String> ss]
 selector returns [String s]
 @init  {$s = "";}
 @after {$s = $s.trim();}
-	:	(selector_atom {$s += $selector_atom.text + " ";}
-		)+
+	:	(selector_name {$s += $selector_name.text + " ";}
+		)+ (selector_pseudo {$s += $selector_pseudo.text;})?
 	;
 	
-selector_atom
-	:	'.' ID
-	|	'#' ID
-	|	ID
+selector_name
+	:	('.' | '#')? ID
+	;
+	
+selector_pseudo
+	:	':' ('hover'|'focus'|'active'|'disabled')
 	;
 	
 declaration returns [String prop, List<Object> params]

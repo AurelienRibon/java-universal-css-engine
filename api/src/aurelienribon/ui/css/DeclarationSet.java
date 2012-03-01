@@ -22,17 +22,21 @@ import java.util.*;
  */
 public class DeclarationSet {
 	private final Style style;
+	private final PseudoClass pseudoClass;
 	private final List<Property> properties;
 	private final Map<Property, List<Object>> propertiesValues;
 
 	/**
 	 * Constructor used to group every declarations associated to a rule in a
 	 * CSS stylesheet.
+	 * @param style The style applied to the target.
+	 * @param pseudoClass The pseudo class of the parent rule.
 	 * @param properties A list of properties.
 	 * @param propertiesValues A map of values associated to the properties.
 	 */
-	public DeclarationSet(Style style, List<Property> properties, Map<Property, List<Object>> propertiesValues) {
+	public DeclarationSet(Style style, PseudoClass pseudoClass, List<Property> properties, Map<Property, List<Object>> propertiesValues) {
 		this.style = style;
+		this.pseudoClass = pseudoClass;
 		this.properties = Collections.unmodifiableList(new ArrayList<Property>(properties));
 		this.propertiesValues = Collections.unmodifiableMap(new HashMap<Property, List<Object>>(propertiesValues));
 	}
@@ -45,8 +49,10 @@ public class DeclarationSet {
 	 * @param target The target object.
 	 * @param stack The stack of classnames for the target. Used to know if the
 	 * target correspond to some nested selectors.
+	 * @param pseudoClass Only the rules with the given pseudo class will be
+	 * scanned.
 	 */
-	public DeclarationSet(Style style, Object target, List<String> stack) {
+	public DeclarationSet(Style style, Object target, List<String> stack, PseudoClass pseudoClass) {
 		List<Property> tProperties = new ArrayList<Property>();
 		Map<Property, List<Object>> tPropertiesValues = new HashMap<Property, List<Object>>();
 
@@ -54,20 +60,23 @@ public class DeclarationSet {
 			assert rule != null;
 			assert rule.getDeclarations() != null;
 
-			if (isLastSelectorValid(rule.getLastSelector(), target) && isStackValid(rule.getSelectors(), stack)) {
-				tProperties.addAll(rule.getDeclarations().getProperties());
+			if (rule.getPseudoClass() != pseudoClass) continue;
+			if (!isLastSelectorValid(rule.getLastSelector(), target)) continue;
+			if (!isStackValid(rule.getSelectors(), stack)) continue;
 
-				for (Property property : rule.getDeclarations().getProperties()) {
-					assert rule.getDeclarations().getValue(property) != null;
+			tProperties.addAll(rule.getDeclarations().getProperties());
 
-					List<Object> value = new ArrayList<Object>();
-					value.addAll(rule.getDeclarations().getValue(property));
-					tPropertiesValues.put(property, value);
-				}
+			for (Property property : rule.getDeclarations().getProperties()) {
+				assert rule.getDeclarations().getValue(property) != null;
+
+				List<Object> value = new ArrayList<Object>();
+				value.addAll(rule.getDeclarations().getValue(property));
+				tPropertiesValues.put(property, value);
 			}
 		}
 
 		this.style = style;
+		this.pseudoClass = pseudoClass;
 		this.properties = Collections.unmodifiableList(tProperties);
 		this.propertiesValues = Collections.unmodifiableMap(tPropertiesValues);
 	}
@@ -89,7 +98,8 @@ public class DeclarationSet {
 			}
 		}
 
-		this.style = ds.style;
+		this.style = ds.getStyle();
+		this.pseudoClass = ds.getPseudoClass();
 		this.properties = Collections.unmodifiableList(new ArrayList<Property>(tProperties));
 		this.propertiesValues = Collections.unmodifiableMap(new HashMap<Property, List<Object>>(tPropertiesValues));
 	}
@@ -103,6 +113,20 @@ public class DeclarationSet {
 	 */
 	public Style getStyle() {
 		return style;
+	}
+
+	/**
+	 * Gets the CSS pseudo class associated to these declarations.
+	 */
+	public PseudoClass getPseudoClass() {
+		return pseudoClass;
+	}
+
+	/**
+	 * Returns true if the declaration set does not contain any declaration.
+	 */
+	public boolean isEmpty() {
+		return properties.isEmpty();
 	}
 
 	/**

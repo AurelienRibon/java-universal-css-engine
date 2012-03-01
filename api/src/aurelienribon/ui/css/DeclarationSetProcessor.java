@@ -8,5 +8,5 @@ package aurelienribon.ui.css;
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
 public interface DeclarationSetProcessor<T> {
-	public void process(T target, DeclarationSet ds);
+	public void process(T t, DeclarationSet ds);
 }
