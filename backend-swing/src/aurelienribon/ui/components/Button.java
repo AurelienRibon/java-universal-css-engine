@@ -6,8 +6,6 @@ import aurelienribon.ui.css.DeclarationSetProcessor;
 import aurelienribon.ui.css.Property;
 import aurelienribon.ui.utils.PaintUtils;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RoundRectangle2D;
 import javax.swing.*;
@@ -28,9 +26,8 @@ public class Button extends JButton implements Container {
 	private final JLabel label = new JLabel();
 
 	public Button() {
-		setLayout(new BorderLayout());
-		add(label, BorderLayout.CENTER);
 		setOpaque(false);
+		updateLabel();
 	}
 
 	@Override
@@ -38,19 +35,15 @@ public class Button extends JButton implements Container {
 		return null;
 	}
 
-	@Override
-	public void revalidate() {
-		if (label != null) {
-			label.setFont(getFont());
-			label.setText(getText());
-			label.setIcon(getIcon());
-			label.setHorizontalAlignment(getHorizontalAlignment());
-			label.setVerticalAlignment(getVerticalAlignment());
-			label.setHorizontalTextPosition(getHorizontalTextPosition());
-			label.setVerticalTextPosition(getVerticalTextPosition());
-		}
-
-		super.revalidate();
+	private void updateLabel() {
+		label.setForeground(getForeground());
+		label.setFont(getFont());
+		label.setText(getText());
+		label.setIcon(getIcon());
+		label.setHorizontalAlignment(getHorizontalAlignment());
+		label.setVerticalAlignment(getVerticalAlignment());
+		label.setHorizontalTextPosition(getHorizontalTextPosition());
+		label.setVerticalTextPosition(getVerticalTextPosition());
 	}
 
 	public Paint getStroke() {
@@ -67,12 +60,6 @@ public class Button extends JButton implements Container {
 
 	public int getCornerRadius() {
 		return cornerRadius;
-	}
-
-	@Override
-	public void setForeground(Color fg) {
-		if (label != null) label.setForeground(fg);
-		super.setForeground(fg);
 	}
 
 	public void setStroke(Paint stroke) {
@@ -118,6 +105,13 @@ public class Button extends JButton implements Container {
 			gg.setPaint(PaintUtils.buildPaint(stroke, 0, 0, w, h));
 			gg.draw(rect);
 		}
+
+		updateLabel();
+
+		Insets m = getMargin();
+		gg.translate(m.left, m.top);
+		label.setSize(w - m.left - m.right, h - m.top - m.bottom);
+		label.paint(gg);
 
 		gg.dispose();
 	}
