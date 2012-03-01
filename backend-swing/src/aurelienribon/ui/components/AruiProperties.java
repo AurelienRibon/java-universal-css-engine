@@ -10,7 +10,7 @@ import java.awt.Paint;
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
-public class AruiProperties {
+public interface AruiProperties {
 	public static final Property foregroundMouseOver = new SingleParamProperty("-arui-foreground-mouseover", Color.class, "color");
 	public static final Property foregroundMouseDown = new SingleParamProperty("-arui-foreground-mousedown", Color.class, "color");
 	public static final Property foregroundSelected = new SingleParamProperty("-arui-foreground-selected", Color.class, "color");
