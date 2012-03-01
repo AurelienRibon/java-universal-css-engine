@@ -15,32 +15,21 @@ import javax.swing.*;
 /**
  * Custom button, highly customizable. Supports a stroke (can be any
  * {@link Paint} object), a stroke thickness, a fill {@link Paint} object, and
- * a corner radius. The stroke and fill attributes can be customized for
- * mouseDown and mouseOver events.
+ * a corner radius.
  *
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
 public class Button extends JButton implements Container {
-	private Color foregroundMouseDown = Color.RED;
-	private Color foregroundMouseOver = Color.RED;
 	private Paint stroke = Color.RED;
-	private Paint strokeMouseDown = Color.RED;
-	private Paint strokeMouseOver = Color.RED;
 	private Paint fill = Color.RED;
-	private Paint fillMouseDown = Color.RED;
-	private Paint fillMouseOver = Color.RED;
 	private int strokeThickness = 0;
 	private int cornerRadius = 0;
 
 	private final JLabel label = new JLabel();
-	private boolean isMouseDown = false;
-	private boolean isMouseOver = false;
 
 	public Button() {
 		setLayout(new BorderLayout());
 		add(label, BorderLayout.CENTER);
-
-		addMouseListener(mouseAdapter);
 		setOpaque(false);
 	}
 
@@ -51,57 +40,25 @@ public class Button extends JButton implements Container {
 
 	@Override
 	public void revalidate() {
-		if (label == null) {super.revalidate(); return;}
-
-		label.setFont(getFont());
-		label.setText(getText());
-		label.setIcon(getIcon());
-		label.setHorizontalAlignment(getHorizontalAlignment());
-		label.setVerticalAlignment(getVerticalAlignment());
-		label.setHorizontalTextPosition(getHorizontalTextPosition());
-		label.setVerticalTextPosition(getVerticalTextPosition());
-
-		if (isMouseDown && isMouseOver) {
-			label.setForeground(foregroundMouseDown);
-		} else if (isMouseOver || (isMouseDown && !isMouseOver)) {
-			label.setForeground(foregroundMouseOver);
-		} else {
-			label.setForeground(getForeground());
+		if (label != null) {
+			label.setFont(getFont());
+			label.setText(getText());
+			label.setIcon(getIcon());
+			label.setHorizontalAlignment(getHorizontalAlignment());
+			label.setVerticalAlignment(getVerticalAlignment());
+			label.setHorizontalTextPosition(getHorizontalTextPosition());
+			label.setVerticalTextPosition(getVerticalTextPosition());
 		}
 
 		super.revalidate();
-	}
-
-	public Color getForegroundMouseDown() {
-		return foregroundMouseDown;
-	}
-
-	public Color getForegroundMouseOver() {
-		return foregroundMouseOver;
 	}
 
 	public Paint getStroke() {
 		return stroke;
 	}
 
-	public Paint getStrokeMouseDown() {
-		return strokeMouseDown;
-	}
-
-	public Paint getStrokeMouseOver() {
-		return strokeMouseOver;
-	}
-
 	public Paint getFill() {
 		return fill;
-	}
-
-	public Paint getFillMouseDown() {
-		return fillMouseDown;
-	}
-
-	public Paint getFillMouseOver() {
-		return fillMouseOver;
 	}
 
 	public int getStrokeThickness() {
@@ -112,44 +69,30 @@ public class Button extends JButton implements Container {
 		return cornerRadius;
 	}
 
-	public void setForegroundMouseDown(Color foregroundMouseDown) {
-		this.foregroundMouseDown = foregroundMouseDown;
-	}
-
-	public void setForegroundMouseOver(Color foregroundMouseOver) {
-		this.foregroundMouseOver = foregroundMouseOver;
+	@Override
+	public void setForeground(Color fg) {
+		if (label != null) label.setForeground(fg);
+		super.setForeground(fg);
 	}
 
 	public void setStroke(Paint stroke) {
 		this.stroke = stroke;
-	}
-
-	public void setStrokeMouseDown(Paint strokeMouseDown) {
-		this.strokeMouseDown = strokeMouseDown;
-	}
-
-	public void setStrokeMouseOver(Paint strokeMouseOver) {
-		this.strokeMouseOver = strokeMouseOver;
+		repaint();
 	}
 
 	public void setFill(Paint fill) {
 		this.fill = fill;
-	}
-
-	public void setFillMouseDown(Paint fillMouseDown) {
-		this.fillMouseDown = fillMouseDown;
-	}
-
-	public void setFillMouseOver(Paint fillMouseOver) {
-		this.fillMouseOver = fillMouseOver;
+		repaint();
 	}
 
 	public void setStrokeThickness(int strokeThickness) {
 		this.strokeThickness = strokeThickness;
+		repaint();
 	}
 
 	public void setCornerRadius(int cornerRadius) {
 		this.cornerRadius = cornerRadius;
+		repaint();
 	}
 
 	@Override
@@ -168,111 +111,30 @@ public class Button extends JButton implements Container {
 			: new Rectangle2D.Double(innerGap, innerGap, innerW, innerH);
 
 		gg.setStroke(new BasicStroke(strokeThickness));
+		gg.setPaint(PaintUtils.buildPaint(fill, innerGap, innerGap, innerW, innerH));
+		gg.fill(rect);
 
-		if (isMouseDown && isMouseOver) {
-			gg.setPaint(PaintUtils.buildPaint(fillMouseDown, innerGap, innerGap, innerW, innerH));
-			gg.fill(rect);
-			if (strokeThickness > 0) {
-				gg.setPaint(PaintUtils.buildPaint(strokeMouseDown, 0, 0, w, h));
-				gg.draw(rect);
-			}
-
-		} else if (isMouseOver || (isMouseDown && !isMouseOver)) {
-			gg.setPaint(PaintUtils.buildPaint(fillMouseOver, innerGap, innerGap, innerW, innerH));
-			gg.fill(rect);
-			if (strokeThickness > 0) {
-				gg.setPaint(PaintUtils.buildPaint(strokeMouseOver, 0, 0, w, h));
-				gg.draw(rect);
-			}
-
-		} else {
-			gg.setPaint(PaintUtils.buildPaint(fill, innerGap, innerGap, innerW, innerH));
-			gg.fill(rect);
-			if (strokeThickness > 0) {
-				gg.setPaint(PaintUtils.buildPaint(stroke, 0, 0, w, h));
-				gg.draw(rect);
-			}
+		if (strokeThickness > 0) {
+			gg.setPaint(PaintUtils.buildPaint(stroke, 0, 0, w, h));
+			gg.draw(rect);
 		}
 
 		gg.dispose();
 	}
 
-	private final MouseAdapter mouseAdapter = new MouseAdapter() {
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			isMouseOver = true;
-			revalidate();
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			isMouseOver = false;
-			revalidate();
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			if (SwingUtilities.isLeftMouseButton(e)) {
-				isMouseDown = true;
-				revalidate();
-			}
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			if (SwingUtilities.isLeftMouseButton(e)) {
-				isMouseDown = false;
-				revalidate();
-			}
-		}
-	};
-
 	// -------------------------------------------------------------------------
 	// StyleProcessor
 	// -------------------------------------------------------------------------
 
-	public static class Processor implements DeclarationSetProcessor<Button> {
+	public static class Processor implements DeclarationSetProcessor<Button>, AruiProperties {
 		@Override
 		public void process(Button target, DeclarationSet ds) {
 			Property p;
 
-			p = AruiProperties.foregroundMouseDown;
-			if (ds.contains(p)) target.setForegroundMouseDown(ds.getValue(p, Color.class));
-			else target.setForegroundMouseDown(target.getForeground());
-
-			p = AruiProperties.foregroundMouseOver;
-			if (ds.contains(p)) target.setForegroundMouseOver(ds.getValue(p, Color.class));
-			else target.setForegroundMouseOver(target.getForeground());
-
-			p = AruiProperties.stroke;
-			if (ds.contains(p)) target.setStroke(ds.getValue(p, Paint.class));
-
-			p = AruiProperties.strokeMouseDown;
-			if (ds.contains(p)) target.setStrokeMouseDown(ds.getValue(p, Paint.class));
-			else target.setStrokeMouseDown(target.getStroke());
-
-			p = AruiProperties.strokeMouseOver;
-			if (ds.contains(p)) target.setStrokeMouseOver(ds.getValue(p, Paint.class));
-			else target.setStrokeMouseOver(target.getStroke());
-
-			p = AruiProperties.fill;
-			if (ds.contains(p)) target.setFill(ds.getValue(p, Paint.class));
-
-			p = AruiProperties.fillMouseDown;
-			if (ds.contains(p)) target.setFillMouseDown(ds.getValue(p, Paint.class));
-			else target.setFillMouseDown(target.getStroke());
-
-			p = AruiProperties.fillMouseOver;
-			if (ds.contains(p)) target.setFillMouseOver(ds.getValue(p, Paint.class));
-			else target.setFillMouseOver(target.getStroke());
-
-			p = AruiProperties.corderRadius;
-			if (ds.contains(p)) target.setCornerRadius((int) ds.getValue(p, Integer.class));
-
-			p = AruiProperties.strokeThickness;
-			if (ds.contains(p)) target.setStrokeThickness((int) ds.getValue(p, Integer.class));
-
-			target.revalidate();
+			p = stroke; if (ds.contains(p)) target.setStroke(ds.getValue(p, Paint.class));
+			p = fill; if (ds.contains(p)) target.setFill(ds.getValue(p, Paint.class));
+			p = corderRadius; if (ds.contains(p)) target.setCornerRadius(ds.getValue(p, Integer.class));
+			p = strokeThickness; if (ds.contains(p)) target.setStrokeThickness(ds.getValue(p, Integer.class));
 		}
 	}
 }

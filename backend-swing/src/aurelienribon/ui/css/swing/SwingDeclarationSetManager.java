@@ -49,10 +49,10 @@ public class SwingDeclarationSetManager implements DeclarationSetManager<Compone
 			this.normalDS = normalDS;
 		}
 
-		@Override public void mouseEntered(MouseEvent e) {apply(); isOver = true;}
-		@Override public void mouseExited(MouseEvent e) {apply(); isOver = false;}
-		@Override public void mousePressed(MouseEvent e) {apply(); isPressed = true;}
-		@Override public void mouseReleased(MouseEvent e) {apply(); isPressed = false;}
+		@Override public void mouseEntered(MouseEvent e) {isOver = true; apply();}
+		@Override public void mouseExited(MouseEvent e) {isOver = false; apply();}
+		@Override public void mousePressed(MouseEvent e) {isPressed = true; apply();}
+		@Override public void mouseReleased(MouseEvent e) {isPressed = false; apply();}
 
 		private void apply() {
 			Style.apply(target, normalDS);

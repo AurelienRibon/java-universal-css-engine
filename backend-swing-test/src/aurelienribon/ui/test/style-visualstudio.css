@@ -8,16 +8,20 @@ aurelienribon-ui-components-Button {
 	-swing-verticalalignment: center;
 	-swing-margin: 3 5;
 	-swing-foreground: #000;
-	-arui-foreground-mouseover: #000;
-	-arui-foreground-mousedown: #000;
 	-arui-stroke: #898C95;
-	-arui-stroke-mouseover: #333;
-	-arui-stroke-mousedown: #1A1A1A;
 	-arui-fill: lineargradient(0, 0, 0, 1, 0.49, #E7E7E7, 0.5, #D1D1D1);
-	-arui-fill-mouseover: lineargradient(0, 0, 0, 1, 0.49, #DBF0FC, 0.5, #B0DFF8);
-	-arui-fill-mousedown: lineargradient(0, 0, 0, 1, 0.49, #F2F9FC, 0.5, #DCEEF7);
 	-arui-strokethickness: 1;
 	-arui-cornerradius: 10;
+}
+
+aurelienribon-ui-components-Button:hover {
+	-arui-stroke: #333;
+	-arui-fill: lineargradient(0, 0, 0, 1, 0.49, #DBF0FC, 0.5, #B0DFF8);
+}
+
+aurelienribon-ui-components-Button:active {
+	-arui-stroke: #1A1A1A;
+	-arui-fill: lineargradient(0, 0, 0, 1, 0.49, #F2F9FC, 0.5, #DCEEF7);
 }
 
 aurelienribon-ui-components-TabPanel {
