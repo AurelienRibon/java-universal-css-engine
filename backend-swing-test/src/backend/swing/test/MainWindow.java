@@ -46,6 +46,8 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel3.setText("jLabel3");
 
+        jPanel3.setEnabled(false);
+
         jLabel4.setText("jLabel4");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);

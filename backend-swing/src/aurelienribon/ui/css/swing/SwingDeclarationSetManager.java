@@ -37,9 +37,10 @@ public class SwingDeclarationSetManager implements DeclarationSetManager<Compone
 			if (!hoverDS.isEmpty() || !activeDS.isEmpty()) target.addMouseListener(tm.mouseListener);
 			if (!focusDS.isEmpty()) target.addFocusListener(tm.focusListener);
 			if (!disabledDS.isEmpty()) target.addPropertyChangeListener(tm.propChangeListener);
+			tm.apply();
+		} else {
+			Style.apply(target, normalDS);
 		}
-
-		Style.apply(target, normalDS);
 	}
 
 	private void clearListeners(Component target) {
@@ -83,7 +84,7 @@ public class SwingDeclarationSetManager implements DeclarationSetManager<Compone
 			this.isFocused = target.isFocusOwner();
 		}
 
-		private void apply() {
+		public void apply() {
 			Style.apply(target, normalDS);
 
 			if (target.isEnabled()) {

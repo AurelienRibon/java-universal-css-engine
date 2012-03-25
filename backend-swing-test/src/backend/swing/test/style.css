@@ -2,6 +2,10 @@
 	-swing-border: lineborder(#000, 1);
 }
 
+.panel:disabled {
+	-swing-background: #555;
+}
+
 #panel2 > .label {
 	-swing-foreground: #F00;
 }
