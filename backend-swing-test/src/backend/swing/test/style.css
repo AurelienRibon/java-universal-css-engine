@@ -2,6 +2,6 @@
 	-swing-border: lineborder(#000, 1);
 }
 
-#panel2 .label {
+#panel2 > .label {
 	-swing-foreground: #F00;
 }

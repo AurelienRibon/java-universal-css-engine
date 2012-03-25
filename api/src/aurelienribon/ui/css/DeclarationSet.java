@@ -202,13 +202,18 @@ public class DeclarationSet {
 	}
 
 	private boolean isStackValid(Selector selector, List<Selector.Atom> stack) {
+		int previousStackIdx = -1;
 		int stackIdx = -1;
 
 		for (int i=0; i<selector.getAtoms().size()-1; i++) {
-			Selector.Atom atom = selector.getAtoms().get(i);
-			stackIdx = getNextValidStackIdx(atom, stack, stackIdx+1);
+			Selector.Atom selectorAtom = selector.getAtoms().get(i);
+			stackIdx = getNextValidStackIdx(selectorAtom, stack, stackIdx+1);
 			if (stackIdx == -1) return false;
+			if (selectorAtom.isStrictNext() && (stackIdx - previousStackIdx) != 1) return false;
+			previousStackIdx = stackIdx;
 		}
+
+		if (selector.getLastAtom().isStrictNext() && (stack.size() - stackIdx) != 1) return false;
 
 		return true;
 	}

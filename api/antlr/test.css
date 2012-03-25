@@ -20,4 +20,5 @@ type, type, type {}
 type.class {}
 type#id {}
 type:pseudo {}
-type.class.class .class #id :pseudo{}
+type > type {}
+type#id.class .class > type#id #id :pseudo{}

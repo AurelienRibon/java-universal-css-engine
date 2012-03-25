@@ -100,7 +100,7 @@ selector_list
 	
 selector
 @after {selector($text);}
-	:	selector_atom+ selector_pseudo?
+	:	selector_atom ('>'? selector_atom)* selector_pseudo?
 	;
 	
 selector_atom

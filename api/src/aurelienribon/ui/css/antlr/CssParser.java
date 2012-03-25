@@ -1,4 +1,4 @@
-// $ANTLR 3.4 D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g 2012-03-25 17:15:04
+// $ANTLR 3.4 D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g 2012-03-25 19:32:26
 
 	package aurelienribon.ui.css.antlr;
 	
@@ -19,10 +19,11 @@ import java.util.HashMap;
 @SuppressWarnings({"all", "warnings", "unchecked"})
 public class CssParser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "COLON", "COMMA", "COMMENT", "DOT", "EQUAL", "FALSE", "HASH", "IDENT", "LBRACE", "LBRACKET", "LCURLY", "NAMECHAR", "NAMESTART", "NULL", "NUMBER", "RBRACE", "RBRACKET", "RCURLY", "SEMI", "STAR", "STRING", "TRUE", "WS"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "COLON", "COMMA", "COMMENT", "DOT", "EQUAL", "FALSE", "HASH", "IDENT", "LBRACE", "LBRACKET", "LCURLY", "NAMECHAR", "NAMESTART", "NULL", "NUMBER", "RBRACE", "RBRACKET", "RCURLY", "SEMI", "STAR", "STRING", "TRUE", "WS", "'>'"
     };
 
     public static final int EOF=-1;
+    public static final int T__27=27;
     public static final int COLON=4;
     public static final int COMMA=5;
     public static final int COMMENT=6;
@@ -311,33 +312,57 @@ public class CssParser extends Parser {
 
 
     // $ANTLR start "selector"
-    // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:101:1: selector : ( selector_atom )+ ( selector_pseudo )? ;
+    // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:101:1: selector : selector_atom ( ( '>' )? selector_atom )* ( selector_pseudo )? ;
     public final CssParser.selector_return selector() throws RecognitionException {
         CssParser.selector_return retval = new CssParser.selector_return();
         retval.start = input.LT(1);
 
 
         try {
-            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:103:2: ( ( selector_atom )+ ( selector_pseudo )? )
-            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:103:4: ( selector_atom )+ ( selector_pseudo )?
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:103:2: ( selector_atom ( ( '>' )? selector_atom )* ( selector_pseudo )? )
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:103:4: selector_atom ( ( '>' )? selector_atom )* ( selector_pseudo )?
             {
-            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:103:4: ( selector_atom )+
-            int cnt4=0;
-            loop4:
-            do {
-                int alt4=2;
-                int LA4_0 = input.LA(1);
+            pushFollow(FOLLOW_selector_atom_in_selector107);
+            selector_atom();
 
-                if ( (LA4_0==DOT||(LA4_0 >= HASH && LA4_0 <= IDENT)||LA4_0==STAR) ) {
-                    alt4=1;
+            state._fsp--;
+            if (state.failed) return retval;
+
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:103:18: ( ( '>' )? selector_atom )*
+            loop5:
+            do {
+                int alt5=2;
+                int LA5_0 = input.LA(1);
+
+                if ( (LA5_0==DOT||(LA5_0 >= HASH && LA5_0 <= IDENT)||LA5_0==STAR||LA5_0==27) ) {
+                    alt5=1;
                 }
 
 
-                switch (alt4) {
+                switch (alt5) {
             	case 1 :
-            	    // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:103:4: selector_atom
+            	    // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:103:19: ( '>' )? selector_atom
             	    {
-            	    pushFollow(FOLLOW_selector_atom_in_selector107);
+            	    // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:103:19: ( '>' )?
+            	    int alt4=2;
+            	    int LA4_0 = input.LA(1);
+
+            	    if ( (LA4_0==27) ) {
+            	        alt4=1;
+            	    }
+            	    switch (alt4) {
+            	        case 1 :
+            	            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:103:19: '>'
+            	            {
+            	            match(input,27,FOLLOW_27_in_selector110); if (state.failed) return retval;
+
+            	            }
+            	            break;
+
+            	    }
+
+
+            	    pushFollow(FOLLOW_selector_atom_in_selector113);
             	    selector_atom();
 
             	    state._fsp--;
@@ -347,28 +372,23 @@ public class CssParser extends Parser {
             	    break;
 
             	default :
-            	    if ( cnt4 >= 1 ) break loop4;
-            	    if (state.backtracking>0) {state.failed=true; return retval;}
-                        EarlyExitException eee =
-                            new EarlyExitException(4, input);
-                        throw eee;
+            	    break loop5;
                 }
-                cnt4++;
             } while (true);
 
 
-            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:103:19: ( selector_pseudo )?
-            int alt5=2;
-            int LA5_0 = input.LA(1);
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:103:40: ( selector_pseudo )?
+            int alt6=2;
+            int LA6_0 = input.LA(1);
 
-            if ( (LA5_0==COLON) ) {
-                alt5=1;
+            if ( (LA6_0==COLON) ) {
+                alt6=1;
             }
-            switch (alt5) {
+            switch (alt6) {
                 case 1 :
-                    // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:103:19: selector_pseudo
+                    // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:103:40: selector_pseudo
                     {
-                    pushFollow(FOLLOW_selector_pseudo_in_selector110);
+                    pushFollow(FOLLOW_selector_pseudo_in_selector117);
                     selector_pseudo();
 
                     state._fsp--;
@@ -406,24 +426,24 @@ public class CssParser extends Parser {
     public final void selector_atom() throws RecognitionException {
         try {
             // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:107:2: ( ( IDENT | STAR ) ( ( HASH | DOT )=> ( HASH | DOT IDENT ) )* | ( ( HASH | DOT )=> ( HASH | DOT IDENT ) )+ )
-            int alt10=2;
-            int LA10_0 = input.LA(1);
+            int alt11=2;
+            int LA11_0 = input.LA(1);
 
-            if ( (LA10_0==IDENT||LA10_0==STAR) ) {
-                alt10=1;
+            if ( (LA11_0==IDENT||LA11_0==STAR) ) {
+                alt11=1;
             }
-            else if ( (LA10_0==DOT||LA10_0==HASH) ) {
-                alt10=2;
+            else if ( (LA11_0==DOT||LA11_0==HASH) ) {
+                alt11=2;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return ;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 10, 0, input);
+                    new NoViableAltException("", 11, 0, input);
 
                 throw nvae;
 
             }
-            switch (alt10) {
+            switch (alt11) {
                 case 1 :
                     // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:107:4: ( IDENT | STAR ) ( ( HASH | DOT )=> ( HASH | DOT IDENT ) )*
                     {
@@ -440,28 +460,28 @@ public class CssParser extends Parser {
 
 
                     // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:107:19: ( ( HASH | DOT )=> ( HASH | DOT IDENT ) )*
-                    loop7:
+                    loop8:
                     do {
-                        int alt7=2;
-                        int LA7_0 = input.LA(1);
+                        int alt8=2;
+                        int LA8_0 = input.LA(1);
 
-                        if ( (LA7_0==HASH) ) {
-                            int LA7_2 = input.LA(2);
+                        if ( (LA8_0==HASH) ) {
+                            int LA8_2 = input.LA(2);
 
                             if ( (synpred1_Css()) ) {
-                                alt7=1;
+                                alt8=1;
                             }
 
 
                         }
-                        else if ( (LA7_0==DOT) ) {
-                            int LA7_3 = input.LA(2);
+                        else if ( (LA8_0==DOT) ) {
+                            int LA8_3 = input.LA(2);
 
-                            if ( (LA7_3==IDENT) ) {
-                                int LA7_5 = input.LA(3);
+                            if ( (LA8_3==IDENT) ) {
+                                int LA8_5 = input.LA(3);
 
                                 if ( (synpred1_Css()) ) {
-                                    alt7=1;
+                                    alt8=1;
                                 }
 
 
@@ -471,42 +491,42 @@ public class CssParser extends Parser {
                         }
 
 
-                        switch (alt7) {
+                        switch (alt8) {
                     	case 1 :
                     	    // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:107:20: ( HASH | DOT )=> ( HASH | DOT IDENT )
                     	    {
                     	    // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:107:35: ( HASH | DOT IDENT )
-                    	    int alt6=2;
-                    	    int LA6_0 = input.LA(1);
+                    	    int alt7=2;
+                    	    int LA7_0 = input.LA(1);
 
-                    	    if ( (LA6_0==HASH) ) {
-                    	        alt6=1;
+                    	    if ( (LA7_0==HASH) ) {
+                    	        alt7=1;
                     	    }
-                    	    else if ( (LA6_0==DOT) ) {
-                    	        alt6=2;
+                    	    else if ( (LA7_0==DOT) ) {
+                    	        alt7=2;
                     	    }
                     	    else {
                     	        if (state.backtracking>0) {state.failed=true; return ;}
                     	        NoViableAltException nvae =
-                    	            new NoViableAltException("", 6, 0, input);
+                    	            new NoViableAltException("", 7, 0, input);
 
                     	        throw nvae;
 
                     	    }
-                    	    switch (alt6) {
+                    	    switch (alt7) {
                     	        case 1 :
                     	            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:107:36: HASH
                     	            {
-                    	            match(input,HASH,FOLLOW_HASH_in_selector_atom142); if (state.failed) return ;
+                    	            match(input,HASH,FOLLOW_HASH_in_selector_atom149); if (state.failed) return ;
 
                     	            }
                     	            break;
                     	        case 2 :
                     	            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:107:43: DOT IDENT
                     	            {
-                    	            match(input,DOT,FOLLOW_DOT_in_selector_atom146); if (state.failed) return ;
+                    	            match(input,DOT,FOLLOW_DOT_in_selector_atom153); if (state.failed) return ;
 
-                    	            match(input,IDENT,FOLLOW_IDENT_in_selector_atom148); if (state.failed) return ;
+                    	            match(input,IDENT,FOLLOW_IDENT_in_selector_atom155); if (state.failed) return ;
 
                     	            }
                     	            break;
@@ -518,7 +538,7 @@ public class CssParser extends Parser {
                     	    break;
 
                     	default :
-                    	    break loop7;
+                    	    break loop8;
                         }
                     } while (true);
 
@@ -529,68 +549,68 @@ public class CssParser extends Parser {
                     // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:108:4: ( ( HASH | DOT )=> ( HASH | DOT IDENT ) )+
                     {
                     // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:108:4: ( ( HASH | DOT )=> ( HASH | DOT IDENT ) )+
-                    int cnt9=0;
-                    loop9:
+                    int cnt10=0;
+                    loop10:
                     do {
-                        int alt9=2;
-                        int LA9_0 = input.LA(1);
+                        int alt10=2;
+                        int LA10_0 = input.LA(1);
 
-                        if ( (LA9_0==HASH) ) {
-                            int LA9_2 = input.LA(2);
+                        if ( (LA10_0==HASH) ) {
+                            int LA10_2 = input.LA(2);
 
                             if ( (synpred2_Css()) ) {
-                                alt9=1;
+                                alt10=1;
                             }
 
 
                         }
-                        else if ( (LA9_0==DOT) ) {
-                            int LA9_3 = input.LA(2);
+                        else if ( (LA10_0==DOT) ) {
+                            int LA10_3 = input.LA(2);
 
                             if ( (synpred2_Css()) ) {
-                                alt9=1;
+                                alt10=1;
                             }
 
 
                         }
 
 
-                        switch (alt9) {
+                        switch (alt10) {
                     	case 1 :
                     	    // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:108:5: ( HASH | DOT )=> ( HASH | DOT IDENT )
                     	    {
                     	    // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:108:20: ( HASH | DOT IDENT )
-                    	    int alt8=2;
-                    	    int LA8_0 = input.LA(1);
+                    	    int alt9=2;
+                    	    int LA9_0 = input.LA(1);
 
-                    	    if ( (LA8_0==HASH) ) {
-                    	        alt8=1;
+                    	    if ( (LA9_0==HASH) ) {
+                    	        alt9=1;
                     	    }
-                    	    else if ( (LA8_0==DOT) ) {
-                    	        alt8=2;
+                    	    else if ( (LA9_0==DOT) ) {
+                    	        alt9=2;
                     	    }
                     	    else {
                     	        if (state.backtracking>0) {state.failed=true; return ;}
                     	        NoViableAltException nvae =
-                    	            new NoViableAltException("", 8, 0, input);
+                    	            new NoViableAltException("", 9, 0, input);
 
                     	        throw nvae;
 
                     	    }
-                    	    switch (alt8) {
+                    	    switch (alt9) {
                     	        case 1 :
                     	            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:108:21: HASH
                     	            {
-                    	            match(input,HASH,FOLLOW_HASH_in_selector_atom167); if (state.failed) return ;
+                    	            match(input,HASH,FOLLOW_HASH_in_selector_atom174); if (state.failed) return ;
 
                     	            }
                     	            break;
                     	        case 2 :
                     	            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:108:28: DOT IDENT
                     	            {
-                    	            match(input,DOT,FOLLOW_DOT_in_selector_atom171); if (state.failed) return ;
+                    	            match(input,DOT,FOLLOW_DOT_in_selector_atom178); if (state.failed) return ;
 
-                    	            match(input,IDENT,FOLLOW_IDENT_in_selector_atom173); if (state.failed) return ;
+                    	            match(input,IDENT,FOLLOW_IDENT_in_selector_atom180); if (state.failed) return ;
 
                     	            }
                     	            break;
@@ -602,13 +622,13 @@ public class CssParser extends Parser {
                     	    break;
 
                     	default :
-                    	    if ( cnt9 >= 1 ) break loop9;
+                    	    if ( cnt10 >= 1 ) break loop10;
                     	    if (state.backtracking>0) {state.failed=true; return ;}
                                 EarlyExitException eee =
-                                    new EarlyExitException(9, input);
+                                    new EarlyExitException(10, input);
                                 throw eee;
                         }
-                        cnt9++;
+                        cnt10++;
                     } while (true);
 
 
@@ -638,9 +658,9 @@ public class CssParser extends Parser {
             // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:112:2: ( COLON IDENT )
             // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:112:4: COLON IDENT
             {
-            match(input,COLON,FOLLOW_COLON_in_selector_pseudo188); if (state.failed) return ;
+            match(input,COLON,FOLLOW_COLON_in_selector_pseudo195); if (state.failed) return ;
 
-            match(input,IDENT,FOLLOW_IDENT_in_selector_pseudo190); if (state.failed) return ;
+            match(input,IDENT,FOLLOW_IDENT_in_selector_pseudo197); if (state.failed) return ;
 
             }
 
@@ -666,15 +686,15 @@ public class CssParser extends Parser {
             // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:116:2: ( LBRACKET IDENT EQUAL STRING RBRACKET )
             // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:116:4: LBRACKET IDENT EQUAL STRING RBRACKET
             {
-            match(input,LBRACKET,FOLLOW_LBRACKET_in_selector_attr202); if (state.failed) return ;
+            match(input,LBRACKET,FOLLOW_LBRACKET_in_selector_attr209); if (state.failed) return ;
 
-            match(input,IDENT,FOLLOW_IDENT_in_selector_attr204); if (state.failed) return ;
+            match(input,IDENT,FOLLOW_IDENT_in_selector_attr211); if (state.failed) return ;
 
-            match(input,EQUAL,FOLLOW_EQUAL_in_selector_attr206); if (state.failed) return ;
+            match(input,EQUAL,FOLLOW_EQUAL_in_selector_attr213); if (state.failed) return ;
 
-            match(input,STRING,FOLLOW_STRING_in_selector_attr208); if (state.failed) return ;
+            match(input,STRING,FOLLOW_STRING_in_selector_attr215); if (state.failed) return ;
 
-            match(input,RBRACKET,FOLLOW_RBRACKET_in_selector_attr210); if (state.failed) return ;
+            match(input,RBRACKET,FOLLOW_RBRACKET_in_selector_attr217); if (state.failed) return ;
 
             }
 
@@ -704,29 +724,29 @@ public class CssParser extends Parser {
             // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:120:2: ( IDENT COLON ( param )+ SEMI )
             // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:120:4: IDENT COLON ( param )+ SEMI
             {
-            IDENT1=(Token)match(input,IDENT,FOLLOW_IDENT_in_declaration222); if (state.failed) return ;
+            IDENT1=(Token)match(input,IDENT,FOLLOW_IDENT_in_declaration229); if (state.failed) return ;
 
             if ( state.backtracking==0 ) {beginDecl((IDENT1!=null?IDENT1.getText():null));}
 
-            match(input,COLON,FOLLOW_COLON_in_declaration236); if (state.failed) return ;
+            match(input,COLON,FOLLOW_COLON_in_declaration243); if (state.failed) return ;
 
             // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:121:9: ( param )+
-            int cnt11=0;
-            loop11:
+            int cnt12=0;
+            loop12:
             do {
-                int alt11=2;
-                int LA11_0 = input.LA(1);
+                int alt12=2;
+                int LA12_0 = input.LA(1);
 
-                if ( ((LA11_0 >= FALSE && LA11_0 <= IDENT)||(LA11_0 >= NULL && LA11_0 <= NUMBER)||(LA11_0 >= STRING && LA11_0 <= TRUE)) ) {
-                    alt11=1;
+                if ( ((LA12_0 >= FALSE && LA12_0 <= IDENT)||(LA12_0 >= NULL && LA12_0 <= NUMBER)||(LA12_0 >= STRING && LA12_0 <= TRUE)) ) {
+                    alt12=1;
                 }
 
 
-                switch (alt11) {
+                switch (alt12) {
             	case 1 :
             	    // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:121:10: param
             	    {
-            	    pushFollow(FOLLOW_param_in_declaration239);
+            	    pushFollow(FOLLOW_param_in_declaration246);
             	    param2=param();
 
             	    state._fsp--;
@@ -738,17 +758,17 @@ public class CssParser extends Parser {
             	    break;
 
             	default :
-            	    if ( cnt11 >= 1 ) break loop11;
+            	    if ( cnt12 >= 1 ) break loop12;
             	    if (state.backtracking>0) {state.failed=true; return ;}
                         EarlyExitException eee =
-                            new EarlyExitException(11, input);
+                            new EarlyExitException(12, input);
                         throw eee;
                 }
-                cnt11++;
+                cnt12++;
             } while (true);
 
 
-            match(input,SEMI,FOLLOW_SEMI_in_declaration249); if (state.failed) return ;
+            match(input,SEMI,FOLLOW_SEMI_in_declaration256); if (state.failed) return ;
 
             }
 
@@ -780,43 +800,43 @@ public class CssParser extends Parser {
 
         try {
             // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:126:2: ( function | param_atom )
-            int alt12=2;
-            int LA12_0 = input.LA(1);
+            int alt13=2;
+            int LA13_0 = input.LA(1);
 
-            if ( (LA12_0==IDENT) ) {
-                int LA12_1 = input.LA(2);
+            if ( (LA13_0==IDENT) ) {
+                int LA13_1 = input.LA(2);
 
-                if ( (LA12_1==LBRACE) ) {
-                    alt12=1;
+                if ( (LA13_1==LBRACE) ) {
+                    alt13=1;
                 }
-                else if ( (LA12_1==COMMA||(LA12_1 >= FALSE && LA12_1 <= IDENT)||(LA12_1 >= NULL && LA12_1 <= RBRACE)||LA12_1==SEMI||(LA12_1 >= STRING && LA12_1 <= TRUE)) ) {
-                    alt12=2;
+                else if ( (LA13_1==COMMA||(LA13_1 >= FALSE && LA13_1 <= IDENT)||(LA13_1 >= NULL && LA13_1 <= RBRACE)||LA13_1==SEMI||(LA13_1 >= STRING && LA13_1 <= TRUE)) ) {
+                    alt13=2;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return o;}
                     NoViableAltException nvae =
-                        new NoViableAltException("", 12, 1, input);
+                        new NoViableAltException("", 13, 1, input);
 
                     throw nvae;
 
                 }
             }
-            else if ( ((LA12_0 >= FALSE && LA12_0 <= HASH)||(LA12_0 >= NULL && LA12_0 <= NUMBER)||(LA12_0 >= STRING && LA12_0 <= TRUE)) ) {
-                alt12=2;
+            else if ( ((LA13_0 >= FALSE && LA13_0 <= HASH)||(LA13_0 >= NULL && LA13_0 <= NUMBER)||(LA13_0 >= STRING && LA13_0 <= TRUE)) ) {
+                alt13=2;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return o;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 12, 0, input);
+                    new NoViableAltException("", 13, 0, input);
 
                 throw nvae;
 
             }
-            switch (alt12) {
+            switch (alt13) {
                 case 1 :
                     // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:126:4: function
                     {
-                    pushFollow(FOLLOW_function_in_param265);
+                    pushFollow(FOLLOW_function_in_param272);
                     function3=function();
 
                     state._fsp--;
@@ -829,7 +849,7 @@ public class CssParser extends Parser {
                 case 2 :
                     // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:127:4: param_atom
                     {
-                    pushFollow(FOLLOW_param_atom_in_param275);
+                    pushFollow(FOLLOW_param_atom_in_param282);
                     param_atom4=param_atom();
 
                     state._fsp--;
@@ -872,24 +892,24 @@ public class CssParser extends Parser {
             // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:131:2: ( IDENT LBRACE (p1= param ( COMMA p2= param )* )? RBRACE )
             // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:131:4: IDENT LBRACE (p1= param ( COMMA p2= param )* )? RBRACE
             {
-            IDENT5=(Token)match(input,IDENT,FOLLOW_IDENT_in_function295); if (state.failed) return f;
+            IDENT5=(Token)match(input,IDENT,FOLLOW_IDENT_in_function302); if (state.failed) return f;
 
-            match(input,LBRACE,FOLLOW_LBRACE_in_function297); if (state.failed) return f;
+            match(input,LBRACE,FOLLOW_LBRACE_in_function304); if (state.failed) return f;
 
             if ( state.backtracking==0 ) {f = new Function(); f.name = (IDENT5!=null?IDENT5.getText():null);}
 
             // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:132:3: (p1= param ( COMMA p2= param )* )?
-            int alt14=2;
-            int LA14_0 = input.LA(1);
+            int alt15=2;
+            int LA15_0 = input.LA(1);
 
-            if ( ((LA14_0 >= FALSE && LA14_0 <= IDENT)||(LA14_0 >= NULL && LA14_0 <= NUMBER)||(LA14_0 >= STRING && LA14_0 <= TRUE)) ) {
-                alt14=1;
+            if ( ((LA15_0 >= FALSE && LA15_0 <= IDENT)||(LA15_0 >= NULL && LA15_0 <= NUMBER)||(LA15_0 >= STRING && LA15_0 <= TRUE)) ) {
+                alt15=1;
             }
-            switch (alt14) {
+            switch (alt15) {
                 case 1 :
                     // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:132:4: p1= param ( COMMA p2= param )*
                     {
-                    pushFollow(FOLLOW_param_in_function310);
+                    pushFollow(FOLLOW_param_in_function317);
                     p1=param();
 
                     state._fsp--;
@@ -898,23 +918,23 @@ public class CssParser extends Parser {
                     if ( state.backtracking==0 ) {f.params.add(p1);}
 
                     // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:133:3: ( COMMA p2= param )*
-                    loop13:
+                    loop14:
                     do {
-                        int alt13=2;
-                        int LA13_0 = input.LA(1);
+                        int alt14=2;
+                        int LA14_0 = input.LA(1);
 
-                        if ( (LA13_0==COMMA) ) {
-                            alt13=1;
+                        if ( (LA14_0==COMMA) ) {
+                            alt14=1;
                         }
 
 
-                        switch (alt13) {
+                        switch (alt14) {
                     	case 1 :
                     	    // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:133:4: COMMA p2= param
                     	    {
-                    	    match(input,COMMA,FOLLOW_COMMA_in_function324); if (state.failed) return f;
+                    	    match(input,COMMA,FOLLOW_COMMA_in_function331); if (state.failed) return f;
 
-                    	    pushFollow(FOLLOW_param_in_function328);
+                    	    pushFollow(FOLLOW_param_in_function335);
                     	    p2=param();
 
                     	    state._fsp--;
@@ -926,7 +946,7 @@ public class CssParser extends Parser {
                     	    break;
 
                     	default :
-                    	    break loop13;
+                    	    break loop14;
                         }
                     } while (true);
 
@@ -937,7 +957,7 @@ public class CssParser extends Parser {
             }
 
 
-            match(input,RBRACE,FOLLOW_RBRACE_in_function340); if (state.failed) return f;
+            match(input,RBRACE,FOLLOW_RBRACE_in_function347); if (state.failed) return f;
 
             }
 
@@ -969,57 +989,57 @@ public class CssParser extends Parser {
 
         try {
             // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:138:2: ( NUMBER | TRUE | FALSE | NULL | STRING | IDENT | HASH )
-            int alt15=7;
+            int alt16=7;
             switch ( input.LA(1) ) {
             case NUMBER:
                 {
-                alt15=1;
+                alt16=1;
                 }
                 break;
             case TRUE:
                 {
-                alt15=2;
+                alt16=2;
                 }
                 break;
             case FALSE:
                 {
-                alt15=3;
+                alt16=3;
                 }
                 break;
             case NULL:
                 {
-                alt15=4;
+                alt16=4;
                 }
                 break;
             case STRING:
                 {
-                alt15=5;
+                alt16=5;
                 }
                 break;
             case IDENT:
                 {
-                alt15=6;
+                alt16=6;
                 }
                 break;
             case HASH:
                 {
-                alt15=7;
+                alt16=7;
                 }
                 break;
             default:
                 if (state.backtracking>0) {state.failed=true; return o;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 15, 0, input);
+                    new NoViableAltException("", 16, 0, input);
 
                 throw nvae;
 
             }
 
-            switch (alt15) {
+            switch (alt16) {
                 case 1 :
                     // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:138:4: NUMBER
                     {
-                    NUMBER6=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_param_atom356); if (state.failed) return o;
+                    NUMBER6=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_param_atom363); if (state.failed) return o;
 
                     if ( state.backtracking==0 ) {o = number((NUMBER6!=null?NUMBER6.getText():null));}
 
@@ -1028,7 +1048,7 @@ public class CssParser extends Parser {
                 case 2 :
                     // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:139:4: TRUE
                     {
-                    match(input,TRUE,FOLLOW_TRUE_in_param_atom364); if (state.failed) return o;
+                    match(input,TRUE,FOLLOW_TRUE_in_param_atom371); if (state.failed) return o;
 
                     if ( state.backtracking==0 ) {o = Boolean.TRUE;}
 
@@ -1037,7 +1057,7 @@ public class CssParser extends Parser {
                 case 3 :
                     // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:140:4: FALSE
                     {
-                    match(input,FALSE,FOLLOW_FALSE_in_param_atom374); if (state.failed) return o;
+                    match(input,FALSE,FOLLOW_FALSE_in_param_atom381); if (state.failed) return o;
 
                     if ( state.backtracking==0 ) {o = Boolean.FALSE;}
 
@@ -1046,7 +1066,7 @@ public class CssParser extends Parser {
                 case 4 :
                     // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:141:4: NULL
                     {
-                    match(input,NULL,FOLLOW_NULL_in_param_atom383); if (state.failed) return o;
+                    match(input,NULL,FOLLOW_NULL_in_param_atom390); if (state.failed) return o;
 
                     if ( state.backtracking==0 ) {o = null;}
 
@@ -1055,7 +1075,7 @@ public class CssParser extends Parser {
                 case 5 :
                     // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:142:4: STRING
                     {
-                    STRING7=(Token)match(input,STRING,FOLLOW_STRING_in_param_atom393); if (state.failed) return o;
+                    STRING7=(Token)match(input,STRING,FOLLOW_STRING_in_param_atom400); if (state.failed) return o;
 
                     if ( state.backtracking==0 ) {o = (STRING7!=null?STRING7.getText():null).substring(1, (STRING7!=null?STRING7.getText():null).length()-1);}
 
@@ -1064,7 +1084,7 @@ public class CssParser extends Parser {
                 case 6 :
                     // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:143:4: IDENT
                     {
-                    IDENT8=(Token)match(input,IDENT,FOLLOW_IDENT_in_param_atom401); if (state.failed) return o;
+                    IDENT8=(Token)match(input,IDENT,FOLLOW_IDENT_in_param_atom408); if (state.failed) return o;
 
                     if ( state.backtracking==0 ) {o = (IDENT8!=null?IDENT8.getText():null);}
 
@@ -1073,7 +1093,7 @@ public class CssParser extends Parser {
                 case 7 :
                     // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:144:4: HASH
                     {
-                    HASH9=(Token)match(input,HASH,FOLLOW_HASH_in_param_atom410); if (state.failed) return o;
+                    HASH9=(Token)match(input,HASH,FOLLOW_HASH_in_param_atom417); if (state.failed) return o;
 
                     if ( state.backtracking==0 ) {o = new Color(); ((Color)o).str = (HASH9!=null?HASH9.getText():null);}
 
@@ -1180,40 +1200,42 @@ public class CssParser extends Parser {
     public static final BitSet FOLLOW_selector_in_selector_list83 = new BitSet(new long[]{0x0000000000000022L});
     public static final BitSet FOLLOW_COMMA_in_selector_list86 = new BitSet(new long[]{0x0000000000800C80L});
     public static final BitSet FOLLOW_selector_in_selector_list88 = new BitSet(new long[]{0x0000000000000022L});
-    public static final BitSet FOLLOW_selector_atom_in_selector107 = new BitSet(new long[]{0x0000000000800C92L});
-    public static final BitSet FOLLOW_selector_pseudo_in_selector110 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_set_in_selector_atom123 = new BitSet(new long[]{0x0000000000000482L});
-    public static final BitSet FOLLOW_HASH_in_selector_atom142 = new BitSet(new long[]{0x0000000000000482L});
-    public static final BitSet FOLLOW_DOT_in_selector_atom146 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_IDENT_in_selector_atom148 = new BitSet(new long[]{0x0000000000000482L});
-    public static final BitSet FOLLOW_HASH_in_selector_atom167 = new BitSet(new long[]{0x0000000000000482L});
-    public static final BitSet FOLLOW_DOT_in_selector_atom171 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_IDENT_in_selector_atom173 = new BitSet(new long[]{0x0000000000000482L});
-    public static final BitSet FOLLOW_COLON_in_selector_pseudo188 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_IDENT_in_selector_pseudo190 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_LBRACKET_in_selector_attr202 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_IDENT_in_selector_attr204 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_EQUAL_in_selector_attr206 = new BitSet(new long[]{0x0000000001000000L});
-    public static final BitSet FOLLOW_STRING_in_selector_attr208 = new BitSet(new long[]{0x0000000000100000L});
-    public static final BitSet FOLLOW_RBRACKET_in_selector_attr210 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IDENT_in_declaration222 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_COLON_in_declaration236 = new BitSet(new long[]{0x0000000003060E00L});
-    public static final BitSet FOLLOW_param_in_declaration239 = new BitSet(new long[]{0x0000000003460E00L});
-    public static final BitSet FOLLOW_SEMI_in_declaration249 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_function_in_param265 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_param_atom_in_param275 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IDENT_in_function295 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_LBRACE_in_function297 = new BitSet(new long[]{0x00000000030E0E00L});
-    public static final BitSet FOLLOW_param_in_function310 = new BitSet(new long[]{0x0000000000080020L});
-    public static final BitSet FOLLOW_COMMA_in_function324 = new BitSet(new long[]{0x0000000003060E00L});
-    public static final BitSet FOLLOW_param_in_function328 = new BitSet(new long[]{0x0000000000080020L});
-    public static final BitSet FOLLOW_RBRACE_in_function340 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_NUMBER_in_param_atom356 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_TRUE_in_param_atom364 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_FALSE_in_param_atom374 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_NULL_in_param_atom383 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_STRING_in_param_atom393 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IDENT_in_param_atom401 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_HASH_in_param_atom410 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_selector_atom_in_selector107 = new BitSet(new long[]{0x0000000008800C92L});
+    public static final BitSet FOLLOW_27_in_selector110 = new BitSet(new long[]{0x0000000000800C80L});
+    public static final BitSet FOLLOW_selector_atom_in_selector113 = new BitSet(new long[]{0x0000000008800C92L});
+    public static final BitSet FOLLOW_selector_pseudo_in_selector117 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_set_in_selector_atom130 = new BitSet(new long[]{0x0000000000000482L});
+    public static final BitSet FOLLOW_HASH_in_selector_atom149 = new BitSet(new long[]{0x0000000000000482L});
+    public static final BitSet FOLLOW_DOT_in_selector_atom153 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_IDENT_in_selector_atom155 = new BitSet(new long[]{0x0000000000000482L});
+    public static final BitSet FOLLOW_HASH_in_selector_atom174 = new BitSet(new long[]{0x0000000000000482L});
+    public static final BitSet FOLLOW_DOT_in_selector_atom178 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_IDENT_in_selector_atom180 = new BitSet(new long[]{0x0000000000000482L});
+    public static final BitSet FOLLOW_COLON_in_selector_pseudo195 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_IDENT_in_selector_pseudo197 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_LBRACKET_in_selector_attr209 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_IDENT_in_selector_attr211 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_EQUAL_in_selector_attr213 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_STRING_in_selector_attr215 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_RBRACKET_in_selector_attr217 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDENT_in_declaration229 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_COLON_in_declaration243 = new BitSet(new long[]{0x0000000003060E00L});
+    public static final BitSet FOLLOW_param_in_declaration246 = new BitSet(new long[]{0x0000000003460E00L});
+    public static final BitSet FOLLOW_SEMI_in_declaration256 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_function_in_param272 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_param_atom_in_param282 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDENT_in_function302 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_LBRACE_in_function304 = new BitSet(new long[]{0x00000000030E0E00L});
+    public static final BitSet FOLLOW_param_in_function317 = new BitSet(new long[]{0x0000000000080020L});
+    public static final BitSet FOLLOW_COMMA_in_function331 = new BitSet(new long[]{0x0000000003060E00L});
+    public static final BitSet FOLLOW_param_in_function335 = new BitSet(new long[]{0x0000000000080020L});
+    public static final BitSet FOLLOW_RBRACE_in_function347 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_NUMBER_in_param_atom363 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_TRUE_in_param_atom371 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_FALSE_in_param_atom381 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_NULL_in_param_atom390 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_STRING_in_param_atom400 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDENT_in_param_atom408 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_HASH_in_param_atom417 = new BitSet(new long[]{0x0000000000000002L});
 
 }

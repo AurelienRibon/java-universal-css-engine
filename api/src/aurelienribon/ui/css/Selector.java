@@ -14,6 +14,7 @@ public class Selector {
 	public Selector(String rawSelector) {
 		rawSelector = rawSelector.trim();
 		rawSelector = rawSelector.replaceAll("\\s+", " ");
+		rawSelector = rawSelector.replaceAll("\\s*>\\s*", " >");
 
 		int pcIdx = rawSelector.indexOf(":");
 		if (pcIdx > -1) {
@@ -53,9 +54,14 @@ public class Selector {
 	public static class Atom {
 		private final Class<?> type;
 		private final List<String> classes;
+		private final boolean strictNext;
 
 		public Atom(String str) {
+			strictNext = str.startsWith(">");
+
+			str = str.replaceAll(">", "");
 			str = str.replaceAll("#", ".");
+
 			String[] parts = str.startsWith(".") ? str.substring(1).split("\\.") : str.split("\\.");
 
 			if (parts[0].equals("*")) {
@@ -74,6 +80,7 @@ public class Selector {
 		public Atom(Class<?> type, List<String> classes) {
 			this.type = type;
 			this.classes = classes == null ? new ArrayList<String> () : classes;
+			this.strictNext = false;
 		}
 
 		public Class<?> getType() {
@@ -82,6 +89,10 @@ public class Selector {
 
 		public List<String> getClasses() {
 			return classes;
+		}
+
+		public boolean isStrictNext() {
+			return strictNext;
 		}
 
 		@Override

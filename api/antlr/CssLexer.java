@@ -1,4 +1,4 @@
-// $ANTLR 3.4 D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g 2012-03-25 17:15:04
+// $ANTLR 3.4 D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g 2012-03-25 19:32:26
 
 	package aurelienribon.ui.css.antlr;
 
@@ -11,6 +11,7 @@ import java.util.ArrayList;
 @SuppressWarnings({"all", "warnings", "unchecked"})
 public class CssLexer extends Lexer {
     public static final int EOF=-1;
+    public static final int T__27=27;
     public static final int COLON=4;
     public static final int COMMA=5;
     public static final int COMMENT=6;
@@ -55,6 +56,27 @@ public class CssLexer extends Lexer {
         super(input,state);
     }
     public String getGrammarFileName() { return "D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g"; }
+
+    // $ANTLR start "T__27"
+    public final void mT__27() throws RecognitionException {
+        try {
+            int _type = T__27;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:12:7: ( '>' )
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:12:9: '>'
+            {
+            match('>'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__27"
 
     // $ANTLR start "NAMESTART"
     public final void mNAMESTART() throws RecognitionException {
@@ -931,190 +953,195 @@ public class CssLexer extends Lexer {
     // $ANTLR end "COMMENT"
 
     public void mTokens() throws RecognitionException {
-        // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:8: ( HASH | DOT | STAR | COLON | SEMI | COMMA | LBRACKET | RBRACKET | EQUAL | LBRACE | RBRACE | LCURLY | RCURLY | TRUE | FALSE | NULL | STRING | IDENT | NUMBER | WS | COMMENT )
-        int alt12=21;
+        // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:8: ( T__27 | HASH | DOT | STAR | COLON | SEMI | COMMA | LBRACKET | RBRACKET | EQUAL | LBRACE | RBRACE | LCURLY | RCURLY | TRUE | FALSE | NULL | STRING | IDENT | NUMBER | WS | COMMENT )
+        int alt12=22;
         switch ( input.LA(1) ) {
-        case '#':
+        case '>':
             {
             alt12=1;
             }
             break;
+        case '#':
+            {
+            alt12=2;
+            }
+            break;
         case '.':
             {
-            int LA12_2 = input.LA(2);
+            int LA12_3 = input.LA(2);
 
-            if ( ((LA12_2 >= '0' && LA12_2 <= '9')) ) {
-                alt12=19;
+            if ( ((LA12_3 >= '0' && LA12_3 <= '9')) ) {
+                alt12=20;
             }
             else {
-                alt12=2;
+                alt12=3;
             }
             }
             break;
         case '*':
             {
-            alt12=3;
+            alt12=4;
             }
             break;
         case ':':
             {
-            alt12=4;
+            alt12=5;
             }
             break;
         case ';':
             {
-            alt12=5;
+            alt12=6;
             }
             break;
         case ',':
             {
-            alt12=6;
+            alt12=7;
             }
             break;
         case '[':
             {
-            alt12=7;
+            alt12=8;
             }
             break;
         case ']':
             {
-            alt12=8;
+            alt12=9;
             }
             break;
         case '=':
             {
-            alt12=9;
+            alt12=10;
             }
             break;
         case '(':
             {
-            alt12=10;
+            alt12=11;
             }
             break;
         case ')':
             {
-            alt12=11;
+            alt12=12;
             }
             break;
         case '{':
             {
-            alt12=12;
+            alt12=13;
             }
             break;
         case '}':
             {
-            alt12=13;
+            alt12=14;
             }
             break;
         case 't':
             {
-            int LA12_14 = input.LA(2);
+            int LA12_15 = input.LA(2);
 
-            if ( (LA12_14=='r') ) {
-                int LA12_23 = input.LA(3);
+            if ( (LA12_15=='r') ) {
+                int LA12_24 = input.LA(3);
 
-                if ( (LA12_23=='u') ) {
-                    int LA12_26 = input.LA(4);
+                if ( (LA12_24=='u') ) {
+                    int LA12_27 = input.LA(4);
 
-                    if ( (LA12_26=='e') ) {
-                        int LA12_29 = input.LA(5);
+                    if ( (LA12_27=='e') ) {
+                        int LA12_30 = input.LA(5);
 
-                        if ( (LA12_29=='-'||(LA12_29 >= '0' && LA12_29 <= '9')||(LA12_29 >= 'A' && LA12_29 <= 'Z')||LA12_29=='_'||(LA12_29 >= 'a' && LA12_29 <= 'z')) ) {
-                            alt12=18;
+                        if ( (LA12_30=='-'||(LA12_30 >= '0' && LA12_30 <= '9')||(LA12_30 >= 'A' && LA12_30 <= 'Z')||LA12_30=='_'||(LA12_30 >= 'a' && LA12_30 <= 'z')) ) {
+                            alt12=19;
                         }
                         else {
-                            alt12=14;
+                            alt12=15;
                         }
                     }
                     else {
-                        alt12=18;
+                        alt12=19;
                     }
                 }
                 else {
-                    alt12=18;
+                    alt12=19;
                 }
             }
             else {
-                alt12=18;
+                alt12=19;
             }
             }
             break;
         case 'f':
             {
-            int LA12_15 = input.LA(2);
-
-            if ( (LA12_15=='a') ) {
-                int LA12_24 = input.LA(3);
-
-                if ( (LA12_24=='l') ) {
-                    int LA12_27 = input.LA(4);
-
-                    if ( (LA12_27=='s') ) {
-                        int LA12_30 = input.LA(5);
-
-                        if ( (LA12_30=='e') ) {
-                            int LA12_33 = input.LA(6);
-
-                            if ( (LA12_33=='-'||(LA12_33 >= '0' && LA12_33 <= '9')||(LA12_33 >= 'A' && LA12_33 <= 'Z')||LA12_33=='_'||(LA12_33 >= 'a' && LA12_33 <= 'z')) ) {
-                                alt12=18;
-                            }
-                            else {
-                                alt12=15;
-                            }
-                        }
-                        else {
-                            alt12=18;
-                        }
-                    }
-                    else {
-                        alt12=18;
-                    }
-                }
-                else {
-                    alt12=18;
-                }
-            }
-            else {
-                alt12=18;
-            }
-            }
-            break;
-        case 'n':
-            {
             int LA12_16 = input.LA(2);
 
-            if ( (LA12_16=='u') ) {
+            if ( (LA12_16=='a') ) {
                 int LA12_25 = input.LA(3);
 
                 if ( (LA12_25=='l') ) {
                     int LA12_28 = input.LA(4);
 
-                    if ( (LA12_28=='l') ) {
+                    if ( (LA12_28=='s') ) {
                         int LA12_31 = input.LA(5);
 
-                        if ( (LA12_31=='-'||(LA12_31 >= '0' && LA12_31 <= '9')||(LA12_31 >= 'A' && LA12_31 <= 'Z')||LA12_31=='_'||(LA12_31 >= 'a' && LA12_31 <= 'z')) ) {
-                            alt12=18;
+                        if ( (LA12_31=='e') ) {
+                            int LA12_34 = input.LA(6);
+
+                            if ( (LA12_34=='-'||(LA12_34 >= '0' && LA12_34 <= '9')||(LA12_34 >= 'A' && LA12_34 <= 'Z')||LA12_34=='_'||(LA12_34 >= 'a' && LA12_34 <= 'z')) ) {
+                                alt12=19;
+                            }
+                            else {
+                                alt12=16;
+                            }
                         }
                         else {
-                            alt12=16;
+                            alt12=19;
                         }
                     }
                     else {
-                        alt12=18;
+                        alt12=19;
                     }
                 }
                 else {
-                    alt12=18;
+                    alt12=19;
                 }
             }
             else {
-                alt12=18;
+                alt12=19;
+            }
+            }
+            break;
+        case 'n':
+            {
+            int LA12_17 = input.LA(2);
+
+            if ( (LA12_17=='u') ) {
+                int LA12_26 = input.LA(3);
+
+                if ( (LA12_26=='l') ) {
+                    int LA12_29 = input.LA(4);
+
+                    if ( (LA12_29=='l') ) {
+                        int LA12_32 = input.LA(5);
+
+                        if ( (LA12_32=='-'||(LA12_32 >= '0' && LA12_32 <= '9')||(LA12_32 >= 'A' && LA12_32 <= 'Z')||LA12_32=='_'||(LA12_32 >= 'a' && LA12_32 <= 'z')) ) {
+                            alt12=19;
+                        }
+                        else {
+                            alt12=17;
+                        }
+                    }
+                    else {
+                        alt12=19;
+                    }
+                }
+                else {
+                    alt12=19;
+                }
+            }
+            else {
+                alt12=19;
             }
             }
             break;
         case '\"':
             {
-            alt12=17;
+            alt12=18;
             }
             break;
         case '-':
@@ -1169,7 +1196,7 @@ public class CssLexer extends Lexer {
         case 'y':
         case 'z':
             {
-            alt12=18;
+            alt12=19;
             }
             break;
         case '0':
@@ -1183,7 +1210,7 @@ public class CssLexer extends Lexer {
         case '8':
         case '9':
             {
-            alt12=19;
+            alt12=20;
             }
             break;
         case '\t':
@@ -1191,12 +1218,12 @@ public class CssLexer extends Lexer {
         case '\r':
         case ' ':
             {
-            alt12=20;
+            alt12=21;
             }
             break;
         case '/':
             {
-            alt12=21;
+            alt12=22;
             }
             break;
         default:
@@ -1209,167 +1236,175 @@ public class CssLexer extends Lexer {
 
         switch (alt12) {
             case 1 :
-                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:10: HASH
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:10: T__27
+                {
+                mT__27(); 
+
+
+                }
+                break;
+            case 2 :
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:16: HASH
                 {
                 mHASH(); 
 
 
                 }
                 break;
-            case 2 :
-                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:15: DOT
+            case 3 :
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:21: DOT
                 {
                 mDOT(); 
 
 
                 }
                 break;
-            case 3 :
-                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:19: STAR
+            case 4 :
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:25: STAR
                 {
                 mSTAR(); 
 
 
                 }
                 break;
-            case 4 :
-                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:24: COLON
+            case 5 :
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:30: COLON
                 {
                 mCOLON(); 
 
 
                 }
                 break;
-            case 5 :
-                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:30: SEMI
+            case 6 :
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:36: SEMI
                 {
                 mSEMI(); 
 
 
                 }
                 break;
-            case 6 :
-                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:35: COMMA
+            case 7 :
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:41: COMMA
                 {
                 mCOMMA(); 
 
 
                 }
                 break;
-            case 7 :
-                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:41: LBRACKET
+            case 8 :
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:47: LBRACKET
                 {
                 mLBRACKET(); 
 
 
                 }
                 break;
-            case 8 :
-                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:50: RBRACKET
+            case 9 :
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:56: RBRACKET
                 {
                 mRBRACKET(); 
 
 
                 }
                 break;
-            case 9 :
-                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:59: EQUAL
+            case 10 :
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:65: EQUAL
                 {
                 mEQUAL(); 
 
 
                 }
                 break;
-            case 10 :
-                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:65: LBRACE
+            case 11 :
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:71: LBRACE
                 {
                 mLBRACE(); 
 
 
                 }
                 break;
-            case 11 :
-                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:72: RBRACE
+            case 12 :
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:78: RBRACE
                 {
                 mRBRACE(); 
 
 
                 }
                 break;
-            case 12 :
-                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:79: LCURLY
+            case 13 :
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:85: LCURLY
                 {
                 mLCURLY(); 
 
 
                 }
                 break;
-            case 13 :
-                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:86: RCURLY
+            case 14 :
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:92: RCURLY
                 {
                 mRCURLY(); 
 
 
                 }
                 break;
-            case 14 :
-                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:93: TRUE
+            case 15 :
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:99: TRUE
                 {
                 mTRUE(); 
 
 
                 }
                 break;
-            case 15 :
-                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:98: FALSE
+            case 16 :
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:104: FALSE
                 {
                 mFALSE(); 
 
 
                 }
                 break;
-            case 16 :
-                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:104: NULL
+            case 17 :
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:110: NULL
                 {
                 mNULL(); 
 
 
                 }
                 break;
-            case 17 :
-                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:109: STRING
+            case 18 :
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:115: STRING
                 {
                 mSTRING(); 
 
 
                 }
                 break;
-            case 18 :
-                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:116: IDENT
+            case 19 :
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:122: IDENT
                 {
                 mIDENT(); 
 
 
                 }
                 break;
-            case 19 :
-                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:122: NUMBER
+            case 20 :
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:128: NUMBER
                 {
                 mNUMBER(); 
 
 
                 }
                 break;
-            case 20 :
-                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:129: WS
+            case 21 :
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:135: WS
                 {
                 mWS(); 
 
 
                 }
                 break;
-            case 21 :
-                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:132: COMMENT
+            case 22 :
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:138: COMMENT
                 {
                 mCOMMENT(); 
 
