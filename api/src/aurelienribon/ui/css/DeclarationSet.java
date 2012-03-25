@@ -1,6 +1,5 @@
 package aurelienribon.ui.css;
 
-import aurelienribon.ui.css.primitives.FunctionProperty;
 import java.util.*;
 
 /**
@@ -22,7 +21,6 @@ import java.util.*;
  */
 public class DeclarationSet {
 	private final Style style;
-	private final PseudoClass pseudoClass;
 	private final List<Property> properties;
 	private final Map<Property, List<Object>> propertiesValues;
 
@@ -30,13 +28,11 @@ public class DeclarationSet {
 	 * Constructor used to group every declarations associated to a rule in a
 	 * CSS stylesheet.
 	 * @param style The style applied to the target.
-	 * @param pseudoClass The pseudo class of the parent rule.
 	 * @param properties A list of properties.
 	 * @param propertiesValues A map of values associated to the properties.
 	 */
-	public DeclarationSet(Style style, PseudoClass pseudoClass, List<Property> properties, Map<Property, List<Object>> propertiesValues) {
+	public DeclarationSet(Style style, List<Property> properties, Map<Property, List<Object>> propertiesValues) {
 		this.style = style;
-		this.pseudoClass = pseudoClass;
 		this.properties = Collections.unmodifiableList(new ArrayList<Property>(properties));
 		this.propertiesValues = Collections.unmodifiableMap(new HashMap<Property, List<Object>>(propertiesValues));
 	}
@@ -52,7 +48,7 @@ public class DeclarationSet {
 	 * @param pseudoClass Only the rules with the given pseudo class will be
 	 * scanned.
 	 */
-	public DeclarationSet(Style style, Object target, List<String> stack, PseudoClass pseudoClass) {
+	public DeclarationSet(Style style, Object target, List<Selector.Atom> stack, PseudoClass pseudoClass) {
 		List<Property> tProperties = new ArrayList<Property>();
 		Map<Property, List<Object>> tPropertiesValues = new HashMap<Property, List<Object>>();
 
@@ -60,9 +56,9 @@ public class DeclarationSet {
 			assert rule != null;
 			assert rule.getDeclarations() != null;
 
-			if (rule.getPseudoClass() != pseudoClass) continue;
-			if (!isLastSelectorValid(rule.getLastSelector(), target)) continue;
-			if (!isStackValid(rule.getSelectors(), stack)) continue;
+			if (rule.getSelector().getPseudoClass() != pseudoClass) continue;
+			if (!isTargetValid(rule.getSelector(), target)) continue;
+			if (!isStackValid(rule.getSelector(), stack)) continue;
 
 			tProperties.addAll(rule.getDeclarations().getProperties());
 
@@ -76,7 +72,6 @@ public class DeclarationSet {
 		}
 
 		this.style = style;
-		this.pseudoClass = pseudoClass;
 		this.properties = Collections.unmodifiableList(tProperties);
 		this.propertiesValues = Collections.unmodifiableMap(tPropertiesValues);
 	}
@@ -99,7 +94,6 @@ public class DeclarationSet {
 		}
 
 		this.style = ds.getStyle();
-		this.pseudoClass = ds.getPseudoClass();
 		this.properties = Collections.unmodifiableList(new ArrayList<Property>(tProperties));
 		this.propertiesValues = Collections.unmodifiableMap(new HashMap<Property, List<Object>>(tPropertiesValues));
 	}
@@ -113,13 +107,6 @@ public class DeclarationSet {
 	 */
 	public Style getStyle() {
 		return style;
-	}
-
-	/**
-	 * Gets the CSS pseudo class associated to these declarations.
-	 */
-	public PseudoClass getPseudoClass() {
-		return pseudoClass;
 	}
 
 	/**
@@ -203,36 +190,44 @@ public class DeclarationSet {
 	// Helpers
 	// -------------------------------------------------------------------------
 
-	private boolean isLastSelectorValid(String selector, Object target) {
-		if (selector.startsWith(".") || selector.startsWith("#")) {
-			List<String> classNames = Style.getRegisteredTargetClassNames(target);
-			return classNames != null && classNames.contains(selector);
+	private boolean isTargetValid(Selector selector, Object target) {
+		if (!selector.getLastAtom().getType().isAssignableFrom(target.getClass())) return false;
 
-		} else {
-			try {
-				Class clazz = Class.forName(selector.replaceAll("-", "."));
-				return clazz.isInstance(target);
-
-			} catch (ClassNotFoundException ex) {
-				throw new RuntimeException(ex);
-			}
+		List<String> targetClasses = Style.getRegisteredTargetClassNames(target);
+		for (String clazz : selector.getLastAtom().getClasses()) {
+			if (!targetClasses.contains(clazz)) return false;
 		}
+
+		return true;
 	}
 
-	private boolean isStackValid(List<String> selectors, List<String> stack) {
-		if (selectors.size() == 1) return true;
+	private boolean isStackValid(Selector selector, List<Selector.Atom> stack) {
+		int stackIdx = -1;
 
-		for (int i=0; i<selectors.size()-1; i++) {
-			int idx = stack.indexOf(selectors.get(i));
-			if (idx == -1) return false;
+		for (int i=0; i<selector.getAtoms().size()-1; i++) {
+			Selector.Atom atom = selector.getAtoms().get(i);
+			stackIdx = getNextValidStackIdx(atom, stack, stackIdx+1);
+			if (stackIdx == -1) return false;
 		}
 
-		for (int i=1; i<selectors.size()-1; i++) {
-			int idx1 = stack.indexOf(selectors.get(i-1));
-			int idx2 = stack.lastIndexOf(selectors.get(i));
-			if (idx1 >= idx2) return false;
+		return true;
+	}
+
+	private int getNextValidStackIdx(Selector.Atom selectorAtom, List<Selector.Atom> stack, int from) {
+		for (int i=from; i<stack.size(); i++) {
+			Selector.Atom stackAtom = stack.get(i);
+
+			if (!selectorAtom.getType().isAssignableFrom(stackAtom.getType())) continue;
+			if (!includes(stackAtom.getClasses(), selectorAtom.getClasses())) continue;
+
+			return i;
 		}
 
+		return -1;
+	}
+
+	private boolean includes(List<String> strs1, List<String> strs2) {
+		for (String str : strs2) if (!strs1.contains(str)) return false;
 		return true;
 	}
 }

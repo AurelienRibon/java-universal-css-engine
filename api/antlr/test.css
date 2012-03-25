@@ -1,23 +1,23 @@
 /**
- * Test file for the css grammar
+ * Comment comment comment comment
+ * Comment comment comment comment
  */
  
-typeRule {
+type {
 	test: 1;
-	test: "abc def";
 	test: 0.25;
 	test: abc;
-	test: #000000;
-	test: "Tahoma" italic 12;
-	test: func(1, 2, 3);
-	test: func(1, func(), func(1));
+	test: "abc def";
+	test: #012 #abc #ABCDEF;
+	test: func(1, 2, func(3));
 }
 
-.classRule {
-}
+type type type {}
+type, type, type {}
 
-.rule1 .rule2 .rule3 {
-}
-
-.rule1, .rule2, .rule3 {
-}
+.class {}
+#id {}
+type.class {}
+type#id {}
+type:pseudo {}
+type.class.class .class #id :pseudo{}

@@ -47,7 +47,7 @@ public class BevelBorderFunction implements Function {
 		int type;
 		if (typeStr.equals("lowered")) type = BevelBorder.LOWERED;
 		else if (typeStr.equals("raised")) type = BevelBorder.RAISED;
-		else throw StyleException.forFunctionParamKeyword(this, 0, "lowered", "raised");
+		else throw StyleException.forKeyword(typeStr, "lowered", "raised");
 
 		if (params.size() == 1) {
 			return BorderFactory.createBevelBorder(type);

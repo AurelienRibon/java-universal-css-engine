@@ -1,9 +1,5 @@
 package aurelienribon.ui.css;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 /**
  * A rule is defined by a selector, and a group of declarations associated to
  * it, like (in common CSS for HTML):
@@ -37,26 +33,16 @@ import java.util.List;
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
 public class Rule {
-	private final List<String> selectors;
-	private final PseudoClass pseudoClass;
+	private final Selector selector;
 	private final DeclarationSet declarations;
 
-	public Rule(List<String> selectors, PseudoClass pseudoClass, DeclarationSet declarations) {
-		this.selectors = Collections.unmodifiableList(selectors);
-		this.pseudoClass = pseudoClass;
+	public Rule(Selector selector, DeclarationSet declarations) {
+		this.selector = selector;
 		this.declarations = declarations;
 	}
 
-	public List<String> getSelectors() {
-		return selectors;
-	}
-
-	public String getLastSelector() {
-		return selectors.get(selectors.size()-1);
-	}
-
-	public PseudoClass getPseudoClass() {
-		return pseudoClass;
+	public Selector getSelector() {
+		return selector;
 	}
 
 	public DeclarationSet getDeclarations() {

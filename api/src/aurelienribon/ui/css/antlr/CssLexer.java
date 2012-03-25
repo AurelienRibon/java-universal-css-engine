@@ -1,4 +1,4 @@
-// $ANTLR 3.4 C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g 2012-02-29 15:32:59
+// $ANTLR 3.4 D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g 2012-03-25 17:15:04
 
 	package aurelienribon.ui.css.antlr;
 
@@ -11,29 +11,29 @@ import java.util.ArrayList;
 @SuppressWarnings({"all", "warnings", "unchecked"})
 public class CssLexer extends Lexer {
     public static final int EOF=-1;
-    public static final int T__14=14;
-    public static final int T__15=15;
-    public static final int T__16=16;
-    public static final int T__17=17;
-    public static final int T__18=18;
-    public static final int T__19=19;
-    public static final int T__20=20;
-    public static final int T__21=21;
-    public static final int T__22=22;
-    public static final int T__23=23;
-    public static final int T__24=24;
-    public static final int T__25=25;
-    public static final int T__26=26;
-    public static final int BOOLEAN=4;
-    public static final int COLOR=5;
+    public static final int COLON=4;
+    public static final int COMMA=5;
     public static final int COMMENT=6;
-    public static final int FLOAT=7;
-    public static final int HEX=8;
-    public static final int ID=9;
-    public static final int INT=10;
-    public static final int NULL=11;
-    public static final int STRING=12;
-    public static final int WS=13;
+    public static final int DOT=7;
+    public static final int EQUAL=8;
+    public static final int FALSE=9;
+    public static final int HASH=10;
+    public static final int IDENT=11;
+    public static final int LBRACE=12;
+    public static final int LBRACKET=13;
+    public static final int LCURLY=14;
+    public static final int NAMECHAR=15;
+    public static final int NAMESTART=16;
+    public static final int NULL=17;
+    public static final int NUMBER=18;
+    public static final int RBRACE=19;
+    public static final int RBRACKET=20;
+    public static final int RCURLY=21;
+    public static final int SEMI=22;
+    public static final int STAR=23;
+    public static final int STRING=24;
+    public static final int TRUE=25;
+    public static final int WS=26;
 
     	@Override
     	public void emitErrorMessage(String msg) {
@@ -54,59 +54,108 @@ public class CssLexer extends Lexer {
     public CssLexer(CharStream input, RecognizerSharedState state) {
         super(input,state);
     }
-    public String getGrammarFileName() { return "C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g"; }
+    public String getGrammarFileName() { return "D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g"; }
 
-    // $ANTLR start "T__14"
-    public final void mT__14() throws RecognitionException {
+    // $ANTLR start "NAMESTART"
+    public final void mNAMESTART() throws RecognitionException {
         try {
-            int _type = T__14;
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:152:2: ( '_' | 'a' .. 'z' | 'A' .. 'Z' )
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:
+            {
+            if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
+                input.consume();
+            }
+            else {
+                MismatchedSetException mse = new MismatchedSetException(null,input);
+                recover(mse);
+                throw mse;
+            }
+
+
+            }
+
+
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "NAMESTART"
+
+    // $ANTLR start "NAMECHAR"
+    public final void mNAMECHAR() throws RecognitionException {
+        try {
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:158:2: ( '_' | 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '-' )
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:
+            {
+            if ( input.LA(1)=='-'||(input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
+                input.consume();
+            }
+            else {
+                MismatchedSetException mse = new MismatchedSetException(null,input);
+                recover(mse);
+                throw mse;
+            }
+
+
+            }
+
+
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "NAMECHAR"
+
+    // $ANTLR start "HASH"
+    public final void mHASH() throws RecognitionException {
+        try {
+            int _type = HASH;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:12:7: ( '#' )
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:12:9: '#'
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:165:6: ( '#' ( NAMECHAR )+ )
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:165:8: '#' ( NAMECHAR )+
             {
             match('#'); 
 
-            }
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:165:12: ( NAMECHAR )+
+            int cnt1=0;
+            loop1:
+            do {
+                int alt1=2;
+                int LA1_0 = input.LA(1);
 
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__14"
+                if ( (LA1_0=='-'||(LA1_0 >= '0' && LA1_0 <= '9')||(LA1_0 >= 'A' && LA1_0 <= 'Z')||LA1_0=='_'||(LA1_0 >= 'a' && LA1_0 <= 'z')) ) {
+                    alt1=1;
+                }
 
-    // $ANTLR start "T__15"
-    public final void mT__15() throws RecognitionException {
-        try {
-            int _type = T__15;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:13:7: ( '(' )
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:13:9: '('
-            {
-            match('('); 
 
-            }
+                switch (alt1) {
+            	case 1 :
+            	    // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:
+            	    {
+            	    if ( input.LA(1)=='-'||(input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
+            	        input.consume();
+            	    }
+            	    else {
+            	        MismatchedSetException mse = new MismatchedSetException(null,input);
+            	        recover(mse);
+            	        throw mse;
+            	    }
 
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__15"
 
-    // $ANTLR start "T__16"
-    public final void mT__16() throws RecognitionException {
-        try {
-            int _type = T__16;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:14:7: ( ')' )
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:14:9: ')'
-            {
-            match(')'); 
+            	    }
+            	    break;
+
+            	default :
+            	    if ( cnt1 >= 1 ) break loop1;
+                        EarlyExitException eee =
+                            new EarlyExitException(1, input);
+                        throw eee;
+                }
+                cnt1++;
+            } while (true);
+
 
             }
 
@@ -117,36 +166,15 @@ public class CssLexer extends Lexer {
         	// do for sure before leaving
         }
     }
-    // $ANTLR end "T__16"
+    // $ANTLR end "HASH"
 
-    // $ANTLR start "T__17"
-    public final void mT__17() throws RecognitionException {
+    // $ANTLR start "DOT"
+    public final void mDOT() throws RecognitionException {
         try {
-            int _type = T__17;
+            int _type = DOT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:15:7: ( ',' )
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:15:9: ','
-            {
-            match(','); 
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__17"
-
-    // $ANTLR start "T__18"
-    public final void mT__18() throws RecognitionException {
-        try {
-            int _type = T__18;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:16:7: ( '.' )
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:16:9: '.'
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:166:6: ( '.' )
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:166:8: '.'
             {
             match('.'); 
 
@@ -159,15 +187,36 @@ public class CssLexer extends Lexer {
         	// do for sure before leaving
         }
     }
-    // $ANTLR end "T__18"
+    // $ANTLR end "DOT"
 
-    // $ANTLR start "T__19"
-    public final void mT__19() throws RecognitionException {
+    // $ANTLR start "STAR"
+    public final void mSTAR() throws RecognitionException {
         try {
-            int _type = T__19;
+            int _type = STAR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:17:7: ( ':' )
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:17:9: ':'
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:167:6: ( '*' )
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:167:8: '*'
+            {
+            match('*'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "STAR"
+
+    // $ANTLR start "COLON"
+    public final void mCOLON() throws RecognitionException {
+        try {
+            int _type = COLON;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:168:7: ( ':' )
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:168:9: ':'
             {
             match(':'); 
 
@@ -180,15 +229,15 @@ public class CssLexer extends Lexer {
         	// do for sure before leaving
         }
     }
-    // $ANTLR end "T__19"
+    // $ANTLR end "COLON"
 
-    // $ANTLR start "T__20"
-    public final void mT__20() throws RecognitionException {
+    // $ANTLR start "SEMI"
+    public final void mSEMI() throws RecognitionException {
         try {
-            int _type = T__20;
+            int _type = SEMI;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:18:7: ( ';' )
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:18:9: ';'
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:169:6: ( ';' )
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:169:8: ';'
             {
             match(';'); 
 
@@ -201,19 +250,17 @@ public class CssLexer extends Lexer {
         	// do for sure before leaving
         }
     }
-    // $ANTLR end "T__20"
+    // $ANTLR end "SEMI"
 
-    // $ANTLR start "T__21"
-    public final void mT__21() throws RecognitionException {
+    // $ANTLR start "COMMA"
+    public final void mCOMMA() throws RecognitionException {
         try {
-            int _type = T__21;
+            int _type = COMMA;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:19:7: ( 'active' )
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:19:9: 'active'
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:170:7: ( ',' )
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:170:9: ','
             {
-            match("active"); 
-
-
+            match(','); 
 
             }
 
@@ -224,19 +271,17 @@ public class CssLexer extends Lexer {
         	// do for sure before leaving
         }
     }
-    // $ANTLR end "T__21"
+    // $ANTLR end "COMMA"
 
-    // $ANTLR start "T__22"
-    public final void mT__22() throws RecognitionException {
+    // $ANTLR start "LBRACKET"
+    public final void mLBRACKET() throws RecognitionException {
         try {
-            int _type = T__22;
+            int _type = LBRACKET;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:20:7: ( 'disabled' )
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:20:9: 'disabled'
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:171:9: ( '[' )
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:171:11: '['
             {
-            match("disabled"); 
-
-
+            match('['); 
 
             }
 
@@ -247,19 +292,17 @@ public class CssLexer extends Lexer {
         	// do for sure before leaving
         }
     }
-    // $ANTLR end "T__22"
+    // $ANTLR end "LBRACKET"
 
-    // $ANTLR start "T__23"
-    public final void mT__23() throws RecognitionException {
+    // $ANTLR start "RBRACKET"
+    public final void mRBRACKET() throws RecognitionException {
         try {
-            int _type = T__23;
+            int _type = RBRACKET;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:21:7: ( 'focus' )
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:21:9: 'focus'
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:172:9: ( ']' )
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:172:11: ']'
             {
-            match("focus"); 
-
-
+            match(']'); 
 
             }
 
@@ -270,19 +313,17 @@ public class CssLexer extends Lexer {
         	// do for sure before leaving
         }
     }
-    // $ANTLR end "T__23"
+    // $ANTLR end "RBRACKET"
 
-    // $ANTLR start "T__24"
-    public final void mT__24() throws RecognitionException {
+    // $ANTLR start "EQUAL"
+    public final void mEQUAL() throws RecognitionException {
         try {
-            int _type = T__24;
+            int _type = EQUAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:22:7: ( 'hover' )
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:22:9: 'hover'
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:173:7: ( '=' )
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:173:9: '='
             {
-            match("hover"); 
-
-
+            match('='); 
 
             }
 
@@ -293,15 +334,57 @@ public class CssLexer extends Lexer {
         	// do for sure before leaving
         }
     }
-    // $ANTLR end "T__24"
+    // $ANTLR end "EQUAL"
 
-    // $ANTLR start "T__25"
-    public final void mT__25() throws RecognitionException {
+    // $ANTLR start "LBRACE"
+    public final void mLBRACE() throws RecognitionException {
         try {
-            int _type = T__25;
+            int _type = LBRACE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:23:7: ( '{' )
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:23:9: '{'
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:174:8: ( '(' )
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:174:10: '('
+            {
+            match('('); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "LBRACE"
+
+    // $ANTLR start "RBRACE"
+    public final void mRBRACE() throws RecognitionException {
+        try {
+            int _type = RBRACE;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:175:8: ( ')' )
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:175:10: ')'
+            {
+            match(')'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "RBRACE"
+
+    // $ANTLR start "LCURLY"
+    public final void mLCURLY() throws RecognitionException {
+        try {
+            int _type = LCURLY;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:176:8: ( '{' )
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:176:10: '{'
             {
             match('{'); 
 
@@ -314,15 +397,15 @@ public class CssLexer extends Lexer {
         	// do for sure before leaving
         }
     }
-    // $ANTLR end "T__25"
+    // $ANTLR end "LCURLY"
 
-    // $ANTLR start "T__26"
-    public final void mT__26() throws RecognitionException {
+    // $ANTLR start "RCURLY"
+    public final void mRCURLY() throws RecognitionException {
         try {
-            int _type = T__26;
+            int _type = RCURLY;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:24:7: ( '}' )
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:24:9: '}'
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:177:8: ( '}' )
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:177:10: '}'
             {
             match('}'); 
 
@@ -335,186 +418,22 @@ public class CssLexer extends Lexer {
         	// do for sure before leaving
         }
     }
-    // $ANTLR end "T__26"
+    // $ANTLR end "RCURLY"
 
-    // $ANTLR start "COLOR"
-    public final void mCOLOR() throws RecognitionException {
+    // $ANTLR start "TRUE"
+    public final void mTRUE() throws RecognitionException {
         try {
-            int _type = COLOR;
+            int _type = TRUE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:144:2: ( '#' HEX HEX HEX HEX HEX HEX HEX HEX | '#' HEX HEX HEX HEX HEX HEX | '#' HEX HEX HEX HEX | '#' HEX HEX HEX )
-            int alt1=4;
-            int LA1_0 = input.LA(1);
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:178:6: ( 'true' )
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:178:8: 'true'
+            {
+            match("true"); 
 
-            if ( (LA1_0=='#') ) {
-                int LA1_1 = input.LA(2);
 
-                if ( ((LA1_1 >= '0' && LA1_1 <= '9')||(LA1_1 >= 'A' && LA1_1 <= 'F')||(LA1_1 >= 'a' && LA1_1 <= 'f')) ) {
-                    int LA1_2 = input.LA(3);
-
-                    if ( ((LA1_2 >= '0' && LA1_2 <= '9')||(LA1_2 >= 'A' && LA1_2 <= 'F')||(LA1_2 >= 'a' && LA1_2 <= 'f')) ) {
-                        int LA1_3 = input.LA(4);
-
-                        if ( ((LA1_3 >= '0' && LA1_3 <= '9')||(LA1_3 >= 'A' && LA1_3 <= 'F')||(LA1_3 >= 'a' && LA1_3 <= 'f')) ) {
-                            int LA1_4 = input.LA(5);
-
-                            if ( ((LA1_4 >= '0' && LA1_4 <= '9')||(LA1_4 >= 'A' && LA1_4 <= 'F')||(LA1_4 >= 'a' && LA1_4 <= 'f')) ) {
-                                int LA1_6 = input.LA(6);
-
-                                if ( ((LA1_6 >= '0' && LA1_6 <= '9')||(LA1_6 >= 'A' && LA1_6 <= 'F')||(LA1_6 >= 'a' && LA1_6 <= 'f')) ) {
-                                    int LA1_8 = input.LA(7);
-
-                                    if ( ((LA1_8 >= '0' && LA1_8 <= '9')||(LA1_8 >= 'A' && LA1_8 <= 'F')||(LA1_8 >= 'a' && LA1_8 <= 'f')) ) {
-                                        int LA1_9 = input.LA(8);
-
-                                        if ( ((LA1_9 >= '0' && LA1_9 <= '9')||(LA1_9 >= 'A' && LA1_9 <= 'F')||(LA1_9 >= 'a' && LA1_9 <= 'f')) ) {
-                                            alt1=1;
-                                        }
-                                        else {
-                                            alt1=2;
-                                        }
-                                    }
-                                    else {
-                                        NoViableAltException nvae =
-                                            new NoViableAltException("", 1, 8, input);
-
-                                        throw nvae;
-
-                                    }
-                                }
-                                else {
-                                    alt1=3;
-                                }
-                            }
-                            else {
-                                alt1=4;
-                            }
-                        }
-                        else {
-                            NoViableAltException nvae =
-                                new NoViableAltException("", 1, 3, input);
-
-                            throw nvae;
-
-                        }
-                    }
-                    else {
-                        NoViableAltException nvae =
-                            new NoViableAltException("", 1, 2, input);
-
-                        throw nvae;
-
-                    }
-                }
-                else {
-                    NoViableAltException nvae =
-                        new NoViableAltException("", 1, 1, input);
-
-                    throw nvae;
-
-                }
-            }
-            else {
-                NoViableAltException nvae =
-                    new NoViableAltException("", 1, 0, input);
-
-                throw nvae;
 
             }
-            switch (alt1) {
-                case 1 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:144:4: '#' HEX HEX HEX HEX HEX HEX HEX HEX
-                    {
-                    match('#'); 
 
-                    mHEX(); 
-
-
-                    mHEX(); 
-
-
-                    mHEX(); 
-
-
-                    mHEX(); 
-
-
-                    mHEX(); 
-
-
-                    mHEX(); 
-
-
-                    mHEX(); 
-
-
-                    mHEX(); 
-
-
-                    }
-                    break;
-                case 2 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:145:4: '#' HEX HEX HEX HEX HEX HEX
-                    {
-                    match('#'); 
-
-                    mHEX(); 
-
-
-                    mHEX(); 
-
-
-                    mHEX(); 
-
-
-                    mHEX(); 
-
-
-                    mHEX(); 
-
-
-                    mHEX(); 
-
-
-                    }
-                    break;
-                case 3 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:146:4: '#' HEX HEX HEX HEX
-                    {
-                    match('#'); 
-
-                    mHEX(); 
-
-
-                    mHEX(); 
-
-
-                    mHEX(); 
-
-
-                    mHEX(); 
-
-
-                    }
-                    break;
-                case 4 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:147:4: '#' HEX HEX HEX
-                    {
-                    match('#'); 
-
-                    mHEX(); 
-
-
-                    mHEX(); 
-
-
-                    mHEX(); 
-
-
-                    }
-                    break;
-
-            }
             state.type = _type;
             state.channel = _channel;
         }
@@ -522,187 +441,22 @@ public class CssLexer extends Lexer {
         	// do for sure before leaving
         }
     }
-    // $ANTLR end "COLOR"
+    // $ANTLR end "TRUE"
 
-    // $ANTLR start "INT"
-    public final void mINT() throws RecognitionException {
+    // $ANTLR start "FALSE"
+    public final void mFALSE() throws RecognitionException {
         try {
-            int _type = INT;
+            int _type = FALSE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:150:5: ( ( '0' .. '9' )+ | '0x' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+ | '0X' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+ )
-            int alt5=3;
-            int LA5_0 = input.LA(1);
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:179:7: ( 'false' )
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:179:9: 'false'
+            {
+            match("false"); 
 
-            if ( (LA5_0=='0') ) {
-                switch ( input.LA(2) ) {
-                case 'x':
-                    {
-                    alt5=2;
-                    }
-                    break;
-                case 'X':
-                    {
-                    alt5=3;
-                    }
-                    break;
-                default:
-                    alt5=1;
-                }
+
 
             }
-            else if ( ((LA5_0 >= '1' && LA5_0 <= '9')) ) {
-                alt5=1;
-            }
-            else {
-                NoViableAltException nvae =
-                    new NoViableAltException("", 5, 0, input);
 
-                throw nvae;
-
-            }
-            switch (alt5) {
-                case 1 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:150:7: ( '0' .. '9' )+
-                    {
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:150:7: ( '0' .. '9' )+
-                    int cnt2=0;
-                    loop2:
-                    do {
-                        int alt2=2;
-                        int LA2_0 = input.LA(1);
-
-                        if ( ((LA2_0 >= '0' && LA2_0 <= '9')) ) {
-                            alt2=1;
-                        }
-
-
-                        switch (alt2) {
-                    	case 1 :
-                    	    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:
-                    	    {
-                    	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
-                    	        input.consume();
-                    	    }
-                    	    else {
-                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
-                    	        recover(mse);
-                    	        throw mse;
-                    	    }
-
-
-                    	    }
-                    	    break;
-
-                    	default :
-                    	    if ( cnt2 >= 1 ) break loop2;
-                                EarlyExitException eee =
-                                    new EarlyExitException(2, input);
-                                throw eee;
-                        }
-                        cnt2++;
-                    } while (true);
-
-
-                    }
-                    break;
-                case 2 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:151:4: '0x' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
-                    {
-                    match("0x"); 
-
-
-
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:151:9: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
-                    int cnt3=0;
-                    loop3:
-                    do {
-                        int alt3=2;
-                        int LA3_0 = input.LA(1);
-
-                        if ( ((LA3_0 >= '0' && LA3_0 <= '9')||(LA3_0 >= 'A' && LA3_0 <= 'F')||(LA3_0 >= 'a' && LA3_0 <= 'f')) ) {
-                            alt3=1;
-                        }
-
-
-                        switch (alt3) {
-                    	case 1 :
-                    	    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:
-                    	    {
-                    	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'F')||(input.LA(1) >= 'a' && input.LA(1) <= 'f') ) {
-                    	        input.consume();
-                    	    }
-                    	    else {
-                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
-                    	        recover(mse);
-                    	        throw mse;
-                    	    }
-
-
-                    	    }
-                    	    break;
-
-                    	default :
-                    	    if ( cnt3 >= 1 ) break loop3;
-                                EarlyExitException eee =
-                                    new EarlyExitException(3, input);
-                                throw eee;
-                        }
-                        cnt3++;
-                    } while (true);
-
-
-                    }
-                    break;
-                case 3 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:152:4: '0X' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
-                    {
-                    match("0X"); 
-
-
-
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:152:9: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
-                    int cnt4=0;
-                    loop4:
-                    do {
-                        int alt4=2;
-                        int LA4_0 = input.LA(1);
-
-                        if ( ((LA4_0 >= '0' && LA4_0 <= '9')||(LA4_0 >= 'A' && LA4_0 <= 'F')||(LA4_0 >= 'a' && LA4_0 <= 'f')) ) {
-                            alt4=1;
-                        }
-
-
-                        switch (alt4) {
-                    	case 1 :
-                    	    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:
-                    	    {
-                    	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'F')||(input.LA(1) >= 'a' && input.LA(1) <= 'f') ) {
-                    	        input.consume();
-                    	    }
-                    	    else {
-                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
-                    	        recover(mse);
-                    	        throw mse;
-                    	    }
-
-
-                    	    }
-                    	    break;
-
-                    	default :
-                    	    if ( cnt4 >= 1 ) break loop4;
-                                EarlyExitException eee =
-                                    new EarlyExitException(4, input);
-                                throw eee;
-                        }
-                        cnt4++;
-                    } while (true);
-
-
-                    }
-                    break;
-
-            }
             state.type = _type;
             state.channel = _channel;
         }
@@ -710,14 +464,169 @@ public class CssLexer extends Lexer {
         	// do for sure before leaving
         }
     }
-    // $ANTLR end "INT"
+    // $ANTLR end "FALSE"
 
-    // $ANTLR start "FLOAT"
-    public final void mFLOAT() throws RecognitionException {
+    // $ANTLR start "NULL"
+    public final void mNULL() throws RecognitionException {
         try {
-            int _type = FLOAT;
+            int _type = NULL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:156:2: ( ( '0' .. '9' )+ '.' ( '0' .. '9' )* | '.' ( '0' .. '9' )+ )
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:180:6: ( 'null' )
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:180:8: 'null'
+            {
+            match("null"); 
+
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "NULL"
+
+    // $ANTLR start "STRING"
+    public final void mSTRING() throws RecognitionException {
+        try {
+            int _type = STRING;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:183:2: ( '\"' (~ ( '\"' ) )* '\"' )
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:183:4: '\"' (~ ( '\"' ) )* '\"'
+            {
+            match('\"'); 
+
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:183:8: (~ ( '\"' ) )*
+            loop2:
+            do {
+                int alt2=2;
+                int LA2_0 = input.LA(1);
+
+                if ( ((LA2_0 >= '\u0000' && LA2_0 <= '!')||(LA2_0 >= '#' && LA2_0 <= '\uFFFF')) ) {
+                    alt2=1;
+                }
+
+
+                switch (alt2) {
+            	case 1 :
+            	    // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:
+            	    {
+            	    if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '!')||(input.LA(1) >= '#' && input.LA(1) <= '\uFFFF') ) {
+            	        input.consume();
+            	    }
+            	    else {
+            	        MismatchedSetException mse = new MismatchedSetException(null,input);
+            	        recover(mse);
+            	        throw mse;
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop2;
+                }
+            } while (true);
+
+
+            match('\"'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "STRING"
+
+    // $ANTLR start "IDENT"
+    public final void mIDENT() throws RecognitionException {
+        try {
+            int _type = IDENT;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:187:2: ( ( '-' )? NAMESTART ( NAMECHAR )* )
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:187:4: ( '-' )? NAMESTART ( NAMECHAR )*
+            {
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:187:4: ( '-' )?
+            int alt3=2;
+            int LA3_0 = input.LA(1);
+
+            if ( (LA3_0=='-') ) {
+                alt3=1;
+            }
+            switch (alt3) {
+                case 1 :
+                    // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:187:4: '-'
+                    {
+                    match('-'); 
+
+                    }
+                    break;
+
+            }
+
+
+            mNAMESTART(); 
+
+
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:187:19: ( NAMECHAR )*
+            loop4:
+            do {
+                int alt4=2;
+                int LA4_0 = input.LA(1);
+
+                if ( (LA4_0=='-'||(LA4_0 >= '0' && LA4_0 <= '9')||(LA4_0 >= 'A' && LA4_0 <= 'Z')||LA4_0=='_'||(LA4_0 >= 'a' && LA4_0 <= 'z')) ) {
+                    alt4=1;
+                }
+
+
+                switch (alt4) {
+            	case 1 :
+            	    // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:
+            	    {
+            	    if ( input.LA(1)=='-'||(input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
+            	        input.consume();
+            	    }
+            	    else {
+            	        MismatchedSetException mse = new MismatchedSetException(null,input);
+            	        recover(mse);
+            	        throw mse;
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop4;
+                }
+            } while (true);
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "IDENT"
+
+    // $ANTLR start "NUMBER"
+    public final void mNUMBER() throws RecognitionException {
+        try {
+            int _type = NUMBER;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:191:2: ( ( '0' .. '9' )+ ( '.' ( '0' .. '9' )+ )? | '.' ( '0' .. '9' )+ )
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -736,23 +645,23 @@ public class CssLexer extends Lexer {
             }
             switch (alt9) {
                 case 1 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:156:4: ( '0' .. '9' )+ '.' ( '0' .. '9' )*
+                    // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:191:4: ( '0' .. '9' )+ ( '.' ( '0' .. '9' )+ )?
                     {
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:156:4: ( '0' .. '9' )+
-                    int cnt6=0;
-                    loop6:
+                    // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:191:4: ( '0' .. '9' )+
+                    int cnt5=0;
+                    loop5:
                     do {
-                        int alt6=2;
-                        int LA6_0 = input.LA(1);
+                        int alt5=2;
+                        int LA5_0 = input.LA(1);
 
-                        if ( ((LA6_0 >= '0' && LA6_0 <= '9')) ) {
-                            alt6=1;
+                        if ( ((LA5_0 >= '0' && LA5_0 <= '9')) ) {
+                            alt5=1;
                         }
 
 
-                        switch (alt6) {
+                        switch (alt5) {
                     	case 1 :
-                    	    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:
+                    	    // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:
                     	    {
                     	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
                     	        input.consume();
@@ -768,59 +677,81 @@ public class CssLexer extends Lexer {
                     	    break;
 
                     	default :
-                    	    if ( cnt6 >= 1 ) break loop6;
+                    	    if ( cnt5 >= 1 ) break loop5;
                                 EarlyExitException eee =
-                                    new EarlyExitException(6, input);
+                                    new EarlyExitException(5, input);
                                 throw eee;
                         }
-                        cnt6++;
+                        cnt5++;
                     } while (true);
 
 
-                    match('.'); 
+                    // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:191:14: ( '.' ( '0' .. '9' )+ )?
+                    int alt7=2;
+                    int LA7_0 = input.LA(1);
 
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:156:20: ( '0' .. '9' )*
-                    loop7:
-                    do {
-                        int alt7=2;
-                        int LA7_0 = input.LA(1);
+                    if ( (LA7_0=='.') ) {
+                        alt7=1;
+                    }
+                    switch (alt7) {
+                        case 1 :
+                            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:191:15: '.' ( '0' .. '9' )+
+                            {
+                            match('.'); 
 
-                        if ( ((LA7_0 >= '0' && LA7_0 <= '9')) ) {
-                            alt7=1;
-                        }
+                            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:191:19: ( '0' .. '9' )+
+                            int cnt6=0;
+                            loop6:
+                            do {
+                                int alt6=2;
+                                int LA6_0 = input.LA(1);
 
-
-                        switch (alt7) {
-                    	case 1 :
-                    	    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:
-                    	    {
-                    	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
-                    	        input.consume();
-                    	    }
-                    	    else {
-                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
-                    	        recover(mse);
-                    	        throw mse;
-                    	    }
+                                if ( ((LA6_0 >= '0' && LA6_0 <= '9')) ) {
+                                    alt6=1;
+                                }
 
 
-                    	    }
-                    	    break;
+                                switch (alt6) {
+                            	case 1 :
+                            	    // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:
+                            	    {
+                            	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
+                            	        input.consume();
+                            	    }
+                            	    else {
+                            	        MismatchedSetException mse = new MismatchedSetException(null,input);
+                            	        recover(mse);
+                            	        throw mse;
+                            	    }
 
-                    	default :
-                    	    break loop7;
-                        }
-                    } while (true);
+
+                            	    }
+                            	    break;
+
+                            	default :
+                            	    if ( cnt6 >= 1 ) break loop6;
+                                        EarlyExitException eee =
+                                            new EarlyExitException(6, input);
+                                        throw eee;
+                                }
+                                cnt6++;
+                            } while (true);
+
+
+                            }
+                            break;
+
+                    }
 
 
                     }
                     break;
                 case 2 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:157:4: '.' ( '0' .. '9' )+
+                    // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:191:33: '.' ( '0' .. '9' )+
                     {
                     match('.'); 
 
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:157:8: ( '0' .. '9' )+
+                    // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:191:37: ( '0' .. '9' )+
                     int cnt8=0;
                     loop8:
                     do {
@@ -834,7 +765,7 @@ public class CssLexer extends Lexer {
 
                         switch (alt8) {
                     	case 1 :
-                    	    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:
+                    	    // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:
                     	    {
                     	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
                     	        input.consume();
@@ -870,275 +801,56 @@ public class CssLexer extends Lexer {
         	// do for sure before leaving
         }
     }
-    // $ANTLR end "FLOAT"
-
-    // $ANTLR start "BOOLEAN"
-    public final void mBOOLEAN() throws RecognitionException {
-        try {
-            int _type = BOOLEAN;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:161:2: ( ( 'true' | 'false' ) )
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:161:4: ( 'true' | 'false' )
-            {
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:161:4: ( 'true' | 'false' )
-            int alt10=2;
-            int LA10_0 = input.LA(1);
-
-            if ( (LA10_0=='t') ) {
-                alt10=1;
-            }
-            else if ( (LA10_0=='f') ) {
-                alt10=2;
-            }
-            else {
-                NoViableAltException nvae =
-                    new NoViableAltException("", 10, 0, input);
-
-                throw nvae;
-
-            }
-            switch (alt10) {
-                case 1 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:161:5: 'true'
-                    {
-                    match("true"); 
-
-
-
-                    }
-                    break;
-                case 2 :
-                    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:161:12: 'false'
-                    {
-                    match("false"); 
-
-
-
-                    }
-                    break;
-
-            }
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "BOOLEAN"
-
-    // $ANTLR start "NULL"
-    public final void mNULL() throws RecognitionException {
-        try {
-            int _type = NULL;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:165:2: ( 'null' )
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:165:4: 'null'
-            {
-            match("null"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "NULL"
-
-    // $ANTLR start "ID"
-    public final void mID() throws RecognitionException {
-        try {
-            int _type = ID;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:168:4: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '-' )* )
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:168:6: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '-' )*
-            {
-            if ( input.LA(1)=='-'||(input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
-                input.consume();
-            }
-            else {
-                MismatchedSetException mse = new MismatchedSetException(null,input);
-                recover(mse);
-                throw mse;
-            }
-
-
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:168:34: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '-' )*
-            loop11:
-            do {
-                int alt11=2;
-                int LA11_0 = input.LA(1);
-
-                if ( (LA11_0=='-'||(LA11_0 >= '0' && LA11_0 <= '9')||(LA11_0 >= 'A' && LA11_0 <= 'Z')||LA11_0=='_'||(LA11_0 >= 'a' && LA11_0 <= 'z')) ) {
-                    alt11=1;
-                }
-
-
-                switch (alt11) {
-            	case 1 :
-            	    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:
-            	    {
-            	    if ( input.LA(1)=='-'||(input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
-            	        input.consume();
-            	    }
-            	    else {
-            	        MismatchedSetException mse = new MismatchedSetException(null,input);
-            	        recover(mse);
-            	        throw mse;
-            	    }
-
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop11;
-                }
-            } while (true);
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "ID"
-
-    // $ANTLR start "STRING"
-    public final void mSTRING() throws RecognitionException {
-        try {
-            int _type = STRING;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:172:2: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) |~ ( '\\\\' | '\"' ) )* '\"' )
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:172:4: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) |~ ( '\\\\' | '\"' ) )* '\"'
-            {
-            match('\"'); 
-
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:172:8: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) |~ ( '\\\\' | '\"' ) )*
-            loop12:
-            do {
-                int alt12=3;
-                int LA12_0 = input.LA(1);
-
-                if ( (LA12_0=='\\') ) {
-                    alt12=1;
-                }
-                else if ( ((LA12_0 >= '\u0000' && LA12_0 <= '!')||(LA12_0 >= '#' && LA12_0 <= '[')||(LA12_0 >= ']' && LA12_0 <= '\uFFFF')) ) {
-                    alt12=2;
-                }
-
-
-                switch (alt12) {
-            	case 1 :
-            	    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:172:10: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
-            	    {
-            	    match('\\'); 
-
-            	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
-            	        input.consume();
-            	    }
-            	    else {
-            	        MismatchedSetException mse = new MismatchedSetException(null,input);
-            	        recover(mse);
-            	        throw mse;
-            	    }
-
-
-            	    }
-            	    break;
-            	case 2 :
-            	    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:172:54: ~ ( '\\\\' | '\"' )
-            	    {
-            	    if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '!')||(input.LA(1) >= '#' && input.LA(1) <= '[')||(input.LA(1) >= ']' && input.LA(1) <= '\uFFFF') ) {
-            	        input.consume();
-            	    }
-            	    else {
-            	        MismatchedSetException mse = new MismatchedSetException(null,input);
-            	        recover(mse);
-            	        throw mse;
-            	    }
-
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop12;
-                }
-            } while (true);
-
-
-            match('\"'); 
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "STRING"
-
-    // $ANTLR start "HEX"
-    public final void mHEX() throws RecognitionException {
-        try {
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:176:2: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:
-            {
-            if ( (input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'F')||(input.LA(1) >= 'a' && input.LA(1) <= 'f') ) {
-                input.consume();
-            }
-            else {
-                MismatchedSetException mse = new MismatchedSetException(null,input);
-                recover(mse);
-                throw mse;
-            }
-
-
-            }
-
-
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "HEX"
+    // $ANTLR end "NUMBER"
 
     // $ANTLR start "WS"
     public final void mWS() throws RecognitionException {
         try {
             int _type = WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:179:4: ( ( ' ' | '\\t' | '\\r' | '\\n' ) )
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:179:6: ( ' ' | '\\t' | '\\r' | '\\n' )
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:195:2: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:195:4: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            if ( (input.LA(1) >= '\t' && input.LA(1) <= '\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
-                input.consume();
-            }
-            else {
-                MismatchedSetException mse = new MismatchedSetException(null,input);
-                recover(mse);
-                throw mse;
-            }
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:195:4: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            int cnt10=0;
+            loop10:
+            do {
+                int alt10=2;
+                int LA10_0 = input.LA(1);
+
+                if ( ((LA10_0 >= '\t' && LA10_0 <= '\n')||LA10_0=='\r'||LA10_0==' ') ) {
+                    alt10=1;
+                }
 
 
-            _channel=HIDDEN;
+                switch (alt10) {
+            	case 1 :
+            	    // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:
+            	    {
+            	    if ( (input.LA(1) >= '\t' && input.LA(1) <= '\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
+            	        input.consume();
+            	    }
+            	    else {
+            	        MismatchedSetException mse = new MismatchedSetException(null,input);
+            	        recover(mse);
+            	        throw mse;
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    if ( cnt10 >= 1 ) break loop10;
+                        EarlyExitException eee =
+                            new EarlyExitException(10, input);
+                        throw eee;
+                }
+                cnt10++;
+            } while (true);
+
+
+            _channel = HIDDEN;
 
             }
 
@@ -1156,39 +868,39 @@ public class CssLexer extends Lexer {
         try {
             int _type = COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:183:2: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:183:4: '/*' ( options {greedy=false; } : . )* '*/'
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:199:2: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:199:4: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
 
 
-            // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:183:9: ( options {greedy=false; } : . )*
-            loop13:
+            // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:199:9: ( options {greedy=false; } : . )*
+            loop11:
             do {
-                int alt13=2;
-                int LA13_0 = input.LA(1);
+                int alt11=2;
+                int LA11_0 = input.LA(1);
 
-                if ( (LA13_0=='*') ) {
-                    int LA13_1 = input.LA(2);
+                if ( (LA11_0=='*') ) {
+                    int LA11_1 = input.LA(2);
 
-                    if ( (LA13_1=='/') ) {
-                        alt13=2;
+                    if ( (LA11_1=='/') ) {
+                        alt11=2;
                     }
-                    else if ( ((LA13_1 >= '\u0000' && LA13_1 <= '.')||(LA13_1 >= '0' && LA13_1 <= '\uFFFF')) ) {
-                        alt13=1;
+                    else if ( ((LA11_1 >= '\u0000' && LA11_1 <= '.')||(LA11_1 >= '0' && LA11_1 <= '\uFFFF')) ) {
+                        alt11=1;
                     }
 
 
                 }
-                else if ( ((LA13_0 >= '\u0000' && LA13_0 <= ')')||(LA13_0 >= '+' && LA13_0 <= '\uFFFF')) ) {
-                    alt13=1;
+                else if ( ((LA11_0 >= '\u0000' && LA11_0 <= ')')||(LA11_0 >= '+' && LA11_0 <= '\uFFFF')) ) {
+                    alt11=1;
                 }
 
 
-                switch (alt13) {
+                switch (alt11) {
             	case 1 :
-            	    // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:183:37: .
+            	    // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:199:37: .
             	    {
             	    matchAny(); 
 
@@ -1196,7 +908,7 @@ public class CssLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop13;
+            	    break loop11;
                 }
             } while (true);
 
@@ -1205,7 +917,7 @@ public class CssLexer extends Lexer {
 
 
 
-            _channel=HIDDEN;
+            skip();
 
             }
 
@@ -1219,180 +931,445 @@ public class CssLexer extends Lexer {
     // $ANTLR end "COMMENT"
 
     public void mTokens() throws RecognitionException {
-        // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:8: ( T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | COLOR | INT | FLOAT | BOOLEAN | NULL | ID | STRING | WS | COMMENT )
-        int alt14=22;
-        alt14 = dfa14.predict(input);
-        switch (alt14) {
+        // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:8: ( HASH | DOT | STAR | COLON | SEMI | COMMA | LBRACKET | RBRACKET | EQUAL | LBRACE | RBRACE | LCURLY | RCURLY | TRUE | FALSE | NULL | STRING | IDENT | NUMBER | WS | COMMENT )
+        int alt12=21;
+        switch ( input.LA(1) ) {
+        case '#':
+            {
+            alt12=1;
+            }
+            break;
+        case '.':
+            {
+            int LA12_2 = input.LA(2);
+
+            if ( ((LA12_2 >= '0' && LA12_2 <= '9')) ) {
+                alt12=19;
+            }
+            else {
+                alt12=2;
+            }
+            }
+            break;
+        case '*':
+            {
+            alt12=3;
+            }
+            break;
+        case ':':
+            {
+            alt12=4;
+            }
+            break;
+        case ';':
+            {
+            alt12=5;
+            }
+            break;
+        case ',':
+            {
+            alt12=6;
+            }
+            break;
+        case '[':
+            {
+            alt12=7;
+            }
+            break;
+        case ']':
+            {
+            alt12=8;
+            }
+            break;
+        case '=':
+            {
+            alt12=9;
+            }
+            break;
+        case '(':
+            {
+            alt12=10;
+            }
+            break;
+        case ')':
+            {
+            alt12=11;
+            }
+            break;
+        case '{':
+            {
+            alt12=12;
+            }
+            break;
+        case '}':
+            {
+            alt12=13;
+            }
+            break;
+        case 't':
+            {
+            int LA12_14 = input.LA(2);
+
+            if ( (LA12_14=='r') ) {
+                int LA12_23 = input.LA(3);
+
+                if ( (LA12_23=='u') ) {
+                    int LA12_26 = input.LA(4);
+
+                    if ( (LA12_26=='e') ) {
+                        int LA12_29 = input.LA(5);
+
+                        if ( (LA12_29=='-'||(LA12_29 >= '0' && LA12_29 <= '9')||(LA12_29 >= 'A' && LA12_29 <= 'Z')||LA12_29=='_'||(LA12_29 >= 'a' && LA12_29 <= 'z')) ) {
+                            alt12=18;
+                        }
+                        else {
+                            alt12=14;
+                        }
+                    }
+                    else {
+                        alt12=18;
+                    }
+                }
+                else {
+                    alt12=18;
+                }
+            }
+            else {
+                alt12=18;
+            }
+            }
+            break;
+        case 'f':
+            {
+            int LA12_15 = input.LA(2);
+
+            if ( (LA12_15=='a') ) {
+                int LA12_24 = input.LA(3);
+
+                if ( (LA12_24=='l') ) {
+                    int LA12_27 = input.LA(4);
+
+                    if ( (LA12_27=='s') ) {
+                        int LA12_30 = input.LA(5);
+
+                        if ( (LA12_30=='e') ) {
+                            int LA12_33 = input.LA(6);
+
+                            if ( (LA12_33=='-'||(LA12_33 >= '0' && LA12_33 <= '9')||(LA12_33 >= 'A' && LA12_33 <= 'Z')||LA12_33=='_'||(LA12_33 >= 'a' && LA12_33 <= 'z')) ) {
+                                alt12=18;
+                            }
+                            else {
+                                alt12=15;
+                            }
+                        }
+                        else {
+                            alt12=18;
+                        }
+                    }
+                    else {
+                        alt12=18;
+                    }
+                }
+                else {
+                    alt12=18;
+                }
+            }
+            else {
+                alt12=18;
+            }
+            }
+            break;
+        case 'n':
+            {
+            int LA12_16 = input.LA(2);
+
+            if ( (LA12_16=='u') ) {
+                int LA12_25 = input.LA(3);
+
+                if ( (LA12_25=='l') ) {
+                    int LA12_28 = input.LA(4);
+
+                    if ( (LA12_28=='l') ) {
+                        int LA12_31 = input.LA(5);
+
+                        if ( (LA12_31=='-'||(LA12_31 >= '0' && LA12_31 <= '9')||(LA12_31 >= 'A' && LA12_31 <= 'Z')||LA12_31=='_'||(LA12_31 >= 'a' && LA12_31 <= 'z')) ) {
+                            alt12=18;
+                        }
+                        else {
+                            alt12=16;
+                        }
+                    }
+                    else {
+                        alt12=18;
+                    }
+                }
+                else {
+                    alt12=18;
+                }
+            }
+            else {
+                alt12=18;
+            }
+            }
+            break;
+        case '\"':
+            {
+            alt12=17;
+            }
+            break;
+        case '-':
+        case 'A':
+        case 'B':
+        case 'C':
+        case 'D':
+        case 'E':
+        case 'F':
+        case 'G':
+        case 'H':
+        case 'I':
+        case 'J':
+        case 'K':
+        case 'L':
+        case 'M':
+        case 'N':
+        case 'O':
+        case 'P':
+        case 'Q':
+        case 'R':
+        case 'S':
+        case 'T':
+        case 'U':
+        case 'V':
+        case 'W':
+        case 'X':
+        case 'Y':
+        case 'Z':
+        case '_':
+        case 'a':
+        case 'b':
+        case 'c':
+        case 'd':
+        case 'e':
+        case 'g':
+        case 'h':
+        case 'i':
+        case 'j':
+        case 'k':
+        case 'l':
+        case 'm':
+        case 'o':
+        case 'p':
+        case 'q':
+        case 'r':
+        case 's':
+        case 'u':
+        case 'v':
+        case 'w':
+        case 'x':
+        case 'y':
+        case 'z':
+            {
+            alt12=18;
+            }
+            break;
+        case '0':
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '9':
+            {
+            alt12=19;
+            }
+            break;
+        case '\t':
+        case '\n':
+        case '\r':
+        case ' ':
+            {
+            alt12=20;
+            }
+            break;
+        case '/':
+            {
+            alt12=21;
+            }
+            break;
+        default:
+            NoViableAltException nvae =
+                new NoViableAltException("", 12, 0, input);
+
+            throw nvae;
+
+        }
+
+        switch (alt12) {
             case 1 :
-                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:10: T__14
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:10: HASH
                 {
-                mT__14(); 
+                mHASH(); 
 
 
                 }
                 break;
             case 2 :
-                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:16: T__15
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:15: DOT
                 {
-                mT__15(); 
+                mDOT(); 
 
 
                 }
                 break;
             case 3 :
-                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:22: T__16
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:19: STAR
                 {
-                mT__16(); 
+                mSTAR(); 
 
 
                 }
                 break;
             case 4 :
-                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:28: T__17
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:24: COLON
                 {
-                mT__17(); 
+                mCOLON(); 
 
 
                 }
                 break;
             case 5 :
-                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:34: T__18
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:30: SEMI
                 {
-                mT__18(); 
+                mSEMI(); 
 
 
                 }
                 break;
             case 6 :
-                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:40: T__19
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:35: COMMA
                 {
-                mT__19(); 
+                mCOMMA(); 
 
 
                 }
                 break;
             case 7 :
-                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:46: T__20
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:41: LBRACKET
                 {
-                mT__20(); 
+                mLBRACKET(); 
 
 
                 }
                 break;
             case 8 :
-                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:52: T__21
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:50: RBRACKET
                 {
-                mT__21(); 
+                mRBRACKET(); 
 
 
                 }
                 break;
             case 9 :
-                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:58: T__22
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:59: EQUAL
                 {
-                mT__22(); 
+                mEQUAL(); 
 
 
                 }
                 break;
             case 10 :
-                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:64: T__23
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:65: LBRACE
                 {
-                mT__23(); 
+                mLBRACE(); 
 
 
                 }
                 break;
             case 11 :
-                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:70: T__24
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:72: RBRACE
                 {
-                mT__24(); 
+                mRBRACE(); 
 
 
                 }
                 break;
             case 12 :
-                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:76: T__25
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:79: LCURLY
                 {
-                mT__25(); 
+                mLCURLY(); 
 
 
                 }
                 break;
             case 13 :
-                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:82: T__26
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:86: RCURLY
                 {
-                mT__26(); 
+                mRCURLY(); 
 
 
                 }
                 break;
             case 14 :
-                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:88: COLOR
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:93: TRUE
                 {
-                mCOLOR(); 
+                mTRUE(); 
 
 
                 }
                 break;
             case 15 :
-                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:94: INT
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:98: FALSE
                 {
-                mINT(); 
+                mFALSE(); 
 
 
                 }
                 break;
             case 16 :
-                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:98: FLOAT
-                {
-                mFLOAT(); 
-
-
-                }
-                break;
-            case 17 :
-                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:104: BOOLEAN
-                {
-                mBOOLEAN(); 
-
-
-                }
-                break;
-            case 18 :
-                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:112: NULL
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:104: NULL
                 {
                 mNULL(); 
 
 
                 }
                 break;
-            case 19 :
-                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:117: ID
-                {
-                mID(); 
-
-
-                }
-                break;
-            case 20 :
-                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:120: STRING
+            case 17 :
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:109: STRING
                 {
                 mSTRING(); 
 
 
                 }
                 break;
-            case 21 :
-                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:127: WS
+            case 18 :
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:116: IDENT
+                {
+                mIDENT(); 
+
+
+                }
+                break;
+            case 19 :
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:122: NUMBER
+                {
+                mNUMBER(); 
+
+
+                }
+                break;
+            case 20 :
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:129: WS
                 {
                 mWS(); 
 
 
                 }
                 break;
-            case 22 :
-                // C:\\Users\\Aurelien\\Home\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:130: COMMENT
+            case 21 :
+                // D:\\Dev\\Java\\css-engine\\api\\antlr\\Css.g:1:132: COMMENT
                 {
                 mCOMMENT(); 
 
@@ -1405,133 +1382,6 @@ public class CssLexer extends Lexer {
     }
 
 
-    protected DFA14 dfa14 = new DFA14(this);
-    static final String DFA14_eotS =
-        "\1\uffff\1\26\3\uffff\1\30\2\uffff\4\22\2\uffff\2\37\2\22\10\uffff"+
-        "\5\22\1\uffff\16\22\1\65\1\66\2\22\1\71\1\65\1\72\2\uffff\1\73\1"+
-        "\22\3\uffff\1\22\1\76\1\uffff";
-    static final String DFA14_eofS =
-        "\77\uffff";
-    static final String DFA14_minS =
-        "\1\11\1\60\3\uffff\1\60\2\uffff\1\143\1\151\1\141\1\157\2\uffff"+
-        "\2\56\1\162\1\165\10\uffff\1\164\1\163\1\143\1\154\1\166\1\uffff"+
-        "\1\165\1\154\1\151\1\141\1\165\1\163\2\145\1\154\1\166\1\142\1\163"+
-        "\1\145\1\162\2\55\1\145\1\154\3\55\2\uffff\1\55\1\145\3\uffff\1"+
-        "\144\1\55\1\uffff";
-    static final String DFA14_maxS =
-        "\1\175\1\146\3\uffff\1\71\2\uffff\1\143\1\151\2\157\2\uffff\2\71"+
-        "\1\162\1\165\10\uffff\1\164\1\163\1\143\1\154\1\166\1\uffff\1\165"+
-        "\1\154\1\151\1\141\1\165\1\163\2\145\1\154\1\166\1\142\1\163\1\145"+
-        "\1\162\2\172\1\145\1\154\3\172\2\uffff\1\172\1\145\3\uffff\1\144"+
-        "\1\172\1\uffff";
-    static final String DFA14_acceptS =
-        "\2\uffff\1\2\1\3\1\4\1\uffff\1\6\1\7\4\uffff\1\14\1\15\4\uffff\1"+
-        "\23\1\24\1\25\1\26\1\1\1\16\1\5\1\20\5\uffff\1\17\25\uffff\1\21"+
-        "\1\22\2\uffff\1\12\1\13\1\10\2\uffff\1\11";
-    static final String DFA14_specialS =
-        "\77\uffff}>";
-    static final String[] DFA14_transitionS = {
-            "\2\24\2\uffff\1\24\22\uffff\1\24\1\uffff\1\23\1\1\4\uffff\1"+
-            "\2\1\3\2\uffff\1\4\1\22\1\5\1\25\1\16\11\17\1\6\1\7\5\uffff"+
-            "\32\22\4\uffff\1\22\1\uffff\1\10\2\22\1\11\1\22\1\12\1\22\1"+
-            "\13\5\22\1\21\5\22\1\20\6\22\1\14\1\uffff\1\15",
-            "\12\27\7\uffff\6\27\32\uffff\6\27",
-            "",
-            "",
-            "",
-            "\12\31",
-            "",
-            "",
-            "\1\32",
-            "\1\33",
-            "\1\35\15\uffff\1\34",
-            "\1\36",
-            "",
-            "",
-            "\1\31\1\uffff\12\17",
-            "\1\31\1\uffff\12\17",
-            "\1\40",
-            "\1\41",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "\1\42",
-            "\1\43",
-            "\1\44",
-            "\1\45",
-            "\1\46",
-            "",
-            "\1\47",
-            "\1\50",
-            "\1\51",
-            "\1\52",
-            "\1\53",
-            "\1\54",
-            "\1\55",
-            "\1\56",
-            "\1\57",
-            "\1\60",
-            "\1\61",
-            "\1\62",
-            "\1\63",
-            "\1\64",
-            "\1\22\2\uffff\12\22\7\uffff\32\22\4\uffff\1\22\1\uffff\32\22",
-            "\1\22\2\uffff\12\22\7\uffff\32\22\4\uffff\1\22\1\uffff\32\22",
-            "\1\67",
-            "\1\70",
-            "\1\22\2\uffff\12\22\7\uffff\32\22\4\uffff\1\22\1\uffff\32\22",
-            "\1\22\2\uffff\12\22\7\uffff\32\22\4\uffff\1\22\1\uffff\32\22",
-            "\1\22\2\uffff\12\22\7\uffff\32\22\4\uffff\1\22\1\uffff\32\22",
-            "",
-            "",
-            "\1\22\2\uffff\12\22\7\uffff\32\22\4\uffff\1\22\1\uffff\32\22",
-            "\1\74",
-            "",
-            "",
-            "",
-            "\1\75",
-            "\1\22\2\uffff\12\22\7\uffff\32\22\4\uffff\1\22\1\uffff\32\22",
-            ""
-    };
-
-    static final short[] DFA14_eot = DFA.unpackEncodedString(DFA14_eotS);
-    static final short[] DFA14_eof = DFA.unpackEncodedString(DFA14_eofS);
-    static final char[] DFA14_min = DFA.unpackEncodedStringToUnsignedChars(DFA14_minS);
-    static final char[] DFA14_max = DFA.unpackEncodedStringToUnsignedChars(DFA14_maxS);
-    static final short[] DFA14_accept = DFA.unpackEncodedString(DFA14_acceptS);
-    static final short[] DFA14_special = DFA.unpackEncodedString(DFA14_specialS);
-    static final short[][] DFA14_transition;
-
-    static {
-        int numStates = DFA14_transitionS.length;
-        DFA14_transition = new short[numStates][];
-        for (int i=0; i<numStates; i++) {
-            DFA14_transition[i] = DFA.unpackEncodedString(DFA14_transitionS[i]);
-        }
-    }
-
-    class DFA14 extends DFA {
-
-        public DFA14(BaseRecognizer recognizer) {
-            this.recognizer = recognizer;
-            this.decisionNumber = 14;
-            this.eot = DFA14_eot;
-            this.eof = DFA14_eof;
-            this.min = DFA14_min;
-            this.max = DFA14_max;
-            this.accept = DFA14_accept;
-            this.special = DFA14_special;
-            this.transition = DFA14_transition;
-        }
-        public String getDescription() {
-            return "1:1: Tokens : ( T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | COLOR | INT | FLOAT | BOOLEAN | NULL | ID | STRING | WS | COMMENT );";
-        }
-    }
  
 
 }

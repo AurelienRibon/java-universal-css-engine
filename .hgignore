@@ -20,3 +20,9 @@ backend-swing-test/dist/*
 backend-swing-test/nbproject/*
 backend-swing-test/manifest.mf
 backend-swing-test/nbbuild.xml
+
+backend-swing-demo/build/*
+backend-swing-demo/dist/*
+backend-swing-demo/nbproject/*
+backend-swing-demo/manifest.mf
+backend-swing-demo/nbbuild.xml

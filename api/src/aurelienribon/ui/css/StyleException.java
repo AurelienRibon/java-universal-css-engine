@@ -23,8 +23,10 @@ public class StyleException extends RuntimeException {
 		return new StyleException("Bad parameter(s) for function \"" + function.getName() + "\"");
 	}
 
-	public static StyleException forFunctionParamKeyword(Function function, int paramId, String... keywords) {
-		return new StyleException("Bad parameter(s) for function \"" + function.getName() + "\"");
+	public static StyleException forKeyword(String name, String... keywords) {
+		String msg = "Bad keyword \"" + name + "\". Allowed:";
+		for (String s : keywords) msg += " " + s;
+		return new StyleException(msg);
 	}
 
 	public StyleException(String msg) {

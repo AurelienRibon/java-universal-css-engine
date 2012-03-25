@@ -46,6 +46,9 @@ public class SwingStyle {
 		Style.registerProperty(SwingProperties.border);
 		Style.registerProperty(SwingProperties.borderPainted);
 		Style.registerProperty(SwingProperties.contentAreaFilled);
+		Style.registerProperty(SwingProperties.fontFamily);
+		Style.registerProperty(SwingProperties.fontStyle);
+		Style.registerProperty(SwingProperties.fontSize);
 
 		Style.registerFunction(SwingFunctions.url);
 		Style.registerFunction(SwingFunctions.font);
@@ -64,6 +67,11 @@ public class SwingStyle {
 		Style.registerFunction(SwingFunctions.matteBorder);
 		Style.registerFunction(SwingFunctions.titledBorder);
 
+		Style.registerPseudoClass(SwingPseudoClasses.hover);
+		Style.registerPseudoClass(SwingPseudoClasses.active);
+		Style.registerPseudoClass(SwingPseudoClasses.focus);
+		Style.registerPseudoClass(SwingPseudoClasses.disabled);
+
 		Style.registerProcessor(Component.class, new ComponentProcessor());
 		Style.registerProcessor(JComponent.class, new JComponentProcessor());
 		Style.registerProcessor(AbstractButton.class, new AbstractButtonProcessor());
@@ -80,8 +88,8 @@ public class SwingStyle {
 		});
 
 		Style.setParamConverter(new ParamConverter() {
-			@Override public Object convertColor(int r, int g, int b, int a) {
-				return new Color(r, g, b, a);
+			@Override public Object convertColor(int argb) {
+				return new Color(argb, true);
 			}
 
 			@Override public Class getColorClass() {

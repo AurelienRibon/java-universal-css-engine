@@ -111,11 +111,16 @@ public class Style {
 
 	private static final Map<String, Property> registeredProperties = new LinkedHashMap<String, Property>();
 	private static final Map<String, Function> registeredFunctions = new LinkedHashMap<String, Function>();
-	private static final Map<Class, List<DeclarationSetProcessor>> registeredProcessors = new LinkedHashMap<Class, List<DeclarationSetProcessor>>();
+	private static final Map<Class<?>, List<DeclarationSetProcessor<?>>> registeredProcessors = new LinkedHashMap<Class<?>, List<DeclarationSetProcessor<?>>>();
 	private static final Map<Object, List<String>> registeredTargets = new LinkedHashMap<Object, List<String>>();
-	private static final Map<Class, ChildrenAccessor> registeredChildrenAccessors = new HashMap<Class, ChildrenAccessor>();
-	private static final Map<Class, DeclarationSetManager> registeredDeclarationSetManagers = new HashMap<Class, DeclarationSetManager>();
+	private static final Map<Class<?>, ChildrenAccessor<?>> registeredChildrenAccessors = new HashMap<Class<?>, ChildrenAccessor<?>>();
+	private static final Map<Class<?>, DeclarationSetManager<?>> registeredDeclarationSetManagers = new HashMap<Class<?>, DeclarationSetManager<?>>();
+	private static final Map<String, PseudoClass> registeredPseudoClasses = new HashMap<String, PseudoClass>();
 	private static ParamConverter converter;
+
+	static {
+		registerPseudoClass(PseudoClass.none);
+	}
 
 	/**
 	 * Registers a new property to the engine.
@@ -152,10 +157,10 @@ public class Style {
 	 * the stylesheet and correspond to the rules which selectors were walidated
 	 * by the target object.
 	 */
-	public static void registerProcessor(Class clazz, DeclarationSetProcessor processor) {
-		List<DeclarationSetProcessor> list = registeredProcessors.get(clazz);
+	public static void registerProcessor(Class<?> clazz, DeclarationSetProcessor<?> processor) {
+		List<DeclarationSetProcessor<?>> list = registeredProcessors.get(clazz);
 		if (list == null) {
-			list = new ArrayList<DeclarationSetProcessor>();
+			list = new ArrayList<DeclarationSetProcessor<?>>();
 			registeredProcessors.put(clazz, list);
 		}
 
@@ -176,9 +181,9 @@ public class Style {
 				for (List<String> names : registeredTargets.values()) {
 					if (names.contains(name)) throw new RuntimeException("ID " + name + " has already been registered.");
 				}
-				registeredTargets.get(target).add(name);
+				registeredTargets.get(target).add(name.substring(1));
 			} else if (name.startsWith(".")) {
-				registeredTargets.get(target).add(name);
+				registeredTargets.get(target).add(name.substring(1));
 			} else {
 				throw new RuntimeException("Names have to start with a '.' for classes or a '#' for ids");
 			}
@@ -191,8 +196,15 @@ public class Style {
 	 * Accessors are used to automatically apply a style to the children of a
 	 * target, without requiring it to manually pass it to its children.
 	 */
-	public static void registerChildrenAccessor(Class parentClass, ChildrenAccessor accessor) {
+	public static void registerChildrenAccessor(Class<?> parentClass, ChildrenAccessor<?> accessor) {
 		registeredChildrenAccessors.put(parentClass, accessor);
+	}
+
+	/**
+	 * Registers a new CSS pseudo-class.
+	 */
+	public static void registerPseudoClass(PseudoClass pseudoClass) {
+		registeredPseudoClasses.put(pseudoClass.getName(), pseudoClass);
 	}
 
 	/**
@@ -202,7 +214,7 @@ public class Style {
 	 * they add a mouse listener to the targets to listen for mouse over (for
 	 * the ':hover' pseudo class, etc.
 	 */
-	public static void registerDeclarationSetManager(Class parentClass, DeclarationSetManager manager) {
+	public static void registerDeclarationSetManager(Class<?> parentClass, DeclarationSetManager<?> manager) {
 		registeredDeclarationSetManagers.put(parentClass, manager);
 	}
 
@@ -218,7 +230,7 @@ public class Style {
 	 * corresponding children accessor registered.
 	 */
 	public static void apply(Object target, Style style) {
-		apply(target, style, new ArrayList<String>());
+		apply(target, style, new ArrayList<Selector.Atom>());
 	}
 
 	/**
@@ -228,12 +240,11 @@ public class Style {
 	 * stylesheet. Complicated to understand, but still useful :)
 	 */
 	public static void apply(Object target, DeclarationSet ds) {
-		if (ds.isEmpty()) return;
-		for (Class clazz : registeredProcessors.keySet()) {
+		for (Class<?> clazz : registeredProcessors.keySet()) {
 			if (clazz.isInstance(target)) {
-				List<DeclarationSetProcessor> processors = registeredProcessors.get(clazz);
-				for (DeclarationSetProcessor proc : processors) {
-					proc.process(target, ds);
+				List<DeclarationSetProcessor<?>> processors = registeredProcessors.get(clazz);
+				for (DeclarationSetProcessor<?> proc : processors) {
+					((DeclarationSetProcessor<Object>) proc).process(target, ds);
 				}
 			}
 		}
@@ -293,7 +304,16 @@ public class Style {
 	 * Gets the CSS classnames associated to the given target.
 	 */
 	public static List<String> getRegisteredTargetClassNames(Object target) {
-		return registeredTargets.get(target);
+		List<String> classes = registeredTargets.get(target);
+		if (classes != null) return classes;
+		return new ArrayList<String>();
+	}
+
+	/**
+	 * Gets the pseudo class object corresponding to the given name.
+	 */
+	public static PseudoClass getRegisteredPseudoClass(String name) {
+		return registeredPseudoClasses.get(name);
 	}
 
 	/**
@@ -387,40 +407,33 @@ public class Style {
 		CssParser parser = new CssParser(tokens);
 
 		try {
-			Map<String, Map<String, List<Object>>> result = parser.stylesheet();
-
-			for (String selector : result.keySet()) {
-				Map<String, List<Object>> declarations = result.get(selector);
-
-				List<Property> properties = new ArrayList<Property>();
-				Map<Property, List<Object>> propertiesValues = new HashMap<Property, List<Object>>();
-
-				for (String name : declarations.keySet()) {
-					Property property = registeredProperties.get(name);
-					if (property == null) throw StyleException.forProperty(name);
-
-					List<Object> params = declarations.get(name);
-					if (!checkParams(property, params)) throw StyleException.forPropertyParams(property);
-
-					properties.add(property);
-					propertiesValues.put(property, params);
-				}
-
-				List<String> selectors = Arrays.asList(selector.split(" "));
-				String lastSelector = selectors.get(selectors.size() - 1);
-				PseudoClass pseudoClass = PseudoClass.NONE;
-
-				if (lastSelector.startsWith(":")) {
-					pseudoClass = PseudoClass.valueOf(lastSelector.substring(1).toUpperCase());
-					selectors = selectors.subList(0, selectors.size()-1);
-				}
-
-				DeclarationSet ds = new DeclarationSet(this, pseudoClass, properties, propertiesValues);
-				rules.add(new Rule(selectors, pseudoClass, ds));
-			}
-
+			parser.stylesheet();
 		} catch (RecognitionException ex) {
 			throw new StyleException(ex.getMessage());
+		}
+
+		for (CssParser.Rule parserRule : parser.rules) {
+			List<Property> properties = new ArrayList<Property>();
+			Map<Property, List<Object>> propertiesValues = new HashMap<Property, List<Object>>();
+
+			for (String name : parserRule.declarations.keySet()) {
+				Property property = registeredProperties.get(name);
+				if (property == null) throw StyleException.forProperty(name);
+
+				List<Object> params = parserRule.declarations.get(name);
+				if (!checkParams(property, params)) {
+					throw StyleException.forPropertyParams(property);
+				}
+
+				properties.add(property);
+				propertiesValues.put(property, params);
+			}
+
+			for (CssParser.Selector rawSelector : parserRule.selectors) {
+				Selector selector = new Selector(rawSelector.str);
+				DeclarationSet ds = new DeclarationSet(this, properties, propertiesValues);
+				rules.add(new Rule(selector, ds));
+			}
 		}
 	}
 
@@ -446,7 +459,7 @@ public class Style {
 
 		for (int i=0; i<params.size(); i++) {
 			Object param = params.get(i);
-			Class paramClass = getParamClass(param);
+			Class<?> paramClass = getParamClass(param);
 
 			if (param != null && !classes[i].isAssignableFrom(paramClass)) {
 				return false;
@@ -456,7 +469,7 @@ public class Style {
 		return true;
 	}
 
-	private Class getParamClass(Object param) {
+	private Class<?> getParamClass(Object param) {
 		if (param == null) return null;
 
 		if (param instanceof CssParser.Function) {
@@ -481,12 +494,12 @@ public class Style {
 	// Helpers - apply
 	// -------------------------------------------------------------------------
 
-	private static void apply(Object target, Style style, List<String> stack) {
+	private static void apply(Object target, Style style, List<Selector.Atom> stack) {
 		// Retrieve all the declarations belonging to the target and evaluate
 		// their parameters
-		Map<PseudoClass, DeclarationSet> dss = new EnumMap<PseudoClass, DeclarationSet>(PseudoClass.class);
+		Map<PseudoClass, DeclarationSet> dss = new HashMap<PseudoClass, DeclarationSet>();
 
-		for (PseudoClass pseudoClass : PseudoClass.values()) {
+		for (PseudoClass pseudoClass : registeredPseudoClasses.values()) {
 			DeclarationSet ds = new DeclarationSet(style, target, stack, pseudoClass);
 			dss.put(pseudoClass, ds);
 
@@ -499,16 +512,17 @@ public class Style {
 		}
 
 		// Apply these declarations to the target
-		for (Class clazz : registeredDeclarationSetManagers.keySet()) {
+		for (Class<?> clazz : registeredDeclarationSetManagers.keySet()) {
 			if (clazz.isInstance(target)) {
-				DeclarationSetManager manager = registeredDeclarationSetManagers.get(clazz);
+				DeclarationSetManager<Object> manager = (DeclarationSetManager<Object>) registeredDeclarationSetManagers.get(clazz);
 				manager.manage(target, dss);
 			}
 		}
 
 		// Add the target class and classname to the selectors stack
-		stack.add(target.getClass().getName());
-		if (registeredTargets.containsKey(target)) stack.addAll(registeredTargets.get(target));
+		Selector.Atom atom = new Selector.Atom(target.getClass(), getRegisteredTargetClassNames(target));
+		stack = new ArrayList<Selector.Atom>(stack);
+		stack.add(atom);
 
 		// Iterate over the target children, if there is any
 		if (target instanceof Container) {
@@ -518,9 +532,9 @@ public class Style {
 			}
 
 		} else {
-			for (Class clazz : registeredChildrenAccessors.keySet()) {
+			for (Class<?> clazz : registeredChildrenAccessors.keySet()) {
 				if (clazz.isInstance(target)) {
-					ChildrenAccessor accessor = registeredChildrenAccessors.get(clazz);
+					ChildrenAccessor<Object> accessor = (ChildrenAccessor<Object>) registeredChildrenAccessors.get(clazz);
 					if (accessor.getChildren(target) != null) {
 						for (Object child : accessor.getChildren(target)) apply(child, style, stack);
 					}
@@ -532,7 +546,7 @@ public class Style {
 	private static Object evaluateParam(Object param) throws StyleException {
 		if (param instanceof CssParser.Color) {
 			CssParser.Color c = (CssParser.Color) param;
-			if (converter != null) return converter.convertColor(c.r, c.g, c.b, c.a);
+			if (converter != null) return converter.convertColor(parseColor(c.str));
 		}
 
 		if (param instanceof CssParser.Function) {
@@ -616,5 +630,23 @@ public class Style {
 
 	private static String getReturnStatement(Function function) {
 		return " [returns " + prettify(function.getReturn().getSimpleName()) + "]";
+	}
+
+	private static int parseColor(String s) {
+		int incr = s.length() == 9 || s.length() == 7 ? 2 : 1;
+		boolean alpha = s.length() == 9 || s.length() == 5;
+
+		int i = 1;
+		int a = alpha ? hex(s.substring(i,i+=incr)) : 255;
+		int r = hex(s.substring(i,i+=incr));
+		int g = hex(s.substring(i,i+=incr));
+		int b = hex(s.substring(i,i+=incr));
+
+		return (a<<24) | (r<<16) | (g<<8) | b;
+	}
+
+	private static int hex(String s) {
+		if (s.length() == 1) s = s.concat(s);
+		return Integer.parseInt(s, 16);
 	}
 }

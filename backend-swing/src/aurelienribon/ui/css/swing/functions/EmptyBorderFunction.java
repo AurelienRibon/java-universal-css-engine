@@ -38,7 +38,7 @@ public class EmptyBorderFunction implements Function {
 		int top = (Integer) params.get(0);
 		int left = (Integer) params.get(1);
 		int bottom = (Integer) params.get(2);
-		int right = (Integer) params.get(4);
+		int right = (Integer) params.get(3);
 		return BorderFactory.createEmptyBorder(top, left, bottom, right);
 	}
 }

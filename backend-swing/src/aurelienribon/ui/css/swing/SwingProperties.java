@@ -37,4 +37,10 @@ public interface SwingProperties {
 
 	public static final Property borderPainted = new SingleParamProperty("-swing-borderpainted", Boolean.class, "b");
 	public static final Property contentAreaFilled = new SingleParamProperty("-swing-contentareafilled", Boolean.class, "b");
+
+	// -------------------------------------------------------------------------
+
+	public static final Property fontFamily = new SingleParamProperty("-swing-font-family", String.class, "family");
+	public static final Property fontStyle = new SingleParamProperty("-swing-font-style", String.class, "style");
+	public static final Property fontSize = new SingleParamProperty("-swing-font-size", Integer.class, "size");
 }

@@ -5,6 +5,7 @@ import aurelienribon.ui.css.DeclarationSetProcessor;
 import aurelienribon.ui.css.Property;
 import aurelienribon.ui.css.swing.SwingFunctions;
 import aurelienribon.ui.css.swing.SwingProperties;
+import aurelienribon.ui.css.swing.SwingUtils;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -23,5 +24,23 @@ public class ComponentProcessor implements DeclarationSetProcessor<Component>, S
 		p = enabled; if (ds.contains(p)) t.setEnabled(ds.getValue(p, Boolean.class));
 		p = focusable; if (ds.contains(p)) t.setFocusable(ds.getValue(p, Boolean.class));
 		p = font; if (ds.contains(p)) t.setFont(ds.getValue(p, Font.class, SwingFunctions.font));
+
+		p = fontFamily; if (ds.contains(p)) {
+			String v = ds.getValue(p, String.class);
+			Font f = t.getFont();
+			t.setFont(new Font(v, f.getStyle(), f.getSize()));
+		}
+
+		p = fontStyle; if (ds.contains(p)) {
+			String v = ds.getValue(p, String.class);
+			Font f = t.getFont();
+			t.setFont(new Font(f.getFamily(), SwingUtils.asFontStyle(v), f.getSize()));
+		}
+
+		p = fontSize; if (ds.contains(p)) {
+			int v = ds.getValue(p, Integer.class);
+			Font f = t.getFont();
+			t.setFont(new Font(f.getFamily(), f.getStyle(), v));
+		}
 	}
 }

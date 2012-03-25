@@ -1,5 +1,7 @@
 package aurelienribon.ui.css.swing;
 
+import aurelienribon.ui.css.StyleException;
+import java.awt.Font;
 import javax.swing.AbstractButton;
 import javax.swing.SwingConstants;
 
@@ -22,8 +24,14 @@ public class SwingUtils {
 		if (val.equals("bottom")) return AbstractButton.BOTTOM;
 		else if (val.equals("top")) return AbstractButton.TOP;
 		else if (val.equals("center")) return AbstractButton.CENTER;
+		else throw StyleException.forKeyword(val, "bottom", "top", "center");
+	}
 
-		assert false;
-		return -1;
+	public static int asFontStyle(String val) {
+		if (val.equals("plain")) return Font.PLAIN;
+		else if (val.equals("italic")) return Font.ITALIC;
+		else if (val.equals("bold")) return Font.BOLD;
+		else if (val.equals("italicbold")) return Font.BOLD | Font.ITALIC;
+		else throw StyleException.forKeyword(val, "plain", "italic", "bold", "italicbold");
 	}
 }

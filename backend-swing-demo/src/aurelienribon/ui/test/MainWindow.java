@@ -18,7 +18,6 @@ public class MainWindow extends javax.swing.JFrame {
 	private final JTextArea editorArea = new JTextArea();
 	private final JTextArea rulesManualArea = new JTextArea();
 	private final JTextArea functionsManualArea = new JTextArea();
-	private Style style;
 
     public MainWindow() {
 		SwingStyle.init();
@@ -106,7 +105,7 @@ public class MainWindow extends javax.swing.JFrame {
 
 	private void setStyle(URL input) {
 		try {
-			style = new Style(input);
+			Style style = new Style(input);
 			editorArea.setText(style.getStyleSheet());
 			editorArea.setCaretPosition(0);
 			Style.apply(getContentPane(), style);
@@ -119,7 +118,7 @@ public class MainWindow extends javax.swing.JFrame {
 
 	private void setStyle(String input) {
 		try {
-			style = new Style(input);
+			Style style = new Style(input);
 			Style.apply(getContentPane(), style);
 		} catch (StyleException ex) {
 			JOptionPane.showMessageDialog(this, ex.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
