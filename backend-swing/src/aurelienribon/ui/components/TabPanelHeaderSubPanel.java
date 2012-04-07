@@ -33,11 +33,15 @@ class TabPanelHeaderSubPanel extends JComponent {
 		addMouseListener(mouseAdapter);
 		addMouseMotionListener(mouseAdapter);
 
-		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-		add(Box.createHorizontalStrut(6));
-		add(descLabel);
-		add(Box.createHorizontalStrut(12));
-		add(crossLabel);
+		JPanel p = new JPanel(new BorderLayout());
+		p.setOpaque(false);
+		p.add(Box.createHorizontalStrut(12), BorderLayout.WEST);
+		p.add(crossLabel, BorderLayout.CENTER);
+
+		setLayout(new BorderLayout());
+		add(Box.createHorizontalStrut(6), BorderLayout.WEST);
+		add(descLabel, BorderLayout.CENTER);
+		add(p, BorderLayout.EAST);
 	}
 
 	public interface Callback {

@@ -27,27 +27,27 @@
 	-ar-fill: texture(url("/res/gfx/bg.png"));
 }
 
-.tabPanel {
+aurelienribon-ui-components-TabPanel {
 	-swing-background: #BBC8D8;
 	-swing-border: matteborder(5, 0, 0, 0, #FDE1A0);
 }
 
-.tabPanel .-ar-header {
+aurelienribon-ui-components-TabPanel .-ar-header {
 	-ar-stroke: null;
 }
 
-.tabPanel .-ar-tab {
+aurelienribon-ui-components-TabPanel .-ar-tab {
 	-swing-foreground: #FFF;
 	-ar-stroke: null;
 	-ar-fill: null;
 }
 
-.tabPanel .-ar-tab:hover {
+aurelienribon-ui-components-TabPanel .-ar-tab:hover {
 	-ar-stroke: #9BA7B7;
 	-ar-fill: lineargradient(0, 0, 0, 1, 0, #6F7776, 1, #4F5F74);
 }
 
-.tabPanel .-ar-tab:selected {
+aurelienribon-ui-components-TabPanel .-ar-tab:selected {
 	-swing-foreground: #000;
 	-ar-stroke: null;
 	-ar-fill: lineargradient(0, 0, 0, 1, 0.49, #FFFAE7, 0.5, #FDE1A0);

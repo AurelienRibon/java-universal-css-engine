@@ -81,18 +81,18 @@ public class Button extends JButton {
 		int w = getWidth();
 		int h = getHeight();
 		double innerGap = strokeThickness / 2f;
-		double innerW = w - innerGap*2 - 1;
-		double innerH = h - innerGap*2 - 1;
+		double innerW = w - innerGap*2;
+		double innerH = h - innerGap*2;
 
 		Shape rect = cornerRadius > 0
 			? new RoundRectangle2D.Double(innerGap, innerGap, innerW, innerH, cornerRadius, cornerRadius)
 			: new Rectangle2D.Double(innerGap, innerGap, innerW, innerH);
 
-		gg.setStroke(new BasicStroke(strokeThickness));
 		gg.setPaint(PaintUtils.buildPaint(fill, innerGap, innerGap, innerW, innerH));
 		gg.fill(rect);
 
 		if (strokeThickness > 0) {
+			gg.setStroke(new BasicStroke(strokeThickness));
 			gg.setPaint(PaintUtils.buildPaint(stroke, 0, 0, w, h));
 			gg.draw(rect);
 		}
