@@ -8,12 +8,16 @@ import javax.swing.JComponent;
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
 public class AruiStyle {
+	private static boolean isInitialized = false;
 
 	/**
 	 * Registers all the properties, functions and processors of the Arui
 	 * backend to the CSS engine. Requires the Swing backend to be initialized.
 	 */
 	public static void init() {
+		if (isInitialized) return;
+		isInitialized = true;
+		
 		Style.registerProperty(AruiProperties.foregroundMouseOver);
 		Style.registerProperty(AruiProperties.foregroundMouseDown);
 		Style.registerProperty(AruiProperties.foregroundSelected);

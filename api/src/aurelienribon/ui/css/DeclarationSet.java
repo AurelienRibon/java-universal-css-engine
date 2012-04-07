@@ -20,6 +20,55 @@ import java.util.*;
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
 public class DeclarationSet {
+	public static Map<String, DeclarationSet> dss(Style style, Object target, List<Selector.Atom> stack) {
+		Map<String, DeclarationSet> dss = new LinkedHashMap<String, DeclarationSet>();
+		List<String> pseudoClassesToTry = new ArrayList<String>();
+		List<String> pseudoClassesTried = new ArrayList<String>();
+		pseudoClassesToTry.add("");
+
+		while (!pseudoClassesToTry.isEmpty()) {
+			String pseudoClass = pseudoClassesToTry.remove(0);
+			pseudoClassesTried.add(pseudoClass);
+
+			List<Property> properties = new ArrayList<Property>();
+			Map<Property, List<Object>> propertiesValues = new HashMap<Property, List<Object>>();
+
+			for (Rule rule : style.getRules()) {
+				assert rule != null;
+				assert rule.getDeclarations() != null;
+
+				String rulePseudoClass = rule.getSelector().getPseudoClass();
+
+				if (!rulePseudoClass.equals(pseudoClass)) {
+					if (!pseudoClassesTried.contains(rulePseudoClass)) pseudoClassesToTry.add(rulePseudoClass);
+					continue;
+				}
+
+				if (!isTargetValid(rule.getSelector(), target)) continue;
+				if (!isStackValid(rule.getSelector(), stack)) continue;
+
+				properties.addAll(rule.getDeclarations().getProperties());
+
+				for (Property property : rule.getDeclarations().getProperties()) {
+					assert rule.getDeclarations().getValue(property) != null;
+
+					List<Object> value = new ArrayList<Object>();
+					value.addAll(rule.getDeclarations().getValue(property));
+					propertiesValues.put(property, value);
+				}
+			}
+
+			DeclarationSet ds = new DeclarationSet(style, properties, propertiesValues);
+			dss.put(pseudoClass, ds);
+		}
+
+		return dss;
+	}
+
+
+
+
+
 	private final Style style;
 	private final List<Property> properties;
 	private final Map<Property, List<Object>> propertiesValues;
@@ -48,7 +97,7 @@ public class DeclarationSet {
 	 * @param pseudoClass Only the rules with the given pseudo class will be
 	 * scanned.
 	 */
-	public DeclarationSet(Style style, Object target, List<Selector.Atom> stack, PseudoClass pseudoClass) {
+	public DeclarationSet(Style style, Object target, List<Selector.Atom> stack, String pseudoClass) {
 		List<Property> tProperties = new ArrayList<Property>();
 		Map<Property, List<Object>> tPropertiesValues = new HashMap<Property, List<Object>>();
 
@@ -56,7 +105,7 @@ public class DeclarationSet {
 			assert rule != null;
 			assert rule.getDeclarations() != null;
 
-			if (rule.getSelector().getPseudoClass() != pseudoClass) continue;
+			if (!rule.getSelector().getPseudoClass().equals(pseudoClass)) continue;
 			if (!isTargetValid(rule.getSelector(), target)) continue;
 			if (!isStackValid(rule.getSelector(), stack)) continue;
 
@@ -190,7 +239,7 @@ public class DeclarationSet {
 	// Helpers
 	// -------------------------------------------------------------------------
 
-	private boolean isTargetValid(Selector selector, Object target) {
+	private static boolean isTargetValid(Selector selector, Object target) {
 		if (!selector.getLastAtom().getType().isAssignableFrom(target.getClass())) return false;
 
 		List<String> targetClasses = Style.getRegisteredTargetClassNames(target);
@@ -201,7 +250,7 @@ public class DeclarationSet {
 		return true;
 	}
 
-	private boolean isStackValid(Selector selector, List<Selector.Atom> stack) {
+	private static boolean isStackValid(Selector selector, List<Selector.Atom> stack) {
 		int previousStackIdx = -1;
 		int stackIdx = -1;
 
@@ -218,7 +267,7 @@ public class DeclarationSet {
 		return true;
 	}
 
-	private int getNextValidStackIdx(Selector.Atom selectorAtom, List<Selector.Atom> stack, int from) {
+	private static int getNextValidStackIdx(Selector.Atom selectorAtom, List<Selector.Atom> stack, int from) {
 		for (int i=from; i<stack.size(); i++) {
 			Selector.Atom stackAtom = stack.get(i);
 
@@ -231,7 +280,7 @@ public class DeclarationSet {
 		return -1;
 	}
 
-	private boolean includes(List<String> strs1, List<String> strs2) {
+	private static boolean includes(List<String> strs1, List<String> strs2) {
 		for (String str : strs2) if (!strs1.contains(str)) return false;
 		return true;
 	}

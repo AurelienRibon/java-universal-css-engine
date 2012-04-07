@@ -17,6 +17,7 @@ import javax.swing.text.JTextComponent;
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
 public class SwingStyle {
+	private static boolean isInitialized = false;
 
 	/**
 	 * Registers all the properties, functions and processors of the Swing
@@ -25,6 +26,9 @@ public class SwingStyle {
 	 * used to convert undefined colors into AWT Color objects.
 	 */
 	public static void init() {
+		if (isInitialized) return;
+		isInitialized = true;
+
 		Style.registerProperty(SwingProperties.background);
 		Style.registerProperty(SwingProperties.foreground);
 		Style.registerProperty(SwingProperties.visible);
@@ -66,11 +70,6 @@ public class SwingStyle {
 		Style.registerFunction(SwingFunctions.lineBorder);
 		Style.registerFunction(SwingFunctions.matteBorder);
 		Style.registerFunction(SwingFunctions.titledBorder);
-
-		Style.registerPseudoClass(SwingPseudoClasses.hover);
-		Style.registerPseudoClass(SwingPseudoClasses.active);
-		Style.registerPseudoClass(SwingPseudoClasses.focus);
-		Style.registerPseudoClass(SwingPseudoClasses.disabled);
 
 		Style.registerProcessor(Component.class, new ComponentProcessor());
 		Style.registerProcessor(JComponent.class, new JComponentProcessor());

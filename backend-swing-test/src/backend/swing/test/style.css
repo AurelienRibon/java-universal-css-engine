@@ -6,6 +6,14 @@
 	-swing-background: #555;
 }
 
+.label {
+	-swing-foreground: #000;
+}
+
+.label:hover {
+	-swing-foreground: #0F0;
+}
+
 #panel2 > .label {
 	-swing-foreground: #F00;
 }

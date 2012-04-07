@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Selector {
 	private final List<Atom> atoms = new ArrayList<Atom>();
-	private final PseudoClass pseudoClass;
+	private final String pseudoClass;
 
 	public Selector(String rawSelector) {
 		rawSelector = rawSelector.trim();
@@ -18,12 +18,10 @@ public class Selector {
 
 		int pcIdx = rawSelector.indexOf(":");
 		if (pcIdx > -1) {
-			String pcName = rawSelector.substring(pcIdx).trim();
-			pseudoClass = Style.getRegisteredPseudoClass(pcName);
+			pseudoClass = rawSelector.substring(pcIdx).trim();
 			rawSelector = rawSelector.substring(0, pcIdx);
-			if (pseudoClass == null) throw new StyleException(pcName + " is not a registered pseudo class");
 		} else {
-			pseudoClass = PseudoClass.none;
+			pseudoClass = "";
 		}
 
 		String[] parts = rawSelector.split(" ");
@@ -38,7 +36,7 @@ public class Selector {
 		return atoms.get(atoms.size()-1);
 	}
 
-	public PseudoClass getPseudoClass() {
+	public String getPseudoClass() {
 		return pseudoClass;
 	}
 

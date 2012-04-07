@@ -115,12 +115,7 @@ public class Style {
 	private static final Map<Object, List<String>> registeredTargets = new LinkedHashMap<Object, List<String>>();
 	private static final Map<Class<?>, ChildrenAccessor<?>> registeredChildrenAccessors = new HashMap<Class<?>, ChildrenAccessor<?>>();
 	private static final Map<Class<?>, DeclarationSetManager<?>> registeredDeclarationSetManagers = new HashMap<Class<?>, DeclarationSetManager<?>>();
-	private static final Map<String, PseudoClass> registeredPseudoClasses = new HashMap<String, PseudoClass>();
 	private static ParamConverter converter;
-
-	static {
-		registerPseudoClass(PseudoClass.none);
-	}
 
 	/**
 	 * Registers a new property to the engine.
@@ -198,13 +193,6 @@ public class Style {
 	 */
 	public static void registerChildrenAccessor(Class<?> parentClass, ChildrenAccessor<?> accessor) {
 		registeredChildrenAccessors.put(parentClass, accessor);
-	}
-
-	/**
-	 * Registers a new CSS pseudo-class.
-	 */
-	public static void registerPseudoClass(PseudoClass pseudoClass) {
-		registeredPseudoClasses.put(pseudoClass.getName(), pseudoClass);
 	}
 
 	/**
@@ -307,13 +295,6 @@ public class Style {
 		List<String> classes = registeredTargets.get(target);
 		if (classes != null) return classes;
 		return new ArrayList<String>();
-	}
-
-	/**
-	 * Gets the pseudo class object corresponding to the given name.
-	 */
-	public static PseudoClass getRegisteredPseudoClass(String name) {
-		return registeredPseudoClasses.get(name);
 	}
 
 	/**
@@ -497,12 +478,9 @@ public class Style {
 	private static void apply(Object target, Style style, List<Selector.Atom> stack) {
 		// Retrieve all the declarations belonging to the target and evaluate
 		// their parameters
-		Map<PseudoClass, DeclarationSet> dss = new HashMap<PseudoClass, DeclarationSet>();
+		Map<String, DeclarationSet> dss = DeclarationSet.dss(style, target, stack);
 
-		for (PseudoClass pseudoClass : registeredPseudoClasses.values()) {
-			DeclarationSet ds = new DeclarationSet(style, target, stack, pseudoClass);
-			dss.put(pseudoClass, ds);
-
+		for (DeclarationSet ds : dss.values()) {
 			for (Property property : ds.getProperties()) {
 				for (int i=0; i<ds.getValue(property).size(); i++) {
 					Object param = ds.getValue(property).get(i);

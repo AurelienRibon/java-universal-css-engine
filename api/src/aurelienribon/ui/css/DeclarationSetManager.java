@@ -16,5 +16,5 @@ import java.util.Map;
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
 public interface DeclarationSetManager<T> {
-	public void manage(T target, Map<PseudoClass, DeclarationSet> dss);
+	public void manage(T target, Map<String, DeclarationSet> dss);
 }
