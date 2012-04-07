@@ -37,15 +37,15 @@ public class DeclarationSet {
 				assert rule != null;
 				assert rule.getDeclarations() != null;
 
+				if (!isTargetValid(rule.getSelector(), target)) continue;
+				if (!isStackValid(rule.getSelector(), stack)) continue;
+
 				String rulePseudoClass = rule.getSelector().getPseudoClass();
 
 				if (!rulePseudoClass.equals(pseudoClass)) {
 					if (!pseudoClassesTried.contains(rulePseudoClass)) pseudoClassesToTry.add(rulePseudoClass);
 					continue;
 				}
-
-				if (!isTargetValid(rule.getSelector(), target)) continue;
-				if (!isStackValid(rule.getSelector(), stack)) continue;
 
 				properties.addAll(rule.getDeclarations().getProperties());
 
@@ -58,8 +58,10 @@ public class DeclarationSet {
 				}
 			}
 
-			DeclarationSet ds = new DeclarationSet(style, properties, propertiesValues);
-			dss.put(pseudoClass, ds);
+			if (!properties.isEmpty()) {
+				DeclarationSet ds = new DeclarationSet(style, properties, propertiesValues);
+				dss.put(pseudoClass, ds);
+			}
 		}
 
 		return dss;

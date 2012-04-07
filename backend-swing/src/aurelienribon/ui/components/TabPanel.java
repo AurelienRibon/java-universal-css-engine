@@ -1,9 +1,6 @@
 package aurelienribon.ui.components;
 
 import aurelienribon.ui.components.TabPanelModel.TabModel;
-import aurelienribon.ui.css.DeclarationSet;
-import aurelienribon.ui.css.DeclarationSetProcessor;
-import aurelienribon.ui.css.Property;
 import aurelienribon.ui.css.Style;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -17,7 +14,7 @@ import javax.swing.border.Border;
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
-public class TabPanel extends JPanel implements aurelienribon.ui.css.Container {
+public class TabPanel extends JPanel {
 	// -------------------------------------------------------------------------
 	// Attributes + ctor
 	// -------------------------------------------------------------------------
@@ -41,11 +38,9 @@ public class TabPanel extends JPanel implements aurelienribon.ui.css.Container {
 
 		setOpaque(false);
 		setModel(new TabPanelModel());
-	}
 
-	@Override
-	public Object[] getChildren() {
-		return new Object[] {cardPanel};
+		Style.registerCssClasses(cardPanel, ".-ar-center");
+		Style.registerCssClasses(headerPanel, ".-ar-header");
 	}
 
 	// -------------------------------------------------------------------------
@@ -85,6 +80,14 @@ public class TabPanel extends JPanel implements aurelienribon.ui.css.Container {
 				cardLayout.show(cardPanel, cardsMap.get(tm));
 				headerPanel.reload();
 				if (tm != null) tm.component.requestFocusInWindow();
+
+				for (TabPanelHeaderSubPanel subPanel : headerPanel.getSubPanels()) {
+					if (subPanel.getModel() == tm) {
+						subPanel.firePropertyChange("selected", false, true);
+					} else {
+						subPanel.firePropertyChange("selected", true, false);
+					}
+				}
 			}
 		});
 
@@ -154,30 +157,5 @@ public class TabPanel extends JPanel implements aurelienribon.ui.css.Container {
 	private void selectLastModel() {
 		if (model.getTabModels().isEmpty()) selectModel(null);
 		else selectModel(model.getTabModels().get(model.getTabModels().size()-1));
-	}
-
-	// -------------------------------------------------------------------------
-	// StyleProcessor
-	// -------------------------------------------------------------------------
-
-	public static class Processor implements DeclarationSetProcessor<TabPanel> {
-		@Override
-		public void process(TabPanel target, DeclarationSet ds) {
-			ds = new DeclarationSet(ds, new Property[] {
-				AruiProperties.stroke,
-				AruiProperties.foregroundUnselected,
-				AruiProperties.foregroundSelected,
-				AruiProperties.foregroundMouseOver,
-				AruiProperties.stroke,
-				AruiProperties.strokeUnselected,
-				AruiProperties.strokeSelected,
-				AruiProperties.strokeMouseOver,
-				AruiProperties.fillUnselected,
-				AruiProperties.fillSelected,
-				AruiProperties.fillMouseOver
-			});
-
-			Style.apply(target.headerPanel, ds);
-		}
 	}
 }

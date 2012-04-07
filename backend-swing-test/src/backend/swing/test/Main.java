@@ -1,5 +1,5 @@
+package backend.swing.test;
 
-import backend.swing.test.MainWindow;
 import javax.swing.SwingUtilities;
 
 /**

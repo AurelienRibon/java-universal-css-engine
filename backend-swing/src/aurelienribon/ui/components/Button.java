@@ -1,6 +1,5 @@
 package aurelienribon.ui.components;
 
-import aurelienribon.ui.css.Container;
 import aurelienribon.ui.css.DeclarationSet;
 import aurelienribon.ui.css.DeclarationSetProcessor;
 import aurelienribon.ui.css.Property;
@@ -17,7 +16,7 @@ import javax.swing.*;
  *
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
-public class Button extends JButton implements Container {
+public class Button extends JButton {
 	private Paint stroke = Color.RED;
 	private Paint fill = Color.RED;
 	private int strokeThickness = 0;
@@ -30,21 +29,9 @@ public class Button extends JButton implements Container {
 		updateLabel();
 	}
 
-	@Override
-	public Object[] getChildren() {
-		return null;
-	}
-
-	private void updateLabel() {
-		label.setForeground(getForeground());
-		label.setFont(getFont());
-		label.setText(getText());
-		label.setIcon(getIcon());
-		label.setHorizontalAlignment(getHorizontalAlignment());
-		label.setVerticalAlignment(getVerticalAlignment());
-		label.setHorizontalTextPosition(getHorizontalTextPosition());
-		label.setVerticalTextPosition(getVerticalTextPosition());
-	}
+	// -------------------------------------------------------------------------
+	// Public API
+	// -------------------------------------------------------------------------
 
 	public Paint getStroke() {
 		return stroke;
@@ -82,6 +69,10 @@ public class Button extends JButton implements Container {
 		repaint();
 	}
 
+	// -------------------------------------------------------------------------
+	// Paint
+	// -------------------------------------------------------------------------
+
 	@Override
 	protected void paintComponent(Graphics g) {
 		Graphics2D gg = (Graphics2D) g.create();
@@ -117,10 +108,25 @@ public class Button extends JButton implements Container {
 	}
 
 	// -------------------------------------------------------------------------
+	// Helpers
+	// -------------------------------------------------------------------------
+
+	private void updateLabel() {
+		label.setForeground(getForeground());
+		label.setFont(getFont());
+		label.setText(getText());
+		label.setIcon(getIcon());
+		label.setHorizontalAlignment(getHorizontalAlignment());
+		label.setVerticalAlignment(getVerticalAlignment());
+		label.setHorizontalTextPosition(getHorizontalTextPosition());
+		label.setVerticalTextPosition(getVerticalTextPosition());
+	}
+
+	// -------------------------------------------------------------------------
 	// StyleProcessor
 	// -------------------------------------------------------------------------
 
-	public static class Processor implements DeclarationSetProcessor<Button>, AruiProperties {
+	public static class Processor implements DeclarationSetProcessor<Button>, ArProperties {
 		@Override
 		public void process(Button target, DeclarationSet ds) {
 			Property p;

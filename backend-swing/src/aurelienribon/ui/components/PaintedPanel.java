@@ -48,7 +48,7 @@ public class PaintedPanel extends JPanel {
 		public void process(PaintedPanel target, DeclarationSet ds) {
 			Property p;
 
-			p = AruiProperties.fill;
+			p = ArProperties.fill;
 			if (ds.contains(p)) target.setFill(ds.getValue(p, Paint.class));
 		}
 	}

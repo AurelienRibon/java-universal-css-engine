@@ -1,5 +1,6 @@
 package aurelienribon.ui.css;
 
+import aurelienribon.ui.css.Selector.Atom;
 import aurelienribon.ui.css.antlr.CssLexer;
 import aurelienribon.ui.css.antlr.CssParser;
 import java.io.BufferedReader;
@@ -116,6 +117,7 @@ public class Style {
 	private static final Map<Class<?>, ChildrenAccessor<?>> registeredChildrenAccessors = new HashMap<Class<?>, ChildrenAccessor<?>>();
 	private static final Map<Class<?>, DeclarationSetManager<?>> registeredDeclarationSetManagers = new HashMap<Class<?>, DeclarationSetManager<?>>();
 	private static ParamConverter converter;
+	private static List<Selector.Atom> lastStack;
 
 	/**
 	 * Registers a new property to the engine.
@@ -218,7 +220,15 @@ public class Style {
 	 * corresponding children accessor registered.
 	 */
 	public static void apply(Object target, Style style) {
-		apply(target, style, new ArrayList<Selector.Atom>());
+		applyImpl(target, style, new ArrayList<Selector.Atom>());
+	}
+
+	/**
+	 * Applies a stylesheet to a target and its children, if it has a
+	 * corresponding children accessor registered.
+	 */
+	public static void apply(Object target, Style style, List<Selector.Atom> stack) {
+		applyImpl(target, style, stack);
 	}
 
 	/**
@@ -309,6 +319,13 @@ public class Style {
 	 */
 	public static String getFunctionsManual() {
 		return generateFunctionsManual();
+	}
+
+	/**
+	 * Gets the stack of element containers computed during last apply call.
+	 */
+	public static List<Atom> getLastStack() {
+		return lastStack;
 	}
 
 	// -------------------------------------------------------------------------
@@ -475,7 +492,7 @@ public class Style {
 	// Helpers - apply
 	// -------------------------------------------------------------------------
 
-	private static void apply(Object target, Style style, List<Selector.Atom> stack) {
+	private static void applyImpl(Object target, Style style, List<Selector.Atom> stack) {
 		// Retrieve all the declarations belonging to the target and evaluate
 		// their parameters
 		Map<String, DeclarationSet> dss = DeclarationSet.dss(style, target, stack);
@@ -489,6 +506,12 @@ public class Style {
 			}
 		}
 
+		// Add the target class and classname to the selectors stack
+		Selector.Atom atom = new Selector.Atom(target.getClass(), getRegisteredTargetClassNames(target));
+		stack = new ArrayList<Selector.Atom>(stack);
+		stack.add(atom);
+		lastStack = Collections.unmodifiableList(stack);
+
 		// Apply these declarations to the target
 		for (Class<?> clazz : registeredDeclarationSetManagers.keySet()) {
 			if (clazz.isInstance(target)) {
@@ -496,11 +519,6 @@ public class Style {
 				manager.manage(target, dss);
 			}
 		}
-
-		// Add the target class and classname to the selectors stack
-		Selector.Atom atom = new Selector.Atom(target.getClass(), getRegisteredTargetClassNames(target));
-		stack = new ArrayList<Selector.Atom>(stack);
-		stack.add(atom);
 
 		// Iterate over the target children, if there is any
 		if (target instanceof Container) {

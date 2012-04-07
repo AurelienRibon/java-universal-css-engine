@@ -4,18 +4,20 @@ import aurelienribon.ui.components.TabPanelModel.TabModel;
 import aurelienribon.ui.css.DeclarationSet;
 import aurelienribon.ui.css.DeclarationSetProcessor;
 import aurelienribon.ui.css.Property;
+import aurelienribon.ui.css.Selector;
 import aurelienribon.ui.css.Style;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.swing.JLayeredPane;
 
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
-class TabPanelHeaderPanel extends JLayeredPane implements aurelienribon.ui.css.Container {
+class TabPanelHeaderPanel extends JLayeredPane {
 	// -------------------------------------------------------------------------
 	// Attributes + ctor
 	// -------------------------------------------------------------------------
@@ -28,8 +30,10 @@ class TabPanelHeaderPanel extends JLayeredPane implements aurelienribon.ui.css.C
 	private final List<TabPanelHeaderSubPanel> subPanels = new ArrayList<TabPanelHeaderSubPanel>();
 	private final Callback callback;
 	private int tabsLayout;
-	private DeclarationSet ds;
-	private Color stroke = Color.RED;
+	private Paint stroke = Color.RED;
+
+	private Style style;
+	private List<Selector.Atom> styleStack;
 
 	public TabPanelHeaderPanel(int layout, Callback callback) {
 		this.tabsLayout = layout;
@@ -45,21 +49,16 @@ class TabPanelHeaderPanel extends JLayeredPane implements aurelienribon.ui.css.C
 		});
 	}
 
-	@Override
-	public Object[] getChildren() {
-		return null;
-	}
-
-	// -------------------------------------------------------------------------
-	// Public API
-	// -------------------------------------------------------------------------
-
 	public interface Callback {
 		public void selectTabRequested(TabModel tm);
 		public void closeTabRequested(TabModel tm);
 		public void closeAllTabsRequested();
 		public void closeOtherTabsRequested(TabModel tm);
 	}
+
+	// -------------------------------------------------------------------------
+	// Public API
+	// -------------------------------------------------------------------------
 
 	public void setTabsLayout(int tabsLayout) {
 		this.tabsLayout = tabsLayout;
@@ -68,6 +67,10 @@ class TabPanelHeaderPanel extends JLayeredPane implements aurelienribon.ui.css.C
 
 	public int getTabsLayout() {
 		return tabsLayout;
+	}
+
+	public List<TabPanelHeaderSubPanel> getSubPanels() {
+		return Collections.unmodifiableList(subPanels);
 	}
 
 	public void addTab(TabModel tm) {
@@ -82,7 +85,9 @@ class TabPanelHeaderPanel extends JLayeredPane implements aurelienribon.ui.css.C
 		subPanels.add(subPanel);
 		reload();
 		setHeight(MAX_HEIGHT);
-		if (ds != null) Style.apply(subPanel, ds);
+
+		Style.registerCssClasses(subPanel, ".-ar-tab");
+		if (style != null) Style.apply(subPanel, style, styleStack);
 	}
 
 	public void removeTab(TabModel model) {
@@ -121,14 +126,16 @@ class TabPanelHeaderPanel extends JLayeredPane implements aurelienribon.ui.css.C
 			switch (layout) {
 				case TabPanel.LAYOUT_STACK:
 					subPanel.setBounds(width, 0, subPanel.getPreferredSize().width, MAX_HEIGHT);
-					subPanel.reload();
+					subPanel.revalidate();
+					subPanel.repaint();
 					width += subPanel.getPreferredSize().width - OVERLAP;
 					break;
 
 				case TabPanel.LAYOUT_GRID:
 					int w = i < subPanels.size()-1 ? getWidth()/subPanels.size() : getWidth()-width;
 					subPanel.setBounds(width, 0, w, MAX_HEIGHT);
-					subPanel.reload();
+					subPanel.revalidate();
+					subPanel.repaint();
 					width += subPanel.getWidth() - OVERLAP;
 					break;
 			}
@@ -138,10 +145,15 @@ class TabPanelHeaderPanel extends JLayeredPane implements aurelienribon.ui.css.C
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
+
+		Graphics2D gg = (Graphics2D) g.create();
+
 		if (stroke != null) {
-			g.setColor(stroke);
-			g.drawLine(0, getHeight()-1, getWidth(), getHeight()-1);
+			gg.setPaint(stroke);
+			gg.drawLine(0, getHeight()-1, getWidth(), getHeight()-1);
 		}
+
+		gg.dispose();
 	}
 
 	// -------------------------------------------------------------------------
@@ -164,16 +176,14 @@ class TabPanelHeaderPanel extends JLayeredPane implements aurelienribon.ui.css.C
 	// StyleProcessor
 	// -------------------------------------------------------------------------
 
-	public static class Processor implements DeclarationSetProcessor<TabPanelHeaderPanel> {
+	public static class Processor implements DeclarationSetProcessor<TabPanelHeaderPanel>, ArProperties {
 		@Override
 		public void process(TabPanelHeaderPanel target, DeclarationSet ds) {
-			target.ds = ds;
+			target.style = ds.getStyle();
+			target.styleStack = new ArrayList<Selector.Atom>(Style.getLastStack());
 
-			Property prop = AruiProperties.stroke;
-			if (ds.contains(prop)) {target.stroke = (Color) ds.getValue(prop).get(0);}
-
-			for (TabPanelHeaderSubPanel p : target.subPanels) Style.apply(p, ds);
-			target.reload();
+			Property p;
+			p = stroke; if (ds.contains(p)) target.stroke = ds.getValue(p, Paint.class);
 		}
 	}
 }

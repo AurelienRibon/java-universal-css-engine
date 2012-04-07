@@ -23,6 +23,8 @@ public class SwingDeclarationSetManager implements DeclarationSetManager<Compone
 	public void manage(Component target, Map<String, DeclarationSet> dss) {
 		clearListeners(target);
 
+		if (dss.isEmpty()) return;
+
 		if ((dss.containsKey("") && dss.size() > 1) || (!dss.containsKey("") && !dss.isEmpty())) {
 			TargetManager.manage(target, dss);
 

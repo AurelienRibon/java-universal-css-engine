@@ -1,6 +1,6 @@
 package aurelienribon.ui.components.processors;
 
-import aurelienribon.ui.components.AruiProperties;
+import aurelienribon.ui.components.ArProperties;
 import aurelienribon.ui.components.GroupBorder;
 import aurelienribon.ui.css.DeclarationSet;
 import aurelienribon.ui.css.DeclarationSetProcessor;
@@ -17,43 +17,43 @@ import javax.swing.JComponent;
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
-public class JComponentProcessor implements DeclarationSetProcessor<JComponent> {
+public class JComponentProcessor implements DeclarationSetProcessor<JComponent>, ArProperties {
 	@Override
 	public void process(JComponent target, DeclarationSet ds) {
 		Property p;
 
 		p = SwingProperties.border;
 		if (ds.contains(p) && ds.getValue(p).get(0) instanceof GroupBorder) {
-			GroupBorder border = (GroupBorder) ds.getValue(p).get(0);
+			GroupBorder border = ds.getValue(p, GroupBorder.class);
 
-			p = AruiProperties.borderStroke;
+			p = borderStroke;
 			if (ds.contains(p)) border.setStroke(ds.getValue(p, Paint.class));
 
-			p = AruiProperties.borderThickness;
+			p = borderThickness;
 			if (ds.contains(p)) border.setThickness(ds.getValue(p, Insets.class, SwingFunctions.insets));
 
-			p = AruiProperties.borderHeaderStroke;
+			p = borderHeaderStroke;
 			if (ds.contains(p)) border.setHeaderStroke(ds.getValue(p, Paint.class));
 
-			p = AruiProperties.borderHeaderThickness;
+			p = borderHeaderThickness;
 			if (ds.contains(p)) border.setHeaderThickness(ds.getValue(p, Insets.class, SwingFunctions.insets));
 
-			p = AruiProperties.borderHeaderFill;
+			p = borderHeaderFill;
 			if (ds.contains(p)) border.setHeaderFill(ds.getValue(p, Paint.class));
 
-			p = AruiProperties.borderTitle;
+			p = borderTitle;
 			if (ds.contains(p)) border.setTitle(ds.getValue(p, String.class));
 
-			p = AruiProperties.borderIcon;
+			p = borderIcon;
 			if (ds.contains(p)) border.setTitleIcon(ds.getValue(p, Icon.class, SwingFunctions.icon));
 
-			p = AruiProperties.borderFont;
+			p = borderFont;
 			if (ds.contains(p)) border.setTitleFont(ds.getValue(p, Font.class, SwingFunctions.font));
 
-			p = AruiProperties.borderForeground;
+			p = borderForeground;
 			if (ds.contains(p)) border.setTitleForeground(ds.getValue(p, Color.class));
 
-			p = AruiProperties.borderMargin;
+			p = borderMargin;
 			if (ds.contains(p)) border.setTitleMargin(ds.getValue(p, Insets.class, SwingFunctions.insets));
 		}
 	}
